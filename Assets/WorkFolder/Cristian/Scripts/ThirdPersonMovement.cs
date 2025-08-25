@@ -43,6 +43,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        readyToJump = true;
 
     }
 
