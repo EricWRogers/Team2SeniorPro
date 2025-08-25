@@ -91,7 +91,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if(grounded)
             rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f, ForceMode.Force); //10f adds speed to make the player move a bit faster than normal
         //When in the air
-        else if (!grounded)
+        else if(!grounded)
             rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
@@ -120,4 +120,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+
+    
+
 }
