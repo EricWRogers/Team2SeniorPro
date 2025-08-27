@@ -28,9 +28,19 @@ public class ThirdPersonCam : MonoBehaviour
         //rotate the player object
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
         
-        if(inputDirection != Vector3.zero)
-            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDirection.normalized, Time.deltaTime * rotationSpeed);
+        if(inputDir != Vector3.zero)
+            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+
+        if(inputDir != Vector3.zero)
+        {
+            Debug.Log("Rotating towards " + inputDir);
+            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+        }
+            else
+        {
+            Debug.Log("No input, not rotating");
+        }
     }
 }
