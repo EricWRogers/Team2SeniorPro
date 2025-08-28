@@ -9,6 +9,10 @@ public class ThirdPersonMovement : MonoBehaviour
     private float thirdPersonMovementSpeed;
     public float walkSpeed;
     public float sprintSpeed;
+    public float slideSpeed;
+
+    private float desiredMovementSpeed;
+    private float lastDesiredMovementSpeed;
 
     public float groundDrag;
     
@@ -19,7 +23,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     bool readyToJump;
 
-     [Header("Crouching")]
+    [Header("Climbing")]
+    //public float climbSpeed;
+    //public float climbXSpeed; //moving up down left right on wall
+
+
+    [Header("Crouching")]
 
      public float crouchSpeed;
      public float crouchYScale;
@@ -30,6 +39,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;  //will use states for this that go between sprinting, walking and air static positions to shift movement similar to the camera change
     public KeyCode crouchKey = KeyCode.LeftAlt;
+    public KeyCode slideKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
 
@@ -37,9 +47,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public LayerMask whatIsTheGround;
 
-    bool grounded;
+    public bool grounded;
 
-    [Header("Slope Handling")]
+    [Header("Slope Handling")]  //enhance this
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
@@ -62,8 +72,11 @@ public class ThirdPersonMovement : MonoBehaviour
         walking,
         sprinting,
         crouching,
+        sliding,
         air
     }
+
+    public bool sliding;
 
     private void Start()
     {
@@ -127,24 +140,35 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void StateHandler()
     {
+
+        // Mode ?: Sliding
+        if(Input.GetKey(slideKey))
+        {
+            state = MovementState.sliding;
+
+            if(OnSlope() && rb.linearVelocity.y < 0.1f)
+                 desiredMovementSpeed = slideSpeed;
+            else  
+                desiredMovementSpeed = sprintSpeed;
+        }
         // Mode ?: Crouching
-        if(Input.GetKey(crouchKey))
+        else if(Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
-            thirdPersonMovementSpeed = crouchSpeed;
+            desiredMovementSpeed = crouchSpeed;
         }
         // Mode 1: Sprinting
-        if(grounded && Input.GetKey(sprintKey))
+        else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
-            thirdPersonMovementSpeed = sprintSpeed;
+            desiredMovementSpeed = sprintSpeed;
         }
 
         // Mode 2: Walking
         else if(grounded)
         {
             state = MovementState.walking;
-            thirdPersonMovementSpeed = walkSpeed;
+            desiredMovementSpeed = walkSpeed;
         }
 
         // Mode 3: In-Air
@@ -153,6 +177,37 @@ public class ThirdPersonMovement : MonoBehaviour
             state = MovementState.air;
             
         }
+        //checks if desired move speed has changed fr
+        if(Mathf.Abs(desiredMovementSpeed - lastDesiredMovementSpeed) > 4f)
+        {
+            StopAllCoroutines();
+            StartCoroutine(SmoothlyLerpMoveSpeed());
+        }
+        else
+        {
+            thirdPersonMovementSpeed = desiredMovementSpeed;  //keep momentum
+        }
+        lastDesiredMovementSpeed = desiredMovementSpeed;
+    }
+
+    //to make to where the speed adjusts slowly and doesnt immediately change back to og speed
+
+    private IEnumerator SmoothlyLerpMoveSpeed() //nice coroutine
+    {
+        //use lerp to smoothly change movement speed to desire value
+
+        float time = 0;
+        float difference = Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed);
+        float startValue = thirdPersonMovementSpeed;
+
+        while (time < difference)
+        {
+            thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference);
+            time += Time.deltaTime;
+            yield return null; /// RECALL !!!
+        }
+
+        thirdPersonMovementSpeed = desiredMovementSpeed;
     }
 
     private void MovePlayer()
@@ -163,7 +218,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //when on slope
         if(OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * thirdPersonMovementSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection(moveDirection) * thirdPersonMovementSpeed * 20f, ForceMode.Force);
 
             if(rb.linearVelocity.y > 0)
                  rb.AddForce(Vector3.down * 80f, ForceMode.Force);  //adds vector3 force down so that you dont ascend to space
@@ -219,7 +274,7 @@ public class ThirdPersonMovement : MonoBehaviour
         exitingSlope = false;
     }
 
-    private bool OnSlope() 
+    public bool OnSlope()  //these must be public to grab from sliding script
     {
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
@@ -230,9 +285,9 @@ public class ThirdPersonMovement : MonoBehaviour
         return false; //if doesnt hit nothing
     }
 
-    private Vector3 GetSlopeMoveDirection()
+    public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
     
