@@ -14,6 +14,9 @@ public class ThirdPersonMovement : MonoBehaviour
     private float desiredMovementSpeed;
     private float lastDesiredMovementSpeed;
 
+    public float speedIncreaseMultiplier;
+    public float slopeIncreaseMultiplier;
+
     public float groundDrag;
     
     [Header("Jumping")]
@@ -192,7 +195,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     //to make to where the speed adjusts slowly and doesnt immediately change back to og speed
 
-    private IEnumerator SmoothlyLerpMoveSpeed() //nice coroutine
+    /*private IEnumerator SmoothlyLerpMoveSpeed() //nice coroutine
     {
         //use lerp to smoothly change movement speed to desire value
 
@@ -205,6 +208,33 @@ public class ThirdPersonMovement : MonoBehaviour
             thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference);
             time += Time.deltaTime;
             yield return null; /// RECALL !!!
+        }
+
+        thirdPersonMovementSpeed = desiredMovementSpeed;
+    }*/
+
+    private IEnumerator SmoothlyLerpMoveSpeed()
+    {
+        float time = 0;
+        float difference = Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed);
+        float startValue = thirdPersonMovementSpeed;
+
+        while (time < difference)
+        {
+            thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference);
+            
+            if (OnSlope())
+            {
+                float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
+                float slopeAngleIncrease = 1 + (slopeAngle / 90f);
+
+                time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
+
+            }
+            else
+                time += Time.deltaTime * speedIncreaseMultiplier;
+
+            yield return null;  
         }
 
         thirdPersonMovementSpeed = desiredMovementSpeed;

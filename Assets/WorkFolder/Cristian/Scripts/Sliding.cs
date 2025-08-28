@@ -84,7 +84,7 @@ public class Sliding : MonoBehaviour
         else
         {
             rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);  //no timer so inf slide down slopes
-            rb.AddForce(Vector3.down * 30f, ForceMode.Force); //testing to see if can fix bug
+            rb.AddForce(Vector3.down * 150f, ForceMode.Force); //testing to see if can fix bug
         }
 
         if (slideTimer <= 0)
