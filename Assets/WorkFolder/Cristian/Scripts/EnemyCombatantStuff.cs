@@ -9,7 +9,7 @@ public class EnemyCombatantStuff : MonoBehaviour
     public float enemyMoveSpeed;
 
 
-    public enum MovingState
+    public enum CloneState
     {
         Stalking,
         Chasing, 
@@ -28,5 +28,14 @@ public class EnemyCombatantStuff : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void EnemyStateHandler()
+    {
+         //.test(gameObject.name or enemy is in a specific range of the player))
+        //{
+        //    state = CloneState.Stalking;
+
+        //}
     }
 }

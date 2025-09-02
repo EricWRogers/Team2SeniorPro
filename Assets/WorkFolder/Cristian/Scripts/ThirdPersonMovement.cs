@@ -10,6 +10,10 @@ public class ThirdPersonMovement : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float slideSpeed;
+    public float wallRunSpeed;
+    public float vaultSpeed;
+    public float climbSpeed;
+    public float airMinSpeed;
 
     private float desiredMovementSpeed;
     private float lastDesiredMovementSpeed;
@@ -26,7 +30,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     bool readyToJump;
 
-    [Header("Climbing")]
+    //[Header("Climbing")]
     //public float climbSpeed;
     //public float climbXSpeed; //moving up down left right on wall
 
@@ -59,6 +63,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     //[Tooltip("")]
 
+    [Header("References")]
+    public Climbing climbingScript;
+
     public Transform orientation;
 
     float horizontalInput;
@@ -76,10 +83,23 @@ public class ThirdPersonMovement : MonoBehaviour
         sprinting,
         crouching,
         sliding,
+        wallrunning,
+        vaulting,
+        climbing,
+        freeze, 
+        unlimited,
         air
     }
 
     public bool sliding;
+    public bool crouching;
+    public bool wallrunning;
+    public bool climbing;
+    public bool vaulting;
+    public bool freeze;
+    public bool unlimited;
+
+    public bool restricted;
 
     private void Start()
     {
@@ -141,77 +161,114 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    bool keepMomentum;
     private void StateHandler()
     {
+        // Mode - Freeze
+        if (freeze)
+        {
+            state = MovementState.freeze;
+            rb.linearVelocity = Vector3.zero;
+            desiredMovementSpeed = 0f;
+        }
 
-        // Mode ?: Sliding
-        if(Input.GetKey(slideKey))
+        // Mode - Unlimited
+        else if (unlimited)
+        {
+            state = MovementState.unlimited;
+            desiredMovementSpeed = 999f;
+        }
+
+        // Mode - Vaulting
+        else if (vaulting)
+        {
+            state = MovementState.vaulting;
+            desiredMovementSpeed = vaultSpeed;
+        }
+
+        // Mode - Climbing
+        else if (climbing)
+        {
+            state = MovementState.climbing;
+            desiredMovementSpeed = climbSpeed;
+        }
+
+        // Mode - Wallrunning
+        else if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMovementSpeed = wallRunSpeed;
+        }
+
+        // Mode - Sliding
+        else if (sliding)
         {
             state = MovementState.sliding;
 
-            if(OnSlope() && rb.linearVelocity.y < 0.1f)
-                 desiredMovementSpeed = slideSpeed;
-            else  
+            // increase speed by one every second
+            if (OnSlope() && rb.linearVelocity.y < 0.1f)
+            {
+                desiredMovementSpeed = slideSpeed;
+                keepMomentum = true;
+            }
+
+            else
                 desiredMovementSpeed = sprintSpeed;
         }
-        // Mode ?: Crouching
-        else if(Input.GetKey(crouchKey))
+
+        // Mode - Crouching
+        else if (crouching)
         {
             state = MovementState.crouching;
             desiredMovementSpeed = crouchSpeed;
         }
-        // Mode 1: Sprinting
-        else if(grounded && Input.GetKey(sprintKey))
+
+        // Mode - Sprinting
+        else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             desiredMovementSpeed = sprintSpeed;
         }
 
-        // Mode 2: Walking
-        else if(grounded)
+        // Mode - Walking
+        else if (grounded)
         {
             state = MovementState.walking;
             desiredMovementSpeed = walkSpeed;
         }
 
-        // Mode 3: In-Air
-        else 
-        {
-            state = MovementState.air;
-            
-        }
-        //checks if desired move speed has changed fr
-        if(Mathf.Abs(desiredMovementSpeed - lastDesiredMovementSpeed) > 4f)
-        {
-            StopAllCoroutines();
-            StartCoroutine(SmoothlyLerpMoveSpeed());
-        }
+        // Mode - Air
         else
         {
-            thirdPersonMovementSpeed = desiredMovementSpeed;  //keep momentum
+            state = MovementState.air;
+
+            if (thirdPersonMovementSpeed < airMinSpeed)
+                desiredMovementSpeed = airMinSpeed;
         }
+
+        bool desiredMovementSpeedHasChanged = desiredMovementSpeed != lastDesiredMovementSpeed;
+
+        if (desiredMovementSpeedHasChanged)
+        {
+            if (keepMomentum)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                thirdPersonMovementSpeed = desiredMovementSpeed;
+            }
+        }
+
         lastDesiredMovementSpeed = desiredMovementSpeed;
+
+        // deactivate keepMomentum
+        if (Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed) < 0.1f) keepMomentum = false;
     }
 
+
     //to make to where the speed adjusts slowly and doesnt immediately change back to og speed
-
-    /*private IEnumerator SmoothlyLerpMoveSpeed() //nice coroutine
-    {
-        //use lerp to smoothly change movement speed to desire value
-
-        float time = 0;
-        float difference = Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed);
-        float startValue = thirdPersonMovementSpeed;
-
-        while (time < difference)
-        {
-            thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference);
-            time += Time.deltaTime;
-            yield return null; /// RECALL !!!
-        }
-
-        thirdPersonMovementSpeed = desiredMovementSpeed;
-    }*/
 
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
@@ -242,6 +299,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (restricted) return; //restricts movement and also occurs during climbing, ledge stuff, and vaulting i think
+
+        if(climbingScript.exitingWall) return;
         //calculates players overall movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -261,7 +321,7 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f * airMultiplier, ForceMode.Force);
 
         //turns gravity off when on slope
-        rb.useGravity = !OnSlope();
+        if(!wallrunning) rb.useGravity = !OnSlope();
    
     }
 

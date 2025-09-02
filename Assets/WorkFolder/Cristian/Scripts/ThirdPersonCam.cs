@@ -55,12 +55,12 @@ public class ThirdPersonCam : MonoBehaviour
         
             if(inputDir != Vector3.zero)
             {
-                Debug.Log($"[{currentStyle}] Rotating playerObj towards inputDir: {inputDir}");
+                //Debug.Log($"[{currentStyle}] Rotating playerObj towards inputDir: {inputDir}");
                 playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
             }
             else
             {
-                Debug.Log($"[{currentStyle}] No input, player not rotating.");
+                //Debug.Log($"[{currentStyle}] No input, player not rotating.");
             }
         }
 
@@ -71,7 +71,7 @@ public class ThirdPersonCam : MonoBehaviour
             
             playerObj.forward = directionToShoulderLookAt.normalized;
 
-            Debug.Log($"[Shoulder] PlayerObj facing shoulderLookAt direction: {directionToShoulderLookAt}");
+            //Debug.Log($"[Shoulder] PlayerObj facing shoulderLookAt direction: {directionToShoulderLookAt}");
         }
         
 
