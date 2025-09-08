@@ -47,6 +47,12 @@ public class Climbing : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    [Header("Wall Filtering")]
+    [Tooltip("Treat surfaces as WALL only if their normal is this many degrees or more away from Up")]
+    [Range(0f, 90f)] public float minWallAngleFromUp = 70f; // 70–80° is somewhat vertical
+    [Tooltip("Optional upper bound to exclude ceilings")]
+    [Range(90f, 180f)] public float maxWallAngleFromUp = 110f;
+
     private void Start()
     {
         lg = GetComponent<LedgeGrabbing>();
@@ -73,7 +79,7 @@ public class Climbing : MonoBehaviour
         }
         
         // State 1 - Climbing
-        if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
+        if (!tpm.grounded && wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
             if (!climbing && climbTimer > 0) StartClimbing();
 
@@ -102,16 +108,28 @@ public class Climbing : MonoBehaviour
 
     private void WallCheck()
     {
-        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
-        wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+        bool hit = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward,
+                                    out frontWallHit, detectionLength, whatIsWall);
 
-        bool newWall = frontWallHit.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
+        // Only treat as a wall if it’s vertical-ish
+        wallFront = hit && IsVerticalWall(frontWallHit.normal);
+
+        wallLookAngle = wallFront ? Vector3.Angle(orientation.forward, -frontWallHit.normal) : 0f;
+
+        bool newWall = wallFront && (frontWallHit.transform != lastWall
+                    || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange);
 
         if ((wallFront && newWall) || tpm.grounded)
         {
             climbTimer = maxClimbTime;
             climbJumpsLeft = climbJumps;
         }
+    }
+
+    bool IsVerticalWall(Vector3 surfaceNormal)
+    {
+        float angleToUp = Vector3.Angle(surfaceNormal, Vector3.up);
+        return angleToUp >= minWallAngleFromUp && angleToUp <= maxWallAngleFromUp;
     }
 
     private void StartClimbing()
