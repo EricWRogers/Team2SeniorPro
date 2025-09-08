@@ -59,7 +59,7 @@ public class AcornThrower : MonoBehaviour
 
         manualPitchDeg = Mathf.Clamp(manualPitchDeg, minPitchDeg, maxPitchDeg);
 
-        // Throw flow (only when carrying)
+        // Throw flow 
         if (carryState.IsCarrying)
         {
             if (Input.GetMouseButtonDown(0)) { charging = true; chargeT = 0f; }
@@ -78,7 +78,7 @@ public class AcornThrower : MonoBehaviour
                 if (carried)
                 {
                     carried.DropAndThrow(v0, Random.insideUnitSphere * 2f);
-                    // Optional: avoid post-throw body bonk
+                    
                     if (playerCollidersToIgnore != null && playerCollidersToIgnore.Length > 0)
                         StartCoroutine(TemporarilyIgnorePlayer(carried));
                 }
@@ -126,45 +126,49 @@ public class AcornThrower : MonoBehaviour
 
     void DrawArcPreview()
     {
-        if (!arcLine) return;
+    if (!arcLine) return;
 
-        Vector3 dir; float speed;
-        GetThrow(out dir, out speed);
+    
+    float linearDrag = 0f; 
 
-        Vector3 g = Physics.gravity;
-        float dt = arcTimeStep;
+    Vector3 dir; float speed;
+    GetThrow(out dir, out speed);
 
-        // Start slightly in front of hand to avoid hitting player collider immediately
-        Vector3 p = handSocket.position + dir * startOffset;
-        Vector3 v = dir * speed;
+    float dt = Time.fixedDeltaTime;          // match physics
+    Vector3 g  = Physics.gravity;
+    Vector3 p  = handSocket.position + dir * startOffset;
+    Vector3 v  = dir * speed;
 
-        arcLine.positionCount = 0;
-        AppendArcPoint(p);
+    arcLine.positionCount = 0;
+    AppendArcPoint(p);
 
-        for (int i = 0; i < arcPoints; i++)
+    for (int i = 0; i < arcPoints; i++)
+    {
+        
+        v += g * dt;
+        if (linearDrag > 0f) v *= Mathf.Max(0f, 1f - linearDrag * dt);
+
+        Vector3 nextP = p + v * dt;
+
+        // spherecast 
+        Vector3 seg = nextP - p;
+        float len = seg.magnitude;
+        if (len > 0.0001f)
         {
-            // Predict next step
-            Vector3 nextV = v + g * dt;
-            Vector3 nextP = p + v * dt + 0.5f * g * dt * dt;
-
-            // Segment spherecast
-            Vector3 seg = nextP - p;
-            float len = seg.magnitude;
-            if (len > 0.0001f)
+            if (Physics.SphereCast(p, acornRadius, seg.normalized, out RaycastHit hit, len, arcCollisionMask, QueryTriggerInteraction.Ignore))
             {
-                if (Physics.SphereCast(p, acornRadius, seg.normalized, out RaycastHit hit, len, arcCollisionMask, QueryTriggerInteraction.Ignore))
-                {
-                    AppendArcPoint(hit.point);
-                    return; // stop at hit
-                }
+                // draw to the ball center at contact
+                Vector3 centerAtContact = hit.point + hit.normal * acornRadius;
+                AppendArcPoint(centerAtContact);
+                return; // stop the arc
             }
-
-            // No hit — advance
-            p = nextP;
-            v = nextV;
-            AppendArcPoint(p);
         }
+
+        // advance
+        p = nextP;
+        AppendArcPoint(p);
     }
+}
 
     void AppendArcPoint(Vector3 pos)
     {
