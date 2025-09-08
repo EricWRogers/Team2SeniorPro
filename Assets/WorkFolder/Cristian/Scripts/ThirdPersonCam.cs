@@ -21,6 +21,17 @@ public class ThirdPersonCam : MonoBehaviour
 
     public CameraStyle currentStyle;
 
+    [Header("Follow")]
+    public Transform cameraTarget;   //empty pivot
+    public float followLerp = 12f;
+
+    [Header("Collision")]
+    public LayerMask cameraCollisionMask; // everything except Player
+    public float camMinDistance = 0.6f;
+    public float camMaxDistance = 4.0f;
+    public float camRadius = 0.2f;   // spherecast radius
+    private Vector3 desiredLocalOffset; // set in inspector
+
     public enum CameraStyle
     {
         Basic,
@@ -47,13 +58,13 @@ public class ThirdPersonCam : MonoBehaviour
         orientation.forward = viewDirection.normalized;
 
         //rotate the player object
-        if(currentStyle == CameraStyle.Basic || currentStyle == CameraStyle.Topdown)
+        if (currentStyle == CameraStyle.Basic || currentStyle == CameraStyle.Topdown)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        
-            if(inputDir != Vector3.zero)
+
+            if (inputDir != Vector3.zero)
             {
                 //Debug.Log($"[{currentStyle}] Rotating playerObj towards inputDir: {inputDir}");
                 playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
@@ -64,16 +75,16 @@ public class ThirdPersonCam : MonoBehaviour
             }
         }
 
-        else if(currentStyle == CameraStyle.Shoulder)
+        else if (currentStyle == CameraStyle.Shoulder)
         {
             Vector3 directionToShoulderLookAt = shoulderLookAt.position - new Vector3(transform.position.x, shoulderLookAt.position.y, transform.position.z);
             orientation.forward = directionToShoulderLookAt.normalized;
-            
+
             playerObj.forward = directionToShoulderLookAt.normalized;
 
             //Debug.Log($"[Shoulder] PlayerObj facing shoulderLookAt direction: {directionToShoulderLookAt}");
         }
-        
+
 
         /*if(inputDir != Vector3.zero)
         {
@@ -84,6 +95,20 @@ public class ThirdPersonCam : MonoBehaviour
         {
             Debug.Log($"[{currentStyle}] No input, player not rotating.");
         }*/
+        
+        Vector3 worldDesired = cameraTarget.TransformPoint(desiredLocalOffset);
+        Vector3 from = cameraTarget.position;
+        Vector3 to = worldDesired;
+
+        if (Physics.SphereCast(from, camRadius, (to - from).normalized, out RaycastHit hit, 
+            camMaxDistance, cameraCollisionMask, QueryTriggerInteraction.Ignore))
+        {
+            float d = Mathf.Clamp(hit.distance - 0.05f, camMinDistance, camMaxDistance);
+            to = from + (to - from).normalized * d;
+        }
+
+        transform.position = Vector3.Lerp(transform.position, to, Time.deltaTime * followLerp);
+        transform.LookAt(cameraTarget.position, Vector3.up);
     }
 
     private void SwitchCameraStyle(CameraStyle newStyle)
