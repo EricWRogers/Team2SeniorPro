@@ -55,12 +55,17 @@ public class CarryableAcorn : MonoBehaviour
 
         nextCatchTime = Time.time + catchCooldown;
 
-        // Re-enable physics
-        if (makeTriggerWhileCarried) StartCoroutine(ReenableColliderNextFixed());
+        
         rb.isKinematic = false;
+
+        // Ensure the collider is solid again next fixed step
+        if (makeTriggerWhileCarried) StartCoroutine(ReenableColliderNextFixed());
+
         rb.linearVelocity = v0;
         if (angular != Vector3.zero) rb.angularVelocity = angular;
     }
+
+
 
     IEnumerator ReenableColliderNextFixed()
     {

@@ -4,8 +4,14 @@ public class CatchZone : MonoBehaviour
 {
     public Transform handSocket;
     public PlayerCarryState carryState;
-    public bool autoCatch = true;
-    public float maxCatchSpeed = 2.0f; // only catch if acorn is moving slowly
+
+    [Header("Behavior")]
+    public bool autoCatch = false;         // recommend OFF for readability
+    public float maxAutoCatchSpeed = 2.0f; // auto-catch only when slow
+    public KeyCode catchKey = KeyCode.E;   // manual catch
+
+    [Header("Debug")]
+    public bool debug;
 
     void OnTriggerStay(Collider other)
     {
@@ -13,17 +19,32 @@ public class CatchZone : MonoBehaviour
 
         var rb = other.attachedRigidbody;
         var ac = rb ? rb.GetComponent<CarryableAcorn>() : null;
-        if (ac == null || ac.IsCarried) return;
+        if (!ac) return;
 
-        // Gate catching: cooldown + speed check + not already carrying
-        if (Time.time < ac.nextCatchTime) return;
-        if (rb && rb.linearVelocity.sqrMagnitude > maxCatchSpeed * maxCatchSpeed) return;
-        if (carryState.IsCarrying) return;
+        if (ac.IsCarried) { if (debug) Debug.Log("Catch blocked: already carried."); return; }
+        if (carryState.IsCarrying) { if (debug) Debug.Log("Catch blocked: player already carrying."); return; }
 
-        bool wantCatch = autoCatch || Input.GetKey(KeyCode.E);
-        if (!wantCatch) return;
+        // Respect throw cooldown
+        if (Time.time < ac.nextCatchTime) {
+            if (debug) Debug.Log($"Catch blocked: cooldown ({ac.nextCatchTime - Time.time:0.00}s left).");
+            return;
+        }
 
+        // Decide whether the player wants to catch
+        bool wantsManualCatch = Input.GetKey(catchKey);
+        bool wantsAutoCatch   = autoCatch && rb && rb.linearVelocity.sqrMagnitude <= maxAutoCatchSpeed * maxAutoCatchSpeed;
+
+        if (!(wantsManualCatch || wantsAutoCatch)) {
+            if (debug) {
+                if (autoCatch) Debug.Log($"No catch: speed {rb.linearVelocity.magnitude:0.00} > auto limit {maxAutoCatchSpeed} and E not held.");
+                else Debug.Log("No catch: press E to pick up.");
+            }
+            return;
+        }
+
+        // Manual catch overrides speed gating entirely 
         ac.PickUp(handSocket);
         carryState.SetCarrying(true);
+        if (debug) Debug.Log("Caught acorn.");
     }
 }

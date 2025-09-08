@@ -2,83 +2,191 @@ using UnityEngine;
 
 public class AcornThrower : MonoBehaviour
 {
-    public Camera aimCamera;           // main camera
-    public Transform handSocket;       // same as CatchZone
+    [Header("Refs")]
+    public Camera aimCamera;
+    public Transform handSocket;
     public PlayerCarryState carryState;
 
     [Header("Throw")]
     public float minThrowSpeed = 6f;
     public float maxThrowSpeed = 16f;
     public float maxChargeTime = 1.0f;
-    public LineRenderer arcLine;       
-    public int arcPoints = 20;
-    public float arcTimeStep = 0.05f;
+
+    [Header("Arc Preview")]
+    public LineRenderer arcLine;
+    public int arcPoints = 36;
+    public float arcTimeStep = 0.045f;
+    public float acornRadius = 0.24f;
+    public float startOffset = 0.28f;           // push arc start forward to avoid self-hit
+    public LayerMask arcCollisionMask = ~0;     // set in Inspector (exclude Player layer)
+
+    [Header("Elevation Control")]
+    public float minPitchDeg = -5f;
+    public float maxPitchDeg = 70f;
+    public float scrollPitchStep = 10f;         // deg per mouse wheel unit
+    public float arrowPitchSpeed = 60f;         // deg/sec with Up/Down
+    public float defaultPitchDeg = 25f;
+
+    [Header("Auto Bob (optional)")]
+    public bool useAutoBob = true;
+    public float bobAmplitudeDeg = 14f;
+    public float bobFrequencyHz = 0.5f;
+
+    [Header("Optional: protect player after throw")]
+    public Collider[] playerCollidersToIgnore;  // assign your player’s CapsuleCollider etc.
+    public float ignorePlayerCollisionTime = 0.5f;
+
+    float manualPitchDeg;
+    float chargeT;
+    bool charging;
 
     CarryableAcorn carried;
-    float chargeT; bool charging;
+
+    void Start()
+    {
+        manualPitchDeg = defaultPitchDeg; // upward by default
+    }
 
     void Update()
     {
-        // detect carried acorn
-        if (!carried || !carried.IsCarried)
-            carried = FindClosestCarried();
+        // Update pitch from inputs
+        float scroll = Input.mouseScrollDelta.y;
+        if (Mathf.Abs(scroll) < 0.001f) scroll = Input.GetAxis("Mouse ScrollWheel"); // fallback axis
+        if (Mathf.Abs(scroll) > 0.0001f) manualPitchDeg += scroll * scrollPitchStep;
 
-        if (carried && carried.IsCarried)
+        float arrow = (Input.GetKey(KeyCode.UpArrow) ? 1f : 0f) - (Input.GetKey(KeyCode.DownArrow) ? 1f : 0f);
+        if (Mathf.Abs(arrow) > 0f) manualPitchDeg += arrow * arrowPitchSpeed * Time.deltaTime;
+
+        manualPitchDeg = Mathf.Clamp(manualPitchDeg, minPitchDeg, maxPitchDeg);
+
+        // Throw flow (only when carrying)
+        if (carryState.IsCarrying)
         {
             if (Input.GetMouseButtonDown(0)) { charging = true; chargeT = 0f; }
-            if (charging && Input.GetMouseButton(0)) { chargeT += Time.deltaTime; DrawArc(); }
+            if (charging && Input.GetMouseButton(0))
+            {
+                chargeT += Time.deltaTime;
+                DrawArcPreview();
+            }
             if (charging && Input.GetMouseButtonUp(0))
             {
-                float t = Mathf.Clamp01(chargeT / maxChargeTime);
-                float speed = Mathf.Lerp(minThrowSpeed, maxThrowSpeed, t);
-                Vector3 dir = AimDir();
+                Vector3 dir; float speed;
+                GetThrow(out dir, out speed);
                 Vector3 v0 = dir * speed;
-                ClearArc();
 
-                carried.DropAndThrow(v0, Random.insideUnitSphere * 2f);
+                if (!carried) carried = FindObjectOfType<CarryableAcorn>();
+                if (carried)
+                {
+                    carried.DropAndThrow(v0, Random.insideUnitSphere * 2f);
+                    // Optional: avoid post-throw body bonk
+                    if (playerCollidersToIgnore != null && playerCollidersToIgnore.Length > 0)
+                        StartCoroutine(TemporarilyIgnorePlayer(carried));
+                }
+
                 carryState.SetCarrying(false);
+                ClearArc();
                 charging = false;
+                carried = null;
             }
         }
-    }
-
-    CarryableAcorn FindClosestCarried()
-    {
-        //  just find any acorn within 2m of hand
-        Collider[] hits = Physics.OverlapSphere(handSocket.position, 2f, LayerMask.GetMask("Acorn"));
-        foreach (var h in hits)
+        else
         {
-            var ac = h.attachedRigidbody ? h.attachedRigidbody.GetComponent<CarryableAcorn>() : null;
-            if (ac && ac.IsCarried) return ac;
+            ClearArc();
         }
-        return null;
     }
 
-    Vector3 AimDir()
+    
+    void GetThrow(out Vector3 dir, out float speed)
     {
-        Ray r = aimCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        Vector3 dir = r.direction;
-        dir.y = Mathf.Clamp(dir.y + 0.15f, -0.2f, 0.9f); 
-        return dir.normalized;
-    }
-
-    void DrawArc()
-    {
-        if (!arcLine || !carried) return;
         float t = Mathf.Clamp01(chargeT / maxChargeTime);
-        float speed = Mathf.Lerp(minThrowSpeed, maxThrowSpeed, t);
+        speed = Mathf.Lerp(minThrowSpeed, maxThrowSpeed, t);
 
-        Vector3 p = handSocket.position;
-        Vector3 v = AimDir() * speed;
+        
+        Vector3 cf = aimCamera.transform.forward;
+        float yawRad = Mathf.Atan2(cf.x, cf.z); // world-space yaw 
 
-        arcLine.positionCount = arcPoints;
+        float bob = (useAutoBob && charging)
+            ? Mathf.Sin(Time.time * Mathf.PI * 2f * bobFrequencyHz) * bobAmplitudeDeg
+            : 0f;
+        float pitchDeg = Mathf.Clamp(manualPitchDeg + bob, minPitchDeg, maxPitchDeg);
+        float pitchRad = pitchDeg * Mathf.Deg2Rad;
+
+        // Spherical dir
+        float cosP = Mathf.Cos(pitchRad);
+        float sinP = Mathf.Sin(pitchRad);
+        float sinY = Mathf.Sin(yawRad);
+        float cosY = Mathf.Cos(yawRad);
+
+        dir = new Vector3(
+            sinY * cosP, // x
+            sinP,        // y 
+            cosY * cosP  // z
+        ).normalized;
+    }
+
+    void DrawArcPreview()
+    {
+        if (!arcLine) return;
+
+        Vector3 dir; float speed;
+        GetThrow(out dir, out speed);
+
+        Vector3 g = Physics.gravity;
+        float dt = arcTimeStep;
+
+        // Start slightly in front of hand to avoid hitting player collider immediately
+        Vector3 p = handSocket.position + dir * startOffset;
+        Vector3 v = dir * speed;
+
+        arcLine.positionCount = 0;
+        AppendArcPoint(p);
+
         for (int i = 0; i < arcPoints; i++)
         {
-            arcLine.SetPosition(i, p);
-            v += Physics.gravity * arcTimeStep;
-            p += v * arcTimeStep;
+            // Predict next step
+            Vector3 nextV = v + g * dt;
+            Vector3 nextP = p + v * dt + 0.5f * g * dt * dt;
+
+            // Segment spherecast
+            Vector3 seg = nextP - p;
+            float len = seg.magnitude;
+            if (len > 0.0001f)
+            {
+                if (Physics.SphereCast(p, acornRadius, seg.normalized, out RaycastHit hit, len, arcCollisionMask, QueryTriggerInteraction.Ignore))
+                {
+                    AppendArcPoint(hit.point);
+                    return; // stop at hit
+                }
+            }
+
+            // No hit — advance
+            p = nextP;
+            v = nextV;
+            AppendArcPoint(p);
         }
     }
 
-    void ClearArc() { if (arcLine) arcLine.positionCount = 0; }
+    void AppendArcPoint(Vector3 pos)
+    {
+        int c = arcLine.positionCount;
+        arcLine.positionCount = c + 1;
+        arcLine.SetPosition(c, pos);
+    }
+
+    void ClearArc()
+    {
+        if (arcLine) arcLine.positionCount = 0;
+    }
+
+    System.Collections.IEnumerator TemporarilyIgnorePlayer(CarryableAcorn ac)
+    {
+        if (!ac || !ac.col) yield break;
+        foreach (var pc in playerCollidersToIgnore)
+            if (pc) Physics.IgnoreCollision(ac.col, pc, true);
+
+        yield return new WaitForSeconds(ignorePlayerCollisionTime);
+
+        foreach (var pc in playerCollidersToIgnore)
+            if (pc && ac && ac.col) Physics.IgnoreCollision(ac.col, pc, false);
+    }
 }
