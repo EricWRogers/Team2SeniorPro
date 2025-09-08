@@ -39,8 +39,12 @@ public class LedgeGrabbing : MonoBehaviour
     public float exitLedgeTime;
     private float exitLedgeTimer;
 
+    [Header("Heist Integration")]
+    public bool ledgeGrabEnabled = true; // default true
+
     private void Update()
     {
+        if (!ledgeGrabEnabled) { if (holding) ExitLedgeHold(); return; }
         LedgeDetection();
         SubStateMachine();
     }

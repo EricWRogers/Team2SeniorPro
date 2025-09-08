@@ -32,6 +32,9 @@ public class Climbing : MonoBehaviour
     public float maxWallLookAngle;
     private float wallLookAngle;
 
+    [Header("Heist Integration")]
+    public bool climbEnabled = true; 
+
     private RaycastHit frontWallHit;
     private bool wallFront;
 
@@ -52,9 +55,11 @@ public class Climbing : MonoBehaviour
     private void Update()
     {
         WallCheck();
+        if (!climbEnabled) { if (climbing) StopClimbing(); return; }  // added wall check
         StateMachine();
 
         if (climbing && !exitingWall) ClimbingMovement();
+        
     }
 
     private void StateMachine()
