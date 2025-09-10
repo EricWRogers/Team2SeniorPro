@@ -7,7 +7,7 @@ public class KillVolume : MonoBehaviour
     {
         if (other.CompareTag("Acorn"))
         {
-            other.GetComponent<CarryableAcorn>()?.RespawnToBottom();
+            other.GetComponent<CarryableAcorn>()?.RespawnToPoint();
         }
         else if (other.CompareTag("Player"))
         {
