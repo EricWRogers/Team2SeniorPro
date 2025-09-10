@@ -74,7 +74,7 @@ public class AcornThrower : MonoBehaviour
                 GetThrow(out dir, out speed);
                 Vector3 v0 = dir * speed;
 
-                if (!carried) carried = FindObjectOfType<CarryableAcorn>();
+                if (!carried) carried = FindFirstObjectByType<CarryableAcorn>();
                 if (carried)
                 {
                     carried.DropAndThrow(v0, Random.insideUnitSphere * 2f);

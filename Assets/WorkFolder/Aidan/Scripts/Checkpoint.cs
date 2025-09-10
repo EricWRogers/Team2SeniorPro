@@ -19,7 +19,7 @@ public class Checkpoint : MonoBehaviour
 
     void Start()
     {
-        if (!acorn) acorn = FindObjectOfType<CarryableAcorn>();
+        if (!acorn) acorn = FindFirstObjectByType<CarryableAcorn>();
         
         var col = GetComponent<Collider>();
         col.isTrigger = true;
@@ -46,7 +46,7 @@ public class Checkpoint : MonoBehaviour
 
     void Activate()
     {
-        if (!acorn) acorn = FindObjectOfType<CarryableAcorn>();
+        if (!acorn) acorn = FindFirstObjectByType<CarryableAcorn>();
         if (acorn) acorn.SetRespawnPoint(transform);
 
         if (s_active && s_active != this) s_active.SetVisualActive(false);

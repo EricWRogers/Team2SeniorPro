@@ -6,9 +6,6 @@ public class LoseScreen : MonoBehaviour
     public GameObject gameOverUI;
     public AudioSource music;
     public PauseMenu pauseMenu;
-    public GameRestartOnDeplete gameRestart;
-    public SurfacePainter surfacePainter;
-    public SurfacePainterMulti surfacePainterM;
     
     public static bool GameIsPaused = false;
 
@@ -24,18 +21,6 @@ public class LoseScreen : MonoBehaviour
             Debug.Log("Pause menu disabled");
         }
 
-        if (gameRestart != null)
-        {
-            gameRestart.enabled = false;
-            Debug.Log("Auto Reload disabled");
-        }
-
-        if (surfacePainter && surfacePainterM != null)
-        {
-            surfacePainter.enabled = false;
-            surfacePainterM.enabled = false;
-            Debug.Log("Painting disabled.");
-        }
 
         if (music != null)
         {
