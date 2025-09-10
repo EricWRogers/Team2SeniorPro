@@ -9,112 +9,167 @@ public class ThirdPersonCam : MonoBehaviour
     public Transform player;
     public Transform playerObj;
     public Rigidbody rb;
-
-    public float rotationSpeed;
-
     public Transform shoulderLookAt;
 
+    [Header("Camera Objects (actual cameras you enable/disable)")]
     public GameObject thirdPersonCam;
     public GameObject shoulderCam;
     public GameObject topDownCam;
-    //public GameObject fourthPersonCam; //NANI?!
 
-    public CameraStyle currentStyle;
+    public enum CameraStyle { Basic, Shoulder, Topdown }
+    public CameraStyle currentStyle = CameraStyle.Basic;
 
-    [Header("Follow")]
-    public Transform cameraTarget;   //empty pivot
+    [Header("Follow & Zoom")]
+    public Transform cameraTarget;     // empty pivot on/behind shoulders
+    public float defaultDistance = 6f;
+    public float minDistance = 2.5f;
+    public float maxDistance = 18f;
+    public float heightOffset = 0.8f;
     public float followLerp = 12f;
+    public float zoomLerp = 14f;
+    [Tooltip("Meters per scroll notch")] public float zoomSensitivity = 1.2f;
+    public bool invertScroll = false;
+    [Tooltip("Keyboard = / - zoom speed (m/s)")] public float keyZoomSpeed = 6f;
 
-    [Header("Collision")]
-    public LayerMask cameraCollisionMask; // everything except Player
-    public float camMinDistance = 0.6f;
-    public float camMaxDistance = 4.0f;
-    public float camRadius = 0.2f;   // spherecast radius
-    private Vector3 desiredLocalOffset; // set in inspector
+    [Header("Turning")]
+    public float rotationSpeed = 10f;
+    public float shoulderRightOffset = 0.6f;
 
-    public enum CameraStyle
+    [Header("Camera Collision")]
+    [Tooltip("Include world layers. EXCLUDE Player.")] public LayerMask cameraCollisionMask;
+    public float camRadius = 0.25f;
+    public float collisionBuffer = 0.10f;
+
+    [Header("Debug")]
+    public bool debugZoom = false;
+
+    float targetDistance;
+    float currentDistance;
+
+    void Start()
     {
-        Basic,
-        Shoulder,
-        Topdown
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        targetDistance = currentDistance = Mathf.Clamp(defaultDistance, minDistance, maxDistance);
+        SwitchCameraStyle(currentStyle);
     }
 
-    //Make Cursor Invisible
-    private void Start()
+    void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;  //makes it not move
-        Cursor.visible = false;  //makes it not see - able
-    }
-
-    private void Update()
-    {
-        //switches cam styles
+        // ---- style hotkeys ----
         if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchCameraStyle(CameraStyle.Basic);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchCameraStyle(CameraStyle.Shoulder);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchCameraStyle(CameraStyle.Topdown);
 
-        //rotation orientation
-        Vector3 viewDirection = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        orientation.forward = viewDirection.normalized;
+        // active camera for this frame
+        Transform camT = ActiveCamTransform();
+        if (!camT) return; // nothing to drive
 
-        //rotate the player object
+        // ---- orientation yaw (camera -> player, at player height) ----
+        Vector3 viewDir = player.position - new Vector3(camT.position.x, player.position.y, camT.position.z);
+        if (viewDir.sqrMagnitude > 0.0001f) orientation.forward = viewDir.normalized;
+
+        // ---- face the squirrel toward camera yaw (ignore pitch) ----
         if (currentStyle == CameraStyle.Basic || currentStyle == CameraStyle.Topdown)
         {
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            Vector3 yawFwd = orientation.forward; yawFwd.y = 0f;
+            if (yawFwd.sqrMagnitude > 0.0001f)
+                playerObj.forward = Vector3.Slerp(playerObj.forward, yawFwd.normalized, Time.deltaTime * rotationSpeed);
+        }
+        else if (currentStyle == CameraStyle.Shoulder)
+        {
+            Vector3 dirToShoulder = shoulderLookAt.position - new Vector3(camT.position.x, shoulderLookAt.position.y, camT.position.z);
+            if (dirToShoulder.sqrMagnitude > 0.0001f) orientation.forward = dirToShoulder.normalized;
+            playerObj.forward = orientation.forward;
+        }
 
-            Vector3 yawForward = orientation.forward;
-            yawForward.y = 0f;
-            if (yawForward.sqrMagnitude > 0.0001f)
+        // ---- ZOOM ----
+        float raw = Input.mouseScrollDelta.y;
+        if (Mathf.Abs(raw) < 0.001f) raw = Input.GetAxis("Mouse ScrollWheel");
+        if (invertScroll) raw = -raw;
+
+        if (Mathf.Abs(raw) > 0.0001f)
+        {
+            float sign = Mathf.Sign(raw); // fixed step per notch
+            targetDistance = Mathf.Clamp(targetDistance - sign * zoomSensitivity, minDistance, maxDistance);
+            if (debugZoom) Debug.Log($"[Zoom] notch {raw:F3} -> target {targetDistance:F2}");
+        }
+
+        // keyboard zoom (= in, - out)
+        if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.Plus))
+            targetDistance = Mathf.Clamp(targetDistance - keyZoomSpeed * Time.deltaTime, minDistance, maxDistance);
+        if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.Underscore))
+            targetDistance = Mathf.Clamp(targetDistance + keyZoomSpeed * Time.deltaTime, minDistance, maxDistance);
+
+        // debug snap to extremes
+        if (Input.GetKeyDown(KeyCode.RightBracket)) targetDistance = maxDistance;
+        if (Input.GetKeyDown(KeyCode.LeftBracket))  targetDistance = minDistance;
+
+        currentDistance = Mathf.Lerp(currentDistance, targetDistance, Time.deltaTime * zoomLerp);
+
+        // ---- place the ACTIVE camera (not this script's transform) ----
+        Vector3 pivot = (cameraTarget ? cameraTarget.position : player.position) + Vector3.up * heightOffset;
+
+        Vector3 behind = -orientation.forward; behind.y = 0f;
+        if (behind.sqrMagnitude < 0.0001f) behind = -player.forward;
+        behind.Normalize();
+
+        Vector3 right = Vector3.Cross(Vector3.up, behind);
+        float side = (currentStyle == CameraStyle.Shoulder) ? shoulderRightOffset : 0f;
+        Vector3 pivotWithSide = pivot + right * side;
+
+        Vector3 desired = pivotWithSide + behind * currentDistance;
+
+        bool clamped = false;
+        if (cameraCollisionMask.value != 0)
+        {
+            if (Physics.SphereCast(pivotWithSide, camRadius, (desired - pivotWithSide).normalized,
+                                   out RaycastHit hit, currentDistance, cameraCollisionMask, QueryTriggerInteraction.Ignore))
             {
-                playerObj.forward = Vector3.Slerp(
-                    playerObj.forward,
-                    yawForward.normalized,
-                    Time.deltaTime * rotationSpeed
-                );
+                float d = Mathf.Clamp(hit.distance - collisionBuffer, minDistance, currentDistance);
+                desired = pivotWithSide + behind * d;
+                clamped = true;
             }
         }
 
-        else if (currentStyle == CameraStyle.Shoulder)
+        camT.position = Vector3.Lerp(camT.position, desired, Time.deltaTime * followLerp);
+        camT.LookAt(pivot, Vector3.up);
+
+        if (debugZoom)
         {
-            Vector3 directionToShoulderLookAt = shoulderLookAt.position - new Vector3(transform.position.x, shoulderLookAt.position.y, transform.position.z);
-            orientation.forward = directionToShoulderLookAt.normalized;
-
-            playerObj.forward = directionToShoulderLookAt.normalized;
-
-            //Debug.Log($"[Shoulder] PlayerObj facing shoulderLookAt direction: {directionToShoulderLookAt}");
+            float actual = Vector3.Distance(camT.position, pivot);
+            Debug.DrawLine(pivot, camT.position, clamped ? Color.red : Color.cyan);
+            Debug.Log($"[Cam:{camT.name}] actual:{actual:F2} current:{currentDistance:F2} target:{targetDistance:F2}");
         }
-
-
-        
-        
-        Vector3 worldDesired = cameraTarget.TransformPoint(desiredLocalOffset);
-        Vector3 from = cameraTarget.position;
-        Vector3 to = worldDesired;
-
-        if (Physics.SphereCast(from, camRadius, (to - from).normalized, out RaycastHit hit, 
-            camMaxDistance, cameraCollisionMask, QueryTriggerInteraction.Ignore))
-        {
-            float d = Mathf.Clamp(hit.distance - 0.05f, camMinDistance, camMaxDistance);
-            to = from + (to - from).normalized * d;
-        }
-
-        transform.position = Vector3.Lerp(transform.position, to, Time.deltaTime * followLerp);
-        transform.LookAt(cameraTarget.position, Vector3.up);
     }
 
-    private void SwitchCameraStyle(CameraStyle newStyle)
+    Transform ActiveCamTransform()
     {
-        shoulderCam.SetActive(false);
-        thirdPersonCam.SetActive(false);
-        topDownCam.SetActive(false);
+        if (currentStyle == CameraStyle.Basic  && thirdPersonCam && thirdPersonCam.activeInHierarchy) return thirdPersonCam.transform;
+        if (currentStyle == CameraStyle.Shoulder && shoulderCam && shoulderCam.activeInHierarchy)     return shoulderCam.transform;
+        if (currentStyle == CameraStyle.Topdown && topDownCam && topDownCam.activeInHierarchy)       return topDownCam.transform;
 
-        if (newStyle == CameraStyle.Basic) thirdPersonCam.SetActive(true);
-        if (newStyle == CameraStyle.Shoulder) shoulderCam.SetActive(true);
-        if (newStyle == CameraStyle.Topdown) topDownCam.SetActive(true);
+        // Fallback to whichever is active
+        if (thirdPersonCam && thirdPersonCam.activeInHierarchy) return thirdPersonCam.transform;
+        if (shoulderCam    && shoulderCam.activeInHierarchy)    return shoulderCam.transform;
+        if (topDownCam     && topDownCam.activeInHierarchy)     return topDownCam.transform;
 
-        Debug.Log($"Switched camera style to: {newStyle}");
+        // As a last resort, use Camera.main
+        var main = Camera.main;
+        return main ? main.transform : null;
+    }
+
+    public void SwitchCameraStyle(CameraStyle newStyle)
+    {
+        if (shoulderCam) shoulderCam.SetActive(false);
+        if (thirdPersonCam) thirdPersonCam.SetActive(false);
+        if (topDownCam) topDownCam.SetActive(false);
+
+        if (newStyle == CameraStyle.Basic   && thirdPersonCam) thirdPersonCam.SetActive(true);
+        if (newStyle == CameraStyle.Shoulder&& shoulderCam)    shoulderCam.SetActive(true);
+        if (newStyle == CameraStyle.Topdown && topDownCam)     topDownCam.SetActive(true);
+
         currentStyle = newStyle;
     }
 }
