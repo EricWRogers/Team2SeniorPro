@@ -64,14 +64,15 @@ public class ThirdPersonCam : MonoBehaviour
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-            if (inputDir != Vector3.zero)
+            Vector3 yawForward = orientation.forward;
+            yawForward.y = 0f;
+            if (yawForward.sqrMagnitude > 0.0001f)
             {
-                //Debug.Log($"[{currentStyle}] Rotating playerObj towards inputDir: {inputDir}");
-                playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
-            }
-            else
-            {
-                //Debug.Log($"[{currentStyle}] No input, player not rotating.");
+                playerObj.forward = Vector3.Slerp(
+                    playerObj.forward,
+                    yawForward.normalized,
+                    Time.deltaTime * rotationSpeed
+                );
             }
         }
 
@@ -86,15 +87,7 @@ public class ThirdPersonCam : MonoBehaviour
         }
 
 
-        /*if(inputDir != Vector3.zero)
-        {
-            Debug.Log($"[{currentStyle}] Rotating playerObj towards inputDir: {inputDir}");
-            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
-        }
-        else
-        {
-            Debug.Log($"[{currentStyle}] No input, player not rotating.");
-        }*/
+        
         
         Vector3 worldDesired = cameraTarget.TransformPoint(desiredLocalOffset);
         Vector3 from = cameraTarget.position;
