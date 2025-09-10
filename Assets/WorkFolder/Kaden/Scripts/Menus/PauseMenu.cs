@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    public AudioSource audioSource;
+    public AudioClip pauseSFX;
 
     public GameObject pauseMenu;
     public void Home()
@@ -50,5 +52,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+
+        // Play clip once
+        if (pauseSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(pauseSFX);
+        }
     }
 }
