@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+
+    [Header("Audio(s):")]
     public AudioSource audioSource;
     public AudioClip pauseSFX;
 
+    [Header("Menu and Script(s):")]
     public GameObject pauseMenu;
+
     public void Home()
     {
         Debug.Log("Loading Main Menu...");
@@ -20,6 +24,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Restart()
@@ -49,6 +55,8 @@ public class PauseMenu : MonoBehaviour
     }
     void Pause()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
