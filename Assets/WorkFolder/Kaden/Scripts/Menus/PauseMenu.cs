@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Audio(s):")]
     public AudioSource audioSource;
-    public AudioClip buttonAudio;
+    public AudioClip buttonClip;
     public AudioSource sfxSource;
     public AudioClip pauseSFX;
     public AudioSource buttonSource;
@@ -31,15 +31,10 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void PlaySound(AudioClip buttonAudio)
+    public void PlaySound(AudioClip buttonClip)
     {
-        if (buttonSource.clip == buttonAudio && buttonSource.isPlaying)
-            return;
-
-        buttonSource.Stop();
-        buttonSource.clip = buttonAudio;
-        if (buttonAudio != null)
-            buttonSource.Play();
+        if (buttonClip != null)
+            buttonSource.PlayOneShot(buttonClip);
     }
 
     public void Restart()
