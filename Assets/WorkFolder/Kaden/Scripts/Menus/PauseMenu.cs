@@ -8,7 +8,6 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Audio(s):")]
     public AudioSource audioSource;
-    public AudioClip buttonClip;
     public AudioSource sfxSource;
     public AudioClip pauseSFX;
     public AudioSource buttonSource;
