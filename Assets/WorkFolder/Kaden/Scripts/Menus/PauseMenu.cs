@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Audio(s):")]
     public AudioSource audioSource;
+    public AudioSource sfxSource;
     public AudioClip pauseSFX;
 
     [Header("Menu and Script(s):")]
@@ -39,6 +40,18 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("You've quit the game!");
     }
 
+    public void ToggleAudio()
+    {
+        if (audioSource != null)
+        {
+            audioSource.mute = !audioSource.mute; // Toggles the mute state
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource not assigned to AudioToggler script.");
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -62,9 +75,9 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
 
         // Play clip once
-        if (pauseSFX != null && audioSource != null)
+        if (pauseSFX != null && sfxSource != null)
         {
-            audioSource.PlayOneShot(pauseSFX);
+            sfxSource.PlayOneShot(pauseSFX);
         }
     }
 }
