@@ -8,8 +8,10 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Audio(s):")]
     public AudioSource audioSource;
+    public AudioClip buttonAudio;
     public AudioSource sfxSource;
     public AudioClip pauseSFX;
+    public AudioSource buttonSource;
 
     [Header("Menu and Script(s):")]
     public GameObject pauseMenu;
@@ -27,6 +29,17 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void PlaySound(AudioClip buttonAudio)
+    {
+        if (buttonSource.clip == buttonAudio && buttonSource.isPlaying)
+            return;
+
+        buttonSource.Stop();
+        buttonSource.clip = buttonAudio;
+        if (buttonAudio != null)
+            buttonSource.Play();
     }
 
     public void Restart()
