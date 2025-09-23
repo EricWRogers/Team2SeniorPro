@@ -49,6 +49,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   sfxSource: {fileID: 6820409618761352004}
   pauseSFX: {fileID: 8300000, guid: 955e63686d2c35e448e2ccc9c7d681c4, type: 3}
+  buttonSource: {fileID: 6820409618761352004}
   pauseMenu: {fileID: 0}
 --- !u!114 &1843266408847379892
 MonoBehaviour:
@@ -75,8 +76,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 753027327693e904ebb832c372bef5e5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 955e63686d2c35e448e2ccc9c7d681c4, type: 3}
-  m_Resource: {fileID: 8300000, guid: 955e63686d2c35e448e2ccc9c7d681c4, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

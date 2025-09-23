@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,21 +9,24 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Audio(s):")]
     public AudioSource audioSource;
-    public AudioSource sfxSource;
+    public AudioSource SFXSource;
     public AudioClip pauseSFX;
-    public AudioSource buttonSource;
+    public AudioClip clickSFX;
 
     [Header("Menu and Script(s):")]
     public GameObject pauseMenu;
 
     public void Home()
     {
+        PlaySound();
         Debug.Log("Loading Main Menu...");
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
     public void Resume()
     {
+        PlaySound();
+        StartCoroutine(WaitForPlay());
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -30,19 +34,15 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void PlaySound(AudioClip buttonClip)
-    {
-        if (buttonClip != null)
-            buttonSource.PlayOneShot(buttonClip);
-    }
-
     public void Restart()
     {
+        PlaySound();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }    
+    }
     public void Quit()
     {
+        PlaySound();
         Application.Quit();
         Debug.Log("You've quit the game!");
     }
@@ -56,6 +56,19 @@ public class PauseMenu : MonoBehaviour
         else
         {
             Debug.LogWarning("AudioSource not assigned to AudioToggler script.");
+        }
+    }
+
+    private void PlaySound()
+    {
+        if (clickSFX != null && SFXSource != null)
+        {
+            SFXSource.PlayOneShot(clickSFX);
+            Debug.Log("Played sound: " + clickSFX.name);
+        }
+        else
+        {
+            Debug.LogWarning("ButtonSource or ButtonClip is missing!");
         }
     }
 
@@ -82,9 +95,14 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
 
         // Play clip once
-        if (pauseSFX != null && sfxSource != null)
+        if (pauseSFX != null && SFXSource != null)
         {
-            sfxSource.PlayOneShot(pauseSFX);
+            SFXSource.PlayOneShot(pauseSFX);
         }
+    }
+
+    private IEnumerator WaitForPlay()
+    {
+        yield return new WaitForSecondsRealtime(0.05f); // tiny delay so sound registers
     }
 }
