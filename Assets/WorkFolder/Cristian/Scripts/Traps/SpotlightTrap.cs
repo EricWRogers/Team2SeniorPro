@@ -1,28 +1,24 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
-//using SuperPupSystems.Helper; // If your debuff or health system is here
 
 public class SpotlightTrap : MonoBehaviour
 {
     [Header("Targets")]
     public Transform playerTarget;
-    public float detectionRadius = 15f;
+    public float detectionRadius = 30f;
+    public float visionAngle = 45f; // Cone of vision in degrees
     public LayerMask visionBlockMask; // Assign walls/obstacles here
 
     [Header("Spotlight Settings")]
     public Light spotLight;
-    public Color playerColor = Color.white;
-
+    public Color normalColor = Color.white;
     public Color observingColor = Color.red;
     public Color curiousColor = Color.yellow;
     public float rotationSpeed = 2f;
-    public float searchAngle = 45f;
+    public float searchAngle = 270f;
     public float searchSpeed = 2f;
 
     [Header("Debuff Settings")]
-    public float countdownTime = 3f; // How long it must see the player
+    public float countdownTime = 3f;
     private float countdownTimer;
     private bool debuffGiven = false;
 
@@ -30,11 +26,13 @@ public class SpotlightTrap : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip searchClip;
     public AudioClip playerClip;
+    public AudioClip curiosityClip;
 
-    private enum SpotState { Searching, PlayerViewing }
+    private enum SpotState { Searching, Curious, PlayerViewing }
     private SpotState currentState = SpotState.Searching;
 
     private float searchTimer = 0f;
+    private Transform curiosityTarget; // store nut distraction
 
     void Start()
     {
@@ -44,30 +42,38 @@ public class SpotlightTrap : MonoBehaviour
 
     void Update()
     {
-        if (playerTarget != null && Vector3.Distance(transform.position, playerTarget.position) <= detectionRadius)
+        // First check for player
+        if (playerTarget != null && IsInDetectionRange(playerTarget, detectionRadius) && CanSee(playerTarget))
         {
-            if (CanSeePlayer())
-            {
-                currentState = SpotState.PlayerViewing;
-                PlayerFocus();
-                return;
-            }
+            currentState = SpotState.PlayerViewing;
+            PlayerFocus();
+            return;
         }
 
-        // Otherwise → Search mode
+        // If no player, check for throwable distraction
+        curiosityTarget = FindNearestThrowable();
+        if (curiosityTarget != null && IsInDetectionRange(curiosityTarget, detectionRadius) && CanSee(curiosityTarget))
+        {
+            currentState = SpotState.Curious;
+            CuriosityFocus();
+            return;
+        }
+
+        // Otherwise, search mode
         currentState = SpotState.Searching;
         SearchMode();
     }
 
-    
+    // --------------------------
+    // STATES
+    // --------------------------
+
     private void PlayerFocus()
     {
         spotLight.color = observingColor;
         RotateTowards(playerTarget.position);
-
         PlayClip(playerClip);
 
-        // Count down
         if (!debuffGiven)
         {
             countdownTimer -= Time.deltaTime;
@@ -79,22 +85,35 @@ public class SpotlightTrap : MonoBehaviour
         }
     }
 
-    //While in search mode add a state that allows the spotlight to lock onto the acorn as well if throwns as a sort of distraction
-    //Also make sure to implement the mechanic where the spotlight doesnt actually have 360 vision somehow
+    private void CuriosityFocus()
+    {
+        spotLight.color = curiousColor;
+        RotateTowards(curiosityTarget.position);
+        PlayClip(curiosityClip);
+
+        // Reset player debuff timer while distracted
+        countdownTimer = countdownTime;
+        debuffGiven = false;
+    }
+
     private void SearchMode()
     {
-        spotLight.color = playerColor;
-
+        spotLight.color = normalColor;
         PlayClip(searchClip);
 
-        countdownTimer = countdownTime; // reset when not looking
+        countdownTimer = countdownTime;
         debuffGiven = false;
 
+        // Simple oscillating search
         searchTimer += Time.deltaTime * searchSpeed;
         float angle = Mathf.Sin(searchTimer) * searchAngle;
         Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
     }
+
+    // --------------------------
+    // HELPERS
+    // --------------------------
 
     private void RotateTowards(Vector3 targetPos)
     {
@@ -103,38 +122,60 @@ public class SpotlightTrap : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
     }
 
-    private bool CanSeePlayer()
+    private bool IsInDetectionRange(Transform target, float range)
     {
-        Vector3 dirToPlayer = (playerTarget.position - transform.position).normalized;
-        float distToPlayer = Vector3.Distance(transform.position, playerTarget.position);
+        return Vector3.Distance(transform.position, target.position) <= range;
+    }
 
-        if (Physics.Raycast(transform.position, dirToPlayer, out RaycastHit hit, distToPlayer, visionBlockMask))
+    private bool CanSee(Transform target)
+    {
+        Vector3 dirToTarget = (target.position - transform.position).normalized;
+        float distToTarget = Vector3.Distance(transform.position, target.position);
+
+        // Check cone of vision
+        float angleToTarget = Vector3.Angle(transform.forward, dirToTarget);
+        if (angleToTarget > visionAngle * 0.5f) return false;
+
+        // Check line of sight (walls etc.)
+        if (Physics.Raycast(transform.position, dirToTarget, out RaycastHit hit, distToTarget, visionBlockMask))
         {
-            // Hit a wall => can’t see player
-            //update to where you have go be in a specific cone shaped view of the raycast before it sees you and doesnt just see u regardless of where u are
-            return false;
+            return false; // blocked
         }
+
         return true;
+    }
+
+    private Transform FindNearestThrowable()
+    {
+        GameObject[] throwables = GameObject.FindGameObjectsWithTag("Acorn");
+        Transform nearest = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (var obj in throwables)
+        {
+            float dist = Vector3.Distance(transform.position, obj.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = obj.transform;
+            }
+        }
+        return nearest;
     }
 
     private void ApplyRandomDebuff()
     {
-        // Example debuff logic
-        int debuffType = Random.Range(0, 3); // Pick between 3 debuffs
+        int debuffType = Random.Range(0, 3);
         switch (debuffType)
         {
             case 0:
                 Debug.Log("Debuff: Slowed movement");
-                // e.g., playerTarget.GetComponent<PlayerMovement>().ApplySlow(); //This will be default to always happen
                 break;
             case 1:
                 Debug.Log("Debuff: Reduced vision");
-                // e.g., playerTarget.GetComponent<PlayerEffects>().ApplyDarkness();  //Add paranoia/sanity stacks plus one
                 break;
             case 2:
                 Debug.Log("Debuff: Health drain");
-                //Health hp = playerTarget.GetComponent<Health>();
-                //if (hp != null) hp.Damage(10);
                 break;
         }
     }
