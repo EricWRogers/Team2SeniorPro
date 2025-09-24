@@ -20,6 +20,6 @@ public class UIManager : MonoBehaviour
         // Example of showing stats in text
         //speedText.text = "Speed: " + .movementSpeed.ToString("F1"); // One decimal place
         nutJumpText.text = "Nut Jumps: " + nutGrabAbility.currentNutJumps;
-        //healthText.text = "Health: " + playerStats.health;
+        //healthText.text = "Health: " + .health;
     }
 }
