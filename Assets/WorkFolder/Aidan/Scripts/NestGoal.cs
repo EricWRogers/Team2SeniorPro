@@ -8,6 +8,8 @@ public class NestGoal : MonoBehaviour
         if (!other.CompareTag("Acorn")) return;
         Debug.Log("WIN! Acorn delivered to the nest.");
         SceneManager.LoadScene("Kaden's Scene");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         //maybe a win screen
     }
 }
