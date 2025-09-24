@@ -51,7 +51,7 @@ public class ThirdPersonCam : MonoBehaviour
 
         if (player == null | playerObj == null | orientation == null | playerObj == null)
         {
-            if (GameObject.FindGameObjectWithTag("Player").gameObject.name == "Squirrel")
+            if (GameObject.FindGameObjectWithTag("Player").gameObject.name == "Squirrel" || GameObject.FindGameObjectWithTag("Player").gameObject.name == "Player")
             {
                 player = GameObject.FindGameObjectWithTag("Player").transform;
             }
