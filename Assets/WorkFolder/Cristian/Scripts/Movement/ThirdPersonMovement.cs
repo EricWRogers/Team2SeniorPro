@@ -61,7 +61,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
-    //[Tooltip("")]
+    [Header("Debuffs")]  //regardence to adding slow mult for debuffs from traps
+    [Range(0f, 1f)] public float movementSlowMultiplier = 1f; // 1 = normal, 0.5 = half speed, 0 = frozen
 
     [Header("References")]
     public Climbing climbingScript;
@@ -257,11 +258,11 @@ public class ThirdPersonMovement : MonoBehaviour
             }
             else
             {
-                thirdPersonMovementSpeed = desiredMovementSpeed;
+                thirdPersonMovementSpeed = desiredMovementSpeed * movementSlowMultiplier;
             }
         }
 
-        lastDesiredMovementSpeed = desiredMovementSpeed;
+        lastDesiredMovementSpeed = desiredMovementSpeed * movementSlowMultiplier;
 
         // deactivate keepMomentum
         if (Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed) < 0.1f) keepMomentum = false;
@@ -278,7 +279,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         while (time < difference)
         {
-            thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference);
+            thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference) * movementSlowMultiplier;
             
             if (OnSlope())
             {
@@ -294,35 +295,41 @@ public class ThirdPersonMovement : MonoBehaviour
             yield return null;  
         }
 
-        thirdPersonMovementSpeed = desiredMovementSpeed;
+        thirdPersonMovementSpeed = desiredMovementSpeed * movementSlowMultiplier;
+    }
+    
+    //reference shade
+    public float CurrentSpeed
+    {
+        get { return thirdPersonMovementSpeed; }
     }
 
     private void MovePlayer()
     {
         if (restricted) return; //restricts movement and also occurs during climbing, ledge stuff, and vaulting i think
 
-        if(climbingScript.exitingWall) return;
+        if (climbingScript.exitingWall) return;
         //calculates players overall movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         //when on slope
-        if(OnSlope() && !exitingSlope)
+        if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection(moveDirection) * thirdPersonMovementSpeed * 20f, ForceMode.Force);
 
-            if(rb.linearVelocity.y > 0)
-                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);  //adds vector3 force down so that you dont ascend to space
+            if (rb.linearVelocity.y > 0)
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);  //adds vector3 force down so that you dont ascend to space
         }
         //When on the ground
-        if(grounded)
+        if (grounded)
             rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f, ForceMode.Force); //10f adds speed to make the player move a bit faster than normal
         //When in the air
-        else if(!grounded)
+        else if (!grounded)
             rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f * airMultiplier, ForceMode.Force);
 
         //turns gravity off when on slope
-        if(!wallrunning) rb.useGravity = !OnSlope();
-   
+        if (!wallrunning) rb.useGravity = !OnSlope();
+
     }
 
     private void SpeedControl()
