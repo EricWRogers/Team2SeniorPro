@@ -9,12 +9,12 @@ public class AcornThrower : MonoBehaviour
 
     [Header("Throw")]
     public float minThrowSpeed = 6f;
-    public float maxThrowSpeed = 16f;
+    public float maxThrowSpeed = 16f;   //default 16f
     public float maxChargeTime = 1.0f;
 
     [Header("Arc Preview")]
     public LineRenderer arcLine;
-    public int arcPoints = 36;
+    public int arcPoints = 36;  //default 36
     public float arcTimeStep = 0.045f;
     public float acornRadius = 0.24f;
     public float startOffset = 0.28f;           // push arc start forward to avoid self-hit
@@ -22,7 +22,7 @@ public class AcornThrower : MonoBehaviour
 
     [Header("Elevation Control")]
     public float minPitchDeg = -5f;
-    public float maxPitchDeg = 70f;
+    public float maxPitchDeg = 90f;  //reg = 70f
     public float scrollPitchStep = 10f;         // deg per mouse wheel unit
     public float arrowPitchSpeed = 60f;         // deg/sec with Up/Down
     public float defaultPitchDeg = 25f;
