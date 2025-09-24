@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class MidairGrabAbility : MonoBehaviour
 {
@@ -12,14 +13,20 @@ public class MidairGrabAbility : MonoBehaviour
     public ThirdPersonMovement tpm;
 
     [Header("Homing Settings")]
-    public float homingSpeed = 12f;      // how quickly player moves toward acorn
-    public float homingDuration = 0.35f; // max time to attempt homing
-    public float catchDistance = 1.0f;   // distance at which we force the pickup
-    public float searchRadius = 15f;     // how far to look for a thrown acorn, edit for linger rng
+    public float homingSpeed = 12f;
+    public float homingDuration = 0.35f;
+    public float catchDistance = 1.0f;
+    public float searchRadius = 15f;
 
     [Header("Slow Motion Settings")]
     public float slowMoTime = 2f;
     public float slowMoScale = 0.3f;
+
+    [Header("Nut Jump Settings")]
+    public int maxNutJumps = 1;            // Base number of nut jumps
+    public int currentNutJumps;           // Remaining nut jumps
+    public float nutJumpCooldown = 3f;     // Cooldown duration
+    private float nutJumpCooldownTimer = 0f;
 
     [Header("Double Jump Settings")]
     public float doubleJumpForce = 10f;
@@ -30,28 +37,53 @@ public class MidairGrabAbility : MonoBehaviour
     private Coroutine homingCoroutine;
 
     [Header("Particles")]
-
     public ParticleSystem grabParticles;
 
     [Header("Animations")]
-
     public Animator animator;
-    private AudioClip slowMoSfx;
+    public AudioClip slowMoSfx;
+    public AudioClip homingSfx;
+
+    [Header("UI")]
+    public TextMeshProUGUI nutJumpTimerText;
+
+    void Start()
+    {
+        currentNutJumps = maxNutJumps; // initialize
+    }
 
     void Update()
     {
-        // When player presses jump midair...
+        // Cooldown timer
+        if (nutJumpCooldownTimer > 0f)
+        {
+            nutJumpCooldownTimer -= Time.deltaTime;
+            if (nutJumpCooldownTimer <= 0f)
+            {
+                // Reset nut jumps when cooldown expires
+                currentNutJumps = maxNutJumps;
+            }
+        }
+
+        // Update TMP UI
+        if (nutJumpTimerText)
+        {
+            if (nutJumpCooldownTimer > 0f)
+                nutJumpTimerText.text = $"Nut Jump CD: {nutJumpCooldownTimer:F1}s";
+            else
+                nutJumpTimerText.text = "Nut Jump Ready!";
+        }
+
+        // Handle input
         if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded())
         {
-            // If player already has a granted midair double jump, consume it :)
-            if (canDoubleJump)
+            if (canDoubleJump && currentNutJumps > 0)
             {
-                DoDoubleJump();
+                DoNutJump();
                 return;
             }
 
-            // otherwise attempt homing toward a recently-thrown acorn
-            if (!isHoming)
+            if (!isHoming && currentNutJumps > 0)
             {
                 CarryableAcorn target = FindNearestThrownAcorn(searchRadius);
                 if (target != null)
@@ -62,11 +94,15 @@ public class MidairGrabAbility : MonoBehaviour
         }
     }
 
-    void DoDoubleJump()
+    void DoNutJump()
     {
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
         playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+
         canDoubleJump = false;
+        currentNutJumps--;                  // Consume a nut jump
+        nutJumpCooldownTimer = nutJumpCooldown; // Start cooldown
+
         ResetTime();
     }
 
@@ -75,57 +111,43 @@ public class MidairGrabAbility : MonoBehaviour
         if (target == null) yield break;
 
         isHoming = true;
-        if (tpm) tpm.freeze = true; // optional may remvoe: freeze normal movement controls
+        if (tpm) tpm.freeze = true;
 
         float elapsed = 0f;
-        // capture midair eligibility before we call PickUp (it will reset on pickup)
         bool targetIsMidairEligible = target.IsAvailableForMidairCatch();
 
         while (elapsed < homingDuration && target != null && !target.IsCarried)
         {
             Vector3 targetPos = target.rb.position;
-            Vector3 dir = (targetPos - playerRb.position);
-            float dist = dir.magnitude;
+            float dist = Vector3.Distance(playerRb.position, targetPos);
 
             if (dist <= catchDistance)
             {
-                // Force pickup and bypass the normal short no-catch cooldown that DropAndThrow sets
                 target.PickUp(carrySocket, ignoreCooldown: true);
 
-                // Only trigger effects if pickup actually succeeded AND the pickup is a midair pickup
-                // Use the midair eligibility we checked before calling PickUp
-                if (target.IsCarried)
+                if (target.IsCarried && carryState != null) carryState.SetCarrying(true);
+
+                if (targetIsMidairEligible)
                 {
-                    // set player to carrying state
-                    if (carryState != null) carryState.SetCarrying(true);
-
-                    if (targetIsMidairEligible)
-                    {
-                        // grant slow-mo and midair double jump
-                        ActivateSlowMo();
-                        canDoubleJump = true;
-                    }
+                    ActivateSlowMo();
+                    canDoubleJump = true;
                 }
-
                 break;
             }
 
-            // Move player toward acorn smoothly
-            // Using MovePosition keeps physics interaction consistent
             Vector3 nextPos = Vector3.MoveTowards(playerRb.position, targetPos, homingSpeed * Time.deltaTime);
             playerRb.MovePosition(nextPos);
 
             elapsed += Time.deltaTime;
             yield return null;
+
+            //if (homingSfx)
         }
 
-        // done
         if (tpm) tpm.freeze = false;
         isHoming = false;
     }
 
-    // find nearest acorn which is recently thrown and still available for midair catch
-    
     CarryableAcorn FindNearestThrownAcorn(float radius)
     {
         CarryableAcorn[] all = FindObjectsByType<CarryableAcorn>(FindObjectsSortMode.None);
@@ -152,17 +174,12 @@ public class MidairGrabAbility : MonoBehaviour
         if (!isSlowingTime)
         {
             Time.timeScale = slowMoScale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale; // physics stays synced
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
             isSlowingTime = true;
 
-            // Sound
-            if (slowMoSfx) AudioSource.PlayClipAtPoint(slowMoSfx, transform.position);
-
-            // Animation
-            if (animator) animator.SetTrigger("MidairGrab");
-
-            // Particles
-            if (grabParticles) grabParticles.Play /*Instantiate(grabParticles, transform.position, Quaternion.identity);*/();
+            if (slowMoSfx) AudioSource.PlayClipAtPoint(slowMoSfx, transform.position); //makes the sfx play at the players position
+            if (animator) animator.SetTrigger("MidairGrab");  //fix this
+            if (grabParticles) grabParticles.Play();
 
             Invoke(nameof(ResetTime), slowMoTime);
         }
@@ -171,12 +188,19 @@ public class MidairGrabAbility : MonoBehaviour
     void ResetTime()
     {
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f; // reset physics timestep
+        Time.fixedDeltaTime = 0.02f;
         isSlowingTime = false;
     }
 
     bool IsGrounded()
-    {   
+    {
         return Physics.Raycast(transform.position, Vector3.down, 1.1f);
+    }
+
+    // Call this from upgrades to increase max jumps
+    public void UpgradeNutJumps(int amount)
+    {
+        maxNutJumps += amount;
+        currentNutJumps = maxNutJumps;
     }
 }
