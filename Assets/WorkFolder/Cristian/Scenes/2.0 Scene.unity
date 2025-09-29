@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 590868134}
   - component: {fileID: 590868133}
   m_Layer: 6
-  m_Name: w
+  m_Name: slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,13 +1607,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590868131}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46354634, y: -0, z: -0, w: 0.88607275}
+  m_LocalRotation: {x: 0.47621852, y: -0.012415525, z: -0.0062689907, w: 0.879217}
   m_LocalPosition: {x: 0, y: 0, z: -0.978}
-  m_LocalScale: {x: 1.0212, y: 1.3791305, z: 0.27015844}
+  m_LocalScale: {x: 1.0212, y: 1.351558, z: 0.27015844}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1102833724}
-  m_LocalEulerAnglesHint: {x: 55.232, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 56.85, y: -2.914, z: -2.395}
 --- !u!65 &590868133
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1779,6 +1779,10 @@ PrefabInstance:
     - target: {fileID: 8361566589930470588, guid: 969c3d4b567b8e847a3d0299a52d5ee1, type: 3}
       propertyPath: m_Name
       value: Lose Screen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361566589930470588, guid: 969c3d4b567b8e847a3d0299a52d5ee1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4385,6 +4389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 3765016522806037410, guid: 6de269ee7f99be143bd0be1aba273e0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4822969009111782445, guid: 6de269ee7f99be143bd0be1aba273e0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5597,9 +5605,12 @@ MonoBehaviour:
   chaseSpeed: 5
   chaseRange: 10
   acceleration: 0.5
+  currentSpeed: 0
   scaryMusic: {fileID: 0}
+  audioSource: {fileID: 0}
   playerMovement: {fileID: 6096306478748901138}
   slowRange: 8
+  slowFactor: 0
 --- !u!136 &1911800438
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6693,9 +6704,15 @@ MonoBehaviour:
   searchRadius: 50
   slowMoTime: 3
   slowMoScale: 0.3
+  maxNutJumps: 1
+  currentNutJumps: 0
+  nutJumpCooldown: 3
   doubleJumpForce: 10
   grabParticles: {fileID: 0}
   animator: {fileID: 0}
+  slowMoSfx: {fileID: 0}
+  homingSfx: {fileID: 0}
+  nutJumpTimerText: {fileID: 0}
 --- !u!1001 &6958043716550285975
 PrefabInstance:
   m_ObjectHideFlags: 0
