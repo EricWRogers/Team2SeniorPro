@@ -46,6 +46,7 @@ public class MidairGrabAbility : MonoBehaviour
 
     [Header("UI")]
     public TextMeshProUGUI nutJumpTimerText;
+    public Stamina staminaBar;
 
     void Start()
     {
@@ -96,12 +97,21 @@ public class MidairGrabAbility : MonoBehaviour
 
     void DoNutJump()
     {
+        if (staminaBar != null && !staminaBar.IsFull())
+            return;
+
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
         playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
 
         canDoubleJump = false;
         currentNutJumps--;                  // Consume a nut jump
         nutJumpCooldownTimer = nutJumpCooldown; // Start cooldown
+
+        // Drain stamina
+        if (staminaBar != null)
+        {
+            staminaBar.DrainToZero();
+        }
 
         ResetTime();
     }

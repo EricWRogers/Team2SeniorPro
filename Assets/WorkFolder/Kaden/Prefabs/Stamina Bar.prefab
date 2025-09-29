@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4001237127976496631}
   - component: {fileID: 6736692579339448368}
+  - component: {fileID: 6147763069503704499}
   m_Layer: 5
-  m_Name: SanityBar
+  m_Name: Stamina Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,10 +87,25 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6147763069503704499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478391736441147498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06242e784f5233544be9e4ed5010066b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 1
+  regenRate: 0.2
+  staminaSlider: {fileID: 6736692579339448368}
 --- !u!1 &1708565546513392587
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9924528, g: 0.3951085, b: 0.3951085, a: 1}
+  m_Color: {r: 0.99215686, g: 0.93372, b: 0.39607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
