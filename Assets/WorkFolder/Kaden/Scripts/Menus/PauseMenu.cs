@@ -25,18 +25,15 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
     {
-        PlaySound();
         StartCoroutine(WaitForPlay());
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     public void Restart()
     {
-        PlaySound();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -59,7 +56,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    private void PlaySound()
+    public void PlaySound()
     {
         if (clickSFX != null && SFXSource != null)
         {
@@ -103,6 +100,6 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator WaitForPlay()
     {
-        yield return new WaitForSecondsRealtime(0.05f); // tiny delay so sound registers
+        yield return new WaitForSecondsRealtime(2.0f); // tiny delay so sound registers
     }
 }
