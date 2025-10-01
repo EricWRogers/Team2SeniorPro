@@ -62,10 +62,19 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool exitingSlope;
 
     [Header("Air Gravity")]
-    public float extraGravityDelay = 5f;       // time in air before stronger gravity kicks in
-    public float fallGravityMultiplier = 2f;   // how much stronger gravity gets
+    public float extraGravityDelay = 7f;       // time in air before stronger gravity kicks in
+    public float fallGravityMultiplier = 1f;   // how much stronger gravity gets
 
     private float airTimeCounter = 0f;
+
+    [Header("Air Gravity Tuning")]
+    public float upwardGravityMultiplier = 1.5f;  // when going up
+    public float downwardGravityMultiplier = 2.5f; // when falling
+
+    [Header("Momentum Tuning")]
+    public float momentumBlendRiseRate = 40f; // how fast we blend up toward target
+    public float momentumBlendFallRate = 25f; // how fast we blend down toward base
+
 
     [Header("Debuffs")]  //regardence to adding slow mult for debuffs from traps
     [Range(0f, 1f)] public float movementSlowMultiplier = 1f; // 1 = normal, 0.5 = half speed, 0 = frozen
@@ -138,6 +147,11 @@ public class ThirdPersonMovement : MonoBehaviour
             airTimeCounter = 0f; // reset on landing
         }
 
+            if (!grounded)
+        {
+            ApplyBetterJumpGravity();
+        }
+
         if (grounded)
             rb.linearDamping = groundDrag;
         else
@@ -175,6 +189,20 @@ public class ThirdPersonMovement : MonoBehaviour
         if(Input.GetKeyUp(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+        }
+    }
+
+        private void ApplyBetterJumpGravity()
+    {
+        // Going up
+        if (rb.linearVelocity.y > 0.1f)
+        {
+            rb.AddForce(Physics.gravity * (upwardGravityMultiplier - 1f), ForceMode.Acceleration);
+        }
+        // Falling down
+        else if (rb.linearVelocity.y < -0.1f)
+        {
+            rb.AddForce(Physics.gravity * (downwardGravityMultiplier - 1f), ForceMode.Acceleration);
         }
     }
 
@@ -280,6 +308,26 @@ public class ThirdPersonMovement : MonoBehaviour
 
         lastDesiredMovementSpeed = desiredMovementSpeed * movementSlowMultiplier;
 
+        // --- Momentum resolution (smoothly blend speed toward the higher of base or momentum) ---
+        Sliding slideComponent = GetComponent<Sliding>();
+        float baseSpeed = desiredMovementSpeed * movementSlowMultiplier;
+        float momentum  = (slideComponent != null) ? slideComponent.MomentumBoost : 0f;
+
+        // the target is whichever is higher: your state speed or the fading momentum
+        float targetSpeed = Mathf.Max(baseSpeed, momentum);
+
+        // choose rise vs fall rate for natural feel
+        float rate = (thirdPersonMovementSpeed < targetSpeed) ? momentumBlendRiseRate : momentumBlendFallRate;
+
+        // blend current speed toward target
+        thirdPersonMovementSpeed = Mathf.MoveTowards(thirdPersonMovementSpeed, targetSpeed, rate * Time.deltaTime);
+
+        // keep lastDesiredMovementSpeed as you already do
+        lastDesiredMovementSpeed = baseSpeed;
+
+        // if we're basically at the base speed again, momentum is effectively done
+        if (Mathf.Abs(thirdPersonMovementSpeed - baseSpeed) < 0.05f) keepMomentum = false;
+
         // deactivate keepMomentum
         if (Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed) < 0.1f) keepMomentum = false;
     }
@@ -372,10 +420,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void ApplyExtraGravity()
     {
-        // only apply if we've been airborne long enough and not sliding a slope
-        if (airTimeCounter >= extraGravityDelay && !OnSlope())
+        if (!OnSlope())
         {
-            rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
+            // fraction of how long we’ve been in the air relative to delay
+            float t = Mathf.Clamp01((airTimeCounter - extraGravityDelay) / 1.5f); 
+            // lerp from normal gravity (1) to fall multiplier
+            float gravityMult = Mathf.Lerp(1f, fallGravityMultiplier, t);
+
+            rb.AddForce(Physics.gravity * (gravityMult - 1f), ForceMode.Acceleration);
         }
     }
 

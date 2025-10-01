@@ -5600,17 +5600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63521999deb2c484f82d877c0fed8ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6096306478748901127}
-  stalkingSpeed: 2
-  chaseSpeed: 5
-  chaseRange: 10
-  acceleration: 0.5
-  currentSpeed: 0
-  scaryMusic: {fileID: 0}
-  audioSource: {fileID: 0}
-  playerMovement: {fileID: 6096306478748901138}
-  slowRange: 8
-  slowFactor: 0
 --- !u!136 &1911800438
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6630,6 +6619,30 @@ PrefabInstance:
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Name
       value: Squirrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: slideForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: maxMomentumSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: momentumDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: momentumDecayRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: momentumDecayRateNoInput
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: slideSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4866966670075613113, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: cameraTransform
