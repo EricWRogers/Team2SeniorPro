@@ -129,7 +129,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private void Update()
     {
         //ground check will cast raycast down to see if the ground exist 
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsTheGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight, whatIsTheGround);
 
         MyInput();
         SpeedControl();

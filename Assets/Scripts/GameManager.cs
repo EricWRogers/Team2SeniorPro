@@ -12,5 +12,9 @@ public class GameManager : MonoBehaviour
         currentCheckpoint = 0;
         SceneManager.LoadScene(_newMap);
     }
+    public void getTime(int _elapsedTime)
+    {
+        
+    }
     
 }
