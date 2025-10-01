@@ -19,6 +19,7 @@ public class UIManagement : MonoBehaviour
 
     void Start()
     {
+        
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");

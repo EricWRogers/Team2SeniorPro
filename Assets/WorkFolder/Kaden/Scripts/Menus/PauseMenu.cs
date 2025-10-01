@@ -23,9 +23,14 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     public void Resume()
     {
         StartCoroutine(WaitForPlay());
+        Cursor.lockState = CursorLockMode.Locked;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
