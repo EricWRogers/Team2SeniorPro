@@ -6,7 +6,6 @@ public class Sliding : MonoBehaviour
 {
     [Header("References")]
     public Transform orientation;
-    public Transform playerObj;
     private Rigidbody rb;
     private ThirdPersonMovement tpm;
 
@@ -29,7 +28,7 @@ public class Sliding : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tpm = GetComponent<ThirdPersonMovement>();
 
-        startYScale = playerObj.localScale.y;
+        startYScale = transform.localScale.y;
     }
 
     private void Update()
@@ -54,7 +53,7 @@ public class Sliding : MonoBehaviour
     {
         tpm.sliding = true;
 
-        playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
@@ -86,8 +85,8 @@ public class Sliding : MonoBehaviour
     {
         tpm.sliding = false;
 
-        playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+        //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
     }
 
     //after sliding keep momentum of the sliding and put it into a time which then slowly goes down like done when going down a slope, character needs to not slow down abruptly after sliding or jumping instead the speed that is gained in momentum slowly goes down, so if you slide jump you can gain speed but it can also slowly go down too so you keep the momentum while moving and lose slowly at all times, increase gravity after jumping
