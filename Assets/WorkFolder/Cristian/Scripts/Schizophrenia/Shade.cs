@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Shade : MonoBehaviour
+/*public class Shade : MonoBehaviour
 {
     public Transform player;
     public float stalkingSpeed = 2f;
@@ -92,4 +92,4 @@ public class Shade : MonoBehaviour
             // trigger schizophrenia debuff here with sanity bar 
         }
     }
-}
+}*/

@@ -1863,7 +1863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Squirrel
       objectReference: {fileID: 0}
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Layer
@@ -2113,9 +2113,12 @@ MonoBehaviour:
   detectionLength: 0.7
   sphereCastRadius: 0.25
   maxWallLookAngle: 30
+  climbEnabled: 1
   minWallNormalAngleChange: 5
   exitingWall: 0
   exitWallTime: 0.2
+  minWallAngleFromUp: 70
+  maxWallAngleFromUp: 110
 --- !u!114 &6096306478748901136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,6 +2149,7 @@ MonoBehaviour:
     m_Bits: 512
   exitingLedge: 0
   exitLedgeTime: 0.2
+  ledgeGrabEnabled: 1
 --- !u!114 &6096306478748901139
 MonoBehaviour:
   m_ObjectHideFlags: 0

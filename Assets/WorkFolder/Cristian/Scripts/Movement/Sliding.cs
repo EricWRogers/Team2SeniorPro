@@ -1,18 +1,15 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Sliding : MonoBehaviour
 {
-
-    [Header("The References")]
+    [Header("References")]
     public Transform orientation;
-    public Transform playerObj;
     private Rigidbody rb;
     private ThirdPersonMovement tpm;
 
     [Header("Sliding")]
-
     public float maxSlideTime;
     public float slideForce;
     private float slideTimer;
@@ -20,49 +17,43 @@ public class Sliding : MonoBehaviour
     public float slideYScale;
     private float startYScale;
 
-    [Header("Inputs")]
-
+    [Header("Input")]
     public KeyCode slideKey = KeyCode.LeftControl;
     private float horizontalInput;
     private float verticalInput;
 
-    //private bool sliding;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();  //gets actual rigid body component for referencing
+        rb = GetComponent<Rigidbody>();
         tpm = GetComponent<ThirdPersonMovement>();
 
-        startYScale = playerObj.transform.localScale.y;  //may not need transform
-
+        startYScale = transform.localScale.y;
     }
 
     private void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal"); //a and d keys
-        verticalInput = Input.GetAxisRaw("Vertical"); // w and s keys
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && tpm.grounded)
-             StartSlide();   //if the slide key is pressed and the movement is not just zero period begin sliding by all means necessary
-        
-        if(Input.GetKeyUp(slideKey) && tpm.sliding)
-             StopSlide();  //stops the slide
+        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+            StartSlide();
+
+        if (Input.GetKeyUp(slideKey) && tpm.sliding)
+            StopSlide();
     }
 
     private void FixedUpdate()
     {
-        if(tpm.sliding)
-             SlidingMovement();
+        if (tpm.sliding)
+            SlidingMovement();
     }
 
- 
-    private void StartSlide()  //functions for starting and stoping and handlin slidin movementn
+    private void StartSlide()
     {
         tpm.sliding = true;
 
-        playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
@@ -70,21 +61,20 @@ public class Sliding : MonoBehaviour
 
     private void SlidingMovement()
     {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; //allows for 360 sliding in respective directions, seems relevant
-        
-        //when sliding normally on flat ground NOT on slope
+        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        // sliding normal
         if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
         {
-            rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force); //force modes
+            rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
             slideTimer -= Time.deltaTime;
         }
-        
-        //Specifically when sliding down a slope
+
+        // sliding down a slope
         else
         {
-            rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);  //no timer so inf slide down slopes
-            rb.AddForce(Vector3.down * 150f, ForceMode.Force); //testing to see if can fix bug
+            rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
         }
 
         if (slideTimer <= 0)
@@ -95,7 +85,9 @@ public class Sliding : MonoBehaviour
     {
         tpm.sliding = false;
 
-        playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z); //change to startyscale aka original size of player
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+        //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
     }
+
+    //after sliding keep momentum of the sliding and put it into a time which then slowly goes down like done when going down a slope, character needs to not slow down abruptly after sliding or jumping instead the speed that is gained in momentum slowly goes down, so if you slide jump you can gain speed but it can also slowly go down too so you keep the momentum while moving and lose slowly at all times, increase gravity after jumping
 }

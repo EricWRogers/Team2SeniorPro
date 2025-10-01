@@ -61,6 +61,12 @@ public class ThirdPersonMovement : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
+    [Header("Air Gravity")]
+    public float extraGravityDelay = 5f;       // time in air before stronger gravity kicks in
+    public float fallGravityMultiplier = 2f;   // how much stronger gravity gets
+
+    private float airTimeCounter = 0f;
+
     [Header("Debuffs")]  //regardence to adding slow mult for debuffs from traps
     [Range(0f, 1f)] public float movementSlowMultiplier = 1f; // 1 = normal, 0.5 = half speed, 0 = frozen
 
@@ -114,7 +120,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private void Update()
     {
         //ground check will cast raycast down to see if the ground exist 
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsTheGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight, whatIsTheGround);
 
         MyInput();
         SpeedControl();
@@ -122,10 +128,20 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //this if statement handles the drag and requires layer mask set up on map ground
 
-        if(grounded)
-             rb.linearDamping = groundDrag;  //damping of linear velocity where higher values increase damping
-             else
-             rb.linearDamping = 0;
+        if (!grounded)
+        {
+            airTimeCounter += Time.deltaTime;
+            ApplyExtraGravity();
+        }
+        else
+        {
+            airTimeCounter = 0f; // reset on landing
+        }
+
+        if (grounded)
+            rb.linearDamping = groundDrag;
+        else
+            rb.linearDamping = 0;
     }
 
     private void FixedUpdate()
@@ -352,6 +368,15 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
        
+    }
+
+    private void ApplyExtraGravity()
+    {
+        // only apply if we've been airborne long enough and not sliding a slope
+        if (airTimeCounter >= extraGravityDelay && !OnSlope())
+        {
+            rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
+        }
     }
 
     private void Jump()

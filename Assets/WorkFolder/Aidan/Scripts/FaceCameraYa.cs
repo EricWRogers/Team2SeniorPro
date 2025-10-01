@@ -1,10 +1,12 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class FaceCameraYa : MonoBehaviour
 {
-    public Transform cameraTransform;   
+    public Transform cameraTransform;
     public float turnSpeed = 12f;
     public bool onlyWhenMoving = false; // set true to rotate only on input
+    public quaternion target;
 
     void Update()
     {
@@ -22,6 +24,10 @@ public class FaceCameraYa : MonoBehaviour
         if (yawForward.sqrMagnitude < 0.0001f) return;
 
         Quaternion target = Quaternion.LookRotation(yawForward.normalized, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * turnSpeed);
+        
+    }
+    void FixedUpdate()
+    {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, target, turnSpeed * Time.deltaTime);
     }
 }

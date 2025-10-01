@@ -44,14 +44,14 @@ public class ThirdPersonCam : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         targetDistance = currentDistance = Mathf.Clamp(defaultDistance, minDistance, maxDistance);
 
         if (player == null | playerObj == null | orientation == null | playerObj == null)
         {
-            if (GameObject.FindGameObjectWithTag("Player").gameObject.name == "Squirrel")
+            if (GameObject.FindGameObjectWithTag("Player").gameObject.name == "Squirrel" || GameObject.FindGameObjectWithTag("Player").gameObject.name == "Player")
             {
                 player = GameObject.FindGameObjectWithTag("Player").transform;
             }
