@@ -6,6 +6,7 @@ public class Sliding : MonoBehaviour
 {
     [Header("References")]
     public Transform orientation;
+    public Transform playerObj;
     private Rigidbody rb;
     private ThirdPersonMovement tpm;
 
@@ -38,7 +39,7 @@ public class Sliding : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tpm = GetComponent<ThirdPersonMovement>();
 
-        startYScale = transform.localScale.y;
+        startYScale = playerObj.localScale.y;
     }
 
     private void Update()
@@ -108,7 +109,7 @@ public class Sliding : MonoBehaviour
     {
         tpm.sliding = true;
 
-        transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z);
+        playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;

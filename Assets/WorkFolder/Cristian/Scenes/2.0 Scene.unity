@@ -6329,17 +6329,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2047176a8cfe0954f8df2282b40d616c, type: 3}
---- !u!114 &514391743568024017 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6147763069503704499, guid: 2047176a8cfe0954f8df2282b40d616c, type: 3}
-  m_PrefabInstance: {fileID: 514391743568024016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06242e784f5233544be9e4ed5010066b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &514391743568024018 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4001237127976496631, guid: 2047176a8cfe0954f8df2282b40d616c, type: 3}
@@ -6646,7 +6635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: upwardGravityMultiplier
-      value: 2.03
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: downwardGravityMultiplier
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4866966670075613113, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: cameraTransform
@@ -6856,7 +6849,7 @@ MonoBehaviour:
   slowMoSfx: {fileID: 0}
   homingSfx: {fileID: 0}
   nutJumpTimerText: {fileID: 0}
-  staminaBar: {fileID: 514391743568024017}
+  staminaBar: {fileID: 0}
 --- !u!1001 &6958043716550285975
 PrefabInstance:
   m_ObjectHideFlags: 0
