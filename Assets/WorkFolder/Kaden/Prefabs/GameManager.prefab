@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  sfxSource: {fileID: 6820409618761352004}
+  SFXSource: {fileID: 6820409618761352004}
   pauseSFX: {fileID: 8300000, guid: 955e63686d2c35e448e2ccc9c7d681c4, type: 3}
-  buttonSource: {fileID: 6820409618761352004}
+  clickSFX: {fileID: 8300000, guid: 718d7071b9793d84cbdd83476374fd8b, type: 3}
   pauseMenu: {fileID: 0}
+  scriptsToToggle:
+  - {fileID: 0}
 --- !u!114 &1843266408847379892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +68,9 @@ MonoBehaviour:
   gameOverUI: {fileID: 0}
   music: {fileID: 0}
   pauseMenu: {fileID: 1300582559487780994}
+  SFXSource: {fileID: 6820409618761352004}
+  clickSFX: {fileID: 8300000, guid: 718d7071b9793d84cbdd83476374fd8b, type: 3}
+  loserSFX: {fileID: 8300000, guid: 52efabea3abd8174fbe8735319f49874, type: 3}
 --- !u!82 &6820409618761352004
 AudioSource:
   m_ObjectHideFlags: 0
