@@ -2155,6 +2155,17 @@ MonoBehaviour:
       m_Bits: 65
     MaximumRaycast: 10
     Damping: 0.5
+--- !u!114 &766695129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8376096232232927377, guid: 505659c1fcd67ad4a8b9bd2c22c14665, type: 3}
+  m_PrefabInstance: {fileID: 2763389034619015746}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766695117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &773729946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 549945119519502295, guid: c1da9e85771fa164eae73bbad83e0f3e, type: 3}
@@ -6451,9 +6462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089051477d6768049b2bac2eaf1a1a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vcam: {fileID: 766695129}
   zoomSpeed: 10
-  minFov: 20
-  maxFov: 60
+  minFov: 30
+  maxFov: 120
 --- !u!1001 &3292525548862139978
 PrefabInstance:
   m_ObjectHideFlags: 0
