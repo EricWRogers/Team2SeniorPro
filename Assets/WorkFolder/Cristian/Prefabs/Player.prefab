@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 8526296667799095665}
   - component: {fileID: 4909502988919493153}
   - component: {fileID: 256744871743012251}
+  - component: {fileID: 3462988730747151048}
   - component: {fileID: 7648467887023637690}
   - component: {fileID: 1780218243859526759}
   - component: {fileID: 4866966670075613113}
@@ -254,8 +255,8 @@ MonoBehaviour:
     m_Bits: 192
   grounded: 0
   maxSlopeAngle: 40
-  upwardGravityMultiplier: 0
-  downwardGravityMultiplier: 0
+  upwardGravityMultiplier: 1
+  downwardGravityMultiplier: 0.5
   momentumBlendRiseRate: 40
   momentumBlendFallRate: 25
   movementSlowMultiplier: 1
@@ -406,7 +407,7 @@ MonoBehaviour:
   tpm: {fileID: 2956949174241930117}
   playerRb: {fileID: 4881826075438588398}
   carrySpeedMultiplier: 0.5
---- !u!114 &7648467887023637690
+--- !u!114 &3462988730747151048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,6 +415,28 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290869919972892445}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88376414bbbf126498342d596f4b7c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimCursor: {fileID: 0}
+  aimCamera: {fileID: 0}
+  handSocket: {fileID: 6881666225045144809}
+  carryState: {fileID: 256744871743012251}
+  minThrowSpeed: 6
+  maxThrowSpeed: 16
+  maxChargeTime: 1
+  playerCollidersToIgnore:
+  - {fileID: 8666241831092054449}
+  ignorePlayerCollisionTime: 0.5
+--- !u!114 &7648467887023637690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290869919972892445}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13e3849eb7f3dce4a83f25390434dd6a, type: 3}
   m_Name: 
