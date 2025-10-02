@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class ThirdPersonMovement : MonoBehaviour
 {
     [Header("Movement")]
-
     private float thirdPersonMovementSpeed;
     public float walkSpeed;
     public float sprintSpeed;
@@ -22,67 +21,55 @@ public class ThirdPersonMovement : MonoBehaviour
     public float slopeIncreaseMultiplier;
 
     public float groundDrag;
-    
+
     [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-
     bool readyToJump;
 
-    //[Header("Climbing")]
-    //public float climbSpeed;
-    //public float climbXSpeed; //moving up down left right on wall
-
-
     [Header("Crouching")]
-
-     public float crouchSpeed;
-     public float crouchYScale;
-     private float startYScale;
+    public float crouchSpeed;
+    public float crouchYScale;
+    private float startYScale;
 
     [Header("Keybinds")]
-
     public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;  //will use states for this that go between sprinting, walking and air static positions to shift movement similar to the camera change
+    public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftAlt;
     public KeyCode slideKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
-
     public float playerHeight;
-
     public LayerMask whatIsTheGround;
-
     public bool grounded;
 
-    [Header("Slope Handling")]  //enhance this
+    [Header("Slope Handling")]
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
-    [Header("Air Gravity")]
-    public float extraGravityDelay = 5f;       // time in air before stronger gravity kicks in
-    public float fallGravityMultiplier = 2f;   // how much stronger gravity gets
+    [Header("Air Gravity Settings")]
+    public float upwardGravityMultiplier;     //unified gravity now, this manages GOING UP
+    public float downwardGravityMultiplier;   // THIS MANAGES FORCE DOWN
 
-    private float airTimeCounter = 0f;
+    [Header("Momentum Tuning")]
+    public float momentumBlendRiseRate = 40f;
+    public float momentumBlendFallRate = 25f;
 
-    [Header("Debuffs")]  //regardence to adding slow mult for debuffs from traps
-    [Range(0f, 1f)] public float movementSlowMultiplier = 1f; // 1 = normal, 0.5 = half speed, 0 = frozen
+    [Header("Debuffs")]
+    [Range(0f, 1f)] public float movementSlowMultiplier = 1f;
 
     [Header("References")]
     public Climbing climbingScript;
-
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
-
     Vector3 moveDirection;
-
     Rigidbody rb;
 
-    public MovementState state; //stores current state player is in
+    public MovementState state;
 
     public enum MovementState
     {
@@ -93,7 +80,7 @@ public class ThirdPersonMovement : MonoBehaviour
         wallrunning,
         vaulting,
         climbing,
-        freeze, 
+        freeze,
         unlimited,
         air
     }
@@ -105,7 +92,6 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool vaulting;
     public bool freeze;
     public bool unlimited;
-
     public bool restricted;
 
     private void Start()
@@ -114,34 +100,23 @@ public class ThirdPersonMovement : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
         startYScale = transform.localScale.y;
-
     }
 
     private void Update()
     {
-        //ground check will cast raycast down to see if the ground exist 
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsTheGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down,
+            playerHeight * 0.5f + 0.2f, whatIsTheGround);
 
         MyInput();
         SpeedControl();
         StateHandler();
 
-        //this if statement handles the drag and requires layer mask set up on map ground
+        // drag
+        rb.linearDamping = grounded ? groundDrag : 0f;
 
+        // apply unified gravity while airborne
         if (!grounded)
-        {
-            airTimeCounter += Time.deltaTime;
-            ApplyExtraGravity();
-        }
-        else
-        {
-            airTimeCounter = 0f; // reset on landing
-        }
-
-        if (grounded)
-            rb.linearDamping = groundDrag;
-        else
-            rb.linearDamping = 0;
+            HandleAirGravity();
     }
 
     private void FixedUpdate()
@@ -154,118 +129,100 @@ public class ThirdPersonMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        //when jumps checks to see if space jump input is pressed
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
-
             Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);  //deals w/ continuous jumping
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        //commence crouching goofy shringking that may work wierd
         if (Input.GetKey(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);  //this makes it to where u dont float in air and you go down to the ground that is marked with tag 
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         }
 
-        //End Crouching
-        if(Input.GetKeyUp(crouchKey))
+        if (Input.GetKeyUp(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+        }
+    }
+
+    private void HandleAirGravity()
+    {
+        if (OnSlope()) return;
+
+        // going up
+        if (rb.linearVelocity.y > 0.1f)
+        {
+            rb.AddForce(Physics.gravity * (upwardGravityMultiplier - 1f), ForceMode.Acceleration);
+        }
+        // falling down
+        else if (rb.linearVelocity.y < -0.1f)
+        {
+            rb.AddForce(Physics.gravity * (downwardGravityMultiplier - 1f), ForceMode.Acceleration);
         }
     }
 
     bool keepMomentum;
     private void StateHandler()
     {
-        // Mode - Freeze
         if (freeze)
         {
             state = MovementState.freeze;
             rb.linearVelocity = Vector3.zero;
             desiredMovementSpeed = 0f;
         }
-
-        // Mode - Unlimited
         else if (unlimited)
         {
             state = MovementState.unlimited;
             desiredMovementSpeed = 999f;
         }
-
-        // Mode - Vaulting
         else if (vaulting)
         {
             state = MovementState.vaulting;
             desiredMovementSpeed = vaultSpeed;
         }
-
-        // Mode - Climbing
         else if (climbing)
         {
             state = MovementState.climbing;
             desiredMovementSpeed = climbSpeed;
         }
-
-        // Mode - Wallrunning
         else if (wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMovementSpeed = wallRunSpeed;
         }
-
-        // Mode - Sliding
         else if (sliding)
         {
             state = MovementState.sliding;
-
-            // increase speed by one every second
-            if (OnSlope() && rb.linearVelocity.y < 0.1f)
-            {
-                desiredMovementSpeed = slideSpeed;
-                keepMomentum = true;
-            }
-
-            else
-                desiredMovementSpeed = sprintSpeed;
+            desiredMovementSpeed = OnSlope() && rb.linearVelocity.y < 0.1f ? slideSpeed : sprintSpeed;
+            keepMomentum = true;
         }
-
-        // Mode - Crouching
         else if (crouching)
         {
             state = MovementState.crouching;
             desiredMovementSpeed = crouchSpeed;
         }
-
-        // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             desiredMovementSpeed = sprintSpeed;
         }
-
-        // Mode - Walking
         else if (grounded)
         {
             state = MovementState.walking;
             desiredMovementSpeed = walkSpeed;
         }
-
-        // Mode - Air
         else
         {
             state = MovementState.air;
-
             if (thirdPersonMovementSpeed < airMinSpeed)
                 desiredMovementSpeed = airMinSpeed;
         }
 
-        bool desiredMovementSpeedHasChanged = desiredMovementSpeed != lastDesiredMovementSpeed;
-
-        if (desiredMovementSpeedHasChanged)
+        bool speedChanged = desiredMovementSpeed != lastDesiredMovementSpeed;
+        if (speedChanged)
         {
             if (keepMomentum)
             {
@@ -278,14 +235,18 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
 
-        lastDesiredMovementSpeed = desiredMovementSpeed * movementSlowMultiplier;
+        // momentum blending
+        Sliding slideComponent = GetComponent<Sliding>();
+        float baseSpeed = desiredMovementSpeed * movementSlowMultiplier;
+        float momentum = (slideComponent != null) ? slideComponent.MomentumBoost : 0f;
+        float targetSpeed = Mathf.Max(baseSpeed, momentum);
+        float rate = (thirdPersonMovementSpeed < targetSpeed) ? momentumBlendRiseRate : momentumBlendFallRate;
 
-        // deactivate keepMomentum
-        if (Mathf.Abs(desiredMovementSpeed - thirdPersonMovementSpeed) < 0.1f) keepMomentum = false;
+        thirdPersonMovementSpeed = Mathf.MoveTowards(thirdPersonMovementSpeed, targetSpeed, rate * Time.deltaTime);
+        lastDesiredMovementSpeed = baseSpeed;
+
+        if (Mathf.Abs(thirdPersonMovementSpeed - baseSpeed) < 0.05f) keepMomentum = false;
     }
-
-
-    //to make to where the speed adjusts slowly and doesnt immediately change back to og speed
 
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
@@ -296,122 +257,94 @@ public class ThirdPersonMovement : MonoBehaviour
         while (time < difference)
         {
             thirdPersonMovementSpeed = Mathf.Lerp(startValue, desiredMovementSpeed, time / difference) * movementSlowMultiplier;
-            
+
             if (OnSlope())
             {
                 float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
                 float slopeAngleIncrease = 1 + (slopeAngle / 90f);
-
                 time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
-
             }
             else
+            {
                 time += Time.deltaTime * speedIncreaseMultiplier;
+            }
 
-            yield return null;  
+            yield return null;
         }
 
         thirdPersonMovementSpeed = desiredMovementSpeed * movementSlowMultiplier;
     }
-    
-    //reference shade
-    public float CurrentSpeed
-    {
-        get { return thirdPersonMovementSpeed; }
-    }
+
+    public float CurrentSpeed => thirdPersonMovementSpeed;
 
     private void MovePlayer()
     {
-        if (restricted) return; //restricts movement and also occurs during climbing, ledge stuff, and vaulting i think
-
+        if (restricted) return;
         if (climbingScript.exitingWall) return;
-        //calculates players overall movement direction
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //when on slope
         if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection(moveDirection) * thirdPersonMovementSpeed * 20f, ForceMode.Force);
-
             if (rb.linearVelocity.y > 0)
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);  //adds vector3 force down so that you dont ascend to space
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
-        //When on the ground
         if (grounded)
-            rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f, ForceMode.Force); //10f adds speed to make the player move a bit faster than normal
-        //When in the air
+        {
+            rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f, ForceMode.Force);
+        }
         else if (!grounded)
+        {
             rb.AddForce(moveDirection.normalized * thirdPersonMovementSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
 
-        //turns gravity off when on slope
         if (!wallrunning) rb.useGravity = !OnSlope();
-
     }
 
     private void SpeedControl()
     {
-        //this limits your speed on a slope so it doesnt update and elongate your speed values
         if (OnSlope() && !exitingSlope)
         {
-            if(rb.linearVelocity.magnitude > thirdPersonMovementSpeed)
+            if (rb.linearVelocity.magnitude > thirdPersonMovementSpeed)
                 rb.linearVelocity = rb.linearVelocity.normalized * thirdPersonMovementSpeed;
         }
-        else //limits speed on ground and or in air
+        else
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-            //this if statement can limit the velocity if needed
             if (flatVel.magnitude > thirdPersonMovementSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * thirdPersonMovementSpeed;
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);  //basically if you go faster than you movement speed is set to in the little setup thing with the tags you calculate what your max vel would be then apply it forcefully
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
-        }
-       
-    }
-
-    private void ApplyExtraGravity()
-    {
-        // only apply if we've been airborne long enough and not sliding a slope
-        if (airTimeCounter >= extraGravityDelay && !OnSlope())
-        {
-            rb.AddForce(Physics.gravity * (fallGravityMultiplier - 1f), ForceMode.Acceleration);
         }
     }
 
     private void Jump()
     {
         exitingSlope = true;
-        //this resets the y vel
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);  //sets y to 0f
-
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
     }
 
     private void ResetJump()
     {
         readyToJump = true;
-
         exitingSlope = false;
     }
 
-    public bool OnSlope()  //these must be public to grab from sliding script
+    public bool OnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0f;  //f ?
+            return angle < maxSlopeAngle && angle != 0f;
         }
-
-        return false; //if doesnt hit nothing
+        return false;
     }
 
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
-
-    
-
 }

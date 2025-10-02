@@ -23,6 +23,16 @@ public class Sliding : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
+    [Header("Momentum")]
+    public float maxMomentumSpeed = 20f;
+    public float momentumDecayRate = 5f;         // normal decay speed
+    public float momentumDecayRateNoInput = 10f; // faster decay when no inputs
+    public float momentumDuration = 1.5f;        // how long momentum can persist
+
+    private float currentMomentum;
+    private float momentumTimer;
+
+    public float MomentumBoost => currentMomentum; // expose to ThirdPersonMovement
 
     private void Start()
     {
@@ -42,6 +52,51 @@ public class Sliding : MonoBehaviour
 
         if (Input.GetKeyUp(slideKey) && tpm.sliding)
             StopSlide();
+
+        // Handle momentum decay when not sliding
+        if (!tpm.sliding && currentMomentum > 0f)
+        {
+            if (momentumTimer > 0f)
+            {
+                momentumTimer -= Time.deltaTime;
+
+                // Target is sprint speed if sprinting, otherwise walk speed
+                float targetSpeed = Input.GetKey(tpm.sprintKey) ? tpm.sprintSpeed : tpm.walkSpeed;
+
+                bool hasInput = Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f;
+                float decayRate = hasInput ? momentumDecayRate : momentumDecayRateNoInput;
+
+                // Decay momentum down toward base speed
+                currentMomentum = Mathf.MoveTowards(currentMomentum, targetSpeed, decayRate * Time.deltaTime);
+
+                ApplyMomentum();
+            }
+            else
+            {
+                // ✅ Reset fully to walk speed once timer runs out
+                currentMomentum = tpm.walkSpeed;
+            }
+        }
+    }
+
+    public void UpdateMomentum(float targetSpeed, bool slidingActive)
+    {
+        if (!slidingActive && currentMomentum > 0f)
+        {
+            if (momentumTimer > 0f)
+            {
+                momentumTimer -= Time.deltaTime;
+                currentMomentum = Mathf.MoveTowards(currentMomentum, targetSpeed, momentumDecayRate * Time.deltaTime);
+            }
+            else
+            {
+                // ✅ Reset fully to walk speed once timer runs out
+                currentMomentum = tpm.walkSpeed;
+            }
+        }
+
+        // Safety clamp
+        currentMomentum = Mathf.Min(currentMomentum, maxMomentumSpeed);
     }
 
     private void FixedUpdate()
@@ -64,18 +119,26 @@ public class Sliding : MonoBehaviour
     {
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // sliding normal
+        // Sliding on flat ground or in midair
         if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
         {
             rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
+            currentMomentum = Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed);
+            momentumTimer = momentumDuration; // refresh duration
             slideTimer -= Time.deltaTime;
         }
-
-        // sliding down a slope
+        // Sliding down a slope
         else
         {
             rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
+
+            currentMomentum = Mathf.MoveTowards(
+                currentMomentum,
+                Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed),
+                slideForce * Time.deltaTime
+            );
+            momentumTimer = momentumDuration;
         }
 
         if (slideTimer <= 0)
@@ -88,7 +151,24 @@ public class Sliding : MonoBehaviour
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+
+        // Preserve momentum briefly after stopping
+        currentMomentum = Mathf.MoveTowards(
+            currentMomentum,
+            Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed),
+            slideForce * Time.deltaTime
+        );
+        momentumTimer = momentumDuration;
     }
 
-    //after sliding keep momentum of the sliding and put it into a time which then slowly goes down like done when going down a slope, character needs to not slow down abruptly after sliding or jumping instead the speed that is gained in momentum slowly goes down, so if you slide jump you can gain speed but it can also slowly go down too so you keep the momentum while moving and lose slowly at all times, increase gravity after jumping
+    private void ApplyMomentum()
+    {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        if (flatVel.sqrMagnitude > 0.01f)
+        {
+            Vector3 momentumVel = flatVel.normalized * currentMomentum;
+            rb.linearVelocity = new Vector3(momentumVel.x, rb.linearVelocity.y, momentumVel.z);
+        }
+    }
 }
