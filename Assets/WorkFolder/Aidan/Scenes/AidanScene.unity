@@ -5167,6 +5167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718dd2bc5be866c46a3b82fdacb16e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carryState: {fileID: 3292525548862139981}
   aimCamera: {fileID: 1432385659}
 --- !u!1001 &1726470802
 PrefabInstance:
@@ -6569,6 +6570,14 @@ PrefabInstance:
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Name
       value: Squirrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: upwardGravityMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: downwardGravityMultiplier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4866966670075613113, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Enabled

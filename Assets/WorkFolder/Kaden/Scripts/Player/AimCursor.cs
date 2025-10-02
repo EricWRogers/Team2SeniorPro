@@ -2,27 +2,41 @@ using UnityEngine;
 
 public class AimCursor : MonoBehaviour
 {
-    public Camera aimCamera; // assign main or aim cam
+    public PlayerCarryState carryState;
+    public Camera aimCamera;
     private Renderer rend;
 
     void Awake()
     {
+        // Renders the cursor visible/invisible
         rend = GetComponentInChildren<Renderer>();
     }
+
+    void OnEnable()
+    {
+        UpdateCursorState();
+    }
+
     void Update()
     {
-        Ray r = aimCamera.ScreenPointToRay(Input.mousePosition);
+        UpdateCursorState();
 
-        if (Physics.Raycast(r, out RaycastHit hit, 100f))
+        if (carryState == carryState.IsCarrying)
         {
-            transform.position = hit.point;
-            transform.rotation = Quaternion.LookRotation(hit.normal);
+            Ray r = aimCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (rend) rend.enabled = true; // show
+            if (Physics.Raycast(r, out RaycastHit hit, 100f))
+            {
+                transform.position = hit.point;
+                transform.rotation = Quaternion.LookRotation(hit.normal);
+            }
         }
-        else
-        {
-            if (rend) rend.enabled = false; // hide, but obj stays active
-        }
+    }
+
+    void UpdateCursorState()
+    {
+        bool isCarrying = carryState.IsCarrying;
+        Cursor.lockState = isCarrying ? CursorLockMode.None : CursorLockMode.Locked;
+        if (rend) rend.enabled = isCarrying;
     }
 }
