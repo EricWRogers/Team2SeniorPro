@@ -5,7 +5,7 @@ public class WorldSpace : MonoBehaviour
     public Transform target;           // the acorn Transform
     public Camera cam;                 // main camera
     public RectTransform markerRect;   
-    public Vector2 screenPadding = new Vector2(32, 32);
+    public Vector2 screenPadding = new Vector2(0, 0);
     public float worldOffsetY = 0.6f;  // show above the acorn
 
     void Reset()
@@ -14,7 +14,7 @@ public class WorldSpace : MonoBehaviour
         cam = Camera.main;
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (!target || !cam || !markerRect) return;
 
