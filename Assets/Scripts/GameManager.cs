@@ -14,6 +14,27 @@ public class GameManager : MonoBehaviour
     }
     public void getTime(int _elapsedTime)
     {
+
+    }
+    public void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        if (QualitySettings.vSyncCount == 0)
+        {
+            Application.targetFrameRate = 60; //cap the fps
+        }
+        else
+        {
+            //Application.targetFrameRate = -1;
+        }
         
     }
     
