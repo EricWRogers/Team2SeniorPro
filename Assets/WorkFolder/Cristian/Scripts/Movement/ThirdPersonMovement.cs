@@ -54,11 +54,11 @@ public class ThirdPersonMovement : MonoBehaviour
     public float downwardGravityMultiplier;   // THIS MANAGES FORCE DOWN
 
     [Header("Momentum Tuning")]
-    public float momentumBlendRiseRate = 40f;
-    public float momentumBlendFallRate = 25f;
+    public float momentumBlendRiseRate; //40f
+    public float momentumBlendFallRate;  //25f
 
     [Header("Debuffs")]
-    [Range(0f, 1f)] public float movementSlowMultiplier = 1f;
+    [Range(0f, 1f)] public float movementSlowMultiplier; //1f
 
     [Header("References")]
     public Climbing climbingScript;

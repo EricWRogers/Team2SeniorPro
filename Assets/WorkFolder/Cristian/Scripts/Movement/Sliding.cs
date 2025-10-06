@@ -24,10 +24,10 @@ public class Sliding : MonoBehaviour
     private float verticalInput;
 
     [Header("Momentum")]
-    public float maxMomentumSpeed = 20f;
-    public float momentumDecayRate = 5f;         // normal decay speed
-    public float momentumDecayRateNoInput = 10f; // faster decay when no inputs
-    public float momentumDuration = 1.5f;        // how long momentum can persist
+    public float maxMomentumSpeed; //20f
+    public float momentumDecayRate;   //5f      // normal decay speed
+    public float momentumDecayRateNoInput; //10f // faster decay when no inputs
+    public float momentumDuration;    //1.5f    // how long momentum can persist
 
     private float currentMomentum;
     private float momentumTimer;

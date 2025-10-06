@@ -16,25 +16,25 @@ public class ThirdPersonCam : MonoBehaviour
 
     [Header("Follow & Zoom")]
     public Transform cameraTarget;  // empty pivot near shoulders
-    public float defaultDistance = 6f;
-    public float minDistance = 2.5f;
-    public float maxDistance = 18f;
-    public float heightOffset = 0.8f;
-    public float followLerp = 12f;
-    public float zoomLerp = 14f;
-    [Tooltip("Meters per scroll notch")] public float zoomSensitivity = 1.2f;
+    public float defaultDistance; //6f
+    public float minDistance;  //2.5f
+    public float maxDistance;  //18f
+    public float heightOffset; //0.8f
+    public float followLerp; //12f
+    public float zoomLerp; //14f
+    [Tooltip("Meters per scroll notch")] public float zoomSensitivity; //1.2f
     public bool invertScroll = false;
-    [Tooltip("Keyboard =/- zoom speed (m/s)")] public float keyZoomSpeed = 6f;
+    [Tooltip("Keyboard =/- zoom speed (m/s)")] public float keyZoomSpeed; //6f
 
     [Header("Turning")]
-    public float rotationSpeed = 10f;
-    public float shoulderRightOffset = 0.6f;
+    public float rotationSpeed;  //10f
+    public float shoulderRightOffset; //0.6f
 
     [Header("Collision")]
     [Tooltip("Include world geometry. EXCLUDE Player.")]
     public LayerMask cameraCollisionMask = 0; // set in Inspector later
-    public float camRadius = 0.25f;
-    public float collisionBuffer = 0.10f;
+    public float camRadius; //0.25f
+    public float collisionBuffer; //0.10f
 
     [Header("Debug")]
     public bool debugZoom = false;

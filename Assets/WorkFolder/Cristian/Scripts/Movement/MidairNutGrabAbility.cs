@@ -13,23 +13,23 @@ public class MidairGrabAbility : MonoBehaviour
     public ThirdPersonMovement tpm;
 
     [Header("Homing Settings")]
-    public float homingSpeed = 12f;
-    public float homingDuration = 0.35f;
-    public float catchDistance = 1.0f;
-    public float searchRadius = 15f;
+    public float homingSpeed; //12f
+    public float homingDuration; //0.35f
+    public float catchDistance;  //1.0f
+    public float searchRadius; //15f
 
     [Header("Slow Motion Settings")]
-    public float slowMoTime = 2f;
-    public float slowMoScale = 0.3f;
+    public float slowMoTime; //2f
+    public float slowMoScale; //0.3f
 
     [Header("Nut Jump Settings")]
-    public int maxNutJumps = 1;            // Base number of nut jumps
+    public int maxNutJumps; //1            // Base number of nut jumps
     public int currentNutJumps;           // Remaining nut jumps
-    public float nutJumpCooldown = 3f;     // Cooldown duration
-    private float nutJumpCooldownTimer = 0f;
+    public float nutJumpCooldown; //3f     // Cooldown duration
+    private float nutJumpCooldownTimer; //0f
 
     [Header("Double Jump Settings")]
-    public float doubleJumpForce = 10f;
+    public float doubleJumpForce; //10f
 
     private bool canDoubleJump = false;
     private bool isSlowingTime = false;
