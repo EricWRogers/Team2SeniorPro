@@ -284,7 +284,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e9e22a00ebc13eb4c9df00c81409b7d1, type: 2}
+  - {fileID: 2100000, guid: 4063b92abc3bfa54f8662771c98119ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,8 +343,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: Player
   activateKey: 101
-  requireButtonPress: 1
+  requireButtonPress: 0
   acorn: {fileID: 0}
-  renderersToTint: []
+  renderersToTint:
+  - {fileID: 318822681096968707}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   activeColor: {r: 1, g: 0.8, b: 0.2, a: 1}

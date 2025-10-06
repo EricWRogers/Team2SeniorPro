@@ -25,7 +25,8 @@ public class AimCursor : MonoBehaviour
         {
             Ray r = aimCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(r, out RaycastHit hit, 100f))
+            // This code will snap onto objects while aiming using Raycast
+            if (Physics.Raycast(r, out RaycastHit hit, 50f))
             {
                 transform.position = hit.point;
                 transform.rotation = Quaternion.LookRotation(hit.normal);
