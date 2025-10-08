@@ -16,6 +16,25 @@ public class PauseMenu : MonoBehaviour
     [Header("Menu and Script(s):")]
     public GameObject pauseMenu;
 
+    [Header("Events")]
+    [Tooltip("Scripts to disable when paused and enable when resumed")]
+    public MonoBehaviour[] scriptsToToggle;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
+
     public void Home()
     {
         PlaySound();
@@ -23,20 +42,36 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+
     public void Resume()
     {
-        PlaySound();
         StartCoroutine(WaitForPlay());
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        ToggleScripts(true);
+    }
+
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+        ToggleScripts(false);
+
+        // Play clip once
+        if (pauseSFX != null && SFXSource != null)
+        {
+            SFXSource.PlayOneShot(pauseSFX);
+        }
     }
 
     public void Restart()
     {
-        PlaySound();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -59,7 +94,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    private void PlaySound()
+    public void PlaySound()
     {
         if (clickSFX != null && SFXSource != null)
         {
@@ -72,37 +107,20 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
-    void Pause()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-
-        // Play clip once
-        if (pauseSFX != null && SFXSource != null)
-        {
-            SFXSource.PlayOneShot(pauseSFX);
-        }
-    }
-
     private IEnumerator WaitForPlay()
     {
-        yield return new WaitForSecondsRealtime(0.05f); // tiny delay so sound registers
+        yield return new WaitForSecondsRealtime(2.0f); // tiny delay so sound registers
+    }
+
+    private void ToggleScripts(bool enable)
+    {
+        if (scriptsToToggle != null)
+        {
+            foreach (var script in scriptsToToggle)
+            {
+                if (script != null)
+                    script.enabled = enable;
+            }
+        }
     }
 }
