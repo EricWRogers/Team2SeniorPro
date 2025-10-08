@@ -41,6 +41,10 @@ public class LedgeGrabbing : MonoBehaviour
 
     [Header("Heist Integration")]
     public bool ledgeGrabEnabled = true; // default true
+    public void Start()
+    {
+        cam = Camera.main.transform;
+    }
 
     private void Update()
     {
