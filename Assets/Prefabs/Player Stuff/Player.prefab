@@ -156,7 +156,7 @@ Transform:
   m_GameObject: {fileID: 2290869919972892445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.0012740724, w: 0.9999992}
-  m_LocalPosition: {x: -13.58, y: -2.6600301, z: -23.16}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
-  slideSpeed: 30
+  slideSpeed: 15
   wallRunSpeed: 8.5
   vaultSpeed: 3
   climbSpeed: 3
@@ -254,9 +254,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   grounded: 0
-  maxSlopeAngle: 40
-  upwardGravityMultiplier: 1
-  downwardGravityMultiplier: 0.5
+  maxSlopeAngle: 90
+  upwardGravityMultiplier: 1.1
+  downwardGravityMultiplier: 2
   momentumBlendRiseRate: 40
   momentumBlendFallRate: 25
   movementSlowMultiplier: 1
@@ -284,15 +284,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 8344112718048604137}
-  playerObj: {fileID: 9000977167144260573}
-  maxSlideTime: 0.75
-  slideForce: 200
+  maxSlideTime: 1
+  slideForce: 10
   slideYScale: 0.5
   slideKey: 306
-  maxMomentumSpeed: 20
-  momentumDecayRate: 5
-  momentumDecayRateNoInput: 10
-  momentumDuration: 1.5
+  maxMomentumSpeed: 30
+  momentumDecayRate: 10
+  momentumDecayRateNoInput: 20
+  momentumDuration: 3
 --- !u!114 &728865975150145358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +339,7 @@ MonoBehaviour:
   orientation: {fileID: 8344112718048604137}
   rb: {fileID: 4881826075438588398}
   tpm: {fileID: 2956949174241930117}
-  lg: {fileID: 0}
+  lg: {fileID: 4909502988919493153}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128
@@ -515,11 +514,11 @@ GameObject:
   - component: {fileID: 1445352827404146130}
   m_Layer: 12
   m_Name: LinePreview
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3989401114837153727
 Transform:
   m_ObjectHideFlags: 0
