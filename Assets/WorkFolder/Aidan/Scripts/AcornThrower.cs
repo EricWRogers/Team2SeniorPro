@@ -196,14 +196,16 @@ public class AcornThrower : MonoBehaviour
             aimSprite.SetActive(true);
             aimSprite.transform.position = aimPoint;
 
-            // Use hit normal if we hit something, else face camera
+            // Use hit normal if we hit something, else face camera + Face the surface and stay flat
             if (hitSomething)
             {
                 aimSprite.transform.rotation = Quaternion.LookRotation(hitNormal);
             }
             else
             {
-                aimSprite.transform.rotation = Quaternion.LookRotation(aimCamera.transform.forward);
+                // Align with the *direction of the last arc segment*, not the camera
+                Vector3 lastDir = (arcLine.GetPosition(arcLine.positionCount - 1) - arcLine.GetPosition(arcLine.positionCount - 2)).normalized;
+                aimSprite.transform.rotation = Quaternion.LookRotation(Vector3.up, lastDir);
             }
         }
 }
