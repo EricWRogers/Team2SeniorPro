@@ -6,6 +6,7 @@ public class AcornThrower : MonoBehaviour
     public Camera aimCamera;
     public Transform handSocket;
     public PlayerCarryState carryState;
+    public GameObject aimSprite;
 
     [Header("Throw")]
     public float minThrowSpeed = 6f;
@@ -19,6 +20,7 @@ public class AcornThrower : MonoBehaviour
     public float acornRadius = 0.24f;
     public float startOffset = 0.28f;           // push arc start forward to avoid self-hit
     public LayerMask arcCollisionMask = ~0;     // set in Inspector (exclude Player layer)
+    private Vector3 aimPoint;
 
     [Header("Elevation Control")]
     public float minPitchDeg = -5f;
@@ -62,13 +64,21 @@ public class AcornThrower : MonoBehaviour
         // Throw flow 
         if (carryState.IsCarrying)
         {
-            if (Input.GetMouseButtonDown(0)) { charging = true; chargeT = 0f; }
-            if (charging && Input.GetMouseButton(0))
+            // Begin charging with right mouse button
+            if (Input.GetMouseButtonDown(1))
+            {
+                charging = true; chargeT = 0f;
+            }
+
+            // Continue charging while holding right mouse button
+            if (charging && Input.GetMouseButton(1))
             {
                 chargeT += Time.deltaTime;
-                DrawArcPreview();
+                DrawArcPreview(); // show arc + aim sprite while charging
             }
-            if (charging && Input.GetMouseButtonUp(0))
+            
+            // Release and throw when right mouse button is released
+            if (charging && Input.GetMouseButtonUp(1))
             {
                 Vector3 dir; float speed;
                 GetThrow(out dir, out speed);
@@ -78,7 +88,7 @@ public class AcornThrower : MonoBehaviour
                 if (carried)
                 {
                     carried.DropAndThrow(v0, Random.insideUnitSphere * 2f);
-                    
+
                     if (playerCollidersToIgnore != null && playerCollidersToIgnore.Length > 0)
                         StartCoroutine(TemporarilyIgnorePlayer(carried));
                 }
@@ -126,48 +136,78 @@ public class AcornThrower : MonoBehaviour
 
     void DrawArcPreview()
     {
-    if (!arcLine) return;
+        if (!arcLine) return;
 
-    
-    float linearDrag = 0f; 
 
-    Vector3 dir; float speed;
-    GetThrow(out dir, out speed);
+        float linearDrag = 0f;
 
-    float dt = Time.fixedDeltaTime;          // match physics
-    Vector3 g  = Physics.gravity;
-    Vector3 p  = handSocket.position + dir * startOffset;
-    Vector3 v  = dir * speed;
+        Vector3 dir; float speed;
+        GetThrow(out dir, out speed);
 
-    arcLine.positionCount = 0;
-    AppendArcPoint(p);
+        float dt = Time.fixedDeltaTime;          // match physics
+        Vector3 g = Physics.gravity;
+        Vector3 p = handSocket.position + dir * startOffset;
+        Vector3 v = dir * speed;
 
-    for (int i = 0; i < arcPoints; i++)
-    {
-        
-        v += g * dt;
-        if (linearDrag > 0f) v *= Mathf.Max(0f, 1f - linearDrag * dt);
+        arcLine.positionCount = 0;
+        AppendArcPoint(p);
 
-        Vector3 nextP = p + v * dt;
+        bool hitSomething = false;
+        Vector3 hitNormal = Vector3.up;
 
-        // spherecast 
-        Vector3 seg = nextP - p;
-        float len = seg.magnitude;
-        if (len > 0.0001f)
+        for (int i = 0; i < arcPoints; i++)
         {
-            if (Physics.SphereCast(p, acornRadius, seg.normalized, out RaycastHit hit, len, arcCollisionMask, QueryTriggerInteraction.Ignore))
+
+            v += g * dt;
+            if (linearDrag > 0f) v *= Mathf.Max(0f, 1f - linearDrag * dt);
+
+            Vector3 nextP = p + v * dt;
+
+            // spherecast 
+            Vector3 seg = nextP - p;
+            float len = seg.magnitude;
+
+            if (len > 0.0001f)
             {
-                // draw to the ball center at contact
-                Vector3 centerAtContact = hit.point + hit.normal * acornRadius;
-                AppendArcPoint(centerAtContact);
-                return; // stop the arc
+                if (Physics.SphereCast(p, acornRadius, seg.normalized, out RaycastHit hit, len, arcCollisionMask, QueryTriggerInteraction.Ignore))
+                {
+                    // draw to the ball center at contact
+                    Vector3 centerAtContact = hit.point + hit.normal * acornRadius;
+                    AppendArcPoint(centerAtContact);
+
+                    aimPoint = centerAtContact; // <-- store the hit point
+                    hitNormal = hit.normal;
+                    hitSomething = true;
+                    break; // stop the arc
+                }
             }
+
+            // advance
+            p = nextP;
+            AppendArcPoint(p);
         }
 
-        // advance
-        p = nextP;
-        AppendArcPoint(p);
-    }
+        if (!hitSomething)
+            aimPoint = p; // last point of arc if no hist
+
+        // --- Aiming sprite control --- 
+        if (aimSprite)
+        {
+            aimSprite.SetActive(true);
+            aimSprite.transform.position = aimPoint;
+
+            // Use hit normal if we hit something, else face camera + Face the surface and stay flat
+            if (hitSomething)
+            {
+                aimSprite.transform.rotation = Quaternion.LookRotation(hitNormal);
+            }
+            else
+            {
+                // Align with the *direction of the last arc segment*, not the camera
+                Vector3 lastDir = (arcLine.GetPosition(arcLine.positionCount - 1) - arcLine.GetPosition(arcLine.positionCount - 2)).normalized;
+                aimSprite.transform.rotation = Quaternion.LookRotation(Vector3.up, lastDir);
+            }
+        }
 }
 
     void AppendArcPoint(Vector3 pos)
@@ -180,6 +220,7 @@ public class AcornThrower : MonoBehaviour
     void ClearArc()
     {
         if (arcLine) arcLine.positionCount = 0;
+        if (aimSprite) aimSprite.SetActive(false);
     }
 
     System.Collections.IEnumerator TemporarilyIgnorePlayer(CarryableAcorn ac)

@@ -15,6 +15,8 @@ public class LoseScreen : MonoBehaviour
     public void GameOver()
     {
         gameOverUI.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         GameIsPaused = true;
 

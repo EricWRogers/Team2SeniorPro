@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7648467887023637690}
   - component: {fileID: 1780218243859526759}
   - component: {fileID: 4866966670075613113}
-  - component: {fileID: 1656117320644562542}
+  - component: {fileID: 531780400067132739}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -415,12 +415,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290869919972892445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88376414bbbf126498342d596f4b7c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimCursor: {fileID: 7565470870265785633}
+  aimCursor: {fileID: 0}
   aimCamera: {fileID: 0}
   handSocket: {fileID: 6881666225045144809}
   carryState: {fileID: 256744871743012251}
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290869919972892445}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13e3849eb7f3dce4a83f25390434dd6a, type: 3}
   m_Name: 
@@ -445,6 +445,7 @@ MonoBehaviour:
   aimCamera: {fileID: 0}
   handSocket: {fileID: 6881666225045144809}
   carryState: {fileID: 256744871743012251}
+  aimSprite: {fileID: 0}
   minThrowSpeed: 6
   maxThrowSpeed: 25
   maxChargeTime: 1
@@ -461,12 +462,12 @@ MonoBehaviour:
   scrollPitchStep: 19
   arrowPitchSpeed: 90
   defaultPitchDeg: 50
-  useAutoBob: 0
+  useAutoBob: 1
   bobAmplitudeDeg: 14
   bobFrequencyHz: 0.5
   playerCollidersToIgnore:
   - {fileID: 8666241831092054449}
-  ignorePlayerCollisionTime: 0.5
+  ignorePlayerCollisionTime: 1
 --- !u!114 &1780218243859526759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ MonoBehaviour:
       y: 0
       z: 0
       w: 0
---- !u!114 &1656117320644562542
+--- !u!114 &531780400067132739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -552,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3989401114837153727
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +593,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 49c3a13e41a56b64198140f0d80150d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -636,7 +637,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.5373578, b: 1, a: 1}
+      key0: {r: 1, g: 0.37104747, b: 0.035848916, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1354,6 +1355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AimCursor
       objectReference: {fileID: 0}
+    - target: {fileID: 4026592712304746791, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5600127075552888162, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 165.38
@@ -1395,6 +1400,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8745620387453894331, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745620387453894331, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
       propertyPath: carryState
       value: 
       objectReference: {fileID: 256744871743012251}
@@ -1408,14 +1417,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5600127075552888162, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
   m_PrefabInstance: {fileID: 1270961549789074330}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7565470870265785633 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8745620387453894331, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
-  m_PrefabInstance: {fileID: 1270961549789074330}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718dd2bc5be866c46a3b82fdacb16e49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
