@@ -3541,6 +3541,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113434446808087761, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
+      propertyPath: vcam
+      value: 
+      objectReference: {fileID: 1323588289}
     - target: {fileID: 4178982069262447747, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -3831,6 +3835,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cfe14ee4ef47c84cbcfe266c1618383, type: 3}
+--- !u!114 &1323588289 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2043812462231418052, guid: 4ef1685433db82045869f8bbf4c0668e, type: 3}
+  m_PrefabInstance: {fileID: 367580539}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1385512980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4184,10 +4199,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel
       objectReference: {fileID: 0}
-    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
-      propertyPath: fallGravityMultiplier
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3462988730747151048, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: aimCamera
       value: 
@@ -4244,10 +4255,6 @@ PrefabInstance:
       propertyPath: aimCamera
       value: 
       objectReference: {fileID: 1873331938}
-    - target: {fileID: 7648467887023637690, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
-      propertyPath: aimSprite
-      value: 
-      objectReference: {fileID: 4026592712304746791, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

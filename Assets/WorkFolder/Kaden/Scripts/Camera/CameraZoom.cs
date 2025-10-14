@@ -4,7 +4,7 @@ using Unity.Cinemachine;
 public class CameraZoom : MonoBehaviour
 {
     [Header("References")]
-    public CinemachineCamera vcam; // assign your 3rd person CinemachineCamera in Inspector
+    public CinemachineCamera vcam; // assign 3rd person CinemachineCamera in Inspector
 
     [Header("Zoom Settings")]
     public float zoomSpeed = 10f;
