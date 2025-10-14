@@ -11,8 +11,7 @@ public class DoorHUB : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Load the next scene (make sure to add the scene to the build settings)
-            SceneManager.LoadScene("Level_1");
-            //GameManager.Instance.LoadLevel("Level_1");
+            GameManager.Instance.newMap("Level_1");
         }
     }
 }
