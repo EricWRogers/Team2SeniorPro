@@ -3,12 +3,20 @@ using UnityEngine;
 public class CollectibleScript : MonoBehaviour
 {
     public int collectibleCheckpointNumber = 0; //the checkpoint number this collectible is associated with
-    void Awake()
+    void Start()
     {
-        if (collectibleCheckpointNumber < GameManager.Instance.currentCheckpoint && GameManager.Instance.currentCheckpoint != -1) //if the player has passed a checkpoint and has respawned, destroy all collectibles that are prior to that checkpoint
+        if (GameManager.Instance != null)
         {
-            Destroy(transform.parent.gameObject);
+            if (collectibleCheckpointNumber < GameManager.Instance.currentCheckpoint && GameManager.Instance.currentCheckpoint != -1) //if the player has passed a checkpoint and has respawned, destroy all collectibles that are prior to that checkpoint
+            {
+                Destroy(transform.parent.gameObject);
+            }
         }
+        else if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("No GameManager found in scene!");
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
