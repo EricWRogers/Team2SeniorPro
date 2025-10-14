@@ -5,6 +5,8 @@ using TMPro;
 public class NestGoal : MonoBehaviour
 {
     public GameObject WinScreen;
+    public Timer timer;
+    //public CollectibleScript collectibles;
 
     [Header("Text Elements")]
     public TMP_Text timerText;
@@ -39,24 +41,24 @@ public class NestGoal : MonoBehaviour
             }
         }
 
-        // Stop the timer
-        //timer.GetComponent<Timer>().enabled = false;
+       // Stop the timer
+        timer.StopTimer();
 
         // Update TMPro text with final time
-        /*if (timerText != null && timer != null)
+        if (timerText != null && timer != null)
         {
             var timerScript = timer.GetComponent<Timer>();
             if (timerScript != null)
             {
-                timerText.text = $"Time: {timerScript.GetCurrentTimeString()}";
+                timerText.text = $"Time - {timer.GetFormattedTime()}" ;
             }
-        }*/
-
+        }
+        /*
         // Update stats text
-        /*if (statsText != null)
+        if (winScoreText != null)
         {
-            var acornCount = FindObjectOfType<AcornCounter>()?.GetAcornCount() ?? 0;
-            statsText.text = $"Acorns Collected: {acornCount}";
+            var collectCount = collectibles.currentScore;
+            winScoreText.text = $"Items Collected: {collectCount}";
         }*/
     }
 }

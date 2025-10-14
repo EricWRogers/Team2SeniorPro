@@ -5042,7 +5042,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
   m_LocalPosition: {x: 63.04, y: 4.24, z: 33.72}
-  m_LocalScale: {x: 26.455101, y: 0.5, z: 23.085531}
+  m_LocalScale: {x: 1556.9893, y: 0.5, z: 23.085531}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1086383056}
@@ -9137,6 +9137,26 @@ PrefabInstance:
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Name
       value: Squirrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 98322976}
+    - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: slideForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: slideKey
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: crouchKey
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: airMinSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3462988730747151048, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: aimCamera
