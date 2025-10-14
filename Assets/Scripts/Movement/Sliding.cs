@@ -1,284 +1,47 @@
-/*using UnityEngine;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Sliding : MonoBehaviour
 {
     [Header("References")]
     public Transform orientation;
-    public Transform playerObj;
     private Rigidbody rb;
     private ThirdPersonMovement tpm;
 
-    [Header("Sliding")]
-    public float maxSlideTime;  // still run a timer, but momentum can outlive it 2f
-    public float slideForce; //18
-    private float slideTimer;
-
-    public float slideYScale  = 0.6f;
+    [Header("Slide Movement")]
+    public float slideForce = 10f;      // acceleration while sliding
+    public float slideYScale = 0.5f;    // crouch height while sliding
     private float startYScale;
 
     [Header("Momentum")]
-    public float maxMomentumSpeed;  // soft cap 30 rn
-    public float momentumDecayRate;   // toward 0 over time 4
-    public float momentumDuration; // refresh window for chaining 1.5
-    public float momentumNoInputBonus;   // set >0 if you want faster decay w/o input 
+    public float maxMomentumSpeed = 20f;          // hard cap
+    public float initialSlideBonus = 2f;          // added at slide start
+    public float baseDecayRate = 6f;              // always-on decay (units/sec)
+    public float noInputExtraDecay = 2f;          // added when no WASD
+    public float stopAtSpeedFraction = 0.15f;     // end slide when <= walkSpeed * this
 
-    private float currentMomentum;
-    private float momentumTimer;
+    [Header("Slope Gain")]
+    public float minSlopeAngleGain = 10f;         // only gain on slopes steeper than this
+    public float slopeGainRate = 8f;              // gain per second on steep downhill
+    public float slopeGainAngleScale = 1f;        // multiplies with angle ratio (angle / tpm.maxSlopeAngle)
 
-    public float MomentumBoost => currentMomentum;
-
-    private float h, v;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        tpm = GetComponent<ThirdPersonMovement>();
-        startYScale = playerObj != null ? playerObj.localScale.y : 1f;
-    }
-
-    private void Update()
-    {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
-
-        // Always decay momentum toward 0 when not being refreshed
-        if (currentMomentum > 0f)
-        {
-            if (momentumTimer > 0f)
-            {
-                momentumTimer -= Time.deltaTime;
-
-                // optional: slightly faster decay if no input (set momentumNoInputBonus > 0 if this ends up being what I do)
-                bool hasInput = Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f;
-                float decay = momentumDecayRate + (hasInput ? 0f : momentumNoInputBonus);
-                currentMomentum = Mathf.MoveTowards(currentMomentum, 0f, decay * Time.deltaTime);
-            }
-            else
-            {
-                currentMomentum = Mathf.MoveTowards(currentMomentum, 0f, momentumDecayRate * Time.deltaTime);
-            }
-        }
-
-        // If sliding and momentum effectively gone then stop sliding and go to crouch
-        if (tpm.sliding && currentMomentum <= 0.05f)
-        {
-            StopSlide();           // exit sliding state
-            tpm.crouching = true;  // fall back to crouch
-            if (playerObj) playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (tpm.sliding)
-            SlidingMovement();
-    }
-
-    public void StartSlide()
-    {
-        if (tpm.sliding) return;
-        tpm.sliding = true;
-        tpm.crouching = false;
-
-        if (playerObj) playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
-        slideTimer = maxSlideTime;
-
-        // send momentum from current horizontal speed
-        Vector3 flat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        currentMomentum = Mathf.Clamp(flat.magnitude, 0f, maxMomentumSpeed);
-        momentumTimer = momentumDuration;
-    }
-
-    public void StopSlide()
-    {
-        if (!tpm.sliding) return;
-
-        tpm.sliding = false;
-
-        // return to crouch scale (TPM will exit crouch when Ctrl released)
-        if (playerObj)
-        {
-            playerObj.localScale = new Vector3(playerObj.localScale.x, tpm != null ? tpm.crouchYScale : startYScale, playerObj.localScale.z);
-        }
-
-        // preserve whatever momentum remains; keep decaying in Update()
-        momentumTimer = Mathf.Max(momentumTimer, 0.15f);
-    }
-
-    // Allow the TPM glide to increase momentum while airborne
-    public void AddMomentum(float delta, float refresh)
-    {
-        currentMomentum = Mathf.Clamp(currentMomentum + delta, 0f, maxMomentumSpeed);
-        momentumTimer   = Mathf.Max(momentumTimer, refresh);
-    }
-
-    // ---- Internals ----
-    private void SlidingMovement()
-    {
-        Vector3 inputDirection = orientation.forward * v + orientation.right * h;
-
-        // baseline push from slide
-        Vector3 pushDir;
-        if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
-            pushDir = inputDirection.normalized;
-        else
-            pushDir = tpm.GetSlopeMoveDirection(inputDirection);
-
-        rb.AddForce(pushDir * slideForce, ForceMode.Force);
-
-        // update momentum from current speed (toward cap)
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        float target = Mathf.Min(flatVel.magnitude, maxMomentumSpeed);
-        currentMomentum = Mathf.MoveTowards(currentMomentum, target, slideForce * Time.fixedDeltaTime);
-
-        // refresh momentum window to allow chaining while sliding like megabonk
-        momentumTimer = momentumDuration;
-
-        // optional legacy timer (doesn't hard-stop slide as momentum determines stop)
-        slideTimer -= Time.fixedDeltaTime;
-        // This forces stop after time:
-        // if (slideTimer <= 0f) StopSlide();
-    }
-}
-*/
-/*
-using UnityEngine;
-
-public class Sliding : MonoBehaviour
-{
-    [Header("References")]
-    public Transform orientation;
-    public Transform playerObj;
-    private Rigidbody rb;
-    private ThirdPersonMovement tpm;
-
-    [Header("Sliding")]
-    public float slideForce = 10f;
-    public float slideYScale = 0.5f;
-    public float maxMomentumSpeed = 25f;
-    public float momentumDecayRate = 4f;
-    public float momentumDuration = 2.5f;
-
-    [HideInInspector] public bool sliding;
-
-    private float startYScale;
-    private float currentMomentum;
-    private float momentumTimer;
-
-    public float MomentumBoost => currentMomentum;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        tpm = GetComponent<ThirdPersonMovement>();
-        startYScale = playerObj.localScale.y;
-    }
-
-    private void FixedUpdate()
-    {
-        if (sliding) HandleSliding();
-        else DecayMomentum();
-    }
-
-    public void StartSlideExternally()
-    {
-        sliding = true;
-        playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
-        // Initial push
-        currentMomentum = Mathf.Min(rb.linearVelocity.magnitude + slideForce, maxMomentumSpeed);
-        momentumTimer = momentumDuration;
-    }
-
-    private void HandleSliding()
-    {
-        Vector3 inputDir = (tpm.orientation.forward * Input.GetAxisRaw("Vertical") +
-                            tpm.orientation.right * Input.GetAxisRaw("Horizontal")).normalized;
-
-        rb.AddForce(inputDir * slideForce, ForceMode.Force);
-        currentMomentum = Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed);
-
-        momentumTimer -= Time.deltaTime;
-
-        // Auto stop when timer expires or player stops moving
-        if (momentumTimer <= 0f || currentMomentum <= tpm.walkSpeed + 0.1f)
-            StopSlide();
-    }
-
-    public void RefreshMomentumFromAirBoost()
-    {
-        currentMomentum = Mathf.Min(currentMomentum + 3f, maxMomentumSpeed);
-        momentumTimer = momentumDuration; // refresh
-    }
-
-    private void StopSlide()
-    {
-        sliding = false;
-        playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
-    }
-
-    private void DecayMomentum()
-    {
-        if (currentMomentum > tpm.walkSpeed)
-        {
-            currentMomentum = Mathf.MoveTowards(currentMomentum, tpm.walkSpeed, momentumDecayRate * Time.deltaTime);
-            ApplyMomentum();
-        }
-    }
-
-    private void ApplyMomentum()
-    {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        if (flatVel.sqrMagnitude > 0.01f)
-        {
-            Vector3 momentumVel = flatVel.normalized * currentMomentum;
-            rb.linearVelocity = new Vector3(momentumVel.x, rb.linearVelocity.y, momentumVel.z);
-        }
-    }
-}
-*/
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Sliding : MonoBehaviour
-{
-    [Header("References")]
-    public Transform orientation;
-    private Rigidbody rb;
-    private ThirdPersonMovement tpm;
-
-    [Header("Sliding")]
-    public float maxSlideTime;
-    public float slideForce;
-    private float slideTimer;
-
-    public float slideYScale;
-    private float startYScale;
-
-    [Header("Input")]
+    // inputs
     public KeyCode slideKey = KeyCode.LeftControl;
     private float horizontalInput;
     private float verticalInput;
 
-    [Header("Momentum")]
-    public float maxMomentumSpeed = 20f;
-    public float momentumDecayRate = 5f;         // normal decay speed
-    public float momentumDecayRateNoInput = 10f; // faster decay when no inputs
-    public float momentumDuration = 1.5f;        // how long momentum can persist
-
+    // runtime
     private float currentMomentum;
-    private float momentumTimer;
+    private bool  startedThisFrame;
+    private float slideStartTime;
 
-    public float MomentumBoost => currentMomentum; // expose to ThirdPersonMovement
+    // expose to TPM
+    public float MomentumBoost => currentMomentum;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb  = GetComponent<Rigidbody>();
         tpm = GetComponent<ThirdPersonMovement>();
         startYScale = transform.localScale.y;
     }
@@ -286,50 +49,44 @@ public class Sliding : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        verticalInput   = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
-            StartSlide();
+        // --- Start slide (one press) ---
+        if (Input.GetKeyDown(slideKey))
+        {
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            bool hasVelocity = flatVel.magnitude > tpm.walkSpeed * 0.4f;
+            bool hasInput    = Mathf.Abs(horizontalInput) > 0.05f || Mathf.Abs(verticalInput) > 0.05f;
 
-        if (Input.GetKeyUp(slideKey) && tpm.sliding)
-            StopSlide();
+            if (hasVelocity || hasInput)
+                StartSlide();
+        }
 
+        // --- Stop conditions ---
+        // 1) Letting go of the key, or
+        // 2) Momentum fell to ~0 (don’t use walkSpeed as stop!)
+        if (tpm.sliding)
+        {
+            bool released = !Input.GetKey(slideKey);
+            float stopThreshold = Mathf.Max(0.1f, tpm.walkSpeed * stopAtSpeedFraction);
+            bool momentumDepleted = currentMomentum <= stopThreshold;
+
+            // tiny grace period to avoid immediate cancel on start
+            bool allowStop = (Time.time - slideStartTime) > 0.08f;
+
+            if (allowStop && (released || momentumDepleted))
+                StopSlide();
+        }
+
+        // --- When NOT actively sliding: keep decaying stored momentum then apply it ---
         if (!tpm.sliding && currentMomentum > 0f)
         {
-            if (momentumTimer > 0f)
-            {
-                momentumTimer -= Time.deltaTime;
+            bool hasInput = Mathf.Abs(horizontalInput) > 0.05f || Mathf.Abs(verticalInput) > 0.05f;
+            float decay = baseDecayRate + (hasInput ? 0f : noInputExtraDecay);
+            currentMomentum = Mathf.Max(0f, currentMomentum - decay * Time.deltaTime);
 
-                float targetSpeed = Input.GetKey(tpm.sprintKey) ? tpm.sprintSpeed : tpm.walkSpeed;
-                bool hasInput = Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f;
-                float decayRate = hasInput ? momentumDecayRate : momentumDecayRateNoInput;
-
-                currentMomentum = Mathf.MoveTowards(currentMomentum, targetSpeed, decayRate * Time.deltaTime);
-                ApplyMomentum();
-            }
-            else
-            {
-                currentMomentum = tpm.walkSpeed;
-            }
+            ApplyMomentum(); // gently blend velocity toward stored momentum
         }
-    }
-
-    public void UpdateMomentum(float targetSpeed, bool slidingActive)
-    {
-        if (!slidingActive && currentMomentum > 0f)
-        {
-            if (momentumTimer > 0f)
-            {
-                momentumTimer -= Time.deltaTime;
-                currentMomentum = Mathf.MoveTowards(currentMomentum, targetSpeed, momentumDecayRate * Time.deltaTime);
-            }
-            else
-            {
-                currentMomentum = tpm.walkSpeed;
-            }
-        }
-
-        currentMomentum = Mathf.Min(currentMomentum, maxMomentumSpeed);
     }
 
     private void FixedUpdate()
@@ -338,15 +95,26 @@ public class Sliding : MonoBehaviour
             SlidingMovement();
     }
 
-    //gp logic stuff called externally
+    // ====== SLIDE LIFECYCLE ======
+
     public void StartSlide()
     {
-        tpm.sliding = true;
+        if (tpm.sliding) return;
 
+        tpm.sliding = true;
+        slideStartTime = Time.time;
+        startedThisFrame = true;
+
+        // apply crouch and a tiny downward impulse to seat on ground
         transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
-        slideTimer = maxSlideTime;
+        // capture initial horizontal speed and add a small bonus
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float startSpeed = flatVel.magnitude + initialSlideBonus;
+
+        // store as momentum (do NOT overwrite every frame!)
+        currentMomentum = Mathf.Clamp(startSpeed, 0f, maxMomentumSpeed);
     }
 
     public void StartSlideExternally()
@@ -355,56 +123,110 @@ public class Sliding : MonoBehaviour
             StartSlide();
     }
 
-    private void SlidingMovement()
-    {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
-        {
-            rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
-
-            currentMomentum = Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed);
-            momentumTimer = momentumDuration;
-            slideTimer -= Time.deltaTime;
-        }
-        else
-        {
-            rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
-            currentMomentum = Mathf.MoveTowards(currentMomentum,
-                Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed),
-                slideForce * Time.deltaTime);
-            momentumTimer = momentumDuration;
-        }
-
-        // Slide naturally ends when the timer expires
-        if (slideTimer <= 0)
-            StopSlide();
-    }
-
     private void StopSlide()
     {
         if (!tpm.sliding) return;
 
         tpm.sliding = false;
+
+        // return to full height
         transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
-        currentMomentum = Mathf.MoveTowards(
-            currentMomentum,
-            Mathf.Min(rb.linearVelocity.magnitude, maxMomentumSpeed),
-            slideForce * Time.deltaTime);
+        // keep whatever momentum remains; it will continue to decay in Update()
+        // optional small settle impulse:
+        rb.AddForce(Vector3.down * 3f, ForceMode.Impulse);
+    }
 
-        momentumTimer = momentumDuration;
+    // ====== SLIDE PHYSICS ======
+
+    private void SlidingMovement()
+    {
+        // Normalize once for consistent direction
+        Vector3 inputDir = (orientation.forward * verticalInput + orientation.right * horizontalInput).normalized;
+
+        // Apply slide acceleration (flat or slope)
+        bool onSlope = tpm.OnSlope();
+        float angle  = onSlope ? Vector3.Angle(Vector3.up, GetSlopeNormalSafe()) : 0f;
+        bool steepEnough = onSlope && angle > minSlopeAngleGain && rb.linearVelocity.y <= 0f;
+
+        if (steepEnough)
+        {
+            // push along the slope
+            rb.AddForce(tpm.GetSlopeMoveDirection(inputDir) * slideForce, ForceMode.Force);
+
+            // down-slope **builds** momentum a bit (but decay still runs below)
+            float angleFactor = Mathf.Clamp01(angle / Mathf.Max(1f, tpm.maxSlopeAngle));
+            AddMomentum(slopeGainRate * slopeGainAngleScale * angleFactor * Time.deltaTime);
+        }
+        else
+        {
+            // flat / gentle slope: normal input push
+            rb.AddForce(inputDir * slideForce, ForceMode.Force);
+        }
+
+        // --- Always-on decay while sliding ---
+        bool hasInput = Mathf.Abs(horizontalInput) > 0.05f || Mathf.Abs(verticalInput) > 0.05f;
+        float decay = baseDecayRate + (hasInput ? 0f : noInputExtraDecay);
+        currentMomentum = Mathf.Max(0f, currentMomentum - decay * Time.deltaTime);
+
+        // Clamp the *resulting* horizontal speed toward stored momentum
+        ClampFlatSpeedToMomentum();
+        startedThisFrame = false;
+    }
+
+    private Vector3 GetSlopeNormalSafe()
+    {
+        // tpm.slopeHit is private there; copy of their ray done in OnSlope()
+        // If you want the exact normal, expose slopeHit in TPM. For now, approximate using ground ray.
+        Physics.Raycast(transform.position, Vector3.down, out var hit, tpm.playerHeight * 0.5f + 0.3f, tpm.whatIsTheGround);
+        return hit.normal != Vector3.zero ? hit.normal : Vector3.up;
+    }
+
+    // Keep the rigidbody's flat speed near the stored momentum value (without snapping)
+    private void ClampFlatSpeedToMomentum()
+    {
+        Vector3 v = rb.linearVelocity;
+        Vector3 flat = new Vector3(v.x, 0f, v.z);
+
+        float target = Mathf.Min(currentMomentum, maxMomentumSpeed);
+        if (flat.sqrMagnitude < 0.0001f) return;
+
+        // Blend flat speed toward target magnitude, preserve direction
+        float newMag = Mathf.MoveTowards(flat.magnitude, target, slideForce * Time.fixedDeltaTime);
+        Vector3 newFlat = flat.normalized * newMag;
+
+        rb.linearVelocity = new Vector3(newFlat.x, v.y, newFlat.z);
     }
 
     private void ApplyMomentum()
     {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        // When not sliding, gently steer the flat velocity to match currentMomentum
+        Vector3 v = rb.linearVelocity;
+        Vector3 flat = new Vector3(v.x, 0f, v.z);
+        if (flat.sqrMagnitude < 0.0001f || currentMomentum <= 0f) return;
 
-        if (flatVel.sqrMagnitude > 0.01f)
-        {
-            Vector3 momentumVel = flatVel.normalized * currentMomentum;
-            rb.linearVelocity = new Vector3(momentumVel.x, rb.linearVelocity.y, momentumVel.z);
-        }
+        float newMag = Mathf.MoveTowards(flat.magnitude, currentMomentum, slideForce * Time.deltaTime);
+        Vector3 newFlat = flat.normalized * newMag;
+        rb.linearVelocity = new Vector3(newFlat.x, v.y, newFlat.z);
+    }
+
+    // Public hook called from TPM on slide-jump / boosts
+    public void AddMomentumFromJump(float added)
+    {
+        AddMomentum(added);
+    }
+
+    // Internal add with clamp (decay still applies every frame)
+    private void AddMomentum(float amount)
+    {
+        currentMomentum = Mathf.Clamp(currentMomentum + amount, 0f, maxMomentumSpeed);
     }
 }
+
+
+//check how to slow down or limit the boost or where to edit this amount
+//Add movement when crouching with tab.
+//Fix slope downward interaction bugs
+//theres something else but i cant remember
+//scuffed decay when sliding, increase vals for it or make it actually make you slow down into sliding as in when you slide make it feel like its ACTUALLY slowing down over time
+//from the momentum building, only take from the initla boost of momentum, so when sliding the initial amount, after that the decay should start, only if you start building momentum should it start going un, but still it should always decay as well.  This is because as of now you can infinitely slide after presing slide once.  This should not be, if you press slide once, after sliding the decay should start and if you do not keep building momentum, you should decay to 0 speed and then return to walking state.
