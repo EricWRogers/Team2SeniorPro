@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5600127075552888162}
   - component: {fileID: 3898256931700521787}
-  - component: {fileID: 8745620387453894331}
   m_Layer: 16
   m_Name: AimCursor
   m_TagString: Untagged
@@ -26,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026592712304746791}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13328333, y: 0.6944319, z: 0.69443184, w: -0.13328333}
-  m_LocalPosition: {x: -30.337524, y: 45.06061, z: 97.20085}
+  m_LocalRotation: {x: 0.00000049498396, y: 0.9922113, z: 0.000003942699, w: -0.124566585}
+  m_LocalPosition: {x: -36.511826, y: 3.6378627, z: 49.63665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!212 &3898256931700521787
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,17 +87,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8745620387453894331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4026592712304746791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718dd2bc5be866c46a3b82fdacb16e49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carryState: {fileID: 0}
-  aimCamera: {fileID: 0}
