@@ -21,6 +21,30 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(_newMap);
         currentScene = SceneManager.GetActiveScene().name;
     }
+    public void setCheckpoint(int _checkpointNumber, bool _force = false)
+    {
+        if (!_force && _checkpointNumber > currentCheckpoint) //only set the checkpoint if its a higher number than the current one
+        {
+            currentCheckpoint = _checkpointNumber;
+        }
+        else if (_force) //if force is true, set it no matter what
+        {
+            currentCheckpoint = _checkpointNumber;
+        }
+    }
+    public void respawnAtCheckpoint(int _checkpointNumber = -1) //if nothing is input, it will use the variable currentCheckpoint by default, so dont worry about calling without a number
+    {
+        if (_checkpointNumber >= 0)
+        {
+            SceneManager.LoadScene(currentScene);
+        }
+        else
+        {
+            setCheckpoint(_checkpointNumber);
+            SceneManager.LoadScene(currentScene);
+        }
+        
+    }
     public void getTime(int _elapsedTime)
     {
 

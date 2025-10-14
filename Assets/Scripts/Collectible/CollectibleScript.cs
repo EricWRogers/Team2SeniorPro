@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class CollectibleScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int collectibleCheckpointNumber = 0; //the checkpoint number this collectible is associated with
+    void Awake()
     {
-
+        if (collectibleCheckpointNumber < GameManager.Instance.currentCheckpoint && GameManager.Instance.currentCheckpoint != -1) //if the player has passed a checkpoint and has respawned, destroy all collectibles that are prior to that checkpoint
+        {
+            Destroy(transform.parent.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
