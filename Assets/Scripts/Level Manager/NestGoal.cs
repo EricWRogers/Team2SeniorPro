@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI; // Add this for UI components
 
@@ -19,9 +18,16 @@ public class NestGoal : MonoBehaviour
 
     public void ReturnToMain()
     {
-        SceneManager.LoadScene("Kaden's Scene");
+        GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f; // Resume the game
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        GameManager.Instance.newMap(GameManager.Instance.currentScene, false); //reloads the current scene, does not reset collectibles so it adds to total
     }
 
     void OnTriggerEnter(Collider other)
