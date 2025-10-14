@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI; // Add this for UI components
 
 public class NestGoal : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class NestGoal : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text statsText;
 
-    [Header("Objects To Deactivate")]
-    public MonoBehaviour[] objectsToDeactivate;
+    [Header("Events")]
+    [Tooltip("Scripts to disable when paused and enable when resumed")]
+    public MonoBehaviour[] scriptsToToggle;
 
     public void ReturnToMain()
     {
@@ -32,16 +34,16 @@ public class NestGoal : MonoBehaviour
         Time.timeScale = 0f; // Pause the game
 
         // Deactivate specified objects
-        if (objectsToDeactivate != null)
+        if (scriptsToToggle != null)
         {
-            foreach (var obj in objectsToDeactivate)
+            foreach (var script in scriptsToToggle)
             {
-                if (obj != null)
-                    obj.enabled = false;
+                if (script != null)
+                    script.enabled = false;
             }
         }
 
-       // Stop the timer
+        // Stop the timer
         timer.StopTimer();
 
         // Update TMPro text with final time
@@ -53,6 +55,7 @@ public class NestGoal : MonoBehaviour
                 timerText.text = $"Time - {timer.GetFormattedTime()}" ;
             }
         }
+    
         /*
         // Update stats text
         if (winScoreText != null)
