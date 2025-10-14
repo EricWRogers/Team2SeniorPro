@@ -1141,6 +1141,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef1685433db82045869f8bbf4c0668e, type: 3}
+--- !u!114 &367580540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2043812462231418052, guid: 4ef1685433db82045869f8bbf4c0668e, type: 3}
+  m_PrefabInstance: {fileID: 367580539}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &382801706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3541,6 +3552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113434446808087761, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
+      propertyPath: vcam
+      value: 
+      objectReference: {fileID: 367580540}
     - target: {fileID: 4178982069262447747, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -3553,6 +3568,10 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 8550814338921001537, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
+      propertyPath: cameraTarget
+      value: 
+      objectReference: {fileID: 54637872}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4195,7 +4214,7 @@ PrefabInstance:
     - target: {fileID: 3462988730747151048, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: aimCursor
       value: 
-      objectReference: {fileID: 1826118378}
+      objectReference: {fileID: 0}
     - target: {fileID: 6358857765918390017, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.18
@@ -5166,17 +5185,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -89.937, z: 0}
---- !u!114 &1826118378 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8745620387453894331, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
-  m_PrefabInstance: {fileID: 1706287395}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718dd2bc5be866c46a3b82fdacb16e49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &1873331938 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5948866394842808777, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
