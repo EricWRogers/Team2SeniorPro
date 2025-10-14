@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class Spinner : MonoBehaviour
+public class testLoadLevel : MonoBehaviour
 {
-    float spinSpeed = 1.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,6 +11,13 @@ public class Spinner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(spinSpeed * Time.deltaTime, 0, 0);
+
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.newMap("Level_1");
+        }
     }
 }
