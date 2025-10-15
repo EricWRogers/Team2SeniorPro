@@ -51,7 +51,7 @@ public class Sliding : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput   = Input.GetAxisRaw("Vertical");
 
-        // --- Start slide (one press) ---
+        // --- Start slide ---
         if (Input.GetKeyDown(slideKey))
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
@@ -64,7 +64,7 @@ public class Sliding : MonoBehaviour
 
         // --- Stop conditions ---
         // 1) Letting go of the key, or
-        // 2) Momentum fell to ~0 (don’t use walkSpeed as stop!)
+        // 2) Momentum fell to 0
         if (tpm.sliding)
         {
             bool released = !Input.GetKey(slideKey);
@@ -178,6 +178,7 @@ public class Sliding : MonoBehaviour
     {
         // tpm.slopeHit is private there; copy of their ray done in OnSlope()
         // If you want the exact normal, expose slopeHit in TPM. For now, approximate using ground ray.
+        //implement this fix later for the slope
         Physics.Raycast(transform.position, Vector3.down, out var hit, tpm.playerHeight * 0.5f + 0.3f, tpm.whatIsTheGround);
         return hit.normal != Vector3.zero ? hit.normal : Vector3.up;
     }
