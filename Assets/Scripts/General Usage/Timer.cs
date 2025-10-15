@@ -4,12 +4,12 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private float totalTime = 180f;
+    [SerializeField] private float totalTime = 0f;
 
     public LoseScreen LS;
 
-    private float timeRemaining;
-    private bool timeRunning = true;
+    public float timeRemaining;
+    public bool timeRunning = true;
 
     private void Start()
     {
@@ -20,10 +20,10 @@ public class Timer : MonoBehaviour
     {
         if (timeRunning)
         {
-            timeRemaining -= Time.deltaTime;
-            if (timeRemaining <= 0 )
+            timeRemaining += Time.deltaTime;
+            if (timeRemaining >= 300f )
             {
-                timeRemaining = 0;
+                //timeRemaining = 0;
                 timeRunning = false;
                 OnTimerEnds();
             }
