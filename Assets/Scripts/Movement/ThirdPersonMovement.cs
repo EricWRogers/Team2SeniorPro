@@ -323,6 +323,8 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.AddForce(orientation.forward * (thirdPersonMovementSpeed * 0.25f), ForceMode.Impulse);
         }
 
+        Debug.Log("Player Has Jumped: ");
+
         StartCoroutine(ForceUngroundRoutine());
     }
 
@@ -353,3 +355,9 @@ public class ThirdPersonMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }
+
+//player brushing into the wall makes player jump height, thids is due to raycast that is effectve in the tpm controller for tracking walls in climbing
+//wall jump consistency make sure isnt being called multiple times, go back through and completely debug the game
+// jump off of sloped platforms needs to be fixed, the jumping is less that regualr the gravity on slopes is messed up
+//fix air drag way too much and you loose momentum while in the air.
+//being able to maintain your momentum even when you stop, so re add when you stop you lose momentum from my original build nefore adding the effect.  Check for the variable that is adding the extra momentum slide after building momentum.
