@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEditor;
+using NUnit.Framework;
+using RangeAttribute = UnityEngine.RangeAttribute;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -75,6 +78,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [Range(0f, 1f)] public float movementSlowMultiplier = 1f;
 
     [Header("References")]
+    public GameObject landingParticleEffect;
     public Climbing climbingScript;
     public Transform orientation;
 
@@ -109,6 +113,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Start()
     {
+        landingParticleEffect = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Particles/LandingParticleEffect.prefab");
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
@@ -130,8 +135,11 @@ public class ThirdPersonMovement : MonoBehaviour
             airTimeCounter += Time.deltaTime;
             ApplyExtraGravity();
         }
-        else
+        else //Has Landed on Ground
         {
+            if(airTimeCounter > 0.2f)
+            Instantiate(landingParticleEffect, transform.position - new Vector3(0, playerHeight * 0.3f, 0), Quaternion.Euler(90, 0, 0));
+
             airTimeCounter = 0f;
         }
 
@@ -224,6 +232,7 @@ public class ThirdPersonMovement : MonoBehaviour
         else if (sliding)
         {
             state = MovementState.sliding;
+
             desiredMovementSpeed = slideSpeed;
             keepMomentum = true;
         }
