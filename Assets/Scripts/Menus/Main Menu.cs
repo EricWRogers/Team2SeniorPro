@@ -5,7 +5,8 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the main hub scene, resets collectibles so it doesnt add 0 to total
+        Debug.Log("Play button pressed, loading game...");
     }
 
     public void Options()

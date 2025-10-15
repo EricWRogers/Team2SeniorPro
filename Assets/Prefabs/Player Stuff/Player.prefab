@@ -238,7 +238,7 @@ MonoBehaviour:
   wallRunSpeed: 8.5
   vaultSpeed: 3
   climbSpeed: 3
-  airMinSpeed: 0
+  airMinSpeed: 7
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
   groundDrag: 4
@@ -291,14 +291,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 8344112718048604137}
-  maxSlideTime: 1
   slideForce: 10
   slideYScale: 0.5
-  slideKey: 306
   maxMomentumSpeed: 30
-  momentumDecayRate: 10
-  momentumDecayRateNoInput: 20
-  momentumDuration: 3
+  initialSlideBonus: 2
+  baseDecayRate: 6
+  noInputExtraDecay: 2
+  stopAtSpeedFraction: 0.15
+  minSlopeAngleGain: 10
+  slopeGainRate: 8
+  slopeGainAngleScale: 1
+  slideKey: 306
 --- !u!114 &728865975150145358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,7 +453,7 @@ MonoBehaviour:
   aimCamera: {fileID: 0}
   handSocket: {fileID: 6881666225045144809}
   carryState: {fileID: 256744871743012251}
-  aimSprite: {fileID: 0}
+  aimSprite: {fileID: 4026592712304746791, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
   minThrowSpeed: 6
   maxThrowSpeed: 25
   maxChargeTime: 1

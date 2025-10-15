@@ -40,7 +40,7 @@ public class PauseMenu : MonoBehaviour
         PlaySound();
         Debug.Log("Loading Main Menu...");
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
     }
 
     public void Resume()
@@ -73,7 +73,7 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.newMap(GameManager.Instance.currentScene, false); //reloads the current scene, does not reset collectibles so it adds to total
     }
     public void Quit()
     {
