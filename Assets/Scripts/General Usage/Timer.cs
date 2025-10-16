@@ -23,7 +23,6 @@ public class Timer : MonoBehaviour
             timeRemaining += Time.deltaTime;
             if (timeRemaining >= 300f )
             {
-                //timeRemaining = 0;
                 timeRunning = false;
                 OnTimerEnds();
             }
