@@ -16,6 +16,12 @@ public class NestGoal : MonoBehaviour
     [Tooltip("Scripts to disable when paused and enable when resumed")]
     public MonoBehaviour[] scriptsToToggle;
 
+    [Header("Rank Displays")]
+    public GameObject Srank;
+    public GameObject Arank;
+    public GameObject Brank;
+    public GameObject Crank;
+
     public void ReturnToMain()
     {
         GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
@@ -49,6 +55,24 @@ public class NestGoal : MonoBehaviour
             }
         }
 
+        // Activates rank based on time
+        if (timer != null && timer.timeRemaining <= 60f)
+        {
+            if (Srank != null) Srank.SetActive(true);
+        }
+        if (timer != null && timer.timeRemaining > 60f && timer.timeRemaining <= 120f)
+        {
+            if (Arank != null) Arank.SetActive(true);
+        }
+        if (timer != null && timer.timeRemaining > 120f && timer.timeRemaining <= 180f)
+        {
+            if (Brank != null) Brank.SetActive(true);
+        }
+        if (timer != null && timer.timeRemaining > 180f && timer.timeRemaining <= 240f)
+        {
+            if (Crank != null) Crank.SetActive(true);
+        }
+
         // Stop the timer
         timer.StopTimer();
 
@@ -62,12 +86,10 @@ public class NestGoal : MonoBehaviour
             }
         }
     
-        /*
-        // Update stats text
-        if (winScoreText != null)
+        // Display total collectibles in statsText
+        if (statsText != null)
         {
-            var collectCount = collectibles.currentScore;
-            winScoreText.text = $"Items Collected: {collectCount}";
-        }*/
+            statsText.text = $"Collectibles - {GameManager.Instance.totalCollectibles}";
+        }
     }
 }

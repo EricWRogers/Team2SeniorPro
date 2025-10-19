@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 public class LoseScreen : MonoBehaviour
 {
     public GameObject gameOverUI;
+    public GameObject Drank;
     public AudioSource music;
     public PauseMenu pauseMenu;
     public AudioSource SFXSource;
     public AudioClip clickSFX;
     public AudioClip loserSFX;
+    public Timer timer;
 
     public static bool GameIsPaused = false;
 
@@ -35,6 +37,11 @@ public class LoseScreen : MonoBehaviour
         {
             SFXSource.PlayOneShot(loserSFX);
             Debug.Log("Played sound: " + loserSFX.name);
+        }
+
+        if (timer != null && timer.timeRemaining >= 300f)
+        {
+            if (Drank != null) Drank.SetActive(true);
         }
 
     }
