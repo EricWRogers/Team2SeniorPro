@@ -5,10 +5,13 @@ public class Checkpoint : MonoBehaviour
     [Header("Who can activate")]
     public string playerTag = "Player";
     public KeyCode activateKey = KeyCode.E;
-    public bool requireButtonPress = true;   
+    public bool requireButtonPress = true;
 
     [Header("Acorn reference (optional; auto-find if empty)")]
     public CarryableAcorn acorn;
+
+    [Header("Jump-pad Objecct")]
+    public GameObject jumpPadObject;
 
     [Header("Visuals (optional)")]
     public Renderer[] renderersToTint;
@@ -53,7 +56,7 @@ public class Checkpoint : MonoBehaviour
         s_active = this;
         SetVisualActive(true);
 
-        
+        jumpPadObject.SetActive(true);
     }
 
     void SetVisualActive(bool on)
