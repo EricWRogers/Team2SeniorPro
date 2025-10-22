@@ -108,7 +108,6 @@ public class ThirdPersonMovement : MonoBehaviour
     [Range(0f, 1f)] public float movementSlowMultiplier = 1f; 
 
     [Header("References")]
-    public GameObject landingParticleEffect;
     public Climbing climbingScript;
     public Transform orientation;
 
@@ -143,7 +142,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Start()
     {
-        //landingParticleEffect = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Particles/LandingParticleEffect.prefab");
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
@@ -210,7 +208,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else //Has Landed on Ground
         {
-            if(airTimeCounter > 0.2f)
+            if (airTimeCounter > 0.2f)
+                ParticleManager.Instance.SpawnParticle("LandingParticleEffect", transform.position - new Vector3(0, playerHeight * 0.3f, 0), Quaternion.Euler(90, 0, 0));
 
             airTimeCounter = 0f;
         }
