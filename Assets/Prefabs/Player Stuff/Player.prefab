@@ -242,7 +242,7 @@ MonoBehaviour:
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
   groundDrag: 4
-  jumpForce: 12
+  jumpForce: 17
   jumpCooldown: 0.25
   airMultiplier: 0.4
   crouchSpeed: 3.5
@@ -260,6 +260,12 @@ MonoBehaviour:
   fallGravityMultiplier: 3
   momentumBlendRiseRate: 40
   momentumBlendFallRate: 25
+  uphillStickForce: 60
+  downhillStickForce: 10
+  groundCheckOffset: 0.2
+  groundCheckDistance: 0.6
+  groundedGraceTime: 0.15
+  jumpBufferTime: 0.1
   enableGroundPound: 1
   groundPoundForce: 20
   slopeBoostMultiplier: 1.5
@@ -267,6 +273,7 @@ MonoBehaviour:
   maxGroundPounds: 3
   groundPoundText: {fileID: 0}
   movementSlowMultiplier: 1
+  landingParticleEffect: {fileID: 0}
   climbingScript: {fileID: 8526296667799095665}
   orientation: {fileID: 8344112718048604137}
   state: 0
@@ -297,7 +304,7 @@ MonoBehaviour:
   initialSlideBonus: 2
   baseDecayRate: 6
   noInputExtraDecay: 2
-  stopAtSpeedFraction: 0.15
+  stopAtSpeedFraction: 0
   minSlopeAngleGain: 10
   slopeGainRate: 8
   slopeGainAngleScale: 1
@@ -320,10 +327,10 @@ MonoBehaviour:
   whatIsTheGround:
     serializedVersion: 2
     m_Bits: 64
-  wallRunForce: 200
-  wallClimbSpeed: 7
+  wallRunForce: 20
+  wallClimbSpeed: 0
   wallJumpUpForce: 12
-  wallJumpSideForce: 3
+  wallJumpSideForce: 15
   maxWallRunTime: 0.7
   upwardsRunKey: 304
   downwardsRunKey: 306
@@ -366,6 +373,8 @@ MonoBehaviour:
   minWallNormalAngleChange: 5
   exitingWall: 0
   exitWallTime: 0.2
+  jumpIgnoreTime: 0.2
+  jumpIgnoreTimer: 0
   minWallAngleFromUp: 70
   maxWallAngleFromUp: 110
 --- !u!114 &4909502988919493153
@@ -453,7 +462,7 @@ MonoBehaviour:
   aimCamera: {fileID: 0}
   handSocket: {fileID: 6881666225045144809}
   carryState: {fileID: 256744871743012251}
-  aimSprite: {fileID: 4026592712304746791, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
+  aimSprite: {fileID: 2756775230209946301}
   minThrowSpeed: 6
   maxThrowSpeed: 25
   maxChargeTime: 1
@@ -470,7 +479,7 @@ MonoBehaviour:
   scrollPitchStep: 19
   arrowPitchSpeed: 90
   defaultPitchDeg: 50
-  useAutoBob: 1
+  useAutoBob: 0
   bobAmplitudeDeg: 14
   bobFrequencyHz: 0.5
   playerCollidersToIgnore:
@@ -1420,6 +1429,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
+--- !u!1 &2756775230209946301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4026592712304746791, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
+  m_PrefabInstance: {fileID: 1270961549789074330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6635202119357634296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5600127075552888162, guid: 11c9f04e56a92224aabc3d95a7ceb8e5, type: 3}
