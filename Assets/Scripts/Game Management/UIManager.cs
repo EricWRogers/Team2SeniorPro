@@ -8,15 +8,11 @@ public class UIManagement : MonoBehaviour
 {
     [Header("TextMeshPro UI Elements")]
     public TMP_Text speedText;
-    public TMP_Text nutJumpText;
-    public TMP_Text healthText;
     public TMP_Text collectibleText;
 
     [Header("Player Reference")]
     //public PlayerStats playerStats;
     public GameObject player;
-    public MidairGrabAbility nutGrabAbility;
-    public ThirdPersonMovement movementSpeed;
 
     void Start()
     {
@@ -42,7 +38,7 @@ public class UIManagement : MonoBehaviour
         
         if(player != null)
         {
-            speedText.text = player.GetComponent<Rigidbody>().linearVelocity.magnitude.ToString("F1", CultureInfo.InvariantCulture) + " m/s";
+            speedText.text = (player.GetComponent<Rigidbody>().linearVelocity.magnitude * 0.15f).ToString("F1", CultureInfo.InvariantCulture) + " mp/h";
         }
     }
 }

@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2427948107126692464}
   - component: {fileID: 4591659664988602885}
   - component: {fileID: 3478165600103428584}
+  - component: {fileID: 4221826294026196274}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -347,6 +348,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4221826294026196274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935795761772418939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ec25aa1844ae04a883046d44527609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedText: {fileID: 5074820941058126303}
+  collectibleText: {fileID: 3930415645664940829}
+  player: {fileID: 0}
 --- !u!1 &953683894642333624
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +375,7 @@ GameObject:
   - component: {fileID: 3071100363908528254}
   - component: {fileID: 3930415645664940829}
   m_Layer: 0
-  m_Name: Number?
+  m_Name: Collecitbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: '-'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
