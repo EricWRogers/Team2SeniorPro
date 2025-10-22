@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float jumpForce = 15f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        // Check if the colliding object is the player
+        if (other.CompareTag("Player"))
+        {
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Reset vertical velocity
+
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange); // Apply upward jump force
+            }
+        }
     }
 }
