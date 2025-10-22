@@ -18031,11 +18031,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 728865975150145358, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: wallClimbSpeed
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 728865975150145358, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: wallJumpUpForce
-      value: 10
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 728865975150145358, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: wallJumpSideForce
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Name
@@ -18044,6 +18048,14 @@ PrefabInstance:
     - target: {fileID: 2369629687222430441, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: stopAtSpeedFraction
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: fallGravityMultiplier
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3462988730747151048, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: aimCamera
@@ -18116,6 +18128,10 @@ PrefabInstance:
     - target: {fileID: 7648467887023637690, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: useAutoBob
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526296667799095665, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

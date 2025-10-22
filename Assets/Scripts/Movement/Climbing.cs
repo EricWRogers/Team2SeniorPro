@@ -32,7 +32,7 @@ public class Climbing : MonoBehaviour
     public float maxWallLookAngle;
     private float wallLookAngle;
 
-    [Header("Heist Integration")]
+    [Header("Height Integration")]
     public bool climbEnabled = true; 
 
     private RaycastHit frontWallHit;
@@ -47,6 +47,10 @@ public class Climbing : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    [Header("Jump Grace Control")]
+    public float jumpIgnoreTime = 0.2f; // seconds to ignore climb after jumping
+    public float jumpIgnoreTimer;
+
     [Header("Wall Filtering")]
     [Tooltip("Treat surfaces as WALL only if their normal is this many degrees or more away from Up")]
     [Range(0f, 90f)] public float minWallAngleFromUp = 70f; // 70–80° is somewhat vertical
@@ -60,6 +64,8 @@ public class Climbing : MonoBehaviour
 
     private void Update()
     {
+        if (jumpIgnoreTimer > 0f)
+            jumpIgnoreTimer -= Time.deltaTime;
         WallCheck();
         if (!climbEnabled) { if (climbing) StopClimbing(); return; }  // added wall check
         StateMachine();
@@ -108,8 +114,19 @@ public class Climbing : MonoBehaviour
 
     private void WallCheck()
     {
+
+        //Prevent climb detection while jumping upward, part of new updated bug fixes, may implement a timer for this in addition to jump delay
+        if (jumpIgnoreTimer > 0f)
+        {
+            wallFront = false;
+            return;
+        }
+
+        if (rb.linearVelocity.y > 1f && wallFront)
+            Debug.Log("Climb ray ignored during jump");
+
         bool hit = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward,
-                                    out frontWallHit, detectionLength, whatIsWall);
+                                      out frontWallHit, detectionLength, whatIsWall);
 
         // Only treat as a wall if it’s vertical-ish
         wallFront = hit && IsVerticalWall(frontWallHit.normal);

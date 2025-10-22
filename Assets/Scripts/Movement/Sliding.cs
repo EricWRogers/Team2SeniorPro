@@ -51,7 +51,7 @@ public class Sliding : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput   = Input.GetAxisRaw("Vertical");
 
-
+        // --- Start slide ---
         if (Input.GetKeyDown(slideKey))
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
