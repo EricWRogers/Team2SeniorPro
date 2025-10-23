@@ -11140,13 +11140,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815970317}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42022055, y: -0.49867973, z: 0.04118462, w: 0.7569921}
-  m_LocalPosition: {x: 7.54, y: 20.97, z: -13.06}
+  m_LocalRotation: {x: 0.26769993, y: -0.3209295, z: -0.14811821, w: 0.896327}
+  m_LocalPosition: {x: 71.2, y: 20.97, z: -23.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 42.632, y: -78.278, z: -29.006}
+  m_LocalEulerAnglesHint: {x: 22.633, y: -45.173, z: -28.284}
 --- !u!114 &815970320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16982,6 +16982,14 @@ PrefabInstance:
     - target: {fileID: 5948866394842808777, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
       propertyPath: near clip plane
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863715847345295490, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
+      propertyPath: m_Antialiasing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863715847345295490, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
+      propertyPath: m_RenderShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7863715847345295490, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
       propertyPath: m_RenderPostProcessing
