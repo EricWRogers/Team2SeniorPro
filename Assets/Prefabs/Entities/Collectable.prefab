@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4135108242564038448}
@@ -82,7 +82,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -4915,6 +4915,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27072b52757dfa4f90f73441c9228a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectibleCheckpointNumber: 0
+  SFXSource: {fileID: 0}
+  collectSFX: {fileID: 8300000, guid: dcf16e7fa5259bd4d9e745de2467d0ad, type: 3}
 --- !u!33 &2995574007332414265
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4946,7 +4949,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8c9fb1e064eae6440b018eba1d7f0dd6, type: 2}
+  - {fileID: 2100000, guid: ad75d1a4742cdbb44bc694f8f44ffc54, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
