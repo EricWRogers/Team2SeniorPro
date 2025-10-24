@@ -38,7 +38,7 @@ public class NestGoal : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Acorn")) return;
+        if (!other.CompareTag("Player")) return;
         Debug.Log("WIN! Acorn delivered to the nest.");
         WinScreen.SetActive(true);
         Cursor.visible = true;
