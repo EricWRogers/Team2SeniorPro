@@ -94,15 +94,23 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool canGroundPound = true;
     private int currentGroundPounds;
 
-   /* [Tooltip("Delay before the downward slam starts (like Mario-style charge)")]
-    public float groundPoundDelay = 0.3f;
+    /* [Tooltip("Delay before the downward slam starts (like Mario-style charge)")]
+     public float groundPoundDelay = 0.3f;
 
-    [Tooltip("Upward stall force during the charge for a visual effect, this is very broken so im stashing for now")]
-    public float groundPoundStallForce = 3f;*/ 
+     [Tooltip("Upward stall force during the charge for a visual effect, this is very broken so im stashing for now")]
+     public float groundPoundStallForce = 3f;*/
 
 
     [Header("Ground Pound UI")]
     public TextMeshProUGUI groundPoundText;
+
+    [Header("Ground Pound SFX")]
+    public AudioSource groundPoundSFXSource;
+    public AudioClip groundPoundSFX;
+
+    [Header("Sliding SFX")]
+    public AudioSource slidingSFXSource;
+    public AudioClip slidingSFX;
 
     [Header("Debuffs")]
     [Range(0f, 1f)] public float movementSlowMultiplier = 1f; 
@@ -200,6 +208,7 @@ public class ThirdPersonMovement : MonoBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
+        HandleSlideAudio();
 
         if (!grounded)
         {
@@ -291,6 +300,12 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                 // COSMETICS YAYYYYY, this makes theoretically a little bouncy, will be another one too where it will act like marios 3 second delay animation before ground pounding for fun
                 //rb.AddForce(Vector3.up * 3f, ForceMode.Impulse);
+            }
+
+            // Play SFX
+            if (groundPoundSFXSource != null && groundPoundSFX != null)
+            {
+                groundPoundSFXSource.PlayOneShot(groundPoundSFX);
             }
 
             Invoke(nameof(ResetGroundPound), groundPoundCooldown);
@@ -504,13 +519,31 @@ public class ThirdPersonMovement : MonoBehaviour
 
         
     }
-    
-    
 
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
+
+    private void HandleSlideAudio()
+    {
+        // Check if we are sliding
+        if (sliding)
+        {
+            if (!slidingSFXSource.isPlaying)
+            {
+                slidingSFXSource.clip = slidingSFX;
+                slidingSFXSource.loop = true; // keeps playing while sliding
+                slidingSFXSource.Play();
+            }
+        }
+        else
+        {
+            if (slidingSFXSource.isPlaying)
+                slidingSFXSource.Stop();
+        }
+    }
+    
 }
 
 //player brushing into the wall makes player jump height, thids is due to raycast that is effectve in the tpm controller for tracking walls in climbing
