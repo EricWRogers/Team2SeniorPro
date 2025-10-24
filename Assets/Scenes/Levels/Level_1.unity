@@ -2027,6 +2027,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3238796641972263029, guid: 232b272dfda962c42a9958a5424809bb, type: 3}
   m_PrefabInstance: {fileID: 170221399}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &178969901 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3755876209845952579, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+  m_PrefabInstance: {fileID: 1558451888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &194169392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
@@ -3391,37 +3396,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 865019208}
     m_Modifications:
-    - target: {fileID: 1361227337645955166, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: ad75d1a4742cdbb44bc694f8f44ffc54, type: 2}
     - target: {fileID: 1689297256592600435, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_Name
       value: Collectable
       objectReference: {fileID: 0}
     - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.826563
+      value: 10.8
       objectReference: {fileID: 0}
     - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -42.483
+      value: -51.2
       objectReference: {fileID: 0}
     - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -76.6841
+      value: -86.3
       objectReference: {fileID: 0}
     - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3451,10 +3440,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8593175213791029845, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
-      propertyPath: prewarm
-      value: 1
+    - target: {fileID: 4135108242564038448, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.78
       objectReference: {fileID: 0}
+    - target: {fileID: 4135108242564038448, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135108242564038448, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: SFXSource
+      value: 
+      objectReference: {fileID: 178969901}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8198,6 +8199,10 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: pauseSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 718d7071b9793d84cbdd83476374fd8b, type: 3}
+    - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1873331940}
@@ -8220,6 +8225,10 @@ PrefabInstance:
     - target: {fileID: 3465065762454458572, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478165600103428584, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3885251443182214580, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_fontSize
@@ -17334,6 +17343,10 @@ PrefabInstance:
       propertyPath: vcam
       value: 
       objectReference: {fileID: 367580540}
+    - target: {fileID: 1731598353821464317, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4178982069262447747, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -21551,14 +21564,6 @@ PrefabInstance:
     - target: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: m_Name
       value: Squirrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
-      propertyPath: crouchKey
-      value: 306
-      objectReference: {fileID: 0}
-    - target: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
-      propertyPath: playerHeight
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3462988730747151048, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
       propertyPath: aimCamera

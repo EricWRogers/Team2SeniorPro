@@ -3,6 +3,8 @@ using UnityEngine;
 public class CollectibleScript : MonoBehaviour
 {
     public int collectibleCheckpointNumber = 0; //the checkpoint number this collectible is associated with
+    public AudioSource SFXSource;
+    public AudioClip collectSFX;
     void Start()
     {
         if (GameManager.Instance != null)
@@ -25,8 +27,10 @@ public class CollectibleScript : MonoBehaviour
         {
             Debug.Log("Collectible touched by player");
             //SoundManager.Instance.PlaySFX(SoundManager.Instance.sfxSource.clip);
+            SFXSource.PlayOneShot(collectSFX);
+
             GameManager.Instance.collectibleCount++;
-            Destroy(transform.parent.gameObject);
+            Destroy(transform.parent.gameObject, 0.1f);
         }
     }
 }
