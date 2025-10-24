@@ -18,7 +18,12 @@ public class Checkpoint : MonoBehaviour
     public Color inactiveColor = Color.gray;
     public Color activeColor = new Color(1f, 0.8f, 0.2f, 1f);
 
+    [Header("Checkpoint SFX")]
+    public AudioSource SFXSource;
+    public AudioClip checkpointSFX;
+
     static Checkpoint s_active; // for visuals
+    public bool Activated = false;
 
     void Start()
     {
@@ -49,6 +54,9 @@ public class Checkpoint : MonoBehaviour
 
     void Activate()
     {
+        // If active already, do nothing
+        if (Activated) return;
+
         if (!acorn) acorn = FindFirstObjectByType<CarryableAcorn>();
         if (acorn) acorn.SetRespawnPoint(transform);
 
@@ -56,7 +64,10 @@ public class Checkpoint : MonoBehaviour
         s_active = this;
         SetVisualActive(true);
 
+        SFXSource.PlayOneShot(checkpointSFX);
+
         jumpPadObject.SetActive(true);
+        Activated = true;
     }
 
     void SetVisualActive(bool on)
