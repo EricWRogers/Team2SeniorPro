@@ -33,7 +33,7 @@ public class NestGoal : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.newMap(GameManager.Instance.currentScene, false); //reloads the current scene, does not reset collectibles so it adds to total
+        GameManager.Instance.newMap(GameManager.Instance.currentScene, true); // reloads the current scene, resets collectibles so it doesnt add to total
     }
 
     void OnTriggerEnter(Collider other)
@@ -56,7 +56,7 @@ public class NestGoal : MonoBehaviour
         }
 
         // Activates rank based on time
-        if (timer != null && timer.timeRemaining <= 60f)
+        if (timer != null && timer.timeRemaining < 60f)
         {
             if (Srank != null) Srank.SetActive(true);
         }
