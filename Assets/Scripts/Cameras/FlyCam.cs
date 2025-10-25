@@ -40,7 +40,7 @@ public class FlyCam : MonoBehaviour
 
         string currentScene = GameManager.Instance.currentScene;
 
-        if (currentScene == "Level_1" && !hasPlayedFlyover_Level1)
+        if (currentScene == "Squirrel_HUB" && !hasPlayedFlyover_Level1)
         {
             hasPlayedFlyover_Level1 = true;
             StartFlyover();
