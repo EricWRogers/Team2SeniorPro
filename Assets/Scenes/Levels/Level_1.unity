@@ -3452,6 +3452,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4135108242564038448, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135108242564038448, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135108242564038448, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: SFXSource
       value: 
@@ -7772,7 +7784,7 @@ MonoBehaviour:
   WinScreen: {fileID: 631269289}
   timer: {fileID: 631269286}
   timerText: {fileID: 631269288}
-  statsText: {fileID: 631269287}
+  statsText: {fileID: 1037200042}
   scriptsToToggle:
   - {fileID: 1151268860}
   Srank: {fileID: 1702420746}
@@ -9512,17 +9524,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a3f53da2dafc54eb7a5f9275794da1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &631269287 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5363933337715775881, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-  m_PrefabInstance: {fileID: 631269284}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &631269288 stripped
@@ -15645,6 +15646,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2701293691000944768, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 631269284}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037200042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3930415645664940829, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1038066405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b796438849fe73643bc02aa94f322b31, type: 3}
