@@ -90,6 +90,15 @@ public class ThirdPersonMovement : MonoBehaviour
     public float groundPoundCooldown; //0.8f
     public int maxGroundPounds = 3;
 
+    [Header("Crouch Jump Tuning")]
+
+    [Tooltip("Multiplier to make crouch jumps as tall as standing jumps (1 = no change).")]
+    public float crouchJumpBoost = 1.15f;
+
+    [Tooltip("Time after a jump during which the crouch downward impulse is suppressed.")]
+    public float crouchImpulseBlockTime = 0.08f;
+
+
     private bool groundPounding = false;
     private bool canGroundPound = true;
     private int currentGroundPounds;
@@ -246,15 +255,22 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.AddForce(Vector3.down * groundPoundForce, ForceMode.Impulse);
         }
 
-        // Ground crouching
+                // Ground crouching
         if (Input.GetKey(crouchKey) && grounded)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+
+            // IMPORTANT: don't apply the downward poke if we just jumped
+            // (prevents canceling the jump impulse on crouch-jump frames)
+            if (Time.time - lastJumpTime >= crouchImpulseBlockTime)
+            {
+                rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            }
         }
 
         if (Input.GetKeyUp(crouchKey))
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+
     }
     
     /*private void PerformGroundPoundSlam()
@@ -451,9 +467,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
         Vector3 currentVel = rb.linearVelocity;
         rb.linearVelocity = new Vector3(currentVel.x, 0f, currentVel.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-        // Inform climbing to ignore walls temporarily
+        bool isCrouchedNow = transform.localScale.y < (startYScale * 0.999f);
+        float jumpMult = isCrouchedNow ? crouchJumpBoost : 1f;
+        rb.AddForce(transform.up * (jumpForce * jumpMult), ForceMode.Impulse);
+
+
+       
         if (climbingScript != null)
             climbingScript.jumpIgnoreTimer = climbingScript.jumpIgnoreTime;
 
