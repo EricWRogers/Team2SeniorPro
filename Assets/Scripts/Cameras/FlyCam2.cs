@@ -11,18 +11,26 @@ public class FlyCam2 : MonoBehaviour
     public GameObject splineCamOBJ; // Spline camera object
     public SplineAnimate SplineCam; // Spline camera with spline animation component
     public MonoBehaviour pauseMenu; // Reference to pauseMenu script
-    
+
     public bool inSequence = false;
+    private static bool hasPlayedFlyover_Level1 = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (playerCanvas != null) playerCanvas.SetActive(false); // Hide at start
+        string currentScene = GameManager.Instance.currentScene;
 
-        if (splineCamOBJ != null)
-            splineCamOBJ.SetActive(true);
+        if (currentScene == "Squirrel_HUB" && !hasPlayedFlyover_Level1)
+        {
+            hasPlayedFlyover_Level1 = true;
+            
+            if (splineCamOBJ != null)
+                splineCamOBJ.SetActive(true);
         
-        StartCoroutine(StartSequence());
+            StartCoroutine(StartSequence());
+        }
+
+        if (playerCanvas != null) playerCanvas.SetActive(false); // Hide at start
     }
 
     private IEnumerator StartSequence()

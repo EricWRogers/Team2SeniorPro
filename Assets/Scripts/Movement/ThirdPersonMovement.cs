@@ -131,7 +131,7 @@ public class ThirdPersonMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
-    Rigidbody rb;
+    public Rigidbody rb;
 
     public MovementState state;
     public enum MovementState
