@@ -29,8 +29,6 @@ public class FlyCam2 : MonoBehaviour
         
             StartCoroutine(StartSequence());
         }
-
-        if (playerCanvas != null) playerCanvas.SetActive(false); // Hide at start
     }
 
     private IEnumerator StartSequence()
