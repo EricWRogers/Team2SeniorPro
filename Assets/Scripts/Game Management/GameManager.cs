@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
     {
         collectibleCount++;
     }
+    public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
     public void Awake()
     {
         if (Instance == null)

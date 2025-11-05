@@ -39,6 +39,6 @@ public class RestartOnKey : MonoBehaviour
         
         Time.timeScale = 1f;
 
-        GameManager.Instance.newMap(GameManager.Instance.currentScene, true); //reloads the current scene, resets collectibles so it doesnt add to total
+        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), true); //reloads the current scene, resets collectibles so it doesnt add to total
     }
 }
