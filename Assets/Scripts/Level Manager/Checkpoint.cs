@@ -65,6 +65,7 @@ public class Checkpoint : MonoBehaviour
         s_active = this;
         SetVisualActive(true);
 
+        ParticleManager.Instance.SpawnParticle("Confetti", transform.position - new Vector3(0, 0, 0), Quaternion.Euler(90, 0, 0));
         SFXSource.PlayOneShot(checkpointSFX);
         SFXSource.PlayOneShot(conffetiSFX);
 
