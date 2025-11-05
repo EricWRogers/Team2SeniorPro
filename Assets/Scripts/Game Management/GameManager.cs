@@ -3,8 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
-    public string currentScene;
+    public static GameManager Instance { get; private set; }    
     public int currentCheckpoint = 0;
     public int collectibleCount = 0;
     public int totalCollectibles = 0;
@@ -19,7 +18,10 @@ public class GameManager : MonoBehaviour
         }
         collectibleCount = 0;
         SceneManager.LoadScene(_newMap);
-        currentScene = SceneManager.GetActiveScene().name;
+    }
+    public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
     }
     public void setCheckpoint(int _checkpointNumber, bool _force = false)
     {
@@ -36,12 +38,12 @@ public class GameManager : MonoBehaviour
     {
         if (_checkpointNumber >= 0)
         {
-            SceneManager.LoadScene(currentScene);
+            SceneManager.LoadScene(GetCurrentScene());
         }
         else
         {
             setCheckpoint(_checkpointNumber);
-            SceneManager.LoadScene(currentScene);
+            SceneManager.LoadScene(GetCurrentScene());
         }
         
     }
@@ -53,10 +55,7 @@ public class GameManager : MonoBehaviour
     {
         collectibleCount++;
     }
-    public string GetCurrentScene()
-    {
-        return SceneManager.GetActiveScene().name;
-    }
+
     public void Awake()
     {
         if (Instance == null)
@@ -75,10 +74,6 @@ public class GameManager : MonoBehaviour
         else
         {
             //Application.targetFrameRate = -1;
-        }
-        if (currentScene == "" || currentScene == null)
-        {
-            currentScene = SceneManager.GetActiveScene().name;
         }
         
     }
