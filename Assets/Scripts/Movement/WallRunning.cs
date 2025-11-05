@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.InputSystem; // ✅ New Input System
+using UnityEngine.InputSystem; 
 
 public class WallRunning : MonoBehaviour
 {
@@ -48,7 +48,7 @@ public class WallRunning : MonoBehaviour
     private Rigidbody rb;
     private LedgeGrabbing lg;
 
-    // ✅ New Input System
+    //New Input System
     private PlayerControlsB controls;
     private Vector2 moveInput;
 
@@ -65,12 +65,12 @@ public class WallRunning : MonoBehaviour
         controls.Player.Jump.performed += ctx => jumpPressed = true;
         controls.Player.Jump.canceled += ctx => jumpPressed = false;
 
-        // run upward/downward on wall (optional mappings)
+        // run upward/downward on wall (optional mappings that are still implemented but dont work since sprint gone now)
         //controls.Player.Sprint.performed += ctx => upwardsRunning = true;
         //controls.Player.Sprint.canceled += ctx => upwardsRunning = false;
 
-        controls.Player.Crouch.performed += ctx => downwardsRunning = true;
-        controls.Player.Crouch.canceled += ctx => downwardsRunning = false;
+        controls.Player.CrouchSlide.performed += ctx => downwardsRunning = true;
+        controls.Player.CrouchSlide.canceled += ctx => downwardsRunning = false;
     }
 
     private void OnEnable() => controls.Player.Enable();

@@ -69,6 +69,24 @@ public class Sliding : MonoBehaviour
     private void Start()
     {
         startYScale = transform.localScale.y;
+
+        /*// Safety reset: make sure sliding is stopped if scene is reloaded while sliding  //Check this for bugs
+        if (tpm.sliding)
+        {
+            StopSlide();
+        }
+
+        // Reset input flags in case they were stuck from previous scene
+        slidePressed = false;
+        slideHeld = false;
+        currentMomentum = 0f;
+
+        // Reset scale
+        transform.localScale = new Vector3(
+            transform.localScale.x,
+            startYScale,
+            transform.localScale.z
+        );*/
     }
 
     private void Update()
@@ -246,4 +264,22 @@ public class Sliding : MonoBehaviour
     {
         currentMomentum = Mathf.Clamp(currentMomentum + amount, 0f, maxMomentumSpeed);
     }
+
+    public void ResetSlideState() //Imma have to string these through msot scripts ig BECAUSE NEW INPUT SUCSK
+    {
+        currentMomentum = 0f;
+        slidePressed = false;
+        slideHeld = false;
+        momentumTimer = 0f;
+        startedThisFrame = false;
+        slideStartTime = 0f;
+        tpm.sliding = false;
+        transform.localScale = new Vector3(
+            transform.localScale.x,
+            startYScale,
+            transform.localScale.z
+        );
+    }
+
+    
 }

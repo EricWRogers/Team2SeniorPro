@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
-
+using UnityEngine.InputSystem;
 public class MidairGrabAbility : MonoBehaviour
 {
     [Header("References")]
@@ -13,23 +13,23 @@ public class MidairGrabAbility : MonoBehaviour
     public ThirdPersonMovement tpm;
 
     [Header("Homing Settings")]
-    public float homingSpeed; //12f
-    public float homingDuration; //0.35f
-    public float catchDistance;  //1.0f
-    public float searchRadius; //15f
+    public float homingSpeed = 12f;
+    public float homingDuration = 0.35f;
+    public float catchDistance = 1.0f;
+    public float searchRadius = 15f;
 
     [Header("Slow Motion Settings")]
-    public float slowMoTime; //2f
-    public float slowMoScale; //0.3f
+    public float slowMoTime = 2f;
+    public float slowMoScale = 0.3f;
 
     [Header("Nut Jump Settings")]
-    public int maxNutJumps; //1            // Base number of nut jumps
-    public int currentNutJumps;           // Remaining nut jumps
-    public float nutJumpCooldown; //3f     // Cooldown duration
-    private float nutJumpCooldownTimer; //0f
+    public int maxNutJumps = 1;
+    public int currentNutJumps;
+    public float nutJumpCooldown = 3f;
+    private float nutJumpCooldownTimer;
 
     [Header("Double Jump Settings")]
-    public float doubleJumpForce; //10f
+    public float doubleJumpForce = 10f;
 
     private bool canDoubleJump = false;
     private bool isSlowingTime = false;
@@ -48,9 +48,25 @@ public class MidairGrabAbility : MonoBehaviour
     public TextMeshProUGUI nutJumpTimerText;
     public Stamina staminaBar;
 
+    //New Input System
+    private PlayerControlsB controls;
+    private bool jumpPressed;
+
+    void Awake()
+    {
+        controls = new PlayerControlsB();
+
+        // Handle Jump input
+        controls.Player.Jump.performed += ctx => jumpPressed = true;
+        controls.Player.Jump.canceled += ctx => jumpPressed = false;
+    }
+
+    void OnEnable() => controls.Player.Enable();
+    void OnDisable() => controls.Player.Disable();
+
     void Start()
     {
-        currentNutJumps = maxNutJumps; // initialize
+        currentNutJumps = maxNutJumps;
     }
 
     void Update()
@@ -61,23 +77,24 @@ public class MidairGrabAbility : MonoBehaviour
             nutJumpCooldownTimer -= Time.deltaTime;
             if (nutJumpCooldownTimer <= 0f)
             {
-                // Reset nut jumps when cooldown expires
-                currentNutJumps = maxNutJumps;
+                currentNutJumps = maxNutJumps; // reset jumps
             }
         }
 
-        // Update TMP UI
+        // TMP UI
         if (nutJumpTimerText)
         {
-            if (nutJumpCooldownTimer > 0f)
-                nutJumpTimerText.text = $"Nut Jump CD: {nutJumpCooldownTimer:F1}s";
-            else
-                nutJumpTimerText.text = "Nut Jump Ready!";
+            nutJumpTimerText.text = nutJumpCooldownTimer > 0f
+                ? $"Nut Jump CD: {nutJumpCooldownTimer:F1}s"
+                : "Nut Jump Ready!";
         }
 
-        // Handle input
-        if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded())
+        // ✅ Handle Jump Input (keyboard + controller)
+        if (jumpPressed && !IsGrounded())
         {
+            // Consume input immediately
+            jumpPressed = false;
+
             if (canDoubleJump && currentNutJumps > 0)
             {
                 DoNutJump();
@@ -104,14 +121,11 @@ public class MidairGrabAbility : MonoBehaviour
         playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
 
         canDoubleJump = false;
-        currentNutJumps--;                  // Consume a nut jump
-        nutJumpCooldownTimer = nutJumpCooldown; // Start cooldown
+        currentNutJumps--;
+        nutJumpCooldownTimer = nutJumpCooldown;
 
-        // Drain stamina
-        if (staminaBar != null)
-        {
-            staminaBar.DrainToZero();
-        }
+        // Drain stamina fully
+        staminaBar?.DrainToZero();
 
         ResetTime();
     }
@@ -135,7 +149,8 @@ public class MidairGrabAbility : MonoBehaviour
             {
                 target.PickUp(carrySocket, ignoreCooldown: true);
 
-                if (target.IsCarried && carryState != null) carryState.SetCarrying(true);
+                if (target.IsCarried && carryState != null)
+                    carryState.SetCarrying(true);
 
                 if (targetIsMidairEligible)
                 {
@@ -150,8 +165,6 @@ public class MidairGrabAbility : MonoBehaviour
 
             elapsed += Time.deltaTime;
             yield return null;
-
-            //if (homingSfx)
         }
 
         if (tpm) tpm.freeze = false;
@@ -181,18 +194,17 @@ public class MidairGrabAbility : MonoBehaviour
 
     void ActivateSlowMo()
     {
-        if (!isSlowingTime)
-        {
-            Time.timeScale = slowMoScale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            isSlowingTime = true;
+        if (isSlowingTime) return;
 
-            if (slowMoSfx) AudioSource.PlayClipAtPoint(slowMoSfx, transform.position); //makes the sfx play at the players position
-            if (animator) animator.SetTrigger("MidairGrab");  //fix this
-            if (grabParticles) grabParticles.Play();
+        Time.timeScale = slowMoScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        isSlowingTime = true;
 
-            Invoke(nameof(ResetTime), slowMoTime);
-        }
+        if (slowMoSfx) AudioSource.PlayClipAtPoint(slowMoSfx, transform.position);
+        if (animator) animator.SetTrigger("MidairGrab");
+        if (grabParticles) grabParticles.Play();
+
+        Invoke(nameof(ResetTime), slowMoTime);
     }
 
     void ResetTime()
@@ -207,7 +219,6 @@ public class MidairGrabAbility : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, 1.1f);
     }
 
-    // Call this from upgrades to increase max jumps
     public void UpgradeNutJumps(int amount)
     {
         maxNutJumps += amount;

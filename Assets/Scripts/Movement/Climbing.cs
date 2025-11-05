@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem; 
 
 public class Climbing : MonoBehaviour
 {
@@ -21,8 +22,6 @@ public class Climbing : MonoBehaviour
     [Header("ClimbJumping")]
     public float climbJumpUpForce;
     public float climbJumpBackForce;
-
-    public KeyCode jumpKey = KeyCode.Space;
     public int climbJumps;
     private int climbJumpsLeft;
 
@@ -48,14 +47,44 @@ public class Climbing : MonoBehaviour
     private float exitWallTimer;
 
     [Header("Jump Grace Control")]
-    public float jumpIgnoreTime = 0.2f; // seconds to ignore climb after jumping
+    public float jumpIgnoreTime = 0.2f;
     public float jumpIgnoreTimer;
 
     [Header("Wall Filtering")]
     [Tooltip("Treat surfaces as WALL only if their normal is this many degrees or more away from Up")]
-    [Range(0f, 90f)] public float minWallAngleFromUp = 70f; // 70–80° is somewhat vertical
+    [Range(0f, 90f)] public float minWallAngleFromUp = 70f;
     [Tooltip("Optional upper bound to exclude ceilings")]
     [Range(90f, 180f)] public float maxWallAngleFromUp = 110f;
+
+    //New Input System
+    private PlayerControlsB controls;
+    private Vector2 moveInput;
+    private bool jumpPressed;
+    private bool moveForwardHeld;
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+
+        // Movement input
+        controls.Player.Move.performed += ctx =>
+        {
+            moveInput = ctx.ReadValue<Vector2>();
+            moveForwardHeld = moveInput.y > 0.1f; // forward stick / W
+        };
+        controls.Player.Move.canceled += ctx =>
+        {
+            moveInput = Vector2.zero;
+            moveForwardHeld = false;
+        };
+
+        // Jump input
+        controls.Player.Jump.performed += ctx => jumpPressed = true;
+        controls.Player.Jump.canceled += ctx => jumpPressed = false;
+    }
+
+    private void OnEnable() => controls.Player.Enable();
+    private void OnDisable() => controls.Player.Disable();
 
     private void Start()
     {
@@ -66,12 +95,19 @@ public class Climbing : MonoBehaviour
     {
         if (jumpIgnoreTimer > 0f)
             jumpIgnoreTimer -= Time.deltaTime;
+
         WallCheck();
-        if (!climbEnabled) { if (climbing) StopClimbing(); return; }  // added wall check
+
+        if (!climbEnabled)
+        {
+            if (climbing) StopClimbing();
+            return;
+        }
+
         StateMachine();
 
-        if (climbing && !exitingWall) ClimbingMovement();
-        
+        if (climbing && !exitingWall)
+            ClimbingMovement();
     }
 
     private void StateMachine()
@@ -80,61 +116,63 @@ public class Climbing : MonoBehaviour
         if (lg.holding)
         {
             if (climbing) StopClimbing();
-
-            // everything else gets handled by the SubStateMachine() in the ledge grabbing script
+            return;
         }
-        
+
         // State 1 - Climbing
-        if (!tpm.grounded && wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
+        if (!tpm.grounded && wallFront && moveForwardHeld && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
-            if (!climbing && climbTimer > 0) StartClimbing();
+            if (!climbing && climbTimer > 0)
+                StartClimbing();
 
-            // timer
-            if (climbTimer > 0) climbTimer -= Time.deltaTime;
-            if (climbTimer < 0) StopClimbing();
+            if (climbTimer > 0)
+                climbTimer -= Time.deltaTime;
+            else
+                StopClimbing();
         }
-
         // State 2 - Exiting
         else if (exitingWall)
         {
-            if (climbing) StopClimbing();
+            if (climbing)
+                StopClimbing();
 
-            if (exitWallTimer > 0) exitWallTimer -= Time.deltaTime;
-            if (exitWallTimer < 0) exitingWall = false;
+            if (exitWallTimer > 0)
+                exitWallTimer -= Time.deltaTime;
+            else
+                exitingWall = false;
         }
-
         // State 3 - None
         else
         {
-            if (climbing) StopClimbing();
+            if (climbing)
+                StopClimbing();
         }
 
-        if (wallFront && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJump();
+        // Handle Climb Jump (press jump while climbing)
+        if (wallFront && jumpPressed && climbJumpsLeft > 0)
+        {
+            jumpPressed = false; // consume input
+            ClimbJump();
+        }
     }
 
     private void WallCheck()
     {
-
-        //Prevent climb detection while jumping upward, part of new updated bug fixes, may implement a timer for this in addition to jump delay
+        // prevent climb detection while just jumping up
         if (jumpIgnoreTimer > 0f)
         {
             wallFront = false;
             return;
         }
 
-        if (rb.linearVelocity.y > 1f && wallFront)
-            Debug.Log("Climb ray ignored during jump");
-
         bool hit = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward,
                                       out frontWallHit, detectionLength, whatIsWall);
 
-        // Only treat as a wall if it’s vertical-ish
         wallFront = hit && IsVerticalWall(frontWallHit.normal);
-
         wallLookAngle = wallFront ? Vector3.Angle(orientation.forward, -frontWallHit.normal) : 0f;
 
         bool newWall = wallFront && (frontWallHit.transform != lastWall
-                    || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange);
+                || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange);
 
         if ((wallFront && newWall) || tpm.grounded)
         {
@@ -153,39 +191,25 @@ public class Climbing : MonoBehaviour
     {
         climbing = true;
         tpm.climbing = true;
-
         lastWall = frontWallHit.transform;
-        lastWallNormal = frontWallHit.normal; //normal in this is direction pointing away from wall
-
-        /// idea - camera fov change
-        /// //thinking of adding Tweening FOV camera change here, may be cool but need more research
-        /// 
+        lastWallNormal = frontWallHit.normal;
     }
+
     private void ClimbingMovement()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, climbSpeed, rb.linearVelocity.z);
-
-        
-        /// //this is where I am putting a lot of thoughts for some reason, probably add a sound effect here for climbing and stopping climbing like a grab and release 
     }
-
-    
 
     private void StopClimbing()
     {
         climbing = false;
         tpm.climbing = false;
-
-        //maybe particles for when timer runs out, this is just for if we end up having a time limit for climbing otherwise this will be removed.
     }
-    
 
     private void ClimbJump()
     {
         if (tpm.grounded) return;
         if (lg.holding || lg.exitingLedge) return;
-
-        print("climbjump");
 
         exitingWall = true;
         exitWallTimer = exitWallTime;
@@ -198,4 +222,3 @@ public class Climbing : MonoBehaviour
         climbJumpsLeft--;
     }
 }
-

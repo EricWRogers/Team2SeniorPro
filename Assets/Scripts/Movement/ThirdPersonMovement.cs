@@ -43,6 +43,11 @@ public class ThirdPersonMovement : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsTheGround;
+    public LayerMask whatIsTheIce;
+    public LayerMask whatIsTheMud;
+    public LayerMask whatIsTheSand;
+    public LayerMask whatIsTheWater; 
+
     public bool grounded;
 
     [Header("Slope Handling")]
@@ -75,27 +80,9 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpBufferTime;
     private float lastJumpTime;
 
-    [Header("Ground Pound Settings")]
-    public bool enableGroundPound = true;
-    public float groundPoundForce;
-    public float slopeBoostMultiplier;
-    public float groundPoundCooldown;
-    public int maxGroundPounds = 3;
-
     [Header("Crouch Jump Tuning")]
     public float crouchJumpBoost = 1.15f;
     public float crouchImpulseBlockTime = 0.08f;
-
-    private bool groundPounding = false;
-    private bool canGroundPound = true;
-    private int currentGroundPounds;
-
-    [Header("Ground Pound UI")]
-    public TextMeshProUGUI groundPoundText;
-
-    [Header("Ground Pound SFX")]
-    public AudioSource groundPoundSFXSource;
-    public AudioClip groundPoundSFX;
 
     [Header("Sliding SFX")]
     public AudioSource slidingSFXSource;
@@ -103,6 +90,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     [Header("Debuffs")]
     [Range(0f, 1f)] public float movementSlowMultiplier = 1f;
+
+    [Header("Animator")]
+
+    public GameObject animatorB;
+    public Animation animatorA;
 
     [Header("References")]
     public Climbing climbingScript;
@@ -113,13 +105,14 @@ public class ThirdPersonMovement : MonoBehaviour
     Vector3 moveDirection;
     Rigidbody rb;
 
+    private Vector3 originalScale;
+
     // --- NEW INPUT SYSTEM ---
     private PlayerControlsB controls;
     private Vector2 moveInput;
     private bool jumpPressed;
     private bool crouchSlidePressed;
     private bool crouchSlideHeld;
-    private bool groundPoundPressed;
 
     public MovementState state;
     public enum MovementState
@@ -159,12 +152,9 @@ public class ThirdPersonMovement : MonoBehaviour
         controls.Player.Jump.canceled += ctx => jumpPressed = false;
 
         // Combined Crouch / Slide
+        
         controls.Player.CrouchSlide.performed += ctx => { crouchSlidePressed = true; crouchSlideHeld = true; };
         controls.Player.CrouchSlide.canceled += ctx => { crouchSlideHeld = false; };
-
-        // Ground Pound (separate input)
-        controls.Player.GroundPound.performed += ctx => groundPoundPressed = true;
-        controls.Player.GroundPound.canceled += ctx => groundPoundPressed = false;
     }
 
     private void OnEnable() => controls.Player.Enable();
@@ -172,15 +162,19 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Start()
     {
+        originalScale = transform.localScale;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
         startYScale = transform.localScale.y;
-        currentGroundPounds = maxGroundPounds;
+        ResetMovementState(); //fixes theorettically scenes not resetting and bugging on reload for new input
     }
 
     private void Update()
     {
+        //animations update velocity?
+        
+
         // Ground check system
         Vector3 rayOrigin = transform.position + Vector3.up * groundCheckOffset;
         Vector3 rayDir = -transform.up;
@@ -199,6 +193,35 @@ public class ThirdPersonMovement : MonoBehaviour
             grounded = (Time.time - lastGroundedTime) < groundedGraceTime;
         }
 
+        //-----ICE HIT LAYER CHECK----- tests
+        bool iceHit = Physics.Raycast(rayOrigin, rayDir, out RaycastHit iHit, rayLen, whatIsTheIce);
+        if (iceHit)
+        {
+            float upDot = Vector3.Dot(gHit.normal, Vector3.up);
+            grounded = upDot >= minGroundUpDot;
+            if (grounded) lastGroundedTime = Time.time;
+            Debug.Log("YOu ON Thing Ice");
+        }
+        else
+        {
+            grounded = (Time.time - lastGroundedTime) < groundedGraceTime;
+        }
+
+
+        ///------MUD HIT------
+        bool mudHit = Physics.Raycast(rayOrigin, rayDir, out RaycastHit mHit, rayLen, whatIsTheMud);
+        if (iceHit)
+        {
+
+        }
+        else
+        {
+            
+        }
+
+
+
+
         MyInput();
         SpeedControl();
         StateHandler();
@@ -215,7 +238,6 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         rb.linearDamping = grounded ? groundDrag : 0;
-        HandleGroundPoundLanding();
     }
 
     private void FixedUpdate() => MovePlayer();
@@ -231,21 +253,6 @@ public class ThirdPersonMovement : MonoBehaviour
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
-        }
-
-        // --- Ground Pound (own button, now with scrunch effect) ---
-        if (enableGroundPound && groundPoundPressed && !grounded && canGroundPound && currentGroundPounds > 0 && !groundPounding)
-        {
-            groundPoundPressed = false;
-            groundPounding = true;
-            canGroundPound = false;
-            currentGroundPounds--;
-
-            // stop vertical movement for precision
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-            // start the "scrunch down" animation effect before the slam
-            StartCoroutine(GroundPoundScrunchThenSlam());
         }
 
         // --- Combined Crouch / Slide ---
@@ -292,73 +299,6 @@ public class ThirdPersonMovement : MonoBehaviour
                 transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
         }
     }
-    
-    private IEnumerator GroundPoundScrunchThenSlam()
-    {
-        // Visual wind-up / scrunch effect carried over to keep same feel
-        Vector3 originalScale = transform.localScale;
-        Vector3 scrunchedScale = new Vector3(originalScale.x, originalScale.y * 0.6f, originalScale.z);
-
-        float scrunchTime = 1.0f;
-        float t = 0f;
-
-        while (t < 1f)
-        {
-            t += Time.deltaTime / scrunchTime;
-            transform.localScale = Vector3.Lerp(originalScale, scrunchedScale, t);
-            yield return null;
-        }
-
-        // Apply downward impulse (slam)
-        rb.AddForce(Vector3.down * groundPoundForce, ForceMode.Impulse);
-
-        // optional: small delay before allowing scale to reset midair may remove
-        yield return new WaitForSeconds(0.15f);
-
-        // smooth restore while falling
-        t = 0f;
-        while (t < 1f && !grounded)
-        {
-            t += Time.deltaTime / 0.2f;
-            transform.localScale = Vector3.Lerp(scrunchedScale, originalScale, t);
-            yield return null;
-        }
-
-        // full reset safeguard
-        transform.localScale = originalScale;
-    }
-
-
-    private void HandleGroundPoundLanding()
-    {
-        if (groundPounding && grounded)
-        {
-            groundPounding = false;
-
-            if (OnSlope())
-            {
-                Vector3 slopeDir = GetSlopeMoveDirection(Vector3.down);
-                Vector3 slideBoost = slopeDir * groundPoundForce * slopeBoostMultiplier;
-                rb.AddForce(slideBoost, ForceMode.Impulse);
-
-                Sliding slide = GetComponent<Sliding>();
-                if (slide != null && !sliding)
-                    slide.StartSlideExternally();
-            }
-
-            if (groundPoundSFXSource != null && groundPoundSFX != null)
-                groundPoundSFXSource.PlayOneShot(groundPoundSFX);
-
-            Invoke(nameof(ResetGroundPound), groundPoundCooldown);
-        }
-    }
-
-    private void ResetGroundPound()
-    {
-        canGroundPound = true;
-        if (currentGroundPounds < maxGroundPounds)
-            currentGroundPounds++;
-    }
 
     bool keepMomentum;
     private void StateHandler()
@@ -375,11 +315,6 @@ public class ThirdPersonMovement : MonoBehaviour
             desiredMovementSpeed = slideSpeed;
             keepMomentum = true;
         }
-        /*else if (grounded && sprintHeld)
-        {
-            state = MovementState.sprinting;
-            desiredMovementSpeed = sprintSpeed;
-        }*/
         else if (grounded)
         {
             state = MovementState.walking;
@@ -427,19 +362,16 @@ public class ThirdPersonMovement : MonoBehaviour
             }
 
             float downhillFactor = Vector3.Dot(slopeDir, Vector3.down);
-            if (!groundPounding)
+            if (downhillFactor > 0f)
             {
-                if (downhillFactor > 0f)
-                {
-                    rb.AddForce(Vector3.down * downhillStickForce, ForceMode.Force);
-                    if (!wallrunning) rb.useGravity = true;
-                }
-                else
-                {
-                    if (rb.linearVelocity.y > 0f)
-                        rb.AddForce(Vector3.down * uphillStickForce, ForceMode.Force);
-                    if (!wallrunning) rb.useGravity = false;
-                }
+                rb.AddForce(Vector3.down * downhillStickForce, ForceMode.Force);
+                if (!wallrunning) rb.useGravity = true;
+            }
+            else
+            {
+                if (rb.linearVelocity.y > 0f)
+                    rb.AddForce(Vector3.down * uphillStickForce, ForceMode.Force);
+                if (!wallrunning) rb.useGravity = false;
             }
         }
         else if (grounded)
@@ -566,8 +498,19 @@ public class ThirdPersonMovement : MonoBehaviour
                 slidingSFXSource.Stop();
         }
     }
+
+    public void ResetMovementState()
+    {
+        sliding = false;
+        crouching = false;
+        restricted = false;
+        freeze = false;
+        unlimited = false;
+        readyToJump = true;
+        lastJumpTime = 0f;
+        airTimeCounter = 0f;
+        thirdPersonMovementSpeed = 0f;
+        rb.linearVelocity = Vector3.zero;
+        transform.localScale = originalScale;
+    }
 }
-
-
-//For slide and control, implement both of these inputs together now.  I need crouch to activate only if the player is moving less than half of the max walk speed, otherwise if the player is moving with wasd or the left stick on controller (just moving in general) more than half of the max speed, the button goes into the statemachine for sliding instead of crouching, this should seamlessly combine crouching and sliding into one button.  Then, we shall also remove ground pounding from crouching and make it its own button.  For keyboard it will be TAB and for controller it will be bumper (for slide, crouch the button on controller is Right bumper). 
-//Finish adding controls for slide and crouch, ground pound, and other things in the new input.   
