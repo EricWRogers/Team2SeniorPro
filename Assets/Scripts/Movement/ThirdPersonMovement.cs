@@ -103,7 +103,7 @@ public class ThirdPersonMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
-    Rigidbody rb;
+    public Rigidbody rb;
 
     private Vector3 originalScale;
 

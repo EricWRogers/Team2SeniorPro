@@ -44,7 +44,7 @@ public class ThirdPersonCam : MonoBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         targetDistance = currentDistance = Mathf.Clamp(defaultDistance, minDistance, maxDistance);
