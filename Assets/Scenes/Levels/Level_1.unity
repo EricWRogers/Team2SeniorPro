@@ -11045,6 +11045,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WinScreen: {fileID: 631269289}
   timer: {fileID: 631269286}
+  SFXSource: {fileID: 1151268863}
+  victoryClip: {fileID: 8300000, guid: 70e1b4900cb177c4a9aefce7beab142d, type: 3}
   timerText: {fileID: 631269288}
   statsText: {fileID: 1037200042}
   scriptsToToggle:
@@ -24781,6 +24783,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3d50c1184cc6f409e0d8cf8fb044a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1151268863 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3478165600103428584, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1152268127
 GameObject:
   m_ObjectHideFlags: 0
@@ -41443,6 +41450,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 122986405392975446, guid: 23c936dd032f07647a07091930438504, type: 3}
+      propertyPath: conffetiSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 551ed100990a9a14b9932fdee1efe6f5, type: 3}
+    - target: {fileID: 122986405392975446, guid: 23c936dd032f07647a07091930438504, type: 3}
+      propertyPath: checkpointSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: fa8a117519520764d933c97691cbb181, type: 3}
     - target: {fileID: 122986405392975446, guid: 23c936dd032f07647a07091930438504, type: 3}
       propertyPath: jumpPadObject
       value: 

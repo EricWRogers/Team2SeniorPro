@@ -21,6 +21,7 @@ public class Checkpoint : MonoBehaviour
     [Header("Checkpoint SFX")]
     public AudioSource SFXSource;
     public AudioClip checkpointSFX;
+    public AudioClip conffetiSFX;
 
     static Checkpoint s_active; // for visuals
     public bool Activated = false;
@@ -65,6 +66,7 @@ public class Checkpoint : MonoBehaviour
         SetVisualActive(true);
 
         SFXSource.PlayOneShot(checkpointSFX);
+        SFXSource.PlayOneShot(conffetiSFX);
 
         jumpPadObject.SetActive(true);
         Activated = true;

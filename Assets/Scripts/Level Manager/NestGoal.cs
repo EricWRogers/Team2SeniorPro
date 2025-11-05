@@ -6,6 +6,8 @@ public class NestGoal : MonoBehaviour
 {
     public GameObject WinScreen;
     public Timer timer;
+    public AudioSource SFXSource;
+    public AudioClip victoryClip;
     //public CollectibleScript collectibles;
 
     [Header("Text Elements")]
@@ -40,6 +42,7 @@ public class NestGoal : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         Debug.Log("WIN! Acorn delivered to the nest.");
+        SFXSource.PlayOneShot(victoryClip);
         WinScreen.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -89,7 +92,7 @@ public class NestGoal : MonoBehaviour
         // Display total collectibles in statsText
         if (statsText != null)
         {
-            statsText.text = $"Collectibles - {GameManager.Instance.totalCollectibles}";
+            statsText.text = $"Collectibles - {GameManager.Instance.collectibleCount}";
         }
     }
 }
