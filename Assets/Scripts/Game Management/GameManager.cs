@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     public int totalCollectibles = 0;
     public int frameRate = 60;
 
-    public void newMap(string _newMap, bool _resetCollectibles = false) //when loading a new map, it will add the current collectible count to the total. if true, it wont. use for cases of retry or quitting the level
+    public void newMap(string _newMap, bool _resetCollectibles = false, bool _resetCheckpoint = true) //when loading a new map, it will add the current collectible count to the total. if true, it wont. use for cases of retry or quitting the level
     {
-        currentCheckpoint = 0;
+        currentCheckpoint = _resetCheckpoint ? currentCheckpoint = 0 : currentCheckpoint = 1; //reset checkpoint to 0 unless told not to
+
         if (_resetCollectibles)
         {
             totalCollectibles = totalCollectibles + collectibleCount;
