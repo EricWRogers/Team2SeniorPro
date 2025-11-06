@@ -6,6 +6,7 @@ public class InteractDisplay : MonoBehaviour
     public Collider meshCollider;
     public Canvas buttonDisplay;
     public bool IsPlayerInRange = false;
+    public CutsceneAsset cutsceneToPlay;
     void Awake()
     {
         if (meshCollider == null)
@@ -38,16 +39,17 @@ public class InteractDisplay : MonoBehaviour
             buttonDisplay.enabled = false;
             IsPlayerInRange = false;
         }
-        if(DialogManager.Instance.dialogCanvas.gameObject.activeSelf)
+        /*if(DialogManager.Instance.dialogCanvas.gameObject.activeSelf)
         {
             DialogManager.Instance.HideDialog();
-        }
+        }*/
     }
     void Update()
     {
-        if (IsPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (IsPlayerInRange && Input.GetKeyDown(KeyCode.E) && DialogManager.Instance.dialogCanvas.gameObject.activeSelf == false)
         {
-            DialogManager.Instance.ShowDialog("TutorialNPCDialog");
+            //DialogManager.Instance.ShowDialog("TutorialNPCDialog");
+            CutsceneManagement.Instance.PlayCutscene(cutsceneToPlay);
         }
     }
 }

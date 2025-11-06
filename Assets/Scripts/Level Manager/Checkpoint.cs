@@ -66,8 +66,10 @@ public class Checkpoint : MonoBehaviour
         SetVisualActive(true);
 
         ParticleManager.Instance.SpawnParticle("Confetti", transform.position + new Vector3(0f, -1.5f, 0f), Quaternion.Euler(-90, 0, 0));
-        SFXSource.PlayOneShot(checkpointSFX);
-        SFXSource.PlayOneShot(conffetiSFX);
+        SoundManager.Instance.PlaySFX("checkpointSFX", 0.3f);
+        SoundManager.Instance.PlaySFX("party-horn", 0.5f);
+        //SFXSource.PlayOneShot(checkpointSFX);
+        //SFXSource.PlayOneShot(conffetiSFX);
 
         jumpPadObject.SetActive(true);
         Activated = true;

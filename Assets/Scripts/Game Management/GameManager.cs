@@ -20,11 +20,8 @@ public class GameManager : MonoBehaviour
         collectibleCount = 0;
         SceneManager.LoadScene(_newMap);
     }
-    public string GetCurrentScene()
-    {
-        return SceneManager.GetActiveScene().name;
-    }
-    public void setCheckpoint(int _checkpointNumber, bool _force = false)
+
+    public void SetCheckpoint(int _checkpointNumber, bool _force = false)
     {
         if (!_force && _checkpointNumber > currentCheckpoint) //only set the checkpoint if its a higher number than the current one
         {
@@ -35,6 +32,10 @@ public class GameManager : MonoBehaviour
             currentCheckpoint = _checkpointNumber;
         }
     }
+        public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
     public void respawnAtCheckpoint(int _checkpointNumber = -1) //if nothing is input, it will use the variable currentCheckpoint by default, so dont worry about calling without a number
     {
         if (_checkpointNumber >= 0)
@@ -43,20 +44,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            setCheckpoint(_checkpointNumber);
+            SetCheckpoint(_checkpointNumber);
             SceneManager.LoadScene(GetCurrentScene());
         }
         
     }
-    public void getTime(int _elapsedTime)
+    public float GetTime()
     {
-
+        return 123.45f; //placeholder
     }
-    public void addCollectible()
-    {
-        collectibleCount++;
-    }
-
     public void Awake()
     {
         if (Instance == null)
