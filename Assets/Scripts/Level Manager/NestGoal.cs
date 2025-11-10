@@ -35,7 +35,7 @@ public class NestGoal : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.newMap(GameManager.Instance.currentScene, true); // reloads the current scene, resets collectibles so it doesnt add to total
+        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); // you beat the level, so dont reset collectibles gotten...
     }
 
     void OnTriggerEnter(Collider other)

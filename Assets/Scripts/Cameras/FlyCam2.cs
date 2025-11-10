@@ -18,7 +18,7 @@ public class FlyCam2 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        string currentScene = GameManager.Instance.currentScene;
+        string currentScene = GameManager.Instance.GetCurrentScene();
 
         if (currentScene == "Squirrel_HUB" && !hasPlayedFlyover_Level1)
         {

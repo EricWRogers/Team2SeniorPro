@@ -31,7 +31,7 @@ public class DialogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(0)) //TODO: GET INPUT SYSTEM
+        /*if (Input.GetMouseButtonUp(0)) //TODO: GET INPUT SYSTEM
         {
             if (dialogCanvas.gameObject.activeSelf)
             {
@@ -41,14 +41,23 @@ public class DialogManager : MonoBehaviour
             {
                 //Do nothing
             }
-        }
+        }*/
     }
-    public void ShowDialog(string dialog = "", string characterName = "", Sprite dialogPortrait = null)
+    public void ShowDialog(string dialog = "", Sprite dialogPortrait = null, string characterName = "")
     {
         if (dialog != "")
         {
-            string LocalizedText = LocalizationSettings.StringDatabase.GetLocalizedString(dialog);
-            dialogCanvasText.text = LocalizedText;
+            if (dialog.StartsWith("$"))
+            {
+                dialog = dialog.Substring(1); //remove $ sign for localization lookup
+                string LocalizedText = LocalizationSettings.StringDatabase.GetLocalizedString(dialog);
+                dialogCanvasText.text = LocalizedText;
+            }
+            else
+            {
+                dialogCanvasText.text = dialog;
+            }
+            
         }
         else
         {
@@ -69,7 +78,7 @@ public class DialogManager : MonoBehaviour
     public void HideDialog()
     {
         dialogCanvas.gameObject.SetActive(false);
-        dialogCanvasText.text = "[No dialog text provided]"; //unload text
+        //dialogCanvasText.text = "[No dialog text provided]"; //unload text
         //dialogCanvas.GetComponent<Sprite>().sprite = null;
     }
 }

@@ -57,7 +57,7 @@ public class LoseScreen : MonoBehaviour
     {
         PlaySound();
         Time.timeScale = 1f;
-        GameManager.Instance.newMap(GameManager.Instance.currentScene, false); //reloads the current scene, does not reset collectibles so it adds to total
+        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); //reloads the current scene, does not reset collectibles so it adds to total
     }
 
     public void Quit()

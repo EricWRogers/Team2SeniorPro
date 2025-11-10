@@ -38,7 +38,7 @@ public class FlyCam : MonoBehaviour
                 pathPoints[i] = pathParent.GetChild(i);
         }
 
-        string currentScene = GameManager.Instance.currentScene;
+        string currentScene = GameManager.Instance.GetCurrentScene();
 
         if (currentScene == "Squirrel_HUB" && !hasPlayedFlyover_Level1)
         {

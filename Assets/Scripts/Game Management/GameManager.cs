@@ -3,25 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
-    public string currentScene;
+    public static GameManager Instance { get; private set; }    
     public int currentCheckpoint = 0;
     public int collectibleCount = 0;
     public int totalCollectibles = 0;
     public int frameRate = 60;
 
-    public void newMap(string _newMap, bool _resetCollectibles = false) //when loading a new map, it will add the current collectible count to the total. if true, it wont. use for cases of retry or quitting the level
+    public void newMap(string _newMap, bool _resetCollectibles = false, bool _resetCheckpoint = true) //when loading a new map, it will add the current collectible count to the total. if true, it wont. use for cases of retry or quitting the level
     {
-        currentCheckpoint = 0;
+        currentCheckpoint = _resetCheckpoint ? currentCheckpoint = 0 : currentCheckpoint = 1; //reset checkpoint to 0 unless told not to
+
         if (_resetCollectibles)
         {
             totalCollectibles = totalCollectibles + collectibleCount;
         }
         collectibleCount = 0;
         SceneManager.LoadScene(_newMap);
-        currentScene = SceneManager.GetActiveScene().name;
     }
-    public void setCheckpoint(int _checkpointNumber, bool _force = false)
+
+    public void SetCheckpoint(int _checkpointNumber, bool _force = false)
     {
         if (!_force && _checkpointNumber > currentCheckpoint) //only set the checkpoint if its a higher number than the current one
         {
@@ -32,30 +32,26 @@ public class GameManager : MonoBehaviour
             currentCheckpoint = _checkpointNumber;
         }
     }
+        public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
     public void respawnAtCheckpoint(int _checkpointNumber = -1) //if nothing is input, it will use the variable currentCheckpoint by default, so dont worry about calling without a number
     {
         if (_checkpointNumber >= 0)
         {
-            SceneManager.LoadScene(currentScene);
+            SceneManager.LoadScene(GetCurrentScene());
         }
         else
         {
-            setCheckpoint(_checkpointNumber);
-            SceneManager.LoadScene(currentScene);
+            SetCheckpoint(_checkpointNumber);
+            SceneManager.LoadScene(GetCurrentScene());
         }
         
     }
-    public void getTime(int _elapsedTime)
+    public float GetTime()
     {
-
-    }
-    public void addCollectible()
-    {
-        collectibleCount++;
-    }
-    public string GetCurrentScene()
-    {
-        return SceneManager.GetActiveScene().name;
+        return 123.45f; //placeholder
     }
     public void Awake()
     {
@@ -75,10 +71,6 @@ public class GameManager : MonoBehaviour
         else
         {
             //Application.targetFrameRate = -1;
-        }
-        if (currentScene == "" || currentScene == null)
-        {
-            currentScene = SceneManager.GetActiveScene().name;
         }
         
     }
