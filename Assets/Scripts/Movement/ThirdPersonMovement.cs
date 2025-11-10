@@ -193,35 +193,97 @@ public class ThirdPersonMovement : MonoBehaviour
             grounded = (Time.time - lastGroundedTime) < groundedGraceTime;
         }
 
-        //-----ICE HIT LAYER CHECK----- tests
-        bool iceHit = Physics.Raycast(rayOrigin, rayDir, out RaycastHit iHit, rayLen, whatIsTheIce);
-        if (iceHit)
+        // ------------------- SURFACE DETECTION -------------------
+        bool isOnIce = false;
+        bool isOnMud = false;
+        grounded = hit || Physics.Raycast(rayOrigin, rayDir, rayLen, whatIsTheIce) || Physics.Raycast(rayOrigin, rayDir, rayLen, whatIsTheMud);
+
+        // Common ray for ground material detection
+        Vector3 matRayOrigin = transform.position + Vector3.up * groundCheckOffset;
+        Vector3 matRayDir = -transform.up;
+        float matRayLen = playerHeight * 0.5f + groundCheckDistance;
+
+        // Check ice layer
+        if (Physics.Raycast(matRayOrigin, matRayDir, out RaycastHit iceHit, matRayLen, whatIsTheIce))
         {
-            float upDot = Vector3.Dot(gHit.normal, Vector3.up);
-            grounded = upDot >= minGroundUpDot;
-            if (grounded) lastGroundedTime = Time.time;
-            Debug.Log("YOu ON Thing Ice");
+            isOnIce = true;
         }
+
+        // Check mud layer
+        if (Physics.Raycast(matRayOrigin, matRayDir, out RaycastHit mudHit, matRayLen, whatIsTheMud))
+        {
+            isOnMud = true;
+        }
+
+        // ------------------- ICE LOGIC -------------------
+        if (isOnIce)
+        {
+            // Disable normal ground drag (slippery)
+            rb.linearDamping = 0f;
+
+            // Check if grounded to allow jumping on ice
+            if (grounded && readyToJump && jumpPressed)
+            {
+                // Perform normal jump behavior
+                readyToJump = false;
+                Jump();
+                Invoke(nameof(ResetJump), jumpCooldown);
+                Debug.Log("Grounded + Jump pressed -> Jump triggered on ice");
+            }
+
+            // Maintain sliding motion
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+            // Kickstart motion if nearly still
+            if (flatVel.magnitude < walkSpeed * 1.1f && grounded)
+            {
+                Vector3 slideDir = (orientation.forward * verticalInput + orientation.right * horizontalInput).normalized;
+                if (slideDir.sqrMagnitude > 0.1f)
+                    rb.AddForce(slideDir * (walkSpeed * 3f), ForceMode.Impulse);
+            }
+
+            // Keep sliding naturally, but only if moving
+            if (flatVel.sqrMagnitude > 0.1f)
+            {
+                // Reduced force if in midair (so it doesn't fight jumping)
+                float iceForce = grounded ? 1.5f : 0.25f;
+                rb.AddForce(flatVel.normalized * iceForce, ForceMode.Force);
+            }
+        }
+
+        // ------------------- MUD LOGIC -------------------
+        else if (isOnMud)
+        {
+            // Increase damping but keep jump viable
+            rb.linearDamping = Mathf.Lerp(rb.linearDamping, groundDrag * 2f, Time.deltaTime * 5f);
+            movementSlowMultiplier = 0.5f; // halve walk speed
+
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+            // Only apply opposing drag if actually moving along the ground
+            if (grounded && flatVel.magnitude > 0.1f)
+            {
+                rb.AddForce(-flatVel.normalized * 4f, ForceMode.Force);
+            }
+
+            // --- Jump allowance on mud ---
+            if (grounded && readyToJump && jumpPressed)
+            {
+                readyToJump = false;
+                Jump();
+                Invoke(nameof(ResetJump), jumpCooldown);
+                Debug.Log("Grounded + Jump pressed -> Jump triggered on mud");
+            }
+        }
+
+
+        // ------------------- NORMAL GROUND (no ice/mud) -------------------
         else
         {
-            grounded = (Time.time - lastGroundedTime) < groundedGraceTime;
+            rb.linearDamping = grounded ? groundDrag : 0;
+            movementSlowMultiplier = 1f;
         }
-
-
-        ///------MUD HIT------
-        bool mudHit = Physics.Raycast(rayOrigin, rayDir, out RaycastHit mHit, rayLen, whatIsTheMud);
-        if (iceHit)
-        {
-
-        }
-        else
-        {
-            
-        }
-
-
-
-
+        
         MyInput();
         SpeedControl();
         StateHandler();
@@ -241,6 +303,18 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     private void FixedUpdate() => MovePlayer();
+
+    /*private void LateUpdate()
+    {
+        if (sliding)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+        }
+        else if (!crouching && grounded)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+        }
+    }*/
 
     private void MyInput()
     {
@@ -279,7 +353,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 {
                     sliding = true;
 
-                    // Optional: downward impulse if in air to emphasize aerial dive
+                    // Optional: downward impulse if in air to emphasize aerial dive may remove later or nots
                     if (!grounded)
                         rb.AddForce(Vector3.down * 3f, ForceMode.Impulse);
 
@@ -298,6 +372,12 @@ public class ThirdPersonMovement : MonoBehaviour
             if (grounded)
                 transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
         }
+
+        if (crouchSlideHeld)
+        {
+            Debug.Log($"SlideHeld={crouchSlideHeld}, Sliding={sliding}, Scale={transform.localScale.y}");
+        }
+
     }
 
     bool keepMomentum;
@@ -499,7 +579,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
-    public void ResetMovementState()
+    public void ResetMovementState()//these reset state functions are buggin
     {
         sliding = false;
         crouching = false;
@@ -507,10 +587,13 @@ public class ThirdPersonMovement : MonoBehaviour
         freeze = false;
         unlimited = false;
         readyToJump = true;
+        jumpPressed = false;
         lastJumpTime = 0f;
         airTimeCounter = 0f;
         thirdPersonMovementSpeed = 0f;
         rb.linearVelocity = Vector3.zero;
         transform.localScale = originalScale;
+
+        
     }
 }

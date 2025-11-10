@@ -5536,10 +5536,17 @@ PrefabInstance:
       propertyPath: useAutoBob
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8526296667799095665, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 353567624}
   m_SourcePrefab: {fileID: 100100000, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
 --- !u!4 &353567616 stripped
 Transform:
@@ -5551,6 +5558,41 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2290869919972892445, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
   m_PrefabInstance: {fileID: 353567615}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &353567619 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4881826075438588398, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+  m_PrefabInstance: {fileID: 353567615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &353567620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2956949174241930117, guid: 6b2b20354d3fc384f9d7a35c38f51318, type: 3}
+  m_PrefabInstance: {fileID: 353567615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353567617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61686a2577df97f429524ff0ac72b2e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &353567624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353567617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5225835437b6e2b46a5817fe8aaeffa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 353567619}
+  tpm: {fileID: 353567620}
+  groundPoundForce: 40
+  slopeBoostMultiplier: 2
+  flattenScaleMultiplier: 0.6
+  rayLengthMultiplier: 1.2
+  cooldown: 1
 --- !u!1001 &365492265
 PrefabInstance:
   m_ObjectHideFlags: 0

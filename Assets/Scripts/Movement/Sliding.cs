@@ -279,7 +279,5 @@ public class Sliding : MonoBehaviour
             startYScale,
             transform.localScale.z
         );
-    }
-
-    
+    }   
 }

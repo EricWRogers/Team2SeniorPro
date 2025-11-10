@@ -65,19 +65,36 @@ public class GroundPound : MonoBehaviour
             StartGroundPound();
         }
 
-        if (!groundPoundHeld && groundPounding)
+        if (!groundPoundHeld && groundPounding && !tpm.grounded)
         {
             CancelGroundPound();
         }
+
     }
 
     private void FixedUpdate()
     {
         if (groundPounding && tpm.grounded)
         {
+            // Give one physics frame for the slope ray to stabilize
+            StartCoroutine(DelayedGroundPoundLanding());
+        }
+    }
+
+    private IEnumerator DelayedGroundPoundLanding()
+    {
+        if (!groundPounding) yield break;
+
+        // Wait one physics frame for slope normal to register properly
+        yield return new WaitForFixedUpdate();
+
+        // Double check that we’re still grounded
+        if (groundPounding && tpm.grounded)
+        {
             HandleGroundPoundLanding();
         }
     }
+
 
     private void OnGroundPoundPressed()
     {
@@ -128,18 +145,50 @@ public class GroundPound : MonoBehaviour
         groundPounding = false;
         transform.localScale = originalScale;
 
-        // slope boost logic unchanged...
+        // --- SLOPE BOOST ---
         if (TryFindSlopeBelow(out Vector3 slopeDir, out float slopeAngle))
         {
+            Debug.Log($"Ground Pound hit slope ({slopeAngle:F1}°) — applying boosted launch!");
+
             Vector3 boost = slopeDir * groundPoundForce * slopeBoostMultiplier;
+
+            // Temporarily uncap momentum and allow absurd speed
+            Sliding slide = GetComponent<Sliding>();
+            if (slide != null)
+            {
+                StartCoroutine(TemporarilyUncapMomentum(slide, 0.75f)); // duration in seconds
+            }
+
+            // Apply big impulse
             rb.AddForce(boost, ForceMode.Impulse);
-            if (!tpm.sliding) GetComponent<Sliding>()?.StartSlideExternally();
+
+            // Start a slide to convert that energy
+            if (!tpm.sliding)
+                slide?.StartSlideExternally();
         }
 
-        // start cooldown as a coroutine to avoid losing reference
-        if (cooldownRoutine != null) StopCoroutine(cooldownRoutine);
+        // --- START COOLDOWN ---
+        if (cooldownRoutine != null)
+            StopCoroutine(cooldownRoutine);
         cooldownRoutine = StartCoroutine(GroundPoundCooldownRoutine());
     }
+
+    private IEnumerator TemporarilyUncapMomentum(Sliding slide, float duration)
+    {
+        if (slide == null) yield break;
+
+        float originalCap = slide.maxMomentumSpeed;
+
+        // Increase cap drastically for short burst
+        slide.maxMomentumSpeed = originalCap * 5f;  // or any large multiplier 
+        Debug.Log($"[GroundPound] Momentum temporarily uncapped (max {slide.maxMomentumSpeed})");
+
+        yield return new WaitForSeconds(duration);
+
+        slide.maxMomentumSpeed = originalCap;
+        Debug.Log($"[GroundPound] Momentum cap restored ({originalCap})");
+    }
+
 
     private IEnumerator GroundPoundCooldownRoutine()
     {
@@ -157,14 +206,16 @@ public class GroundPound : MonoBehaviour
         slopeDirection = Vector3.zero;
         slopeAngle = 0f;
 
-        Vector3 origin = transform.position + Vector3.up * 0.1f;
-        float rayLen = tpm.playerHeight * 0.5f * rayLengthMultiplier;
+        Vector3 origin = transform.position + Vector3.up * 0.2f;
+        Vector3 castDir = -rb.linearVelocity.normalized; // cast along fall direction, not world down
+        float rayLen = tpm.playerHeight * 0.75f * rayLengthMultiplier;
 
-        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, rayLen, tpm.whatIsTheGround))
+        if (Physics.Raycast(origin, castDir, out RaycastHit hit, rayLen, tpm.whatIsTheGround))
         {
             slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-            if (slopeAngle > 5f) // Steeper than flat
+            if (slopeAngle > 5f)
             {
+                // Use surface tangent relative to gravity, gives cleaner direction
                 slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
                 return true;
             }
@@ -172,4 +223,5 @@ public class GroundPound : MonoBehaviour
 
         return false;
     }
+
 }

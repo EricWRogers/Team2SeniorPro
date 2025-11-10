@@ -190,6 +190,15 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""606eca3a-142e-4076-95d6-508abf0b36eb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -608,6 +617,28 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c96bb0f-5488-4436-b7db-f734e11d3bd1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""965c84a1-c4ae-4b6c-8de8-4461d93f1518"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1234,6 +1265,7 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
         m_Player_CrouchSlide = m_Player.FindAction("CrouchSlide", throwIfNotFound: true);
         m_Player_CameraTurn = m_Player.FindAction("CameraTurn", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
+        m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1342,6 +1374,7 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CrouchSlide;
     private readonly InputAction m_Player_CameraTurn;
     private readonly InputAction m_Player_GroundPound;
+    private readonly InputAction m_Player_Restart;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1397,6 +1430,10 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/GroundPound".
         /// </summary>
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Restart".
+        /// </summary>
+        public InputAction @Restart => m_Wrapper.m_Player_Restart;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1456,6 +1493,9 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
             @GroundPound.started += instance.OnGroundPound;
             @GroundPound.performed += instance.OnGroundPound;
             @GroundPound.canceled += instance.OnGroundPound;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         /// <summary>
@@ -1500,6 +1540,9 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
             @GroundPound.started -= instance.OnGroundPound;
             @GroundPound.performed -= instance.OnGroundPound;
             @GroundPound.canceled -= instance.OnGroundPound;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         /// <summary>
@@ -1973,6 +2016,13 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGroundPound(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Restart" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRestart(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
