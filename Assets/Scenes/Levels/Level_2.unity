@@ -3341,11 +3341,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 5948866394842808777, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
   m_PrefabInstance: {fileID: 753349502}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &753349504 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1731598353821464317, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
-  m_PrefabInstance: {fileID: 753349502}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &762412829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3442,7 +3437,7 @@ PrefabInstance:
     - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 753349504}
+      objectReference: {fileID: 0}
     - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: gameOverUI
       value: 
