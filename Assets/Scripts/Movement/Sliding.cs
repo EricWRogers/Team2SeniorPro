@@ -218,7 +218,7 @@ public class Sliding : MonoBehaviour
             rb.AddForce(inputDir * slideForce, ForceMode.Force);
         }
 
-        // Always-on decay
+        // Always on decay
         bool hasInput = Mathf.Abs(horizontalInput) > 0.05f || Mathf.Abs(verticalInput) > 0.05f;
         float decay = baseDecayRate + (hasInput ? 0f : noInputExtraDecay);
         currentMomentum = Mathf.Max(0f, currentMomentum - decay * Time.deltaTime);
