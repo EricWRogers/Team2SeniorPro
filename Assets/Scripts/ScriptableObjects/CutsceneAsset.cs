@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-//using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CutsceneAsset", menuName = "Scriptable Objects/CutsceneAsset")]
