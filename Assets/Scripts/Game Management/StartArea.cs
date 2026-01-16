@@ -3,6 +3,7 @@ using UnityEngine;
 public class StartArea : MonoBehaviour
 {
     public Timer timer;
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,6 +18,7 @@ public class StartArea : MonoBehaviour
         {
             // Start the timer when the player exits the start area
             timer.timeRunning = true;
+            animator.SetTrigger("TimerStart");
             Debug.Log("Player exited start area. Timer started.");
         }
     }
