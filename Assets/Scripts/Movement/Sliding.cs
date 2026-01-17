@@ -118,7 +118,7 @@ public class Sliding : MonoBehaviour
                 StopSlide();
         }
 
-        // --- Momentum Decay ---
+        // Momentum Decay
         if (!tpm.sliding)
         {
             hasInput = Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f;
