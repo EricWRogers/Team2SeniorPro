@@ -5,6 +5,7 @@ public class Key : MonoBehaviour
 {
     public GameObject bars;
     public TMP_Text keyText;
+    public Animator textAnimatior;
 
     float spinSpeed = 20.0f;
     Transform meshTransform;
@@ -26,6 +27,7 @@ public class Key : MonoBehaviour
             bars.SetActive(false);
             keyText.gameObject.SetActive(true);
             keyText.text = "You got the key!";
+            textAnimatior.SetTrigger("KeyCollect");
             Destroy(gameObject);
         }
     }

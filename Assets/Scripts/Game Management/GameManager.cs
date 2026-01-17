@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             currentCheckpoint = _checkpointNumber;
         }
     }
-        public string GetCurrentScene()
+    public string GetCurrentScene()
     {
         return SceneManager.GetActiveScene().name;
     }

@@ -92,7 +92,7 @@ public class NestGoal : MonoBehaviour
         // Display total collectibles in statsText
         if (statsText != null)
         {
-            statsText.text = $"Collectibles - {GameManager.Instance.collectibleCount}";
+            statsText.text = $"Berries - {GameManager.Instance.collectibleCount}";
         }
     }
 }
