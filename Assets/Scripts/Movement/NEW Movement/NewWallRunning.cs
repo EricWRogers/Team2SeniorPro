@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WNewWallRunning : MonoBehaviour
+public class NewWallRunning : MonoBehaviour
 {
     [Header("Wallrunning")]
     public LayerMask whatIsWall;
