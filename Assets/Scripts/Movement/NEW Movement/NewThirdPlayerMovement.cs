@@ -110,7 +110,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
-        TextStuff();
+        //TextStuff();
 
         // handle drag
         if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
@@ -375,7 +375,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
-    private void TextStuff()
+    /*private void TextStuff()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
@@ -386,7 +386,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
             text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
 
         text_mode.SetText(state.ToString());
-    }
+    }*/
 
     public static float Round(float value, int digits)
     {
