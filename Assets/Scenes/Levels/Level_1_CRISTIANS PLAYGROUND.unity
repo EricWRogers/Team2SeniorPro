@@ -12255,6 +12255,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4221826294026196274, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 946535193}
     - target: {fileID: 4300940084718156360, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -21022,10 +21026,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   wallRunForce: 200
   wallJumpUpForce: 7
   wallJumpSideForce: 14
@@ -21090,18 +21094,18 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128
-  climbSpeed: 0
-  maxClimbTime: 0
-  climbJumpUpForce: 0
-  climbJumpBackForce: 0
+  climbSpeed: 10
+  maxClimbTime: 0.75
+  climbJumpUpForce: 14
+  climbJumpBackForce: 12
   jumpKey: 32
-  climbJumps: 0
-  detectionLength: 0
-  sphereCastRadius: 0
-  maxWallLookAngle: 0
-  minWallNormalAngleChange: 0
+  climbJumps: 1
+  detectionLength: 0.7
+  sphereCastRadius: 0.25
+  maxWallLookAngle: 30
+  minWallNormalAngleChange: 5
   exitingWall: 0
-  exitWallTime: 0
+  exitWallTime: 0.2
 --- !u!114 &946535199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21144,7 +21148,7 @@ MonoBehaviour:
   sliding: 0
   crouching: 0
   wallrunning: 0
-  climbing: 0
+  climbing: 1
   vaulting: 0
   freeze: 0
   unlimited: 0

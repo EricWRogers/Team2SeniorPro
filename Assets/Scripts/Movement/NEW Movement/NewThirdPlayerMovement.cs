@@ -293,7 +293,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         if (climbingScript.exitingWall) return;
-        if (climbingScriptDone.exitingWall) return;
+        //if (climbingScriptDone.exitingWall) return; //this caused a small error but uh, not needed
         if (restricted) return;
 
         // calculate movement direction
