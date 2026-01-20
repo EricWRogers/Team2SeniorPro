@@ -51,7 +51,7 @@ public class RestartOnKey : MonoBehaviour
             return;
         }
 
-        // hold-to-restart
+        // hold to restart
         if (restartHeld)
         {
             holdTimer += Time.unscaledDeltaTime;
@@ -75,3 +75,5 @@ public class RestartOnKey : MonoBehaviour
         tpm.ResetMovementState();
     }
 }
+
+

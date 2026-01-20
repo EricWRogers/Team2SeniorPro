@@ -27,7 +27,7 @@ public class Key : MonoBehaviour
             bars.SetActive(false);
             keyText.gameObject.SetActive(true);
             keyText.text = "You got the key!";
-            textAnimatior.Play("KeyText");
+            textAnimatior.SetTrigger("KeyCollect");
             Destroy(gameObject);
         }
     }
