@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &2071450 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2761332846447786173, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
-  m_PrefabInstance: {fileID: 1307937127576146441}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &141052975 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8959743272731145457, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
@@ -1378,7 +1373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe253c71f2dc8bb4ca001adbc4788c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2071450}
+  player: {fileID: 0}
   playerCanvas: {fileID: 1277211216}
   playerCam: {fileID: 1307937127576146442}
   splineCamOBJ: {fileID: 2056570507}
@@ -1525,21 +1520,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 294693425023540609, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 872528424127752158, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
       propertyPath: m_Name
       value: Level1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1460101240647278224, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2793352274981191314, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
-      propertyPath: m_Color.a
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4602323190486092198, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1580,14 +1563,6 @@ PrefabInstance:
     - target: {fileID: 4602323190486092198, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312335686036342869, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7312335686036342869, guid: 1c1f65e1fb104b1409caa746f38bef2e, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 16777215
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1661,7 +1636,7 @@ PrefabInstance:
     - target: {fileID: 3527235458254099797, guid: b0f366fdf4cab7e4b8fc24dc6638d086, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2071450}
+      objectReference: {fileID: 0}
     - target: {fileID: 3527235458254099797, guid: b0f366fdf4cab7e4b8fc24dc6638d086, type: 3}
       propertyPath: fadeImage
       value: 
