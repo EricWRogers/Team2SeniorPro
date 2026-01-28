@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using Dave.PhysicsExtension;
 
-public class NewThirdPlayerMovement : MonoBehaviour
+/// Stuff changed
+/// Added wallrunning and restricted state (Don't forget FixedUpdate part)
+/// made grounded public
+
+public class PlayerMovementAdvancedFinished : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
-    private float desiredMoveSpeed;
-    private float lastDesiredMoveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
     public float slideSpeed;
     public float wallrunSpeed;
-    public float climbSpeed;
-    public float vaultSpeed;
-    public float airMinSpeed;
+
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
 
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
@@ -47,11 +49,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
-
-    [Header("References")]
-    public NewClimbing climbingScript;
-
-    private ClimbingDone climbingScriptDone;  //could need this and dashing script to work refer to new dashing 
+    
 
     public Transform orientation;
 
@@ -65,35 +63,21 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public MovementState state;
     public enum MovementState
     {
-        freeze,
-        unlimited,
+        restricted,
         walking,
         sprinting,
         wallrunning,
-        climbing,
-        vaulting,
         crouching,
         sliding,
         air
     }
 
+    public bool restricted; // no wasd movement
     public bool sliding;
-    public bool crouching;
     public bool wallrunning;
-    public bool climbing;
-    public bool vaulting;
-
-    public bool freeze;
-    public bool unlimited;
-    
-    public bool restricted;
-
-    public TextMeshProUGUI text_speed;
-    public TextMeshProUGUI text_mode;
 
     private void Start()
     {
-        climbingScriptDone = GetComponent<ClimbingDone>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -110,10 +94,9 @@ public class NewThirdPlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
-        //TextStuff();
 
         // handle drag
-        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
+        if (grounded)
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 0;
@@ -121,7 +104,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if(state != MovementState.restricted)
+            MovePlayer();
     }
 
     private void MyInput()
@@ -130,7 +114,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -140,53 +124,25 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         // start crouch
-        if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
+        if (Input.GetKeyDown(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
-            crouching = true;
         }
 
         // stop crouch
         if (Input.GetKeyUp(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-
-            crouching = false;
         }
     }
 
-    bool keepMomentum;
     private void StateHandler()
     {
-        // Mode - Freeze
-        if (freeze)
+        // Mode - Restricted (no input)
+        if (restricted)
         {
-            state = MovementState.freeze;
-            rb.linearVelocity = Vector3.zero;
-            desiredMoveSpeed = 0f;
-        }
-
-        // Mode - Unlimited
-        else if (unlimited)
-        {
-            state = MovementState.unlimited;
-            desiredMoveSpeed = 999f;
-        }
-
-        // Mode - Vaulting
-        else if (vaulting)
-        {
-            state = MovementState.vaulting;
-            desiredMoveSpeed = vaultSpeed;
-        }
-
-        // Mode - Climbing
-        else if (climbing)
-        {
-            state = MovementState.climbing;
-            desiredMoveSpeed = climbSpeed;
+            state = MovementState.restricted;
         }
 
         // Mode - Wallrunning
@@ -201,26 +157,22 @@ public class NewThirdPlayerMovement : MonoBehaviour
         {
             state = MovementState.sliding;
 
-            // increase speed by one every second
             if (OnSlope() && rb.linearVelocity.y < 0.1f)
-            {
                 desiredMoveSpeed = slideSpeed;
-                keepMomentum = true;
-            }
 
             else
                 desiredMoveSpeed = sprintSpeed;
         }
 
         // Mode - Crouching
-        else if (crouching)
+        else if (Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
         }
 
         // Mode - Sprinting
-        else if (grounded && Input.GetKey(sprintKey))
+        else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
@@ -237,30 +189,20 @@ public class NewThirdPlayerMovement : MonoBehaviour
         else
         {
             state = MovementState.air;
-
-            if (moveSpeed < airMinSpeed)
-                desiredMoveSpeed = airMinSpeed;
         }
 
-        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
-
-        if (desiredMoveSpeedHasChanged)
+        // check if desiredMoveSpeed has changed drastically
+        if(Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
         {
-            if (keepMomentum)
-            {
-                StopAllCoroutines();
-                StartCoroutine(SmoothlyLerpMoveSpeed());
-            }
-            else
-            {
-                moveSpeed = desiredMoveSpeed;
-            }
+            StopAllCoroutines();
+            StartCoroutine(SmoothlyLerpMoveSpeed());
+        }
+        else
+        {
+            moveSpeed = desiredMoveSpeed;
         }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
-
-        // deactivate keepMomentum
-        if (Mathf.Abs(desiredMoveSpeed - moveSpeed) < 0.1f) keepMomentum = false;
     }
 
     private IEnumerator SmoothlyLerpMoveSpeed()
@@ -292,10 +234,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (climbingScript.exitingWall) return;
-        //if (climbingScriptDone.exitingWall) return; //this caused a small error but uh, not needed
-        if (restricted) return;
-
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -309,15 +247,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         // on ground
-        else if (grounded)
+        else if(grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
-        else if (!grounded)
+        else if(!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
         // turn gravity off while on slope
-        if(!wallrunning) rb.useGravity = !OnSlope();
+        rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
@@ -337,12 +275,14 @@ public class NewThirdPlayerMovement : MonoBehaviour
             // limit velocity if needed
             if (flatVel.magnitude > moveSpeed)
             {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;  //calculates what max velocity would be
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z); //and reapply it here
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
         }
     }
 
+    public Transform markerSphere;
+    public float maxJumpHeight;
     private void Jump()
     {
         exitingSlope = true;
@@ -350,8 +290,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
         // reset y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        // rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        // precision please
+        rb.linearVelocity = PhysicsExtension.CalculateJumpVelocity(transform.position, markerSphere.position, maxJumpHeight);
     }
+
     private void ResetJump()
     {
         readyToJump = true;
@@ -361,7 +304,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     public bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -373,24 +316,5 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
-    }
-
-    /*private void TextStuff()
-    {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-        if (OnSlope())
-            text_speed.SetText("Speed: " + Round(rb.linearVelocity.magnitude, 1) + " / " + Round(moveSpeed, 1));
-
-        else
-            text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
-
-        text_mode.SetText(state.ToString());
-    }*/
-
-    public static float Round(float value, int digits)
-    {
-        float mult = Mathf.Pow(10.0f, (float)digits);
-        return Mathf.Round(value * mult) / mult;
     }
 }
