@@ -72,7 +72,7 @@ public class RestartOnKey : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), true);
-        tpm.ResetMovementState();
+        //tpm.ResetMovementState();
     }
 }
 

@@ -583,7 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -29107,9 +29107,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
     - target: {fileID: 3885251443182214580, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885251443182214580, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -1948313918874195100, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+    - target: {fileID: 3885251443182214580, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 16777215
+      objectReference: {fileID: 0}
     - target: {fileID: 3885251443182214580, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 4

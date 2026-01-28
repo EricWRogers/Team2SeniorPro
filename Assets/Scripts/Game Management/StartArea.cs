@@ -4,6 +4,7 @@ public class StartArea : MonoBehaviour
 {
     public Timer timer;
     public Animator animator;
+    public Animator animator2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -11,7 +12,14 @@ public class StartArea : MonoBehaviour
         timer.timeRunning = false; // Ensure the timer is not running at the start
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            animator2.SetTrigger("LevelDisplay");
+            Debug.Log("Player entered start area.");
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (!timer.timeRunning && other.CompareTag("Player"))
