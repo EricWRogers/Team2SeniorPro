@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
+using TMPro;
 
 public class FlyCam2 : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FlyCam2 : MonoBehaviour
     public GameObject splineCamOBJ; // Spline camera object
     public SplineAnimate SplineCam; // Spline camera with spline animation component
     public MonoBehaviour pauseMenu; // Reference to pauseMenu script
+    public TMP_Text infoText; // Reference to info text UI element
 
     public bool inSequence = false;
     private static bool hasPlayedFlyover_Level1 = false;
@@ -43,7 +45,7 @@ public class FlyCam2 : MonoBehaviour
                 script.enabled = false;
 
         }
-        
+
         // Disable Player Canvas
         if (playerCanvas != null)
             playerCanvas.SetActive(false);
@@ -56,6 +58,30 @@ public class FlyCam2 : MonoBehaviour
         // Switch cameras
         if (playerCam != null) playerCam.SetActive(false);
         if (splineCamOBJ != null) splineCamOBJ.SetActive(true);
+
+        // Message 1
+        infoText.gameObject.SetActive(true);
+        infoText.text = "Welcome to the Forest!";
+        infoText.color = new Color(1, 1, 1, 0); // start invisible
+
+        yield return StartCoroutine(FadeText(infoText, 0f, 1f, 1f)); // fade in
+        yield return new WaitForSeconds(2f);                            // hold
+        yield return StartCoroutine(FadeText(infoText, 1f, 0f, 1f)); // fade out
+
+        // Message 2
+        infoText.text = "Collect the key to unlock the gate ahead.";
+        yield return StartCoroutine(FadeText(infoText, 0f, 1f, 1f));
+        yield return new WaitForSeconds(2f);
+        yield return StartCoroutine(FadeText(infoText, 1f, 0f, 1f));
+
+        // Message 3
+        infoText.text = "Press [R] to skip the Cutscene OR Restart.";
+        yield return StartCoroutine(FadeText(infoText, 0f, 1f, 1f));
+        yield return new WaitForSeconds(2f);
+        yield return StartCoroutine(FadeText(infoText, 1f, 0f, 1f));
+
+        infoText.gameObject.SetActive(false); // hide after all messages
+
 
         // Play spline forward and wait til finished
         if (SplineCam != null)
@@ -98,4 +124,21 @@ public class FlyCam2 : MonoBehaviour
 
         inSequence = false;
     }
+
+    private IEnumerator FadeText(TMP_Text text, float startAlpha, float endAlpha, float duration)
+    {
+        float t = 0f;
+        Color c = text.color;
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float a = Mathf.Lerp(startAlpha, endAlpha, t / duration);
+            text.color = new Color(c.r, c.g, c.b, a);
+            yield return null;
+        }
+
+        text.color = new Color(c.r, c.g, c.b, endAlpha);
+    }
+
 }
