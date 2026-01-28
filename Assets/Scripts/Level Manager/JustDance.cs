@@ -1,8 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class JustDance : MonoBehaviour
 {
     private Animator playerAnimator;
+
+    [Header("Dance Cam Spline")]
+    public SplineAnimate cameraSpline;
+    public float splineSpeed = 0.1f;
+
+    private bool hasStarted = false;
     
     void Start()
     {
@@ -14,19 +22,31 @@ public class JustDance : MonoBehaviour
         {
             Debug.LogError("Animator component not found!");
         }
+
+        playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+        if (cameraSpline != null)
+        {
+            cameraSpline.Pause();
+        }
     }
 
     void Update()
     {
-        if (playerAnimator != null)
+        if (!hasStarted)
         {
             StartTheDance();
+        }
+
+        if (cameraSpline != null)
+        {
+            cameraSpline.NormalizedTime += splineSpeed * Time.unscaledDeltaTime;
         }
     }
 
     public void StartTheDance()
     {
-        // Set the "StartDance" trigger in the Animator to initiate the transition
+        hasStarted = true;
         playerAnimator.SetBool("dance", true);
     }
 

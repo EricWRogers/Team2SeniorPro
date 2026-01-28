@@ -5,9 +5,11 @@ using UnityEngine.UI; // Add this for UI components
 public class NestGoal : MonoBehaviour
 {
     public GameObject WinScreen;
+    public GameObject MainCam;
+    public GameObject PlayerSquirrel;
+    public GameObject VictorySquirrel;
     public Timer timer;
     public AudioSource SFXSource;
-    public AudioClip victoryClip;
     //public CollectibleScript collectibles;
 
     [Header("Text Elements")]
@@ -42,7 +44,10 @@ public class NestGoal : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         Debug.Log("WIN! Acorn delivered to the nest.");
-        SFXSource.PlayOneShot(victoryClip);
+        PlayerSquirrel.SetActive(false);
+        MainCam.SetActive(false);
+        VictorySquirrel.SetActive(true);
+        SFXSource.Play();
         WinScreen.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
