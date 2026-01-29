@@ -5,7 +5,6 @@ public class LoseScreen : MonoBehaviour
 {
     public GameObject gameOverUI;
     public GameObject Drank;
-    public AudioSource music;
     public PauseMenu pauseMenu;
     public AudioSource SFXSource;
     public AudioClip clickSFX;
@@ -28,10 +27,11 @@ public class LoseScreen : MonoBehaviour
             Debug.Log("Pause menu disabled");
         }
 
-        if (music != null)
+        if (SoundManager.Instance != null)
         {
-            music.mute = true;
+            SoundManager.Instance.SetMusicMuted(true);
         }
+
 
         if (SFXSource != null && loserSFX != null)
         {
@@ -45,6 +45,7 @@ public class LoseScreen : MonoBehaviour
         }
 
     }
+    
     public void Home()
     {
         PlaySound();
@@ -58,6 +59,11 @@ public class LoseScreen : MonoBehaviour
         PlaySound();
         Time.timeScale = 1f;
         GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); //reloads the current scene, does not reset collectibles so it adds to total
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.SetMusicMuted(false);
+        }
     }
 
     public void Quit()

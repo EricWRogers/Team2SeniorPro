@@ -10200,6 +10200,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneParameters
       objectReference: {fileID: 0}
+    - target: {fileID: 9109170245464262721, guid: ea881f23328078a4c8a4918adabbefa2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12449,6 +12453,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1705649382}
+    - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: soundInit
+      value: 
+      objectReference: {fileID: 1705649382}
     - target: {fileID: 1458785546214176537, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -38013,6 +38025,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2077647984}
   m_SourcePrefab: {fileID: 100100000, guid: 66342aca81924c1409821e16b9098101, type: 3}
+--- !u!114 &1705649382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7435277555387920863, guid: ea881f23328078a4c8a4918adabbefa2, type: 3}
+  m_PrefabInstance: {fileID: 501856859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7f9e274b06cd646b18d500eff424d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1706468459
 PrefabInstance:
   m_ObjectHideFlags: 0
