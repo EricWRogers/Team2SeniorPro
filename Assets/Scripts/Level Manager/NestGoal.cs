@@ -32,6 +32,11 @@ public class NestGoal : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f; // Resume the game
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.SetMusicMuted(true);
+        }
     }
 
     public void Restart()
