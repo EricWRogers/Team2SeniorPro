@@ -68,6 +68,11 @@ public class NestGoal : MonoBehaviour
             }
         }
 
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.SetMusicMuted(true);
+        }
+
         // Activates rank based on time
         if (timer != null && timer.timeRemaining < 60f)
         {
