@@ -26,6 +26,18 @@ public class NestGoal : MonoBehaviour
     public GameObject Brank;
     public GameObject Crank;
 
+    void Awake()
+    {
+        if (MainCam == null)
+        MainCam = GameObject.FindWithTag("MainCamera");
+
+        if (PlayerSquirrel == null)
+            PlayerSquirrel = GameObject.FindWithTag("Player");
+
+        if (VictorySquirrel == null)
+            VictorySquirrel = GameObject.FindWithTag("DancingPlayer");
+    }
+
     public void ReturnToMain()
     {
         GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total

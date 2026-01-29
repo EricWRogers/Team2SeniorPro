@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class LoseScreen : MonoBehaviour
 {
     public GameObject gameOverUI;
-    public GameObject Drank;
+    public GameObject D_Rank;
+    public Animator D_animator;
     public PauseMenu pauseMenu;
     public AudioSource SFXSource;
     public AudioClip clickSFX;
@@ -16,6 +17,8 @@ public class LoseScreen : MonoBehaviour
     public void GameOver()
     {
         gameOverUI.SetActive(true);
+        D_Rank.SetActive(true);
+        D_animator.SetTrigger("D_Display");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
@@ -37,11 +40,6 @@ public class LoseScreen : MonoBehaviour
         {
             SFXSource.PlayOneShot(loserSFX);
             Debug.Log("Played sound: " + loserSFX.name);
-        }
-
-        if (timer != null && timer.timeRemaining >= 300f)
-        {
-            if (Drank != null) Drank.SetActive(true);
         }
 
     }
