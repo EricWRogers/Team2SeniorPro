@@ -171,12 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fe65e6962f75c49b933f88cea75693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 1863964439}
-  playerObj: {fileID: 994253890}
-  maxSlideTime: 2
-  slideForce: 200
-  slideYScale: 0.5
-  slideKey: 306
 --- !u!114 &148601979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,43 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0862e1b5544fc4bb916c43e2eaf995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
-  sprintSpeed: 10
-  slideSpeed: 30
-  wallrunSpeed: 8.5
-  climbSpeed: 0
-  vaultSpeed: 0
-  airMinSpeed: 0
-  speedIncreaseMultiplier: 1.5
-  slopeIncreaseMultiplier: 2.5
-  groundDrag: 4
-  jumpForce: 12
-  jumpCooldown: 0.25
-  airMultiplier: 0.4
-  crouchSpeed: 3.5
-  crouchYScale: 0.5
-  jumpKey: 32
-  sprintKey: 304
-  crouchKey: 306
-  playerHeight: 2
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1536
-  grounded: 0
-  maxSlopeAngle: 40
-  climbingScript: {fileID: 0}
-  orientation: {fileID: 1863964439}
-  state: 0
-  sliding: 0
-  crouching: 0
-  wallrunning: 0
-  climbing: 0
-  vaulting: 0
-  freeze: 0
-  unlimited: 0
-  restricted: 0
-  text_speed: {fileID: 0}
-  text_mode: {fileID: 1069566097}
 --- !u!54 &148601984
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -429,7 +386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &152239862
 Transform:
   m_ObjectHideFlags: 0
@@ -568,6 +525,161 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!43 &300938526
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: pb_Mesh-131848
+  serializedVersion: 11
+  m_SubMeshes: []
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 0
+  m_KeepIndices: 0
+  m_IndexFormat: 0
+  m_IndexBuffer: 
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 0
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata: 
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &324946787
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324946788}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +844,7 @@ GameObject:
   - component: {fileID: 426627603}
   - component: {fileID: 426627605}
   - component: {fileID: 426627604}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: OutlineEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1130,6 +1242,161 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!43 &647002570
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: pb_Mesh-131876
+  serializedVersion: 11
+  m_SubMeshes: []
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 0
+  m_KeepIndices: 0
+  m_IndexFormat: 0
+  m_IndexBuffer: 
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 0
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata: 
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &737493389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1730,7 @@ GameObject:
   - component: {fileID: 994253892}
   - component: {fileID: 994253891}
   m_Layer: 6
-  m_Name: PlayerObj
+  m_Name: APlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1575,8 +1842,9 @@ GameObject:
   - component: {fileID: 1060174642}
   - component: {fileID: 1060174641}
   - component: {fileID: 1060174640}
+  - component: {fileID: 1060174644}
   m_Layer: 0
-  m_Name: PlayerCam
+  m_Name: APlayerCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1609,10 +1877,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbeb9ff899020cf4bba0c367151844ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
-  orientation: {fileID: 1863964439}
-  camHolder: {fileID: 1472768081}
 --- !u!114 &1060174641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,6 +1948,50 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1060174644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060174638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1069566096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,10 +2238,9 @@ GameObject:
   - component: {fileID: 1326138665}
   - component: {fileID: 1326138670}
   - component: {fileID: 1326138669}
-  - component: {fileID: 1326138668}
-  - component: {fileID: 1326138667}
   - component: {fileID: 1326138666}
   - component: {fileID: 1326138671}
+  - component: {fileID: 1326138672}
   m_Layer: 0
   m_Name: PlayerCam
   m_TagString: MainCamera
@@ -1949,8 +2256,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326138664}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04760751, y: -0.032331318, z: 0.0015417704, w: 0.9983416}
-  m_LocalPosition: {x: -51.42008, y: 1.31, z: -35.511402}
+  m_LocalRotation: {x: 0.25326863, y: -0.031311642, z: 0.008202122, w: 0.9668544}
+  m_LocalPosition: {x: -51.83112, y: 2.4999993, z: -35.147232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1988,40 +2295,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &1326138667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326138664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35b5db210770a5c40b55f8e52707439c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 324946788}
-  player: {fileID: 1796264385}
-  playerObj: {fileID: 2045860011}
-  rb: {fileID: 1796264386}
-  rotationSpeed: 7
-  combatLookAt: {fileID: 1405362677}
-  thirdPersonCam: {fileID: 0}
-  combatCam: {fileID: 0}
-  topDownCam: {fileID: 0}
-  currentStyle: 0
---- !u!114 &1326138668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326138664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &1326138669
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2061,11 +2334,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 50
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 70
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2125,6 +2398,28 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1326138672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326138664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82cd6a9613a6c4944ac662986f4803e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 324946788}
+  player: {fileID: 1796264385}
+  playerObj: {fileID: 2045860011}
+  rb: {fileID: 1796264386}
+  rotationSpeed: 7
+  combatLookAt: {fileID: 1405362677}
+  thirdPersonCam: {fileID: 0}
+  combatCam: {fileID: 0}
+  topDownCam: {fileID: 0}
+  currentStyle: 0
 --- !u!1 &1405362676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,8 +2429,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1405362677}
-  m_Layer: 6
-  m_Name: CombatLookAt
+  m_Layer: 0
+  m_Name: ACombatLookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2478,21 +2773,20 @@ GameObject:
   m_Component:
   - component: {fileID: 1796264385}
   - component: {fileID: 1796264386}
-  - component: {fileID: 1796264394}
+  - component: {fileID: 1796264387}
   - component: {fileID: 1796264393}
   - component: {fileID: 1796264392}
   - component: {fileID: 1796264391}
   - component: {fileID: 1796264390}
   - component: {fileID: 1796264389}
   - component: {fileID: 1796264388}
-  - component: {fileID: 1796264387}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1796264385
 Transform:
   m_ObjectHideFlags: 0
@@ -2569,26 +2863,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796264384}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c030da1060e485439955c3816cba3d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac19a022d53dca489833afb97dd7a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 324946788}
-  cam: {fileID: 1326138665}
+  orientation: {fileID: 0}
+  rb: {fileID: 0}
+  tpm: {fileID: 0}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  climbSpeed: 3
+  maxClimbTime: 0.75
+  climbJumpUpForce: 15
+  climbJumpBackForce: 15
   jumpKey: 32
-  moveToLedgeSpeed: 12
-  ledgeJumpForwardForce: 14
-  ledgeJumpUpForce: 5
-  maxLedgeGrabDistance: 2
-  minTimeOnLedge: 0.5
-  holding: 0
-  ledgeDetectionLength: 3
-  ledgeSphereCastRadius: 0.5
+  climbJumps: 0
+  detectionLength: 0
+  sphereCastRadius: 0
+  maxWallLookAngle: 30
+  minWallNormalAngleChange: 0
+  exitingWall: 0
+  exitWallTime: 0
+  cam: {fileID: 0}
+  moveToLedgeSpeed: 0
+  ledgeJumpForwardForce: 0
+  ledgeJumpUpForce: 0
+  maxLedgeJumpUpSpeed: 0
+  maxLedgeGrabDistance: 0
+  minTimeOnLedge: 0
+  ledgeDetectionLength: 0
+  ledgeSphereCastRadius: 0
   whatIsLedge:
     serializedVersion: 2
     m_Bits: 0
   currLedge: {fileID: 0}
-  exitingLedge: 0
-  exitLedgeTime: 0.2
+  vaultDetectionLength: 0
+  topReached: 0
+  vaultClimbSpeed: 0
+  vaultJumpForwardForce: 0
+  vaultJumpUpForce: 0
+  vaultCooldown: 0
 --- !u!114 &1796264389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,48 +2910,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796264384}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6066f25503bf44abcb3e6fdfea6c2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 18f69eabfa498d342b78ee621ed1d2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 324946788}
-  rb: {fileID: 1796264386}
-  pm: {fileID: 1796264394}
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 0
-  climbSpeed: 10
-  maxClimbTime: 0.75
-  climbJumpUpForce: 14
-  climbJumpBackForce: 12
-  jumpKey: 32
-  climbJumps: 1
-  detectionLength: 0.7
-  sphereCastRadius: 0.25
-  maxWallLookAngle: 30
-  minWallNormalAngleChange: 5
-  exitingWall: 0
-  exitWallTime: 0.2
-  cam: {fileID: 1326138665}
-  moveToLedgeSpeed: 12
-  ledgeJumpForwardForce: 14
-  ledgeJumpUpForce: 6
-  maxLedgeJumpUpSpeed: 7
-  maxLedgeGrabDistance: 2
-  minTimeOnLedge: 0.5
-  ledgeDetectionLength: 3
-  ledgeSphereCastRadius: 0.5
-  whatIsLedge:
-    serializedVersion: 2
-    m_Bits: 0
-  currLedge: {fileID: 0}
-  vaultDetectionLength: 1.2
-  topReached: 0
-  vaultClimbSpeed: 10
-  vaultJumpForwardForce: 20
-  vaultJumpUpForce: 12
-  vaultCooldown: 1
+  orientation: {fileID: 0}
+  playerObj: {fileID: 0}
+  maxSlideTime: 0
+  slideForce: 0
+  slideYScale: 0
+  slideKey: 306
 --- !u!114 &1796264390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2647,15 +2930,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796264384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1fe65e6962f75c49b933f88cea75693, type: 3}
+  m_Script: {fileID: 11500000, guid: 8578a6066815e2b43abc851c84343abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 324946788}
-  playerObj: {fileID: 1796264385}
-  maxSlideTime: 2
-  slideForce: 200
-  slideYScale: 0.5
-  slideKey: 306
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  wallRunForce: 0
+  wallJumpUpForce: 0
+  wallJumpSideForce: 0
+  wallClimbSpeed: 0
+  maxWallRunTime: 0
+  jumpKey: 32
+  upwardsRunKey: 304
+  downwardsRunKey: 306
+  wallCheckDistance: 0
+  minJumpHeight: 0
+  exitWallTime: 0
+  useGravity: 0
+  gravityCounterForce: 0
+  orientation: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!114 &1796264391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2665,30 +2963,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796264384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf3b4ec2009accc49a0a600cfcf5719f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d8ea9bcf7428fe438b9ae2a4509a2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  wallRunForce: 200
-  wallJumpUpForce: 7
-  wallJumpSideForce: 14
-  wallClimbSpeed: 3
-  maxWallRunTime: 4
-  jumpKey: 32
-  upwardsRunKey: 304
-  downwardsRunKey: 306
-  wallCheckDistance: 0.7
-  minJumpHeight: 2
-  exitWallTime: 0.2
-  useGravity: 1
-  gravityCounterForce: 27
+  tpm: {fileID: 1796264393}
   orientation: {fileID: 324946788}
   cam: {fileID: 0}
+  rb: {fileID: 0}
+  moveToLedgeSpeed: 0
+  maxLedgeGrabDistance: 0
+  minTimeOnLedge: 0
+  holding: 0
+  jumpKey: 32
+  ledgeJumpForwardForce: 0
+  ledgeJumpUpwardForce: 0
+  ledgeDetectionLength: 0
+  ledgeSphereCastRadius: 0
+  whatIsLedge:
+    serializedVersion: 2
+    m_Bits: 0
+  exitingLedge: 0
+  exitLedgeTime: 0
 --- !u!114 &1796264392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2698,46 +2993,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796264384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ae0e31e7bb907478d76e87334b688c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pm: {fileID: 1796264394}
-  orientation: {fileID: 324946788}
-  cam: {fileID: 1326138665}
-  rb: {fileID: 1796264386}
-  moveToLedgeSpeed: 12
-  maxLedgeGrabDistance: 2
-  minTimeOnLedge: 0.5
-  holding: 0
-  jumpKey: 32
-  ledgeJumpForwardForce: 14
-  ledgeJumpUpwardForce: 5
-  ledgeDetectionLength: 3
-  ledgeSphereCastRadius: 0.5
-  whatIsLedge:
-    serializedVersion: 2
-    m_Bits: 0
-  exitingLedge: 0
-  exitLedgeTime: 0.2
---- !u!114 &1796264393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796264384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bab04870fdad9a54c859293cd1386821, type: 3}
+  m_Script: {fileID: 11500000, guid: de2ba230d388675419b90fbbd6f3888b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 324946788}
   rb: {fileID: 1796264386}
-  pm: {fileID: 1796264394}
-  lg: {fileID: 0}
+  tpm: {fileID: 1796264393}
+  lg: {fileID: 1796264391}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   climbSpeed: 10
   maxClimbTime: 0.75
   climbJumpUpForce: 14
@@ -2750,7 +3015,7 @@ MonoBehaviour:
   minWallNormalAngleChange: 5
   exitingWall: 0
   exitWallTime: 0.2
---- !u!114 &1796264394
+--- !u!114 &1796264393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2759,7 +3024,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796264384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb0862e1b5544fc4bb916c43e2eaf995, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f2aadefa073900468b146f0f0bcab42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 7
@@ -2779,14 +3044,14 @@ MonoBehaviour:
   crouchYScale: 0.5
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 277
+  crouchKey: 306
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   grounded: 0
   maxSlopeAngle: 40
-  climbingScript: {fileID: 1796264393}
+  climbingScript: {fileID: 1796264392}
   orientation: {fileID: 324946788}
   state: 0
   sliding: 0
@@ -3141,7 +3406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1863964439}
   m_Layer: 6
-  m_Name: Orientation
+  m_Name: AOrientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3172,7 +3437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013890320}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3208,7 +3473,7 @@ GameObject:
   - component: {fileID: 2045860014}
   - component: {fileID: 2045860013}
   - component: {fileID: 2045860012}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerObj
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3307,6 +3572,103 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045860010}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &4320452045410994845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1786766560852747318, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 647002570}
+    - target: {fileID: 3714680282047917832, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 300938526}
+    - target: {fileID: 3817110049961284333, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 647002570}
+    - target: {fileID: 3817110049961284333, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_VersionIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3817110049961284333, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_MeshFormatVersion
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.793384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5038766617008396278, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Name
+      value: NewMovementSetup
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168118511916296657, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 300938526}
+    - target: {fileID: 5168118511916296657, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_VersionIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168118511916296657, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_MeshFormatVersion
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_mode
+      value: 
+      objectReference: {fileID: 1069566097}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_speed
+      value: 
+      objectReference: {fileID: 557575375}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3318,3 +3680,4 @@ SceneRoots:
   - {fileID: 1690751287}
   - {fileID: 1796264385}
   - {fileID: 152239862}
+  - {fileID: 4320452045410994845}
