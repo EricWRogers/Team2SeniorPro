@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int collectibleCount = 0;
     public int totalCollectibles = 0;
     public int frameRate = 60;
+    public SerializationManager serializationManager;
 
     public void newMap(string _newMap, bool _resetCollectibles = false, bool _resetCheckpoint = true) //when loading a new map, it will add the current collectible count to the total. if true, it wont. use for cases of retry or quitting the level
     {
@@ -18,7 +19,9 @@ public class GameManager : MonoBehaviour
             totalCollectibles = totalCollectibles + collectibleCount;
         }
         collectibleCount = 0;
-        SceneManager.LoadScene(_newMap);
+        
+        //SceneManager.LoadScene(_newMap);
+        LevelLoader.Instance.LoadLevel(_newMap);
     }
 
     public void SetCheckpoint(int _checkpointNumber, bool _force = false)
@@ -72,6 +75,10 @@ public class GameManager : MonoBehaviour
         {
             //Application.targetFrameRate = -1;
         }
+        #if UNITY_EDITOR
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+                {SceneManager.LoadSceneAsync("LoadingScene", LoadSceneMode.Additive);}
+        #endif
         
     }
     
