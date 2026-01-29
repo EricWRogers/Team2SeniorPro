@@ -337,8 +337,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
             // limit velocity if needed
             if (flatVel.magnitude > moveSpeed)
             {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;  //calculates what max velocity would be
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z); //and reapply it here
             }
         }
     }

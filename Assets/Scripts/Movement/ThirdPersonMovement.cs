@@ -568,7 +568,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (!slidingSFXSource.isPlaying)
             {
                 slidingSFXSource.clip = slidingSFX;
-                slidingSFXSource.loop = true;
+                slidingSFXSource.loop = false;
                 slidingSFXSource.Play();
             }
         }

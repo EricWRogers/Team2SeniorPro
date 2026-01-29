@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
+    
     [Header("Audio Sources")]
     public AudioSource musicSource;
     public AudioSource sfxSource;
@@ -13,6 +15,8 @@ public class SoundManager : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject spawnableAudioSourcePrefab;
+
+    public float UnmuteDelay = 2f; // adjust in Inspector
 
     public void PlayMusic(AudioClip clip)
     {
@@ -120,4 +124,28 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetMusicMuted(bool muted)
+    {
+        if (musicSource != null)
+            musicSource.mute = muted;
+    }
+
+    public bool IsMusicMuted()
+    {
+        return musicSource != null && musicSource.mute;
+    }
+
+    public void UnmuteMusicDelayed()
+    {
+        StopAllCoroutines(); // prevents stacking delays
+        StartCoroutine(UnmuteMusicAfterDelay());
+    }
+
+    private IEnumerator UnmuteMusicAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(UnmuteDelay);
+        SetMusicMuted(false);
+    }
+
 }

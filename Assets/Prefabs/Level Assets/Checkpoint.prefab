@@ -326,7 +326,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 10
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -352,7 +352,8 @@ MonoBehaviour:
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   activeColor: {r: 1, g: 0.8, b: 0.2, a: 1}
   SFXSource: {fileID: 6064081056262935354}
-  checkpointSFX: {fileID: 8300000, guid: fa8a117519520764d933c97691cbb181, type: 3}
+  checkpointSFX: {fileID: 8300000, guid: 1cd2bc40584552943b4f4dcd33c07e27, type: 3}
+  conffetiSFX: {fileID: 8300000, guid: cd8fbbd287a56f94090759c701db45c3, type: 3}
   Activated: 0
 --- !u!82 &6064081056262935354
 AudioSource:
