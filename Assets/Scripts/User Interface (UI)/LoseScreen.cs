@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 public class LoseScreen : MonoBehaviour
 {
     public GameObject gameOverUI;
-    public GameObject Drank;
-    public AudioSource music;
+    public GameObject D_Rank;
+    public Animator D_animator;
     public PauseMenu pauseMenu;
     public AudioSource SFXSource;
     public AudioClip clickSFX;
@@ -17,6 +17,8 @@ public class LoseScreen : MonoBehaviour
     public void GameOver()
     {
         gameOverUI.SetActive(true);
+        D_Rank.SetActive(true);
+        D_animator.SetTrigger("D_Display");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
@@ -28,10 +30,11 @@ public class LoseScreen : MonoBehaviour
             Debug.Log("Pause menu disabled");
         }
 
-        if (music != null)
+        if (SoundManager.Instance != null)
         {
-            music.mute = true;
+            SoundManager.Instance.SetMusicMuted(true);
         }
+
 
         if (SFXSource != null && loserSFX != null)
         {
@@ -39,12 +42,8 @@ public class LoseScreen : MonoBehaviour
             Debug.Log("Played sound: " + loserSFX.name);
         }
 
-        if (timer != null && timer.timeRemaining >= 300f)
-        {
-            if (Drank != null) Drank.SetActive(true);
-        }
-
     }
+    
     public void Home()
     {
         PlaySound();
@@ -58,6 +57,11 @@ public class LoseScreen : MonoBehaviour
         PlaySound();
         Time.timeScale = 1f;
         GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); //reloads the current scene, does not reset collectibles so it adds to total
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.SetMusicMuted(false);
+        }
     }
 
     public void Quit()

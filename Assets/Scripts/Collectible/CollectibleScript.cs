@@ -2,37 +2,42 @@ using UnityEngine;
 
 public class CollectibleScript : MonoBehaviour
 {
-    public int collectibleCheckpointNumber = 0; //the checkpoint number this collectible is associated with
+    public int collectibleCheckpointNumber = 0;
     public Animator animator;
-    public AudioSource SFXSource;
     public AudioClip collectSFX;
-    void Start()
+
+    private void Start()
     {
         if (GameManager.Instance != null)
         {
-            if (collectibleCheckpointNumber < GameManager.Instance.currentCheckpoint && GameManager.Instance.currentCheckpoint != -1) //if the player has passed a checkpoint and has respawned, destroy all collectibles that are prior to that checkpoint
+            if (collectibleCheckpointNumber < GameManager.Instance.currentCheckpoint &&
+                GameManager.Instance.currentCheckpoint != -1)
             {
                 Destroy(transform.parent.gameObject);
             }
         }
-        else if (GameManager.Instance == null)
+        else
         {
             Debug.LogWarning("No GameManager found in scene!");
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Collectible touched by player");
-            //SoundManager.Instance.PlaySFX(SoundManager.Instance.sfxSource.clip);
-            SFXSource.PlayOneShot(collectSFX);
+        if (!other.CompareTag("Player")) return;
+
+        Debug.Log("Collectible touched by player");
+
+        // Play SFX safely
+        AudioSource.PlayClipAtPoint(collectSFX, transform.position);
+
+        // Play animation
+        if (animator != null)
             animator.SetTrigger("BerryCollect");
 
-            GameManager.Instance.collectibleCount++;
-            Destroy(transform.parent.gameObject, 0.1f);
-        }
+        GameManager.Instance.collectibleCount++;
+
+        // Destroy after animation trigger
+        Destroy(transform.parent.gameObject, 0.1f);
     }
 }

@@ -128,6 +128,7 @@ MonoBehaviour:
   meshCollider: {fileID: 5648909331468258477}
   buttonDisplay: {fileID: 1419554376115014655}
   IsPlayerInRange: 0
+  cutsceneToPlay: {fileID: 0}
 --- !u!1 &2161556740331886238
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,8 +332,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: 986827451979848637, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -356,11 +357,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.005
+  m_fontSize: 0.003
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 0.005
+  m_fontSizeMin: 0.003
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2

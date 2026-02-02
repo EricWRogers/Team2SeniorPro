@@ -8,7 +8,6 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
 
     [Header("Audio(s):")]
-    public AudioSource audioSource;
     public AudioSource SFXSource;
     public AudioClip pauseSFX;
     public AudioClip clickSFX;
@@ -41,6 +40,11 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Loading Main Menu...");
         Time.timeScale = 1f;
         GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.SetMusicMuted(true);
+        }
     }
 
     public void Resume()
@@ -75,6 +79,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); //reloads the current scene, does not reset collectibles so it adds to total
     }
+    
     public void Quit()
     {
         PlaySound();
@@ -84,14 +89,16 @@ public class PauseMenu : MonoBehaviour
 
     public void ToggleAudio()
     {
-        if (audioSource != null)
+        if (SoundManager.Instance == null)
         {
-            audioSource.mute = !audioSource.mute; // Toggles the mute state
+            Debug.LogWarning("No SoundManager found!");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("AudioSource not assigned to AudioToggler script.");
-        }
+
+        bool mute = !SoundManager.Instance.IsMusicMuted();
+        SoundManager.Instance.SetMusicMuted(mute);
+
+        Debug.Log(mute ? "Music muted." : "Music unmuted.");
     }
 
     public void PlaySound()
