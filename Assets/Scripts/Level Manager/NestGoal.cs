@@ -4,7 +4,7 @@ using UnityEngine.UI; // Add this for UI components
 
 public class NestGoal : MonoBehaviour
 {
-    public GameObject WinScreen;
+    
     public GameObject MainCam;
     public GameObject PlayerSquirrel;
     public GameObject VictorySquirrel;
@@ -19,6 +19,11 @@ public class NestGoal : MonoBehaviour
     [Header("Events")]
     [Tooltip("Scripts to disable when paused and enable when resumed")]
     public MonoBehaviour[] scriptsToToggle;
+
+    [Header("UI Elements")]
+    public GameObject WinScreen;
+    public GameObject BerryUI;
+    public GameObject TimerUI;
 
     [Header("Rank Displays")]
     public GameObject Srank;
@@ -66,6 +71,8 @@ public class NestGoal : MonoBehaviour
         VictorySquirrel.SetActive(true);
         SFXSource.Play();
         WinScreen.SetActive(true);
+        BerryUI.SetActive(false);
+        TimerUI.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f; // Pause the game

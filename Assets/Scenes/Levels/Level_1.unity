@@ -5281,6 +5281,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4300940084718156360, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 631269284}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &259451793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8068434162339386927, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &260409520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2677411859334973030, guid: f8e9de68a4af2d84791869410fc24542, type: 3}
@@ -9976,6 +9981,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e75941518c36f54e8387f372f125c67, type: 3}
+--- !u!1 &489742422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4959271732520913777, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &494052391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b796438849fe73643bc02aa94f322b31, type: 3}
@@ -11880,9 +11890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1999bf2ed61202478647228ed0cfbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WinScreen: {fileID: 631269289}
-  MainCam: {fileID: 0}
-  PlayerSquirrel: {fileID: 0}
+  MainCam: {fileID: 1242460674}
+  PlayerSquirrel: {fileID: 1024309076}
   VictorySquirrel: {fileID: 2115313943}
   timer: {fileID: 631269286}
   SFXSource: {fileID: 1151268863}
@@ -11890,6 +11899,9 @@ MonoBehaviour:
   statsText: {fileID: 631269285}
   scriptsToToggle:
   - {fileID: 1151268860}
+  WinScreen: {fileID: 631269289}
+  BerryUI: {fileID: 259451793}
+  TimerUI: {fileID: 489742422}
   Srank: {fileID: 1702420746}
   Arank: {fileID: 71355691}
   Brank: {fileID: 256441508}
