@@ -71,7 +71,10 @@ public class Checkpoint : MonoBehaviour
         //SFXSource.PlayOneShot(checkpointSFX);
         //SFXSource.PlayOneShot(conffetiSFX);
 
-        jumpPadObject.SetActive(true);
+        if (jumpPadObject != null)
+        {
+            jumpPadObject.SetActive(true);
+        }
         Activated = true;
     }
 
