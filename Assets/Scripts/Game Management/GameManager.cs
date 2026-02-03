@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
         }
         collectibleCount = 0;
         
-        //SceneManager.LoadScene(_newMap);
-        LevelLoader.Instance.LoadLevel(_newMap);
+        SceneManager.LoadScene(_newMap);
+        //LevelLoader.Instance.LoadLevel(_newMap);
     }
 
     public void SetCheckpoint(int _checkpointNumber, bool _force = false)
