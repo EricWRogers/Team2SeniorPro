@@ -1215,8 +1215,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Throws left: 123'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: 986827451979848637, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11345,7 +11345,7 @@ MonoBehaviour:
   VictorySquirrel: {fileID: 0}
   timer: {fileID: 631269286}
   SFXSource: {fileID: 1151268863}
-  timerText: {fileID: 631269288}
+  timerText: {fileID: 0}
   statsText: {fileID: 1037200042}
   scriptsToToggle:
   - {fileID: 1151268860}
@@ -13312,17 +13312,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 935795761772418939, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 631269284}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &631269288 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5890584850394026934, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-  m_PrefabInstance: {fileID: 631269284}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &631269289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4546187219868736652, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
@@ -23886,10 +23875,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Speed: 12/23'
+  m_text: 'Speed: 0/23'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: 986827451979848637, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -30184,6 +30173,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301730769726878209, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 301730769726878209, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: climbJumps
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857964503789427036, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: wallJumpUpForce
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8303852
@@ -30227,6 +30228,18 @@ PrefabInstance:
     - target: {fileID: 5038766617008396278, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_Name
       value: NewMovementSetup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_mode
+      value: 
+      objectReference: {fileID: 77035051}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_speed
+      value: 
+      objectReference: {fileID: 1075807113}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: wallrunSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42145,7 +42158,7 @@ PrefabInstance:
     - target: {fileID: 7959340015733414464, guid: ff3bc6c04f12dab41bed404f458704a9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: -1948313918874195100, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+      objectReference: {fileID: 986827451979848637, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
     - target: {fileID: 8910588946916764354, guid: ff3bc6c04f12dab41bed404f458704a9, type: 3}
       propertyPath: m_fontSize
       value: 18
