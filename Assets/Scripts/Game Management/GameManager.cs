@@ -75,11 +75,11 @@ public class GameManager : MonoBehaviour
         {
             //Application.targetFrameRate = -1;
         }
-        #if UNITY_EDITOR
+/*        #if UNITY_EDITOR
             if (SceneManager.GetActiveScene().name != "LoadingScene")
                 {SceneManager.LoadSceneAsync("LoadingScene", LoadSceneMode.Additive);}
         #endif
-        
+  */      
     }
     
 }
