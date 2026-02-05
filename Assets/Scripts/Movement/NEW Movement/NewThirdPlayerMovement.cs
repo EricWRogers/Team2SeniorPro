@@ -38,6 +38,19 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
 
+    [Header("Ground Pound")]
+    public KeyCode groundPoundKey = KeyCode.LeftAlt;   // change if desired
+    public float groundPoundWindup = 0.08f;            // small "hang" before slam
+    public float groundPoundDownVelocity = 35f;        // slam speed
+    public float groundPoundExtraGravity = 2.5f;       // extra gravity multiplier while slamming
+    public float groundPoundImpactCooldown = 0.15f;    // prevents instant re-trigger
+    public float groundPoundBounceVelocity = 0f;       // set > 0 for bounce
+
+    private bool groundPounding;
+    private bool wasGroundedLastFrame;
+    private float groundPoundCooldownTimer;
+    private bool leftGroundSinceLastPound;
+
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -74,6 +87,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         vaulting,
         crouching,
         sliding,
+        groundPounding,
         air
     }
 
@@ -85,7 +99,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     public bool freeze;
     public bool unlimited;
-    
+
     public bool restricted;
 
     public TextMeshProUGUI text_speed;
@@ -100,6 +114,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+
+        // ground pound gating
+        wasGroundedLastFrame = false;
+        leftGroundSinceLastPound = true; // allow if you start in air; will be reset after first impact
     }
 
     private void Update()
@@ -107,10 +125,25 @@ public class NewThirdPlayerMovement : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
+        // ground pound cooldown timer
+        if (groundPoundCooldownTimer > 0f)
+            groundPoundCooldownTimer -= Time.deltaTime;
+
+        // track leaving ground so you can't ground pound without jumping/falling
+        if (!grounded)
+            leftGroundSinceLastPound = true;
+
         MyInput();
         SpeedControl();
         StateHandler();
         TextStuff();
+
+        // detect landing for impact (first frame you become grounded)
+        if (groundPounding && grounded && !wasGroundedLastFrame)
+        {
+            GroundPoundImpact();
+        }
+        wasGroundedLastFrame = grounded;
 
         // handle drag
         if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
@@ -122,6 +155,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+
+        // Extra gravity while slamming to feel snappier on long falls
+        if (groundPounding && !grounded && groundPoundExtraGravity > 1f)
+        {
+            Vector3 extra = Physics.gravity * (groundPoundExtraGravity - 1f);
+            rb.AddForce(extra, ForceMode.Acceleration);
+        }
     }
 
     private void MyInput()
@@ -137,6 +177,19 @@ public class NewThirdPlayerMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+        // Ground pound (only in air, not during wallrun/climb/vault)
+        if (Input.GetKeyDown(groundPoundKey)
+            && !grounded
+            && !groundPounding
+            && groundPoundCooldownTimer <= 0f
+            && leftGroundSinceLastPound
+            && !wallrunning
+            && !climbing
+            && !vaulting)
+        {
+            StartCoroutine(GroundPoundRoutine());
         }
 
         // start crouch
@@ -207,7 +260,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
                 desiredMoveSpeed = slideSpeed;
                 keepMomentum = true;
             }
-
             else
                 desiredMoveSpeed = sprintSpeed;
         }
@@ -217,6 +269,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
+        }
+
+        // Mode - Ground Pounding
+        else if (groundPounding)
+        {
+            state = MovementState.groundPounding;
+            desiredMoveSpeed = 0f;
         }
 
         // Mode - Sprinting
@@ -238,7 +297,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         {
             state = MovementState.air;
 
-            if (moveSpeed < airMinSpeed)
+            if (!groundPounding && moveSpeed < airMinSpeed)
                 desiredMoveSpeed = airMinSpeed;
         }
 
@@ -292,6 +351,9 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        // Ground pound: no movement forces during slam
+        if (groundPounding) return;
+
         if (climbingScript.exitingWall) return;
         //if (climbingScriptDone.exitingWall) return; //this caused a small error but uh, not needed
         if (restricted) return;
@@ -316,8 +378,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
-        // turn gravity off while on slope
-        if(!wallrunning) rb.useGravity = !OnSlope();
+        // turn gravity off while on slope (unless wallrunning)
+        if (!wallrunning) rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
@@ -381,7 +443,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         if (OnSlope())
             text_speed.SetText("Speed: " + Round(rb.linearVelocity.magnitude, 1) + " / " + Round(moveSpeed, 1));
-
         else
             text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
 
@@ -392,5 +453,62 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         float mult = Mathf.Pow(10.0f, (float)digits);
         return Mathf.Round(value * mult) / mult;
+    }
+
+    // ---------------------------
+    // Ground Pound Implementation
+    // ---------------------------
+
+    private IEnumerator GroundPoundRoutine()
+    {
+        groundPounding = true;
+
+        // "hang": kill upward velocity and damp horizontal a bit
+        Vector3 v = rb.linearVelocity;
+        if (v.y > 0f) v.y = 0f;
+        v.x *= 0.6f;
+        v.z *= 0.6f;
+        rb.linearVelocity = v;
+
+        // windup pause
+        float t = 0f;
+        while (t < groundPoundWindup && !grounded)
+        {
+            t += Time.deltaTime;
+
+            // keep y from drifting upward during windup
+            Vector3 vv = rb.linearVelocity;
+            if (vv.y > 0f) vv.y = 0f;
+            rb.linearVelocity = vv;
+
+            yield return null;
+        }
+
+        // slam down
+        Vector3 slam = rb.linearVelocity;
+        slam.y = -groundPoundDownVelocity;
+        rb.linearVelocity = slam;
+    }
+
+    private void GroundPoundImpact()
+    {
+        groundPounding = false;
+        groundPoundCooldownTimer = groundPoundImpactCooldown;
+        leftGroundSinceLastPound = false;
+
+        // optional bounce
+        if (groundPoundBounceVelocity > 0f)
+        {
+            Vector3 v = rb.linearVelocity;
+            v.y = groundPoundBounceVelocity;
+            rb.linearVelocity = v;
+        }
+        else
+        {
+            // stop downward motion to avoid jitter/sticking
+            Vector3 v = rb.linearVelocity;
+            if (v.y < 0f) v.y = 0f;
+            rb.linearVelocity = v;
+        }
     }
 }
