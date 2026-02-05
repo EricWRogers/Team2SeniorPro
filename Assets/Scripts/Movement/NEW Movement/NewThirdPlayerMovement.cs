@@ -39,12 +39,17 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Pound")]
-    public KeyCode groundPoundKey = KeyCode.LeftAlt;   // change if desired
-    public float groundPoundWindup = 0.08f;            // small "hang" before slam
-    public float groundPoundDownVelocity = 35f;        // slam speed
-    public float groundPoundExtraGravity = 2.5f;       // extra gravity multiplier while slamming
-    public float groundPoundImpactCooldown = 0.15f;    // prevents instant re-trigger
-    public float groundPoundBounceVelocity = 0f;       // set > 0 for bounce
+    public KeyCode groundPoundKey = KeyCode.LeftAlt;
+    public float groundPoundWindup = 0.08f;
+    public float groundPoundDownVelocity = 35f;
+    public float groundPoundExtraGravity = 2.5f;
+    public float groundPoundImpactCooldown = 0.15f;
+    public float groundPoundBounceVelocity = 0f;
+
+    [Header("Ground Pound -> Slope Slide")]
+    public bool groundPoundBoostOnSlope = true;
+    [Tooltip("Minimum planar speed after landing on a slope. If 0, uses walkSpeed.")]
+    public float groundPoundSlopeEnterSpeed = 0f;
 
     private bool groundPounding;
     private bool wasGroundedLastFrame;
@@ -63,16 +68,14 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     [Header("References")]
     public NewClimbing climbingScript;
-
-    private ClimbingDone climbingScriptDone;  //could need this and dashing script to work refer to new dashing 
-
+    private ClimbingDone climbingScriptDone;
+    private NewSliding slidingScript; // <-- IMPORTANT: we call this on slope impact
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
 
     Vector3 moveDirection;
-
     Rigidbody rb;
 
     public MovementState state;
@@ -108,28 +111,24 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private void Start()
     {
         climbingScriptDone = GetComponent<ClimbingDone>();
+        slidingScript = GetComponent<NewSliding>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
         readyToJump = true;
-
         startYScale = transform.localScale.y;
 
-        // ground pound gating
         wasGroundedLastFrame = false;
-        leftGroundSinceLastPound = true; // allow if you start in air; will be reset after first impact
+        leftGroundSinceLastPound = true;
     }
 
     private void Update()
     {
-        // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround, QueryTriggerInteraction.Ignore);
 
-        // ground pound cooldown timer
         if (groundPoundCooldownTimer > 0f)
             groundPoundCooldownTimer -= Time.deltaTime;
 
-        // track leaving ground so you can't ground pound without jumping/falling
         if (!grounded)
             leftGroundSinceLastPound = true;
 
@@ -138,14 +137,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
         StateHandler();
         TextStuff();
 
-        // detect landing for impact (first frame you become grounded)
+        // Impact detection (first grounded frame)
         if (groundPounding && grounded && !wasGroundedLastFrame)
         {
             GroundPoundImpact();
         }
         wasGroundedLastFrame = grounded;
 
-        // handle drag
         if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
             rb.linearDamping = groundDrag;
         else
@@ -156,7 +154,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         MovePlayer();
 
-        // Extra gravity while slamming to feel snappier on long falls
         if (groundPounding && !grounded && groundPoundExtraGravity > 1f)
         {
             Vector3 extra = Physics.gravity * (groundPoundExtraGravity - 1f);
@@ -169,17 +166,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // when to jump
+        // Jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
-
             Jump();
-
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        // Ground pound (only in air, not during wallrun/climb/vault)
+        // Ground pound
         if (Input.GetKeyDown(groundPoundKey)
             && !grounded
             && !groundPounding
@@ -192,20 +187,17 @@ public class NewThirdPlayerMovement : MonoBehaviour
             StartCoroutine(GroundPoundRoutine());
         }
 
-        // start crouch
+        // Crouch (NOTE: if you keep crouchKey = LeftControl, change slideKey in NewSliding)
         if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
             crouching = true;
         }
 
-        // stop crouch
         if (Input.GetKeyUp(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-
             crouching = false;
         }
     }
@@ -213,86 +205,66 @@ public class NewThirdPlayerMovement : MonoBehaviour
     bool keepMomentum;
     private void StateHandler()
     {
-        // Mode - Freeze
         if (freeze)
         {
             state = MovementState.freeze;
             rb.linearVelocity = Vector3.zero;
             desiredMoveSpeed = 0f;
         }
-
-        // Mode - Unlimited
         else if (unlimited)
         {
             state = MovementState.unlimited;
             desiredMoveSpeed = 999f;
         }
-
-        // Mode - Vaulting
         else if (vaulting)
         {
             state = MovementState.vaulting;
             desiredMoveSpeed = vaultSpeed;
         }
-
-        // Mode - Climbing
         else if (climbing)
         {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
         }
-
-        // Mode - Wallrunning
         else if (wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
         }
-
-        // Mode - Sliding
         else if (sliding)
         {
             state = MovementState.sliding;
 
-            // increase speed by one every second
             if (OnSlope() && rb.linearVelocity.y < 0.1f)
             {
                 desiredMoveSpeed = slideSpeed;
                 keepMomentum = true;
             }
             else
+            {
                 desiredMoveSpeed = sprintSpeed;
+            }
         }
-
-        // Mode - Crouching
         else if (crouching)
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
         }
-
-        // Mode - Ground Pounding
         else if (groundPounding)
         {
             state = MovementState.groundPounding;
             desiredMoveSpeed = 0f;
         }
-
-        // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
         }
-
-        // Mode - Walking
         else if (grounded)
         {
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed;
         }
-
-        // Mode - Air
         else
         {
             state = MovementState.air;
@@ -302,7 +274,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
-
         if (desiredMoveSpeedHasChanged)
         {
             if (keepMomentum)
@@ -317,14 +288,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
-
-        // deactivate keepMomentum
         if (Mathf.Abs(desiredMoveSpeed - moveSpeed) < 0.1f) keepMomentum = false;
     }
 
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
-        // smoothly lerp movementSpeed to desired value
         float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
@@ -337,11 +305,12 @@ public class NewThirdPlayerMovement : MonoBehaviour
             {
                 float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
                 float slopeAngleIncrease = 1 + (slopeAngle / 90f);
-
                 time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
             }
             else
+            {
                 time += Time.deltaTime * speedIncreaseMultiplier;
+            }
 
             yield return null;
         }
@@ -351,17 +320,12 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Ground pound: no movement forces during slam
         if (groundPounding) return;
-
-        if (climbingScript.exitingWall) return;
-        //if (climbingScriptDone.exitingWall) return; //this caused a small error but uh, not needed
+        if (climbingScript != null && climbingScript.exitingWall) return;
         if (restricted) return;
 
-        // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // on slope
         if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
@@ -369,38 +333,34 @@ public class NewThirdPlayerMovement : MonoBehaviour
             if (rb.linearVelocity.y > 0)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
-
-        // on ground
         else if (grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
-        // in air
-        else if (!grounded)
+        }
+        else
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
 
-        // turn gravity off while on slope (unless wallrunning)
-        if (!wallrunning) rb.useGravity = !OnSlope();
+        if (!wallrunning)
+            rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
     {
-        // limiting speed on slope
         if (OnSlope() && !exitingSlope)
         {
             if (rb.linearVelocity.magnitude > moveSpeed)
                 rb.linearVelocity = rb.linearVelocity.normalized * moveSpeed;
         }
-
-        // limiting speed on ground or in air
         else
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-            // limit velocity if needed
             if (flatVel.magnitude > moveSpeed)
             {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;  //calculates what max velocity would be
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z); //and reapply it here
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
         }
     }
@@ -409,21 +369,19 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         exitingSlope = true;
 
-        // reset y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
     private void ResetJump()
     {
         readyToJump = true;
-
         exitingSlope = false;
     }
 
     public bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, whatIsGround, QueryTriggerInteraction.Ignore))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -439,6 +397,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void TextStuff()
     {
+        if (text_speed == null || text_mode == null) return;
+
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         if (OnSlope())
@@ -451,32 +411,30 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     public static float Round(float value, int digits)
     {
-        float mult = Mathf.Pow(10.0f, (float)digits);
+        float mult = Mathf.Pow(10.0f, digits);
         return Mathf.Round(value * mult) / mult;
     }
 
-    // ---------------------------
-    // Ground Pound Implementation
-    // ---------------------------
-
+//Ground pound
     private IEnumerator GroundPoundRoutine()
     {
         groundPounding = true;
 
-        // "hang": kill upward velocity and damp horizontal a bit
+        //temp gravity might be off — force it ON for the slam.
+        rb.useGravity = true;
+
+        // delay hang: kill upward velocity and damp horizontal
         Vector3 v = rb.linearVelocity;
         if (v.y > 0f) v.y = 0f;
         v.x *= 0.6f;
         v.z *= 0.6f;
         rb.linearVelocity = v;
 
-        // windup pause
         float t = 0f;
         while (t < groundPoundWindup && !grounded)
         {
             t += Time.deltaTime;
 
-            // keep y from drifting upward during windup
             Vector3 vv = rb.linearVelocity;
             if (vv.y > 0f) vv.y = 0f;
             rb.linearVelocity = vv;
@@ -484,7 +442,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
             yield return null;
         }
 
-        // slam down
         Vector3 slam = rb.linearVelocity;
         slam.y = -groundPoundDownVelocity;
         rb.linearVelocity = slam;
@@ -496,7 +453,47 @@ public class NewThirdPlayerMovement : MonoBehaviour
         groundPoundCooldownTimer = groundPoundImpactCooldown;
         leftGroundSinceLastPound = false;
 
-        // optional bounce
+        bool onSlopeNow = OnSlope();
+
+        // If landing on a slope: boost to at least walkSpeed, then start your normal slide script.
+        if (groundPoundBoostOnSlope && onSlopeNow && slidingScript != null)
+        {
+            float minEnterSpeed = (groundPoundSlopeEnterSpeed > 0f) ? groundPoundSlopeEnterSpeed : walkSpeed;
+
+            // downhill direction on the slope
+            Vector3 downhill = Vector3.ProjectOnPlane(Vector3.down, slopeHit.normal).normalized;
+            if (downhill.sqrMagnitude < 0.001f)
+                downhill = Vector3.ProjectOnPlane(orientation.forward, slopeHit.normal).normalized;
+
+            // project current velocity onto slope plane
+            Vector3 v = rb.linearVelocity;
+            Vector3 planar = Vector3.ProjectOnPlane(v, slopeHit.normal);
+
+            // ensure moving downhill & at least min speed
+            float alongDownhill = Vector3.Dot(planar, downhill);
+            if (planar.sqrMagnitude < 0.01f || alongDownhill < 0.1f)
+                planar = downhill * minEnterSpeed;
+
+            if (planar.magnitude < minEnterSpeed)
+                planar = planar.normalized * minEnterSpeed;
+
+            // kill downward Y to avoid jitter
+            float newY = v.y;
+            if (newY < 0f) newY = 0f;
+
+            rb.linearVelocity = new Vector3(planar.x, newY, planar.z);
+
+            // make your speed system immediately “caught up”
+            moveSpeed = Mathf.Max(moveSpeed, walkSpeed);
+            lastDesiredMoveSpeed = -9999f;
+
+            // start slide using the actual slide script (scale + forces)
+            slidingScript.StartSlideExternal(resetTimer: true);
+
+            return;
+        }
+
+        // 
         if (groundPoundBounceVelocity > 0f)
         {
             Vector3 v = rb.linearVelocity;
@@ -505,7 +502,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
         else
         {
-            // stop downward motion to avoid jitter/sticking
             Vector3 v = rb.linearVelocity;
             if (v.y < 0f) v.y = 0f;
             rb.linearVelocity = v;

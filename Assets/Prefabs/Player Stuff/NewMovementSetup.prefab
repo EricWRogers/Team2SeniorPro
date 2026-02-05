@@ -527,7 +527,7 @@ MonoBehaviour:
   walkSpeed: 7
   sprintSpeed: 10
   slideSpeed: 30
-  wallrunSpeed: 8.5
+  wallrunSpeed: 10
   climbSpeed: 3
   vaultSpeed: 15
   airMinSpeed: 7
@@ -542,6 +542,12 @@ MonoBehaviour:
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
+  groundPoundKey: 308
+  groundPoundWindup: 0.08
+  groundPoundDownVelocity: 35
+  groundPoundExtraGravity: 2.5
+  groundPoundImpactCooldown: 0.15
+  groundPoundBounceVelocity: 0
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -585,7 +591,7 @@ MonoBehaviour:
   climbJumpUpForce: 14
   climbJumpBackForce: 12
   jumpKey: 32
-  climbJumps: 1
+  climbJumps: 0
   detectionLength: 0.7
   sphereCastRadius: 0.25
   maxWallLookAngle: 30
@@ -641,7 +647,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   wallRunForce: 200
-  wallJumpUpForce: 7
+  wallJumpUpForce: 12
   wallJumpSideForce: 14
   wallClimbSpeed: 3
   maxWallRunTime: 4
@@ -769,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MeshFormatVersion: 0
+  m_MeshFormatVersion: 2
   m_Faces: []
   m_SharedVertices: []
   m_SharedTextures: []
@@ -787,7 +793,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 0
+  m_VersionIndex: 7
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1872,7 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MeshFormatVersion: 0
+  m_MeshFormatVersion: 2
   m_Faces: []
   m_SharedVertices: []
   m_SharedTextures: []
@@ -1890,7 +1896,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 0
+  m_VersionIndex: 7
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
