@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StartArea : MonoBehaviour
@@ -26,6 +27,7 @@ public class StartArea : MonoBehaviour
         {
             // Start the timer when the player exits the start area
             timer.timeRunning = true;
+            SoundManager.Instance.PlaySFX("Whip", 1f);
             animator.SetTrigger("TimerStart");
             Debug.Log("Player exited start area. Timer started.");
         }
