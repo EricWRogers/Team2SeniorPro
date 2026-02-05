@@ -10,6 +10,9 @@ public class Checkpoint : MonoBehaviour
     [Header("Acorn reference (optional; auto-find if empty)")]
     public CarryableAcorn acorn;
 
+    [Header("Checkpoint Animaton")]
+    public Animator checkpointAnimator;
+
     [Header("Jump-pad Objecct")]
     public GameObject jumpPadObject;
 
@@ -64,6 +67,8 @@ public class Checkpoint : MonoBehaviour
         if (s_active && s_active != this) s_active.SetVisualActive(false);
         s_active = this;
         SetVisualActive(true);
+
+        if (checkpointAnimator) checkpointAnimator.SetTrigger("Checkpoint");
 
         ParticleManager.Instance.SpawnParticle("Confetti", transform.position + new Vector3(0f, -1.5f, 0f), Quaternion.Euler(-90, 0, 0));
         SoundManager.Instance.PlaySFX("checkpointSFX", 0.3f);
