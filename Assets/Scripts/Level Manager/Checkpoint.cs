@@ -10,6 +10,9 @@ public class Checkpoint : MonoBehaviour
     [Header("Acorn reference (optional; auto-find if empty)")]
     public CarryableAcorn acorn;
 
+    [Header("Checkpoint Animaton")]
+    public Animator checkpointAnimator;
+
     [Header("Jump-pad Objecct")]
     public GameObject jumpPadObject;
 
