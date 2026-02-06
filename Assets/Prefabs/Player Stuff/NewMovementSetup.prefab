@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 2857964503789427036}
   - component: {fileID: 6370834667682660888}
   - component: {fileID: 2487827173279851799}
+  - component: {fileID: 7135522167149671966}
   m_Layer: 0
   m_Name: NewTestPlayer
   m_TagString: Player
@@ -730,6 +731,21 @@ MonoBehaviour:
   vaultJumpForwardForce: 0
   vaultJumpUpForce: 0
   vaultCooldown: 0
+--- !u!114 &7135522167149671966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668661954304852184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9ac8e0768cf39419acd2278faea365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 2.2
+  terminalFallSpeed: 0
+  disableGravityOnSlope: 1
 --- !u!1 &3839653853592578239
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +811,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 28
+  m_VersionIndex: 34
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1898,7 +1914,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 28
+  m_VersionIndex: 34
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
