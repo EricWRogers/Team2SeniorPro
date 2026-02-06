@@ -542,12 +542,14 @@ MonoBehaviour:
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
-  groundPoundKey: 308
+  groundPoundKey: 9
   groundPoundWindup: 0.08
   groundPoundDownVelocity: 35
   groundPoundExtraGravity: 2.5
   groundPoundImpactCooldown: 0.15
-  groundPoundBounceVelocity: 0
+  groundPoundBounceVelocity: 1
+  groundPoundBoostOnSlope: 1
+  groundPoundSlopeEnterSpeed: 0
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -793,7 +795,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7
+  m_VersionIndex: 28
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1896,7 +1898,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7
+  m_VersionIndex: 28
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
