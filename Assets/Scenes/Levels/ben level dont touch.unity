@@ -1458,6 +1458,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1955506487}
+    - target: {fileID: 400754728068713101, guid: d842513d6ad4cda499267c5aee6d1f8e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -48.703064
+      objectReference: {fileID: 0}
     - target: {fileID: 769251352923877074, guid: d842513d6ad4cda499267c5aee6d1f8e, type: 3}
       propertyPath: m_Name
       value: Pause Menu
@@ -1651,7 +1655,7 @@ MonoBehaviour:
   m_text: horizontal level test
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1948313918874195100, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1997,11 +2001,6 @@ PrefabInstance:
 --- !u!20 &753349503 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5948866394842808777, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
-  m_PrefabInstance: {fileID: 753349502}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &753349504 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1731598353821464317, guid: 54b40d3938b041945a0f87d19f02aa11, type: 3}
   m_PrefabInstance: {fileID: 753349502}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &760344945
@@ -2485,7 +2484,7 @@ PrefabInstance:
     - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 753349504}
+      objectReference: {fileID: 0}
     - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: gameOverUI
       value: 
@@ -4001,7 +4000,7 @@ MonoBehaviour:
   m_text: duck!!!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1948313918874195100, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4095,7 +4094,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1948313918874195100, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
