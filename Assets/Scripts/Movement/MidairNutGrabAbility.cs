@@ -10,7 +10,7 @@ public class MidairGrabAbility : MonoBehaviour
     [Tooltip("Where the thrown object should attach when picked up")]
     public Transform carrySocket;
     [Tooltip("movement script; will be frozen during homing if assigned")]
-    public ThirdPersonMovement tpm;
+    public NewThirdPlayerMovement tpm;
 
     [Header("Homing Settings")]
     public float homingSpeed = 12f;

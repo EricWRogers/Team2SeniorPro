@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerCarryState : MonoBehaviour
 {
-    public Climbing climbing;          
-    public LedgeGrabbing ledgeGrab;    
-    public ThirdPersonMovement tpm;   
+    public NewClimbing climbing;          
+    public NewLedgeGrabbing ledgeGrab;    
+    public NewThirdPlayerMovement tpm;   
     public Rigidbody playerRb;  
     [Range(0.2f, 1f)] public float carrySpeedMultiplier = 0.5f;
 
@@ -16,8 +16,8 @@ public class PlayerCarryState : MonoBehaviour
     public void SetCarrying(bool on)
     {
         IsCarrying = on;
-        if (climbing) climbing.climbEnabled = !on;
-        if (ledgeGrab) ledgeGrab.ledgeGrabEnabled = !on;
+        if (climbing) climbing.climbing = !on;
+        if (ledgeGrab) ledgeGrab.holding = !on;
         if (tpm && baseMoveSpeed > 0f) tpm.walkSpeed = on ? baseMoveSpeed * carrySpeedMultiplier : baseMoveSpeed;
         
         if (playerRb) playerRb.useGravity = true;

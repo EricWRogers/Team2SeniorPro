@@ -17,7 +17,7 @@ public class RestartOnKey : MonoBehaviour
     private PlayerControlsB controls;
     private bool restartHeld;
 
-    private ThirdPersonMovement tpm;
+    private NewThirdPlayerMovement tpm;
 
     private void Awake()
     {

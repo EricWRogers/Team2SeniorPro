@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [Header("Player Reference")]
     //public PlayerStats playerStats;
     public MidairGrabAbility nutGrabAbility;
-    public ThirdPersonMovement movementSpeed;
+    public NewThirdPlayerMovement movementSpeed;
 
     void Update()
     {

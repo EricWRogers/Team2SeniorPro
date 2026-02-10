@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EmoteScript : MonoBehaviour
 {
-    public ThirdPersonMovement playerMovement;
+    public NewThirdPlayerMovement playerMovement;
     public Animator playerAnimator;
     public KeyCode emoteKey = KeyCode.P;
 
