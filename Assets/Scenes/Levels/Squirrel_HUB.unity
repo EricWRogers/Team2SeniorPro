@@ -26378,7 +26378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 85.922005
+      value: 87.21
       objectReference: {fileID: 0}
     - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -33979,6 +33979,14 @@ PrefabInstance:
       propertyPath: grabParticles
       value: 
       objectReference: {fileID: 1742785842}
+    - target: {fileID: 2857964503789427036, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: wallJumpUpForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857964503789427036, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: wallJumpSideForce
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3714680282047917832, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -34035,6 +34043,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1067191019}
+    - target: {fileID: 7135522167149671966, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: gravityScale
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: jumpForce
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: walkSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: sprintSpeed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37147,7 +37171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 85.5048
+      value: 85.88
       objectReference: {fileID: 0}
     - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37438,7 +37462,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: affd17913f69e5748bd851b387f677d1, type: 2}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: jumpForce
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2160692692228030793, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: m_LocalScale.x
