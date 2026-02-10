@@ -31,7 +31,7 @@ public class FlyCam2 : MonoBehaviour
     {
         string currentScene = GameManager.Instance.GetCurrentScene();
 
-        if (currentScene == "Level_1" && !hasPlayedFlyover_Level1)
+        if ((currentScene == "Level_1" || currentScene == "Level_2") && !hasPlayedFlyover_Level1)
         {
             hasPlayedFlyover_Level1 = true;
             
