@@ -536,17 +536,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2aadefa073900468b146f0f0bcab42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
-  sprintSpeed: 10
+  walkSpeed: 20
+  sprintSpeed: 20
   slideSpeed: 30
-  wallrunSpeed: 10
+  wallrunSpeed: 20
   climbSpeed: 3
-  vaultSpeed: 15
+  vaultSpeed: 30
   airMinSpeed: 7
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
   groundDrag: 4
-  jumpForce: 12
+  jumpForce: 18
   jumpCooldown: 0.25
   airMultiplier: 0.4
   crouchSpeed: 3.5
@@ -605,8 +605,8 @@ MonoBehaviour:
   climbSpeed: 10
   maxClimbTime: 0.75
   climbing: 0
-  climbJumpUpForce: 14
-  climbJumpBackForce: 12
+  climbJumpUpForce: 15
+  climbJumpBackForce: 30
   jumpKey: 32
   climbJumps: 0
   detectionLength: 0.7
@@ -664,8 +664,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   wallRunForce: 200
-  wallJumpUpForce: 12
-  wallJumpSideForce: 14
+  wallJumpUpForce: 25
+  wallJumpSideForce: 30
   wallClimbSpeed: 3
   maxWallRunTime: 4
   jumpKey: 32
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9ac8e0768cf39419acd2278faea365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 2.2
+  gravityScale: 1.5
   terminalFallSpeed: 0
   disableGravityOnSlope: 1
 --- !u!114 &883837923857014362
@@ -2236,7 +2236,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
