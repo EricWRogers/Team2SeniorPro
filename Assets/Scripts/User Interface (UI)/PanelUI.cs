@@ -24,14 +24,16 @@ public class PanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // Show panel on hover
     public void OnPointerEnter(PointerEventData eventData)
     {
-        statsPanel?.SetActive(true);
+        statsPanel.SetActive(true);
         RefreshStats();
     }
 
     // Hide panel when leaving
     public void OnPointerExit(PointerEventData eventData)
     {
-        statsPanel?.SetActive(false);
+        statsPanel.SetActive(false);
+        HideRanks();
+
     }
 
     public void RefreshStats()
@@ -65,5 +67,14 @@ public class PanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case "C": Crank?.SetActive(true); break;
             case "D": Drank?.SetActive(true); break;
         }
+    }
+
+    public void HideRanks()
+    {
+        Srank?.SetActive(false);
+        Arank?.SetActive(false);
+        Brank?.SetActive(false);
+        Crank?.SetActive(false);
+        Drank?.SetActive(false);
     }
 }

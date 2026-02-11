@@ -6749,22 +6749,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 481148827055439384, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-      propertyPath: m_text
-      value: THE BURROW
-      objectReference: {fileID: 0}
-    - target: {fileID: 481148827055439384, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-      propertyPath: m_fontSize
-      value: 24.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 481148827055439384, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 935795761772418939, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1490164261}
+    - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1931587430}
     - target: {fileID: 4221826294026196274, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: player
       value: 
@@ -34139,6 +34135,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe42e228774a60c47bd4e1e02763d732, type: 3}
+--- !u!114 &1931587430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905813003099719191, guid: 077ea059cd7a66e4bbd29793adb54574, type: 3}
+  m_PrefabInstance: {fileID: 1943513266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1943513266
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -175,7 +175,9 @@ MonoBehaviour:
   pauseSFX: {fileID: 8300000, guid: 718d7071b9793d84cbdd83476374fd8b, type: 3}
   clickSFX: {fileID: 8300000, guid: 718d7071b9793d84cbdd83476374fd8b, type: 3}
   pauseMenu: {fileID: 6544221909808427475}
-  scriptsToToggle: []
+  scriptsToToggle:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1420574837309271952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3188,7 +3190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL 1
+  m_text: THE BURROW
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
@@ -3215,10 +3217,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 24.25
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
