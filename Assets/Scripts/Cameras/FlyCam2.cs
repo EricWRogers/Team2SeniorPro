@@ -13,6 +13,7 @@ public class FlyCam2 : MonoBehaviour
     public SplineAnimate SplineCam; // Spline camera with spline animation component
     public MonoBehaviour pauseMenu; // Reference to pauseMenu script
     public TMP_Text infoText; // Reference to info text UI element
+    public TMP_Text inputText; // Reference to input text UI element
 
     [Header("Spline Speed Control")]
     public float baseSplineSpeed = 0.1f;  // normal speed
@@ -114,7 +115,7 @@ public class FlyCam2 : MonoBehaviour
         infoText.gameObject.SetActive(true);
 
         // Show messages with skip ability
-        yield return StartCoroutine(ShowMessage("Welcome to the Forest!", 1.2f));
+        yield return StartCoroutine(ShowMessage("Welcome to the " +inputText.text+"!", 1.2f));
         yield return StartCoroutine(ShowMessage("Collect the key to unlock the gate ahead.", 1.2f));
         yield return StartCoroutine(ShowMessage("Press [Q] to skip Scene & [R] to Restart Level.", 1.2f));
         yield return StartCoroutine(ShowMessage("Press/Hold [SPACE] to speed up Scene.", 1.2f));
