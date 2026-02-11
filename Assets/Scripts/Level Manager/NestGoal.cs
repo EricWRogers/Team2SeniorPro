@@ -13,7 +13,7 @@ public class NestGoal : MonoBehaviour
     //public CollectibleScript collectibles;
 
     [Header("Text Elements")]
-    public TMP_Text timerText;
+    public static TMP_Text timerText;
     public TMP_Text statsText;
 
     [Header("Events")]
