@@ -117,17 +117,17 @@ public class NestGoal : MonoBehaviour
             achievedRank = "S";
             Srank?.SetActive(true);
         }
-        else if (finalTime <= 120f)
+        else if (finalTime > 60f && finalTime <= 120f)
         {
             achievedRank = "A";
             Arank?.SetActive(true);
         }
-        else if (finalTime <= 180f)
+        else if (finalTime > 120f && finalTime <= 180f)
         {
             achievedRank = "B";
             Brank?.SetActive(true);
         }
-        else if (finalTime <= 240f)
+        else if (finalTime > 180f && finalTime <= 240f)
         {
             achievedRank = "C";
             Crank?.SetActive(true);
