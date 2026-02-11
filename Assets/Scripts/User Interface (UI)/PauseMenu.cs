@@ -47,6 +47,14 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void HUB()
+    {
+        PlaySound();
+        Debug.Log("Loading Burrow...");
+        Time.timeScale = 1f;
+        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the burrow, resets collectibles so it doesnt add 0 to total
+    }
+
     public void Resume()
     {
         StartCoroutine(WaitForPlay());

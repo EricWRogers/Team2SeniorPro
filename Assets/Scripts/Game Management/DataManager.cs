@@ -1,24 +1,13 @@
 using UnityEngine;
-using TMPro;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager Instance {get; private set;}
-
-    public GameManager GM;
-    public LoseScreen LS;
-    public NestGoal NG;
-
-    public static int totalCollectibles = 0;
-    public static float winTime = 0;
-    public static GameObject winRank;
+    public static DataManager Instance { get; private set; }
 
     void Awake()
     {
         if (Instance != null && Instance != this)
-        {
             Destroy(gameObject);
-        }
         else
         {
             Instance = this;
@@ -26,60 +15,86 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // ---------- BEST TIME ----------
+    public void SaveBestTime(string levelName, float time)
     {
-        if (GM == null)
+        float bestTime = PlayerPrefs.GetFloat(levelName + "_BestTime", float.MaxValue);
+
+        if (time < bestTime)
         {
-            GM = Object.FindFirstObjectByType<GameManager>();
-        }
-        if (NG == null)
-        {
-            NG = Object.FindFirstObjectByType<NestGoal>();
-        }
-        if (LS == null)
-        {
-            LS = Object.FindFirstObjectByType<LoseScreen>();
+            PlayerPrefs.SetFloat(levelName + "_BestTime", time);
+            PlayerPrefs.Save();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public float GetBestTime(string levelName)
     {
-        
+        return PlayerPrefs.GetFloat(levelName + "_BestTime", -1f);
     }
 
-    public void UpdateStats()
+    // ---------- BEST SCORE ----------
+    public void SaveBestScore(string levelName, int score)
     {
-        totalCollectibles = GM.collectibleCount;
+        int bestScore = PlayerPrefs.GetInt(levelName + "_BestScore", 0);
+
+        if (score > bestScore)
+        {
+            PlayerPrefs.SetInt(levelName + "_BestScore", score);
+            PlayerPrefs.Save();
+        }
     }
 
-    public void UpdateTimer()
+    public int GetBestScore(string levelName)
     {
-        winTime = GM.GetTime();
+        return PlayerPrefs.GetInt(levelName + "_BestScore", 0);
     }
 
-    public void UpdateRank()
+    // ---------- BEST RANK ----------
+    public void SaveBestRank(string levelName, string newRank)
     {
-        if (winTime <= 60f)
+        string savedRank = PlayerPrefs.GetString(levelName + "_BestRank", "");
+
+        if (IsBetterRank(newRank, savedRank))
         {
-            winRank = NG.Srank;
+            PlayerPrefs.SetString(levelName + "_BestRank", newRank);
+            PlayerPrefs.Save();
+            Debug.Log("New Best Rank: " + newRank);
         }
-        else if (winTime > 60f && winTime <= 120f)
+    }
+
+    public string GetBestRank(string levelName)
+    {
+        return PlayerPrefs.GetString(levelName + "_BestRank", "");
+    }
+
+    bool IsBetterRank(string newRank, string savedRank)
+    {
+        if (string.IsNullOrEmpty(savedRank)) return true;
+
+        return RankValue(newRank) > RankValue(savedRank);
+    }
+
+    int RankValue(string rank)
+    {
+        switch (rank)
         {
-            winRank = NG.Arank;
+            case "S": return 5;
+            case "A": return 4;
+            case "B": return 3;
+            case "C": return 2;
+            case "D": return 1;
+            default: return 0;
         }
-        else if (winTime > 120f && winTime <= 180f)
-        {
-            winRank = NG.Brank;
-        }
-        else if (winTime > 180f && winTime <= 240f)
-        {
-            winRank = NG.Crank;
-        }
-        else
-        {
-            winRank = LS.D_Rank; // Rank if time exceeds 240 seconds
-        }
+    }
+
+    // ---------- FORMAT TIME ----------
+    public string FormatTime(float time)
+    {
+        if (time < 0) return "--:--";
+
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

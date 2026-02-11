@@ -273,7 +273,6 @@ GameObject:
   m_Component:
   - component: {fileID: 584438454035561629}
   - component: {fileID: 7075432672837404062}
-  - component: {fileID: 3630200477129898012}
   - component: {fileID: 5473841154577139474}
   - component: {fileID: 9054265211140253324}
   m_Layer: 12
@@ -349,14 +348,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3630200477129898012
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2721656923782677898}
-  m_Enabled: 1
 --- !u!114 &5473841154577139474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f30cecb9fbb0641aa54a0d09c2b13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSpline: {fileID: 0}
+  splineSpeed: 0.1
 --- !u!1001 &8841849503468260966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1315,6 +1308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f30cecb9fbb0641aa54a0d09c2b13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSpline: {fileID: 0}
+  splineSpeed: 0.1
 --- !u!4 &9024710332560304525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 608a09134caa7154dbe815731094f088, type: 3}

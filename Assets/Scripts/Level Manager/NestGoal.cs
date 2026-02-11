@@ -31,6 +31,8 @@ public class NestGoal : MonoBehaviour
     public GameObject Brank;
     public GameObject Crank;
 
+    string achievedRank = "D";
+
     void Awake()
     {
         if (MainCam == null)
@@ -65,14 +67,20 @@ public class NestGoal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
         Debug.Log("WIN! Acorn delivered to the nest.");
+
+        // Scene Transition and UI updates
         PlayerSquirrel.SetActive(false);
         MainCam.SetActive(false);
         VictorySquirrel.SetActive(true);
+
         SFXSource.Play();
+
         WinScreen.SetActive(true);
         BerryUI.SetActive(false);
         TimerUI.SetActive(false);
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f; // Pause the game
@@ -92,26 +100,50 @@ public class NestGoal : MonoBehaviour
             SoundManager.Instance.SetMusicMuted(true);
         }
 
-        // Activates rank based on time
-        if (timer != null && timer.timeRemaining < 60f)
-        {
-            if (Srank != null) Srank.SetActive(true);
-        }
-        if (timer != null && timer.timeRemaining > 60f && timer.timeRemaining <= 120f)
-        {
-            if (Arank != null) Arank.SetActive(true);
-        }
-        if (timer != null && timer.timeRemaining > 120f && timer.timeRemaining <= 180f)
-        {
-            if (Brank != null) Brank.SetActive(true);
-        }
-        if (timer != null && timer.timeRemaining > 180f && timer.timeRemaining <= 240f)
-        {
-            if (Crank != null) Crank.SetActive(true);
-        }
-
         // Stop the timer
         timer.StopTimer();
+
+        float finalTime = timer.GetElapsedTime();
+
+        // Reset rank visuals
+        Srank?.SetActive(false);
+        Arank?.SetActive(false);
+        Brank?.SetActive(false);
+        Crank?.SetActive(false);
+
+        // Rank calculation (clean else-if chain)
+        if (finalTime <= 60f)
+        {
+            achievedRank = "S";
+            Srank?.SetActive(true);
+        }
+        else if (finalTime <= 120f)
+        {
+            achievedRank = "A";
+            Arank?.SetActive(true);
+        }
+        else if (finalTime <= 180f)
+        {
+            achievedRank = "B";
+            Brank?.SetActive(true);
+        }
+        else if (finalTime <= 240f)
+        {
+            achievedRank = "C";
+            Crank?.SetActive(true);
+        }
+        else
+        {
+            achievedRank = "D";
+        }
+
+        // Save best stats
+        string levelName = GameManager.Instance.GetCurrentScene();
+        int berries = GameManager.Instance.collectibleCount;
+
+        DataManager.Instance.SaveBestTime(levelName, finalTime);
+        DataManager.Instance.SaveBestScore(levelName, berries);
+        DataManager.Instance.SaveBestRank(levelName, achievedRank);
 
         // Update TMPro text with final time
         if (timerText != null && timer != null)

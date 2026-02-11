@@ -53,4 +53,10 @@ public class Timer : MonoBehaviour
         //whatever loser concequences we want to add later
         LS.GameOver();
     }
+
+    public float GetElapsedTime()
+    {
+        return timeRemaining;
+    }
+
 }
