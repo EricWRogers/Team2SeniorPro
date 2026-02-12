@@ -5,10 +5,17 @@ public class Checkpoint : MonoBehaviour
     [Header("Who can activate")]
     public string playerTag = "Player";
     public KeyCode activateKey = KeyCode.E;
+    public KeyCode teleportKey = KeyCode.R;
     public bool requireButtonPress = true;
 
     [Header("Acorn reference (optional; auto-find if empty)")]
     public CarryableAcorn acorn;
+
+    [Header("Respawn Point")]
+    public Transform respawnPoint; // Optional: if not set, will use checkpoint's own transform
+
+    [Header("Timer Saved")]
+    public Timer timer; // Reference to the Timer script to save the time when checkpoint is activated
 
     [Header("Checkpoint Animaton")]
     public Animator checkpointAnimator;
@@ -36,6 +43,14 @@ public class Checkpoint : MonoBehaviour
         var col = GetComponent<Collider>();
         col.isTrigger = true;
         SetVisualActive(this == s_active);
+    }
+
+    void Update()
+    {
+        if (KeyCode.R == teleportKey && Input.GetKeyDown(teleportKey) && Activated == true)
+        {
+            PlayerTeleport(respawnPoint);
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -92,5 +107,11 @@ public class Checkpoint : MonoBehaviour
             foreach (var m in r.materials)
                 m.color = on ? activeColor : inactiveColor;
         }
+    }
+
+    void PlayerTeleport(Transform target)
+    {
+        var player = GameObject.FindWithTag(playerTag);
+        if (player) player.transform.position = target.position;
     }
 }

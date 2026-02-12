@@ -47,7 +47,7 @@ public class NestGoal : MonoBehaviour
 
     public void ReturnToMain()
     {
-        GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
+        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the burrow, resets collectibles so it doesnt add 0 to total
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f; // Resume the game
