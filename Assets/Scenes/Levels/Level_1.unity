@@ -9927,26 +9927,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 301730769726878209, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: climbJumpUpForce
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 301730769726878209, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: climbJumpBackForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857964503789427036, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: wallJumpUpForce
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857964503789427036, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: wallJumpSideForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3031366289706466631, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6089284
@@ -9991,48 +9971,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel
       objectReference: {fileID: 0}
-    - target: {fileID: 7135522167149671966, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: gravityScale
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: jumpForce
-      value: 18
-      objectReference: {fileID: 0}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
       value: 
       objectReference: {fileID: 165085878}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: walkSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_speed
       value: 
       objectReference: {fileID: 2136892315}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: vaultSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: sprintSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: wallrunSpeed
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
---- !u!1 &538968010 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5038766617008396278, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-  m_PrefabInstance: {fileID: 538968009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &538968011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2668661954304852184, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
@@ -11641,7 +11592,7 @@ PrefabInstance:
     - target: {fileID: 4221826294026196274, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 538968010}
+      objectReference: {fileID: 538968011}
     - target: {fileID: 4591659664988602885, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_IgnoreReversedGraphics
       value: 1
