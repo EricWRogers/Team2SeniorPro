@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
     public CarryableAcorn acorn;
 
     [Header("Respawn Point")]
-    public Transform respawnPoint; // Optional: if not set, will use checkpoint's own transform
+    public Transform respawnPoint; // very optional but if not set, will use checkpoint's own transform (can set two automations)
 
     [Header("Timer Saved")]
     public Timer timerScript; // Reference to the Timer script to save the time when checkpoint is activated
@@ -106,12 +106,11 @@ public class Checkpoint : MonoBehaviour
 
         Transform target = respawnPoint ? respawnPoint : transform;
 
-        // save checkpoint for THIS RUN
+        // save checkpoint for THIS RUN ONLY
         float t = timerScript ? timerScript.GetElapsedTime() : 0f;
         RunCheckpointState.Set(target.position, t);
 
-        // OPTIONAL: if you we still want PlayerPrefs saving, keep it.
-        // But for "single run only", should remove it.
+        // player prefs only needed for consistent saving but in this case it needs to occur once
 
     }
 

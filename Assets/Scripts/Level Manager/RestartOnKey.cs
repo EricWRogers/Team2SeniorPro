@@ -7,7 +7,7 @@ public class RestartOnKey : MonoBehaviour
 
     private float holdTimer = 0f;
 
-    // --- NEW INPUT SYSTEM ---
+    //NEW INPUT SYSTEM
     private PlayerControlsB controls;
     private bool restartHeld;
     private bool didFullRestartThisHold;
@@ -28,7 +28,7 @@ public class RestartOnKey : MonoBehaviour
 
         controls.Player.Restart.canceled += ctx =>
         {
-            // If we DIDN'T full-restart, treat this as a TAP
+            // If we dont full restart, treat this as a TAP
             if (!didFullRestartThisHold)
             {
                 TryRespawnToCheckpoint();
@@ -59,56 +59,6 @@ public class RestartOnKey : MonoBehaviour
         }
     }
 
-    /*private void TryRespawnToCheckpoint()
-    {
-        if (!RunCheckpointState.HasCheckpoint) return;
-
-        var tagged = GameObject.FindWithTag("Player");
-        if (!tagged) return;
-
-        Vector3 targetPos = RunCheckpointState.Position;
-
-        // Find the mover on this object or its parents (handles tag-on-child case)
-        var mover = tagged.GetComponent<NewThirdPlayerMovement>();
-        if (mover != null && mover.rb != null)
-        {
-            Vector3 targetPos = RunCheckpointState.Position + Vector3.up * 0.2f;
-
-            var rb = mover.rb;
-
-            // Stop motion
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-
-            // Temporarily disable interpolation so it doesn't "smooth back"
-            var oldInterp = rb.interpolation;
-            rb.interpolation = RigidbodyInterpolation.None;
-
-            // Teleport
-            rb.position = targetPos;
-            rb.rotation = Quaternion.identity; // OPTIONAL: remove if you want to keep rotation
-
-            Physics.SyncTransforms();
-            rb.WakeUp();
-
-            // Restore interpolation
-            rb.interpolation = oldInterp;
-
-            // Reset mover states that can apply forces instantly
-            mover.sliding = false;
-            mover.crouching = false;
-            mover.wallrunning = false;
-            mover.climbing = false;
-            mover.vaulting = false;
-        }
-
-
-
-        // Rewind timer
-        var timer = FindFirstObjectByType<Timer>();
-        if (timer) timer.SetTime(RunCheckpointState.SavedTime);
-    }*/
-
     private void TryRespawnToCheckpoint()
     {
         if (!RunCheckpointState.HasCheckpoint) return;
@@ -124,9 +74,6 @@ public class RestartOnKey : MonoBehaviour
         if (timer) timer.SetTime(RunCheckpointState.SavedTime);
     }
 
-
-
-
     private void FullRestart()
     {
         Time.timeScale = 1f;
@@ -134,7 +81,7 @@ public class RestartOnKey : MonoBehaviour
         // Clear checkpoint for fresh run
         RunCheckpointState.Clear();
 
-        // Reset timer + wipe saved timer (if you’re still using PlayerPrefs there)
+        // Reset timer + wipe saved timer (if still using PlayerPrefs there)
         var timer = FindFirstObjectByType<Timer>();
         if (timer) timer.ResetTimerAndSaveData();
 
