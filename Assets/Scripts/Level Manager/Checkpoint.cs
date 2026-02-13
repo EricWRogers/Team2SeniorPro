@@ -15,7 +15,7 @@ public class Checkpoint : MonoBehaviour
     public Transform respawnPoint; // Optional: if not set, will use checkpoint's own transform
 
     [Header("Timer Saved")]
-    public Timer timer; // Reference to the Timer script to save the time when checkpoint is activated
+    public Timer timerScript; // Reference to the Timer script to save the time when checkpoint is activated
 
     [Header("Checkpoint Animaton")]
     public Animator checkpointAnimator;
@@ -38,6 +38,8 @@ public class Checkpoint : MonoBehaviour
 
     void Start()
     {
+        //if (!timerScript) timerScript = FindFirstObjectByType<Timer>(); //can auto find timer if needed
+
         if (!acorn) acorn = FindFirstObjectByType<CarryableAcorn>();
         
         var col = GetComponent<Collider>();
@@ -45,13 +47,15 @@ public class Checkpoint : MonoBehaviour
         SetVisualActive(this == s_active);
     }
 
-    void Update()
+    /*void Update()
     {
-        if (KeyCode.R == teleportKey && Input.GetKeyDown(teleportKey) && Activated == true)
+        if (Input.GetKeyDown(teleportKey) && Activated == true)
         {
             PlayerTeleport(respawnPoint);
+            //if (timerScript) timerScript.SaveTimer();
         }
-    }
+    }*/
+
 
     void OnTriggerStay(Collider other)
     {
@@ -96,6 +100,19 @@ public class Checkpoint : MonoBehaviour
             jumpPadObject.SetActive(true);
         }
         Activated = true;
+       
+        //Transform target = respawnPoint ? respawnPoint : transform;
+        if (!timerScript) timerScript = FindFirstObjectByType<Timer>();
+
+        Transform target = respawnPoint ? respawnPoint : transform;
+
+        // save checkpoint for THIS RUN
+        float t = timerScript ? timerScript.GetElapsedTime() : 0f;
+        RunCheckpointState.Set(target.position, t);
+
+        // OPTIONAL: if you we still want PlayerPrefs saving, keep it.
+        // But for "single run only", should remove it.
+
     }
 
     void SetVisualActive(bool on)

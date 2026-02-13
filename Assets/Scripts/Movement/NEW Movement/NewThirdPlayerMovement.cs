@@ -89,6 +89,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private NewSliding slidingScript; // <-- IMPORTANT: we call this on slope impact
     public Transform orientation;
 
+    private float teleportLockTimer = 0f;
+
     float horizontalInput;
     float verticalInput;
 
@@ -337,6 +339,12 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (teleportLockTimer > 0f)  //new test for timer and restart on checkpoint
+        {
+            teleportLockTimer -= Time.fixedDeltaTime;
+            return;
+        }
+
         if (groundPounding) return;
         if (climbingScript != null && climbingScript.exitingWall) return;
         if (restricted) return;
@@ -523,6 +531,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
             if (v.y < 0f) v.y = 0f;
             rb.linearVelocity = v;
         }
+    }
+    
+    public void TeleportTo(Vector3 pos)
+    {
+        teleportLockTimer = 0.1f; // 0.1s stops forces for a couple physics frames
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.position = pos;
+        Physics.SyncTransforms();
     }
 }
 
