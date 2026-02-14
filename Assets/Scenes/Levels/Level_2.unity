@@ -17486,6 +17486,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3826659481972124643, guid: a0594ecb9d8af624c81240e4ae75dfc1, type: 3}
   m_PrefabInstance: {fileID: 134593450}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &731040360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3304135914869473051, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 1241684034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &731921602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8730402636029893078, guid: 68b3fa58d93268645ba714e1629f5117, type: 3}
@@ -29832,7 +29843,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 481148827055439384, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_text
-      value: LEVEL 2
+      value: THE HARVEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 481148827055439384, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: m_fontSize
+      value: 22.2
       objectReference: {fileID: 0}
     - target: {fileID: 935795761772418939, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_Name
@@ -31843,6 +31858,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3952908457729018571, guid: 312c863c4be9635459f147401039a4cc, type: 3}
   m_PrefabInstance: {fileID: 1299564574}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1299589443 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5074820941058126303, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 1241684034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1303728713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36757,11 +36783,11 @@ PrefabInstance:
       objectReference: {fileID: 98710506}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7933846
+      value: -2.793384
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.79
+      value: 17.82
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.z
@@ -36836,25 +36862,13 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: jumpForce
-      value: 18
-      objectReference: {fileID: 0}
+      propertyPath: text_mode
+      value: 
+      objectReference: {fileID: 1299589443}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: walkSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: vaultSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: sprintSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-      propertyPath: wallrunSpeed
-      value: 20
-      objectReference: {fileID: 0}
+      propertyPath: text_speed
+      value: 
+      objectReference: {fileID: 731040360}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

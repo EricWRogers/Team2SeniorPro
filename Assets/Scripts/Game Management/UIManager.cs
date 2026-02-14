@@ -7,7 +7,7 @@ using System.Globalization;
 public class UIManagement : MonoBehaviour
 {
     [Header("TextMeshPro UI Elements")]
-    public TMP_Text speedText;
+    //public TMP_Text speedText;
     public TMP_Text collectibleText;
 
     [Header("Player Reference")]
@@ -38,7 +38,7 @@ public class UIManagement : MonoBehaviour
         
         if(player != null)
         {
-            speedText.text = (player.GetComponent<Rigidbody>().linearVelocity.magnitude).ToString("F1", CultureInfo.InvariantCulture) + " mp/h";
+            //speedText.text = (player.GetComponent<Rigidbody>().linearVelocity.magnitude).ToString("F1", CultureInfo.InvariantCulture) + " mp/h";
         }
     }
 }
