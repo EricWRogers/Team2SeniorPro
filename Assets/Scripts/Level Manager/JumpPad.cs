@@ -5,17 +5,19 @@ public class JumpPad : MonoBehaviour
     [SerializeField] private float jumpForce = 15f;
 
     private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Player"))
     {
-        // Check if the colliding object is the player
-        if (other.CompareTag("Player"))
-        {
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Reset vertical velocity
+        Rigidbody rb = other.attachedRigidbody;
 
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange); // Apply upward jump force
-            }
+        if (rb != null)
+        {
+            Vector3 vel = rb.linearVelocity;
+            vel.y = 0f;
+            rb.linearVelocity = vel;
+
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
+}
 }
