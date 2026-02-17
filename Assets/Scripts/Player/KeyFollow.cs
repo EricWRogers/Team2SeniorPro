@@ -24,7 +24,7 @@ public class KeyFollow : MonoBehaviour
     void FollowPlayer()
     {
         // Store player position in history
-        positionHistory.Add(player.position - player.forward * 2f); // Store position slightly behind the player
+        positionHistory.Add(player.position - player.forward); // Store position slightly behind the player
 
         // Move to position from 'n' frames ago
         int index = Mathf.FloorToInt(followDelay * 60f); // Convert delay to frames (assuming 60 FPS)
