@@ -5,6 +5,9 @@ public class Key : MonoBehaviour
 {
     public GameObject bars;
     public TMP_Text keyText;
+    public TMP_Text keyScore;
+    public int keyValue = 1;
+    public bool isCollected = false;
     public Animator textAnimatior;
 
     float spinSpeed = 20.0f;
@@ -27,7 +30,10 @@ public class Key : MonoBehaviour
             bars.SetActive(false);
             keyText.gameObject.SetActive(true);
             keyText.text = "You got the key!";
+            isCollected = true;
+            keyScore.text = "+" + keyValue.ToString();
             textAnimatior.SetTrigger("KeyCollect");
+
             Destroy(gameObject);
         }
     }
