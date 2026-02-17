@@ -6,7 +6,7 @@ public class Key : MonoBehaviour
     public GameObject bars;
     public TMP_Text keyText;
     public TMP_Text keyScore;
-    public int keyValue = 1;
+    public int keyNum = 0;
     public bool isCollected = false;
     public Animator textAnimatior;
 
@@ -30,7 +30,8 @@ public class Key : MonoBehaviour
             bars.SetActive(false);
             keyText.gameObject.SetActive(true);
             keyText.text = "You got the key!";
-            keyScore.text = "+" + keyValue.ToString();
+            keyNum++;
+            keyScore.text = keyNum.ToString();
             textAnimatior.SetTrigger("KeyCollect");
             isCollected = true;
             Destroy(gameObject);
