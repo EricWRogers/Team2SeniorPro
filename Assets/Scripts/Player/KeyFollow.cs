@@ -19,11 +19,12 @@ public class KeyFollow : MonoBehaviour
             FollowPlayer(); // If the key has been collected, start following the player
         }
 
-        // rotate spawnedKey
+        // rotate spawnedKey around player
         if (spawnedKey.activeInHierarchy)
         {
-            spawnedKey.transform.Rotate(0, 50 * Time.deltaTime, 0); // Rotate the key around the Y-axis
+            spawnedKey.transform.RotateAround(player.position, Vector3.up, 20 * Time.deltaTime);
         }
+        
         
     }
 
