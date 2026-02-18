@@ -31808,6 +31808,10 @@ PrefabInstance:
       propertyPath: text_speed
       value: 
       objectReference: {fileID: 355378731}
+    - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31819,6 +31823,11 @@ PrefabInstance:
 --- !u!1 &1929731632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2668661954304852184, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+  m_PrefabInstance: {fileID: 1929731631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1929731633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7002487782435042816, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
   m_PrefabInstance: {fileID: 1929731631}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1929885248
@@ -36139,7 +36148,7 @@ PrefabInstance:
     - target: {fileID: 2250685719423970268, guid: 958e791493b5a1f4796932ea48699ff3, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1929731633}
     - target: {fileID: 2250685719423970268, guid: 958e791493b5a1f4796932ea48699ff3, type: 3}
       propertyPath: playerCanvas
       value: 
