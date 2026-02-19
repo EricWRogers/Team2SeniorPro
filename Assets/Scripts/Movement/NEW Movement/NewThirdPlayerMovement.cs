@@ -34,13 +34,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float crouchYScale;
     private float startYScale;
 
-    [Header("Keybinds")]
+    /*[Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode crouchKey = KeyCode.LeftControl;*/
 
     [Header("Ground Pound")]
-    public KeyCode groundPoundKey = KeyCode.LeftAlt;
+    //public KeyCode groundPoundKey = KeyCode.LeftAlt;
     public float groundPoundWindup = 0.08f;
     public float groundPoundDownVelocity = 35f;
     public float groundPoundExtraGravity = 2.5f;
@@ -53,6 +53,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float groundPoundSlopeEnterSpeed = 0f;
 
     private bool groundPounding;
+    public bool dashing;
     private bool wasGroundedLastFrame;
     private float groundPoundCooldownTimer;
     private bool leftGroundSinceLastPound;
@@ -78,7 +79,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
     //private InputAction wallRunAction;
     private InputAction slideAction;
 
-    private Vector2 moveInput;
+    private PlayerControlsB controls;
+    private Vector2 moveInputNIS;
     private bool sprintHeld;
     private bool crouchHeld;
     private bool jumpPressedThisFrame;
@@ -99,9 +101,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     public Rigidbody rb;
 
-    private PlayerControlsB controls;
-    private Vector2 moveInputNIS;
-
     public MovementState state;
     public enum MovementState
     {
@@ -115,6 +114,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         crouching,
         sliding,
         groundPounding,
+        dashing,
         air
     }
 
@@ -134,7 +134,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        controls = new PlayerControlsB();
+        //controls = new PlayerControlsB();
 
         climbingScriptDone = GetComponent<ClimbingDone>();
         slidingScript = GetComponent<NewSliding>();
@@ -194,44 +194,67 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        //general movement of the player
-        controls.Player.Move.performed += ctx => moveInputNIS = ctx.ReadValue<Vector2>();
-        controls.Player.Move.canceled += ctx => moveInputNIS = Vector2.zero;
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
 
-        //the button inputs
+        controls.Player.Sprint.started += OnSprintStarted;
+        controls.Player.Sprint.canceled += OnSprintCanceled;
 
+        controls.Player.Crouch.started += OnCrouchStarted;
+        controls.Player.Crouch.canceled += OnCrouchCanceled;
+
+        controls.Player.Jump.started += OnJumpStarted;
+        controls.Player.GroundPound.started += OnGroundPoundStarted;
 
         controls.Player.Enable();
     }
 
     private void OnDisable()
     {
+        controls.Player.Move.performed -= OnMove;
+        controls.Player.Move.canceled -= OnMove;
+
+        controls.Player.Sprint.started -= OnSprintStarted;
+        controls.Player.Sprint.canceled -= OnSprintCanceled;
+
+        controls.Player.Crouch.started -= OnCrouchStarted;
+        controls.Player.Crouch.canceled -= OnCrouchCanceled;
+
+        controls.Player.Jump.started -= OnJumpStarted;
+        controls.Player.GroundPound.started -= OnGroundPoundStarted;
+
         controls.Player.Disable();
     }
 
-    private void OnMove()
+    //below stored subscriptions as methods so inputs wont double fire
+    private void OnSprintStarted(InputAction.CallbackContext _) => sprintHeld = true;
+    private void OnSprintCanceled(InputAction.CallbackContext _) => sprintHeld = false;
+    private void OnCrouchStarted(InputAction.CallbackContext _) => crouchHeld = true;
+    private void OnCrouchCanceled(InputAction.CallbackContext _) => crouchHeld = false;
+    private void OnJumpStarted(InputAction.CallbackContext _) => jumpPressedThisFrame = true;
+    private void OnGroundPoundStarted(InputAction.CallbackContext _) => groundPoundPressedThisFrame = true;
+    private void OnMove(InputAction.CallbackContext ctx)
     {
-        
+        moveInputNIS = ctx.ReadValue<Vector2>();
     }
 
     private void MyInput()
     {
-        //horizontalInput = Input.GetAxisRaw("Horizontal");
-        //verticalInput = Input.GetAxisRaw("Vertical");
         horizontalInput = moveInputNIS.x;
         verticalInput = moveInputNIS.y;
 
-
-        // Jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        // Jump (press)
+        if (jumpPressedThisFrame && readyToJump && grounded)
         {
+            jumpPressedThisFrame = false;
             readyToJump = false;
+
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        // Ground pound
-        if (Input.GetKeyDown(groundPoundKey)
+        // Ground pound (press)
+        if (groundPoundPressedThisFrame
             && !grounded
             && !groundPounding
             && groundPoundCooldownTimer <= 0f
@@ -240,23 +263,29 @@ public class NewThirdPlayerMovement : MonoBehaviour
             && !climbing
             && !vaulting)
         {
+            groundPoundPressedThisFrame = false;
             StartCoroutine(GroundPoundRoutine());
         }
 
-        // Crouch (NOTE: if you keep crouchKey = LeftControl, change slideKey in NewSliding)
-        if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
+        // Crouch (hold OR toggle-style; this is HOLD-style)
+        if (crouchHeld && !crouching && Mathf.Abs(horizontalInput) < 0.001f && Mathf.Abs(verticalInput) < 0.001f)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
             crouching = true;
         }
 
-        if (Input.GetKeyUp(crouchKey))
+        if (!crouchHeld && crouching)
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             crouching = false;
         }
+
+        // clear one-frame presses if they weren’t consumed
+        jumpPressedThisFrame = false;
+        groundPoundPressedThisFrame = false;
     }
+
 
     bool keepMomentum;
     private void StateHandler()
@@ -287,6 +316,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
         }
+        else if (dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = 0f;  // we’re using dash impulse, not moveSpeed forces or equal it to lastDesiredMoveSpeed maybe
+        }
         else if (sliding)
         {
             state = MovementState.sliding;
@@ -311,7 +345,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
             state = MovementState.groundPounding;
             desiredMoveSpeed = 0f;
         }
-        else if (grounded && Input.GetKey(sprintKey))
+        else if (grounded && sprintHeld)
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
@@ -382,7 +416,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
             return;
         }
 
-        if (groundPounding) return;
+        if (dashing) return;
+        if (groundPounding) return;  
         if (climbingScript != null && climbingScript.exitingWall) return;
         if (restricted) return;
 
@@ -410,6 +445,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
+        if (dashing) return;   
+        
         if (OnSlope() && !exitingSlope)
         {
             if (rb.linearVelocity.magnitude > moveSpeed)

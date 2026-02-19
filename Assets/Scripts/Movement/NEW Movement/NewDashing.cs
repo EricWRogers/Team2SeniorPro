@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewDashing : MonoBehaviour
 {
     [Header("References")]
     public Transform orientation;
     public Transform playerCam;
+
     private Rigidbody rb;
-    
-    private PlayerMovementDashing tpm;  //check this
+    private NewThirdPlayerMovement tpm;
 
     [Header("Dashing")]
     public float dashForce = 70f;
     public float dashUpwardForce = 2f;
-    public float maxDashYSpeed;
     public float dashDuration = 0.4f;
 
     [Header("Settings")]
@@ -24,77 +22,106 @@ public class NewDashing : MonoBehaviour
     public bool resetYVel = true;
 
     [Header("Cooldown")]
-    public float dashCd = 1.5f; // cooldown of your dash ability
+    public float dashCd = 1.5f;
     private float dashCdTimer;
 
-    [Header("Input")]
-    public KeyCode dashKey = KeyCode.E;
+    private PlayerControlsB controls;
+    private Vector2 moveInput;
+    private bool dashPressedThisFrame;
+
+    private Vector3 delayedForceToApply;
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+    }
 
     private void Start()
     {
-        if (playerCam == null)
-            playerCam = Camera.main.transform;
+        if (orientation == null) orientation = transform;
+        if (playerCam == null && Camera.main != null) playerCam = Camera.main.transform;
 
         rb = GetComponent<Rigidbody>();
-        tpm = GetComponent<PlayerMovementDashing>();
+        tpm = GetComponent<NewThirdPlayerMovement>();
+    }
+
+    private void OnEnable()
+    {
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
+
+        controls.Player.Dash.started += OnDashStarted;
+
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Move.performed -= OnMove;
+        controls.Player.Move.canceled -= OnMove;
+
+        controls.Player.Dash.started -= OnDashStarted;
+
+        controls.Player.Disable();
+
+        // safety cleanup
+        CancelInvoke();
+        dashPressedThisFrame = false;
+
+        if (tpm != null)
+        {
+            tpm.dashing = false;
+            tpm.restricted = false; // only matters if you use restricted elsewhere
+        }
+
+        if (rb != null && disableGravity)
+            rb.useGravity = true;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(dashKey))
-            Dash();
-
-        if (dashCdTimer > 0)
+        if (dashCdTimer > 0f)
             dashCdTimer -= Time.deltaTime;
+
+        if (dashPressedThisFrame)
+        {
+            dashPressedThisFrame = false;
+            TryDash();
+        }
     }
 
-    private void Dash()
+    private void OnMove(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
+    private void OnDashStarted(InputAction.CallbackContext _) => dashPressedThisFrame = true;
+
+    private void TryDash()
     {
-        // cooldown implementation
-        if (dashCdTimer > 0) return;
-        else dashCdTimer = dashCd;
+        if (dashCdTimer > 0f) return;
+        dashCdTimer = dashCd;
 
-        // this will cause the PlayerMovement script to change to MovementMode.dashing
-        tpm.dashing = true;
-        tpm.maxYSpeed = maxDashYSpeed;
+        CancelInvoke(nameof(DelayedDashForce));
+        CancelInvoke(nameof(ResetDash));
 
-        Transform forwardT;
+        if (tpm != null)
+        {
+            tpm.dashing = true;     // <-- important
+            // tpm.restricted = true; // optional (usually not needed if MovePlayer/SpeedControl bail on dashing)
+        }
 
-        // decide wheter you want to use the playerCam or the playersOrientation as forward direction
-        if (useCameraForward)
-            forwardT = playerCam;
-        else
-            forwardT = orientation;
-
-        // call the GetDirection() function below to calculate the direction
+        Transform forwardT = (useCameraForward && playerCam != null) ? playerCam : orientation;
         Vector3 direction = GetDirection(forwardT);
 
-        // calculate the forward and upward force
         Vector3 forceToApply = direction * dashForce + orientation.up * dashUpwardForce;
 
-        // disable gravity of the players rigidbody if needed
-        if (disableGravity)
-            rb.useGravity = false;
+        if (disableGravity) rb.useGravity = false;
 
-        // reset the y velocity of the players rigidbody to 0 if needed
         if (resetYVel)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        // add the dash force (deayed)
         delayedForceToApply = forceToApply;
-
-        // limit y speed
-        //if (delayedForceToApply.y > maxDashYSpeed)
-        //    delayedForceToApply = new Vector3(delayedForceToApply.x, maxDashYSpeed, delayedForceToApply.z);
-
-        print("dashForce: " + delayedForceToApply);
         Invoke(nameof(DelayedDashForce), 0.025f);
-
-        // make sure the dash stops after the dashDuration is over
         Invoke(nameof(ResetDash), dashDuration);
     }
 
-    private Vector3 delayedForceToApply;
     private void DelayedDashForce()
     {
         rb.AddForce(delayedForceToApply, ForceMode.Impulse);
@@ -102,31 +129,28 @@ public class NewDashing : MonoBehaviour
 
     private void ResetDash()
     {
-        tpm.dashing = false;
-        tpm.maxYSpeed = 0;
+        if (tpm != null)
+        {
+            tpm.dashing = false;
+            tpm.restricted = false;
+        }
 
-        // if you disabled it before, activate the gravity of the rigidbody again
-        if (disableGravity)
-            rb.useGravity = true;
+        if (disableGravity) rb.useGravity = true;
     }
 
     private Vector3 GetDirection(Transform forwardT)
     {
-        // get the W,A,S,D input
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        float x = moveInput.x;
+        float z = moveInput.y;
 
-        // 2 Vector3 for the forward and right velocity
-        Vector3 direction = new Vector3();
+        Vector3 dir = allowAllDirections
+            ? forwardT.forward * z + forwardT.right * x
+            : forwardT.forward;
 
-        if (allowAllDirections)
-            direction = forwardT.forward * z + forwardT.right * x;
-        else
-            direction = forwardT.forward;
+        if (Mathf.Abs(x) < 0.001f && Mathf.Abs(z) < 0.001f)
+            dir = forwardT.forward;
 
-        if (x == 0 && z == 0) 
-            direction = forwardT.forward;
-
-        return direction.normalized;
+        dir.y = 0f; // optional: keeps dash flat, remove if you want dash to follow camera pitch
+        return dir.normalized;
     }
 }
