@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-/// added if(tpm.wallrunning) return;
 
 public class NewSliding : MonoBehaviour
 {
@@ -13,19 +9,24 @@ public class NewSliding : MonoBehaviour
     private NewThirdPlayerMovement tpm;
 
     [Header("Sliding")]
-    public float maxSlideTime;
-    public float slideForce;
+    public float maxSlideTime = 0.75f;
+    public float slideForce = 400f;
     private float slideTimer;
 
-    public float slideYScale;
+    public float slideYScale = 0.5f;
     private float startYScale;
 
-    [Header("Input")]
-    public KeyCode slideKey = KeyCode.C; // CHANGE THIS if crouch is LeftControl
-    private float horizontalInput;
-    private float verticalInput;
+    [Header("Input (New Input System)")]
+    private PlayerControlsB controls;
+    private Vector2 moveInput;
+    private bool slideHeld; // for "hold-to-slide" behavior
 
     private bool externallyForcedSlide; // started by something else (ground pound, etc.)
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+    }
 
     private void Start()
     {
@@ -35,18 +36,35 @@ public class NewSliding : MonoBehaviour
         startYScale = playerObj.localScale.y;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-        // Normal input slide start
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
-            StartSlideInternal(isExternal: false);
+        controls.Player.Slide.started += ctx =>
+        {
+            slideHeld = true;
 
-        // Normal input slide stop (only if slide was started by key)
-        if (Input.GetKeyUp(slideKey) && tpm.sliding && !externallyForcedSlide)
-            StopSlideInternal();
+            // Only start slide if player is trying to move (same logic you had)
+            if (moveInput.sqrMagnitude > 0.001f)
+                StartSlideInternal(isExternal: false);
+        };
+
+        controls.Player.Slide.canceled += ctx =>
+        {
+            slideHeld = false;
+
+            // Only stop if this slide was started by the key (not external)
+            if (tpm.sliding && !externallyForcedSlide)
+                StopSlideInternal();
+        };
+
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Disable();
     }
 
     private void FixedUpdate()
@@ -74,7 +92,6 @@ public class NewSliding : MonoBehaviour
         if (tpm.wallrunning) return;
 
         externallyForcedSlide = isExternal;
-
         tpm.sliding = true;
 
         // apply slide scale
@@ -87,20 +104,17 @@ public class NewSliding : MonoBehaviour
 
     private void SlidingMovement()
     {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 inputDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
 
-        // If externally started and no input, give it *some* direction so slope slide works instantly
+        // If externally started and no input, give it some direction so slope slide works instantly
         if (externallyForcedSlide && inputDirection.sqrMagnitude < 0.001f)
-        {
             inputDirection = orientation.forward;
-        }
 
         // sliding normal
         if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
         {
             rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
-
-            slideTimer -= Time.deltaTime;
+            slideTimer -= Time.fixedDeltaTime;
         }
         // sliding down a slope
         else
@@ -108,7 +122,13 @@ public class NewSliding : MonoBehaviour
             rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
         }
 
-        if (slideTimer <= 0)
+        // End conditions
+        if (slideTimer <= 0f)
+            StopSlideInternal();
+
+        // Optional: if you want hold-to-slide, end when released (only for non-external slides)
+        // (Your old code ended on key up, so this matches.)
+        if (!slideHeld && tpm.sliding && !externallyForcedSlide)
             StopSlideInternal();
     }
 
