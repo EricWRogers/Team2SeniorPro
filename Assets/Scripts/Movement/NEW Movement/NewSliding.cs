@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-/// added if(tpm.wallrunning) return;
+using UnityEngine.InputSystem;
 
 public class NewSliding : MonoBehaviour
 {
@@ -13,52 +10,66 @@ public class NewSliding : MonoBehaviour
     private NewThirdPlayerMovement tpm;
 
     [Header("Sliding")]
-    public float maxSlideTime;
-    public float slideForce;
+    public float maxSlideTime = 0.75f;
+    public float slideForce = 400f;
     private float slideTimer;
 
-    public float slideYScale;
+    public float slideYScale = 0.5f;
     private float startYScale;
 
-    [Header("Input")]
-    public KeyCode slideKey = KeyCode.C; // CHANGE THIS if crouch is LeftControl
-    private float horizontalInput;
-    private float verticalInput;
+    [Header("Input (New Input System)")]
+    private PlayerControlsB controls;
+    private Vector2 moveInput;
+    private bool slideHeld;
 
-    private bool externallyForcedSlide; // started by something else (ground pound, etc.)
+    private bool externallyForcedSlide;
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+    }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         tpm = GetComponent<NewThirdPlayerMovement>();
 
+        if (tpm != null && orientation == null) orientation = tpm.orientation;
+        if (orientation == null) orientation = transform;
+
+        if (playerObj == null) playerObj = transform;
+
         startYScale = playerObj.localScale.y;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
 
-        // Normal input slide start
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
-            StartSlideInternal(isExternal: false);
+        controls.Player.Slide.started += OnSlideStarted;
+        controls.Player.Slide.canceled += OnSlideCanceled;
 
-        // Normal input slide stop (only if slide was started by key)
-        if (Input.GetKeyUp(slideKey) && tpm.sliding && !externallyForcedSlide)
-            StopSlideInternal();
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Move.performed -= OnMove;
+        controls.Player.Move.canceled -= OnMove;
+
+        controls.Player.Slide.started -= OnSlideStarted;
+        controls.Player.Slide.canceled -= OnSlideCanceled;
+
+        controls.Player.Disable();
     }
 
     private void FixedUpdate()
     {
-        if (tpm.sliding)
+        if (tpm != null && tpm.sliding)
             SlidingMovement();
     }
 
-    /// <summary>
-    /// Call this from other scripts (like ground pound) to start a slide
-    /// without needing slideKey / input direction.
-    /// </summary>
     public void StartSlideExternal(bool resetTimer = true)
     {
         StartSlideInternal(isExternal: true, resetTimer: resetTimer);
@@ -69,51 +80,75 @@ public class NewSliding : MonoBehaviour
         StopSlideInternal();
     }
 
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        moveInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnSlideStarted(InputAction.CallbackContext _)
+    {
+        slideHeld = true;
+
+        if (moveInput.sqrMagnitude > 0.001f)
+            StartSlideInternal(isExternal: false, resetTimer: true);
+    }
+
+    private void OnSlideCanceled(InputAction.CallbackContext _)
+    {
+        slideHeld = false;
+
+        if (tpm != null && tpm.sliding && !externallyForcedSlide)
+            StopSlideInternal();
+    }
+
     private void StartSlideInternal(bool isExternal, bool resetTimer = true)
     {
+        if (tpm == null) return;
         if (tpm.wallrunning) return;
 
         externallyForcedSlide = isExternal;
-
         tpm.sliding = true;
 
-        // apply slide scale
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         if (resetTimer)
             slideTimer = maxSlideTime;
+        else if (slideTimer <= 0f)
+            slideTimer = maxSlideTime; // safety so it doesn't insta-end
     }
 
     private void SlidingMovement()
     {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 inputDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
 
-        // If externally started and no input, give it *some* direction so slope slide works instantly
         if (externallyForcedSlide && inputDirection.sqrMagnitude < 0.001f)
-        {
             inputDirection = orientation.forward;
-        }
 
-        // sliding normal
         if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
         {
             rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
-            slideTimer -= Time.deltaTime;
+            if (slideTimer > 0f)
+            {
+                slideTimer -= Time.fixedDeltaTime;
+                if (slideTimer <= 0f) StopSlideInternal();
+            }
         }
-        // sliding down a slope
         else
         {
             rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
+            // optional: you can also tick timer here if you want slope slide to time out
         }
 
-        if (slideTimer <= 0)
+        if (!slideHeld && tpm.sliding && !externallyForcedSlide)
             StopSlideInternal();
     }
 
     private void StopSlideInternal()
     {
+        if (tpm == null) return;
+
         tpm.sliding = false;
         externallyForcedSlide = false;
 

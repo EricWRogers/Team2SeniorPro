@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewWallRunning : MonoBehaviour
 {
@@ -14,15 +13,6 @@ public class NewWallRunning : MonoBehaviour
     public float maxWallRunTime;
     private float wallRunTimer;
 
-    [Header("Input")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode upwardsRunKey = KeyCode.LeftShift;
-    public KeyCode downwardsRunKey = KeyCode.LeftControl;
-    private bool upwardsRunning;
-    private bool downwardsRunning;
-    private float horizontalInput;
-    private float verticalInput;
-
     [Header("Detection")]
     public float wallCheckDistance;
     public float minJumpHeight;
@@ -33,12 +23,12 @@ public class NewWallRunning : MonoBehaviour
 
     [Header("Exiting")]
     private bool exitingWall;
-    public float exitWallTime;
+    public float exitWallTime = 0.2f;
     private float exitWallTimer;
 
     [Header("Gravity")]
-    public bool useGravity;
-    public float gravityCounterForce;
+    public bool useGravity = true;
+    public float gravityCounterForce = 10f;
 
     [Header("References")]
     public Transform orientation;
@@ -47,29 +37,86 @@ public class NewWallRunning : MonoBehaviour
     private NewLedgeGrabbing lg;
     private Rigidbody rb;
 
+    // --- New Input System ---
+    private PlayerControlsB controls;
+    private Vector2 moveInput;
+    private bool upHeld;     // Sprint
+    private bool downHeld;   // Crouch
+    private bool jumpPressedThisFrame;
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         tpm = GetComponent<NewThirdPlayerMovement>();
         lg = GetComponent<NewLedgeGrabbing>();
+
+        if (orientation == null && tpm != null) orientation = tpm.orientation;
+        if (orientation == null) orientation = transform;
     }
+
+    private void OnEnable()
+    {
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
+
+        controls.Player.Sprint.started += OnUpStarted;
+        controls.Player.Sprint.canceled += OnUpCanceled;
+
+        controls.Player.Crouch.started += OnDownStarted;
+        controls.Player.Crouch.canceled += OnDownCanceled;
+
+        controls.Player.Jump.started += OnJumpStarted;
+
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Move.performed -= OnMove;
+        controls.Player.Move.canceled -= OnMove;
+
+        controls.Player.Sprint.started -= OnUpStarted;
+        controls.Player.Sprint.canceled -= OnUpCanceled;
+
+        controls.Player.Crouch.started -= OnDownStarted;
+        controls.Player.Crouch.canceled -= OnDownCanceled;
+
+        controls.Player.Jump.started -= OnJumpStarted;
+
+        controls.Player.Disable();
+    }
+
+    private void OnMove(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
+    private void OnUpStarted(InputAction.CallbackContext _) => upHeld = true;
+    private void OnUpCanceled(InputAction.CallbackContext _) => upHeld = false;
+    private void OnDownStarted(InputAction.CallbackContext _) => downHeld = true;
+    private void OnDownCanceled(InputAction.CallbackContext _) => downHeld = false;
+    private void OnJumpStarted(InputAction.CallbackContext _) => jumpPressedThisFrame = true;
 
     private void Update()
     {
         CheckForWall();
         StateMachine();
+
+        // clear one-frame press
+        jumpPressedThisFrame = false;
     }
 
     private void FixedUpdate()
     {
-        if (tpm.wallrunning)
+        if (tpm != null && tpm.wallrunning)
             WallRunningMovement();
     }
 
     private void CheckForWall()
     {
         wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallhit, wallCheckDistance, whatIsWall);
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallhit, wallCheckDistance, whatIsWall);
+        wallLeft  = Physics.Raycast(transform.position, -orientation.right, out leftWallhit, wallCheckDistance, whatIsWall);
     }
 
     private bool AboveGround()
@@ -79,46 +126,39 @@ public class NewWallRunning : MonoBehaviour
 
     private void StateMachine()
     {
-        // Getting Inputs
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        upwardsRunning = Input.GetKey(upwardsRunKey);
-        downwardsRunning = Input.GetKey(downwardsRunKey);
+        float horizontalInput = moveInput.x;
+        float verticalInput   = moveInput.y;
 
         // State 1 - Wallrunning
-        if((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
+        if ((wallLeft || wallRight) && verticalInput > 0.1f && AboveGround() && !exitingWall)
         {
             if (!tpm.wallrunning)
                 StartWallRun();
 
-            // wallrun timer
-            if (wallRunTimer > 0)
+            if (wallRunTimer > 0f)
                 wallRunTimer -= Time.deltaTime;
 
-            if(wallRunTimer <= 0 && tpm.wallrunning)
+            if (wallRunTimer <= 0f && tpm.wallrunning)
             {
                 exitingWall = true;
                 exitWallTimer = exitWallTime;
             }
 
-            // wall jump
-            if (Input.GetKeyDown(jumpKey)) WallJump();
+            if (jumpPressedThisFrame)
+                WallJump();
         }
-
         // State 2 - Exiting
         else if (exitingWall)
         {
             if (tpm.wallrunning)
                 StopWallRun();
 
-            if (exitWallTimer > 0)
+            if (exitWallTimer > 0f)
                 exitWallTimer -= Time.deltaTime;
 
-            if (exitWallTimer <= 0)
+            if (exitWallTimer <= 0f)
                 exitingWall = false;
         }
-
         // State 3 - None
         else
         {
@@ -130,43 +170,40 @@ public class NewWallRunning : MonoBehaviour
     private void StartWallRun()
     {
         tpm.wallrunning = true;
-
         wallRunTimer = maxWallRunTime;
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        // apply camera effects
-        if (cam == null) return;
-        cam.DoFov(90f);
-        if (wallLeft) cam.DoTilt(-5f);
-        if (wallRight) cam.DoTilt(5f);
+        if (cam != null)
+        {
+            cam.DoFov(90f);
+            if (wallLeft) cam.DoTilt(-5f);
+            if (wallRight) cam.DoTilt(5f);
+        }
     }
 
     private void WallRunningMovement()
     {
         rb.useGravity = useGravity;
 
-        Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+        float horizontalInput = moveInput.x;
 
+        Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
-        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        if ((orientation.forward - wallForward).sqrMagnitude > (orientation.forward + wallForward).sqrMagnitude)
             wallForward = -wallForward;
 
-        // forward force
         rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
-        // upwards/downwards force
-        if (upwardsRunning)
+        if (upHeld)
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, wallClimbSpeed, rb.linearVelocity.z);
-        if (downwardsRunning)
+        else if (downHeld)
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -wallClimbSpeed, rb.linearVelocity.z);
 
-        // push to wall force
-        if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
-            rb.AddForce(-wallNormal * 100, ForceMode.Force);
+        if (!(wallLeft && horizontalInput > 0f) && !(wallRight && horizontalInput < 0f))
+            rb.AddForce(-wallNormal * 100f, ForceMode.Force);
 
-        // weaken gravity
         if (useGravity)
             rb.AddForce(transform.up * gravityCounterForce, ForceMode.Force);
     }
@@ -175,25 +212,23 @@ public class NewWallRunning : MonoBehaviour
     {
         tpm.wallrunning = false;
 
-        // reset camera effects
-        if (cam == null) return;
-        cam.DoFov(80f);
-        cam.DoTilt(0f);
+        if (cam != null)
+        {
+            cam.DoFov(80f);
+            cam.DoTilt(0f);
+        }
     }
 
     private void WallJump()
     {
-        if (lg.holding || lg.exitingLedge) return;
+        if (lg != null && (lg.holding || lg.exitingLedge)) return;
 
-        // enter exiting wall state
         exitingWall = true;
         exitWallTimer = exitWallTime;
 
         Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
-
         Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
 
-        // reset y velocity and add force
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(forceToApply, ForceMode.Impulse);
     }

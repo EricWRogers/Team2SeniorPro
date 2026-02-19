@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 7118467893025155388}
   - component: {fileID: 2857964503789427036}
   - component: {fileID: 6370834667682660888}
+  - component: {fileID: 6724929360425598616}
   - component: {fileID: 2487827173279851799}
   - component: {fileID: 7135522167149671966}
   - component: {fileID: 883837923857014362}
@@ -528,17 +529,14 @@ MonoBehaviour:
   airMultiplier: 0.4
   crouchSpeed: 3.5
   crouchYScale: 0.5
-  jumpKey: 32
-  sprintKey: 304
-  crouchKey: 306
-  groundPoundKey: 9
   groundPoundWindup: 0.08
   groundPoundDownVelocity: 35
   groundPoundExtraGravity: 2.5
   groundPoundImpactCooldown: 0.15
   groundPoundBounceVelocity: 1
   groundPoundBoostOnSlope: 1
-  groundPoundSlopeEnterSpeed: 0
+  groundPoundSlopeEnterSpeed: 25
+  dashing: 0
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -584,7 +582,6 @@ MonoBehaviour:
   climbing: 0
   climbJumpUpForce: 15
   climbJumpBackForce: 30
-  jumpKey: 32
   climbJumps: 0
   detectionLength: 0.7
   sphereCastRadius: 0.25
@@ -645,9 +642,6 @@ MonoBehaviour:
   wallJumpSideForce: 30
   wallClimbSpeed: 3
   maxWallRunTime: 4
-  jumpKey: 32
-  upwardsRunKey: 304
-  downwardsRunKey: 306
   wallCheckDistance: 0.7
   minJumpHeight: 2
   exitWallTime: 0.2
@@ -672,7 +666,28 @@ MonoBehaviour:
   maxSlideTime: 2
   slideForce: 200
   slideYScale: 0.5
-  slideKey: 306
+--- !u!114 &6724929360425598616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668661954304852184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1b581b47e5b9b44905a07eaf13da72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 467439584808613755}
+  playerCam: {fileID: 2621640965754357359}
+  dashForce: 70
+  dashUpwardForce: 2
+  dashDuration: 0.4
+  useCameraForward: 1
+  allowAllDirections: 1
+  disableGravity: 0
+  resetYVel: 1
+  dashCd: 1.5
 --- !u!114 &2487827173279851799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,7 +1465,7 @@ MonoBehaviour:
   player: {fileID: 1972529787884859178}
   key: {fileID: 0}
   spawnedKey: {fileID: 8321310908236637140}
-  followDelay: 0.2
+  followDelay: 0.5
 --- !u!1 &5339247191701796688
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2361,7 @@ Transform:
   m_GameObject: {fileID: 8321310908236637140}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2967,10 +2982,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6365240969420877230}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1268185956010156851}
   m_SourcePrefab: {fileID: 100100000, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
 --- !u!95 &372940318209878044 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
+  m_PrefabInstance: {fileID: 6072653949210629517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5656398370450826341 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7333559149474385432, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
   m_PrefabInstance: {fileID: 6072653949210629517}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6038447400005136998 stripped
@@ -3021,6 +3044,65 @@ CapsuleCollider:
   m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 1.02, z: 0}
+--- !u!114 &1268185956010156851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6379084191767701724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa2b9bccfefda549bd1cf67fd922ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RootBones:
+  - {fileID: 5656398370450826341}
+  m_EndBones: []
+  m_Material: {fileID: 0}
+  m_StartDepth: 0
+  m_SiblingConstraints: 0
+  m_ClosedSiblings: 0
+  m_SiblingRotationConstraints: 1
+  m_LengthUnification: 0
+  m_CollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExtraColliders: []
+  m_Radius: 0
+  m_RadiusCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_DeltaTimeMode: 0
+  m_ConstantDeltaTime: 0.03
+  m_Iterations: 1
+  m_SleepThreshold: 0.005
+  m_GravityAligner: {fileID: 0}
+  m_Gravity: {x: 0, y: 0, z: 0}
+  m_ForceModule: {fileID: 0}
+  m_ForceScale: 1
+  m_SimulateSpace: {fileID: 0}
 --- !u!1001 &8733404261064438170
 PrefabInstance:
   m_ObjectHideFlags: 0

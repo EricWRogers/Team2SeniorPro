@@ -13,7 +13,7 @@ public class NestGoal : MonoBehaviour
     //public CollectibleScript collectibles;
 
     [Header("Text Elements")]
-    public static TMP_Text timerText;
+    public TMP_Text timerText;
     public TMP_Text statsText;
 
     [Header("Events")]
@@ -24,6 +24,7 @@ public class NestGoal : MonoBehaviour
     public GameObject WinScreen;
     public GameObject BerryUI;
     public GameObject TimerUI;
+    public GameObject KeyUI;
 
     [Header("Rank Displays")]
     public GameObject Srank;
@@ -80,6 +81,7 @@ public class NestGoal : MonoBehaviour
         WinScreen.SetActive(true);
         BerryUI.SetActive(false);
         TimerUI.SetActive(false);
+        KeyUI.SetActive(false);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

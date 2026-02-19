@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewClimbing : MonoBehaviour
 {
@@ -12,24 +11,23 @@ public class NewClimbing : MonoBehaviour
     public LayerMask whatIsWall;
 
     [Header("Climbing")]
-    public float climbSpeed;
-    public float maxClimbTime;
+    public float climbSpeed = 6f;
+    public float maxClimbTime = 1.25f;
     private float climbTimer;
 
     public bool climbing;
 
     [Header("ClimbJumping")]
-    public float climbJumpUpForce;
-    public float climbJumpBackForce;
+    public float climbJumpUpForce = 6f;
+    public float climbJumpBackForce = 4f;
 
-    public KeyCode jumpKey = KeyCode.Space;
-    public int climbJumps;
+    public int climbJumps = 1;
     private int climbJumpsLeft;
 
     [Header("Detection")]
-    public float detectionLength;
-    public float sphereCastRadius;
-    public float maxWallLookAngle;
+    public float detectionLength = 1.0f;
+    public float sphereCastRadius = 0.35f;
+    public float maxWallLookAngle = 35f;
     private float wallLookAngle;
 
     private RaycastHit frontWallHit;
@@ -37,111 +35,176 @@ public class NewClimbing : MonoBehaviour
 
     private Transform lastWall;
     private Vector3 lastWallNormal;
-    public float minWallNormalAngleChange;
+    public float minWallNormalAngleChange = 5f;
 
     [Header("Exiting")]
     public bool exitingWall;
-    public float exitWallTime;
+    public float exitWallTime = 0.2f;
     private float exitWallTimer;
+
+    // ---- New Input System ----
+    private PlayerControlsB controls;
+    private Vector2 moveInput;
+    private bool jumpPressedThisFrame;
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+    }
 
     private void Start()
     {
-        lg = GetComponent<NewLedgeGrabbing>();
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (tpm == null) tpm = GetComponent<NewThirdPlayerMovement>();
+        if (lg == null) lg = GetComponent<NewLedgeGrabbing>();
+        if (orientation == null && tpm != null) orientation = tpm.orientation;
+        if (orientation == null) orientation = transform;
+
+        climbTimer = maxClimbTime;
+        climbJumpsLeft = climbJumps;
     }
+
+    private void OnEnable()
+    {
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
+
+        controls.Player.Jump.started += OnJumpStarted;
+
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Move.performed -= OnMove;
+        controls.Player.Move.canceled -= OnMove;
+
+        controls.Player.Jump.started -= OnJumpStarted;
+
+        controls.Player.Disable();
+    }
+
+    private void OnMove(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
+    private void OnJumpStarted(InputAction.CallbackContext _) => jumpPressedThisFrame = true;
 
     private void Update()
     {
         WallCheck();
         StateMachine();
 
-        if (climbing && !exitingWall) ClimbingMovement();
+        if (climbing && !exitingWall)
+            ClimbingMovement();
+
+        // one-frame press clear
+        jumpPressedThisFrame = false;
     }
 
     private void StateMachine()
     {
+        bool wantsForward = moveInput.y > 0.1f;
+
         // State 0 - Ledge Grabbing
-        if (lg.holding)
+        if (lg != null && lg.holding)
         {
             if (climbing) StopClimbing();
-
-            // everything else gets handled by the SubStateMachine() in the ledge grabbing script
-        }
-        
-        // State 1 - Climbing
-        else if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
-        {
-            if (!climbing && climbTimer > 0) StartClimbing();
-
-            // timer
-            if (climbTimer > 0) climbTimer -= Time.deltaTime;
-            if (climbTimer < 0) StopClimbing();
+            return;
         }
 
         // State 2 - Exiting
-        else if (exitingWall)
+        if (exitingWall)
         {
             if (climbing) StopClimbing();
 
-            if (exitWallTimer > 0) exitWallTimer -= Time.deltaTime;
-            if (exitWallTimer < 0) exitingWall = false;
+            if (exitWallTimer > 0f) exitWallTimer -= Time.deltaTime;
+            if (exitWallTimer <= 0f) exitingWall = false;
+            return;
         }
 
-        // State 3 - None
+        // State 1 - Climbing
+        if (wallFront && wantsForward && wallLookAngle < maxWallLookAngle && !exitingWall)
+        {
+            if (!climbing && climbTimer > 0f)
+                StartClimbing();
+
+            if (climbTimer > 0f) climbTimer -= Time.deltaTime;
+            if (climbTimer <= 0f) StopClimbing();
+        }
         else
         {
+            // State 3 - None
             if (climbing) StopClimbing();
         }
 
-        if (wallFront && Input.GetKeyDown(jumpKey) && climbJumpsLeft > 0) ClimbJump();
+        // Climb jump
+        if (wallFront && jumpPressedThisFrame && climbJumpsLeft > 0)
+            ClimbJump();
     }
 
     private void WallCheck()
     {
-        wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
-        wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+        wallFront = Physics.SphereCast(
+            transform.position,
+            sphereCastRadius,
+            orientation.forward,
+            out frontWallHit,
+            detectionLength,
+            whatIsWall,
+            QueryTriggerInteraction.Ignore
+        );
 
-        bool newWall = frontWallHit.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
-
-        if ((wallFront && newWall) || tpm.grounded)
+        if (wallFront)
         {
-            climbTimer = maxClimbTime;
-            climbJumpsLeft = climbJumps;
+            wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+
+            bool newWall =
+                frontWallHit.transform != lastWall ||
+                Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
+
+            if (newWall || (tpm != null && tpm.grounded))
+            {
+                climbTimer = maxClimbTime;
+                climbJumpsLeft = climbJumps;
+            }
         }
     }
 
     private void StartClimbing()
     {
         climbing = true;
-        tpm.climbing = true;
+
+        if (tpm != null)
+        {
+            tpm.climbing = true;
+
+            // IMPORTANT: prevents NewThirdPlayerMovement from fighting climb velocity/forces
+            tpm.restricted = true;
+        }
 
         lastWall = frontWallHit.transform;
         lastWallNormal = frontWallHit.normal;
-
-        /// idea - camera fov change
     }
 
     private void ClimbingMovement()
     {
+        // Keep it simple: constant upward velocity while climbing
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, climbSpeed, rb.linearVelocity.z);
-
-        /// idea - sound effect
     }
 
     private void StopClimbing()
     {
         climbing = false;
-        tpm.climbing = false;
 
-        /// idea - particle effect
-        /// idea - sound effect
+        if (tpm != null)
+        {
+            tpm.climbing = false;
+            tpm.restricted = false;
+        }
     }
 
     private void ClimbJump()
     {
-        if (tpm.grounded) return;
-        if (lg.holding || lg.exitingLedge) return;
-
-        print("climbjump");
+        if (tpm != null && tpm.grounded) return;
+        if (lg != null && (lg.holding || lg.exitingLedge)) return;
 
         exitingWall = true;
         exitWallTimer = exitWallTime;

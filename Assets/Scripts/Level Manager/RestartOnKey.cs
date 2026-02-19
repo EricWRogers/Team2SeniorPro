@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RestartOnKey : MonoBehaviour
 {
     [Header("Restart Settings")]
-    public float holdSeconds = 0.5f; // set to whatever feels right
+    public float holdSeconds = 0.5f;
 
     private float holdTimer = 0f;
 
-    //NEW INPUT SYSTEM
+    // NEW INPUT SYSTEM
     private PlayerControlsB controls;
     private bool restartHeld;
     private bool didFullRestartThisHold;
@@ -19,31 +20,35 @@ public class RestartOnKey : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.Restart.performed += ctx =>
-        {
-            restartHeld = true;
-            didFullRestartThisHold = false;
-            holdTimer = 0f;
-        };
-
-        controls.Player.Restart.canceled += ctx =>
-        {
-            // If we dont full restart, treat this as a TAP
-            if (!didFullRestartThisHold)
-            {
-                TryRespawnToCheckpoint();
-            }
-
-            restartHeld = false;
-            holdTimer = 0f;
-        };
+        controls.Player.Restart.started += OnRestartStarted;   // button down
+        controls.Player.Restart.canceled += OnRestartCanceled; // button up
 
         controls.Player.Enable();
     }
 
     private void OnDisable()
     {
+        controls.Player.Restart.started -= OnRestartStarted;
+        controls.Player.Restart.canceled -= OnRestartCanceled;
+
         controls.Player.Disable();
+    }
+
+    private void OnRestartStarted(InputAction.CallbackContext _)
+    {
+        restartHeld = true;
+        didFullRestartThisHold = false;
+        holdTimer = 0f;
+    }
+
+    private void OnRestartCanceled(InputAction.CallbackContext _)
+    {
+        // If we DIDN'T full-restart, treat this as a TAP
+        if (!didFullRestartThisHold)
+            TryRespawnToCheckpoint();
+
+        restartHeld = false;
+        holdTimer = 0f;
     }
 
     private void Update()
@@ -54,8 +59,8 @@ public class RestartOnKey : MonoBehaviour
 
         if (holdTimer >= holdSeconds)
         {
+            didFullRestartThisHold = true; // set BEFORE calling, prevents edge cases
             FullRestart();
-            didFullRestartThisHold = true;
         }
     }
 
@@ -66,12 +71,11 @@ public class RestartOnKey : MonoBehaviour
         var mover = FindFirstObjectByType<NewThirdPlayerMovement>();
         if (mover == null) return;
 
-        Vector3 targetPos = RunCheckpointState.Position;
-
-        mover.TeleportTo(targetPos);
+        mover.TeleportTo(RunCheckpointState.Position);
 
         var timer = FindFirstObjectByType<Timer>();
-        if (timer) timer.SetTime(RunCheckpointState.SavedTime);
+        if (timer != null)
+            timer.SetTime(RunCheckpointState.SavedTime);
     }
 
     private void FullRestart()
@@ -81,9 +85,10 @@ public class RestartOnKey : MonoBehaviour
         // Clear checkpoint for fresh run
         RunCheckpointState.Clear();
 
-        // Reset timer + wipe saved timer (if still using PlayerPrefs there)
+        // Reset timer + wipe saved timer
         var timer = FindFirstObjectByType<Timer>();
-        if (timer) timer.ResetTimerAndSaveData();
+        if (timer != null)
+            timer.ResetTimerAndSaveData();
 
         GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), true);
     }
