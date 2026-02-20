@@ -663,7 +663,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 20
+    maxNumParticles: 10
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -3879,16 +3879,16 @@ ParticleSystem:
       emitProbability: 1
   LightsModule:
     enabled: 1
-    ratio: 0
+    ratio: 1
     light: {fileID: 4856597842358160697, guid: 58b7a7d61db866d428ac7ae3c36ff4fa, type: 3}
-    randomDistribution: 1
+    randomDistribution: 0
     color: 1
-    range: 1
+    range: 0
     intensity: 1
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4907,6 +4907,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bars: {fileID: 0}
   keyText: {fileID: 0}
+  keyScore: {fileID: 0}
+  keyValue: 1
+  isCollected: 0
   textAnimatior: {fileID: 0}
 --- !u!54 &3940914673692432542
 Rigidbody:

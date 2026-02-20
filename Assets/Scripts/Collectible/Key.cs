@@ -4,8 +4,8 @@ using TMPro;
 public class Key : MonoBehaviour
 {
     public GameObject bars;
-    public TMP_Text keyText;
-    public TMP_Text keyScore;
+    //public TMP_Text keyText;
+    //public TMP_Text keyScore;
     public int keyNum = 0;
     public bool isCollected = false;
     public Animator textAnimatior;
@@ -28,10 +28,10 @@ public class Key : MonoBehaviour
         if (key.CompareTag("Player"))
         {
             bars.SetActive(false);
-            keyText.gameObject.SetActive(true);
-            keyText.text = "You got the key!";
-            keyNum++;
-            keyScore.text = keyNum.ToString();
+            //keyText.gameObject.SetActive(true);
+            //keyText.text = "You got the key!";
+            //keyNum++;
+            //keyScore.text = keyNum.ToString();
             textAnimatior.SetTrigger("KeyCollect");
             isCollected = true;
             Destroy(gameObject);

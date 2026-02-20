@@ -64,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 1237227726720706965}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5253499, y: 0.032389157, z: -0.020017602, w: 0.850034}
-  m_LocalPosition: {x: -3.173865, y: 25.54, z: -33.1355}
+  m_LocalPosition: {x: -3.173865, y: 25.57, z: -33.1355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -413,13 +413,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1972529787884859178}
   - component: {fileID: 4703360030634037239}
-  - component: {fileID: 2388956124045526081}
   - component: {fileID: 7573647716419646299}
   - component: {fileID: 301730769726878209}
-  - component: {fileID: 7118467893025155388}
   - component: {fileID: 2857964503789427036}
   - component: {fileID: 6370834667682660888}
   - component: {fileID: 1292300163609082424}
+  - component: {fileID: 3839671093794790857}
   - component: {fileID: 6724929360425598616}
   - component: {fileID: 2487827173279851799}
   - component: {fileID: 7135522167149671966}
@@ -480,29 +479,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!136 &2388956124045526081
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2668661954304852184}
-  m_Material: {fileID: 13400000, guid: 2be13e73fc92abf4c9c054b8633672bf, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7573647716419646299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,7 +550,7 @@ MonoBehaviour:
   orientation: {fileID: 467439584808613755}
   rb: {fileID: 4703360030634037239}
   tpm: {fileID: 7573647716419646299}
-  lg: {fileID: 7118467893025155388}
+  lg: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128
@@ -590,36 +566,6 @@ MonoBehaviour:
   minWallNormalAngleChange: 5
   exitingWall: 0
   exitWallTime: 0.2
---- !u!114 &7118467893025155388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2668661954304852184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8ea9bcf7428fe438b9ae2a4509a2c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tpm: {fileID: 7573647716419646299}
-  orientation: {fileID: 467439584808613755}
-  cam: {fileID: 4066398067646279291}
-  rb: {fileID: 4703360030634037239}
-  moveToLedgeSpeed: 12
-  maxLedgeGrabDistance: 2
-  minTimeOnLedge: 0.5
-  holding: 0
-  jumpKey: 32
-  ledgeJumpForwardForce: 14
-  ledgeJumpUpwardForce: 5
-  ledgeDetectionLength: 3
-  ledgeSphereCastRadius: 0.5
-  whatIsLedge:
-    serializedVersion: 2
-    m_Bits: 0
-  exitingLedge: 0
-  exitLedgeTime: 0.2
 --- !u!114 &2857964503789427036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +613,7 @@ MonoBehaviour:
   maxSlideTime: 2
   slideForce: 200
   slideYScale: 0.5
---- !u!114 &1292300163609082424
+--- !u!114 &3839671093794790857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -681,14 +627,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 467439584808613755}
   playerCam: {fileID: 2621640965754357359}
-  dashForce: 20
+  dashForce: 70
   dashUpwardForce: 2
   dashDuration: 0.4
   useCameraForward: 1
   allowAllDirections: 1
   disableGravity: 0
   resetYVel: 1
-  dashCd: 2.5
+  dashCd: 1.5
 --- !u!114 &6724929360425598616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   climbing: {fileID: 301730769726878209}
-  ledgeGrab: {fileID: 7118467893025155388}
+  ledgeGrab: {fileID: 0}
   tpm: {fileID: 7573647716419646299}
   playerRb: {fileID: 4703360030634037239}
   carrySpeedMultiplier: 0.5
@@ -1108,7 +1054,7 @@ GameObject:
   - component: {fileID: 6911664843963005600}
   m_Layer: 12
   m_Name: CarrySpot
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1122,7 +1068,7 @@ Transform:
   m_GameObject: {fileID: 4433748308225663477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.005, y: 0, z: 0.483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1176,7 +1122,7 @@ GameObject:
   - component: {fileID: 9161910073663866680}
   m_Layer: 0
   m_Name: NewThirdPersonCam
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1519,8 +1465,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5339247191701796688}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000012094129, y: 0.7204445, z: -0.000000012908606, w: 0.6935127}
-  m_LocalPosition: {x: -3.173865, y: 15.54, z: -33.1355}
+  m_LocalRotation: {x: 0.4860894, y: 0.51385736, z: -0.5049662, w: 0.4946482}
+  m_LocalPosition: {x: -3.173865, y: 15.57, z: -33.1355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2338,7 +2284,7 @@ GameObject:
   - component: {fileID: 851587025779934671}
   m_Layer: 0
   m_Name: NewCamHolder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2883,6 +2829,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3278349814890728622, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3383662092708309005, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       propertyPath: m_Layer
       value: 12
@@ -2910,6 +2860,10 @@ PrefabInstance:
     - target: {fileID: 4607668393258877731, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4635416944509295197, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       propertyPath: m_Layer
@@ -3010,7 +2964,7 @@ PrefabInstance:
       addedObject: {fileID: 1268185956010156851}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1402390764232111809}
+      addedObject: {fileID: 8505301999987743095}
   m_SourcePrefab: {fileID: 100100000, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
 --- !u!95 &372940318209878044 stripped
 Animator:
@@ -3129,7 +3083,7 @@ MonoBehaviour:
   m_ForceModule: {fileID: 0}
   m_ForceScale: 1
   m_SimulateSpace: {fileID: 0}
---- !u!114 &1402390764232111809
+--- !u!114 &8505301999987743095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

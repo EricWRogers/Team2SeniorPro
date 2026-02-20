@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.403, y: 13.27, z: -0.4332}
-  m_LocalScale: {x: 0.09728196, y: 12.707027, z: 0.09728196}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4834169437636285131}
@@ -174,11 +174,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1999bf2ed61202478647228ed0cfbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WinScreen: {fileID: 0}
+  MainCam: {fileID: 0}
+  PlayerSquirrel: {fileID: 0}
+  VictorySquirrel: {fileID: 0}
   timer: {fileID: 0}
+  SFXSource: {fileID: 0}
   timerText: {fileID: 0}
   statsText: {fileID: 0}
-  objectsToDeactivate: []
+  scriptsToToggle: []
+  WinScreen: {fileID: 0}
+  BerryUI: {fileID: 0}
+  TimerUI: {fileID: 0}
+  KeyUI: {fileID: 0}
+  Srank: {fileID: 0}
+  Arank: {fileID: 0}
+  Brank: {fileID: 0}
+  Crank: {fileID: 0}
 --- !u!4 &4834169437636285131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5182855610491001460, guid: 3591aeaf4389e9543b93c6cf08aad1b5, type: 3}

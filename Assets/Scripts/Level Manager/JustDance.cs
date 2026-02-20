@@ -12,6 +12,11 @@ public class JustDance : MonoBehaviour
 
     private bool hasStarted = false;
     
+    void Awake()
+    {
+        if (cameraSpline == null)
+        cameraSpline = GameObject.FindWithTag("DanceCam").GetComponent<SplineAnimate>();
+    }
     void Start()
     {
         // Get the Animator component attached to the GameObject
