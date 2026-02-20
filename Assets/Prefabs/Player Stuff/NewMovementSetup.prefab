@@ -417,7 +417,6 @@ GameObject:
   - component: {fileID: 301730769726878209}
   - component: {fileID: 2857964503789427036}
   - component: {fileID: 6370834667682660888}
-  - component: {fileID: 1292300163609082424}
   - component: {fileID: 3839671093794790857}
   - component: {fileID: 6724929360425598616}
   - component: {fileID: 2487827173279851799}
@@ -492,8 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 10
-  sprintSpeed: 17
-  slideSpeed: 10
+  sprintSpeed: 15
+  slideSpeed: 100
   wallrunSpeed: 15
   climbSpeed: 3
   vaultSpeed: 30
@@ -535,6 +534,7 @@ MonoBehaviour:
   restricted: 0
   text_speed: {fileID: 0}
   text_mode: {fileID: 0}
+  keepMomentum: 0
 --- !u!114 &301730769726878209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +613,9 @@ MonoBehaviour:
   maxSlideTime: 2
   slideForce: 200
   slideYScale: 0.5
+  uphillDecel: 20
+  uphillBrakeForceMult: 1
+  stopSpeed: 15
 --- !u!114 &3839671093794790857
 MonoBehaviour:
   m_ObjectHideFlags: 0
