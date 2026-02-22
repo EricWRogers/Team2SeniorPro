@@ -149,6 +149,13 @@ public class NewSliding : MonoBehaviour
 
             return;
         }
+
+        /*public Vector3 GetSlopeDownDirection(Vector3 surfaceNormal)
+        {
+            Vector3 rightOnPlane = Vector3.Cross(Vector3.up, surfaceNormal);
+            Vector3 forwardOnPlane = Vector3.Cross(rightOnPlane, surfaceNormal);
+            return forwardOnPlane.normalized;
+        }*/
         
         //when ON SLOPE BELOW
         Vector3 normal = tpm.CurrentSlopeNormal;
@@ -207,8 +214,8 @@ public class NewSliding : MonoBehaviour
         bool movingDownhill = downhillSpeed > 0.1f; // small threshold to avoid jitter
 
         // NEW Timer behavior: FAHHHHHHHHHHHHHHHHHHHHH
-        // on downhill slope: DON'T drain timer (keeps sliding)
-        // otherwise: drain timer normally
+        // on downhill slope: DO NOT drain timer (keeps sliding)
+        // otherwise: drain timer N O R M A L
         if (!movingDownhill)
         {
             slideTimer -= Time.fixedDeltaTime;
