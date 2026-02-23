@@ -4,8 +4,8 @@ using UnityEngine;
 public class StartArea : MonoBehaviour
 {
     public Timer timer;
-    public Animator animator;
-    public Animator animator2;
+    public Animator Time_Animator;
+    public Animator Level_Animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,7 +17,7 @@ public class StartArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            animator2.SetTrigger("LevelDisplay");
+            Level_Animator.SetTrigger("LevelDisplay");
             Debug.Log("Player entered start area.");
         }
     }
@@ -28,7 +28,7 @@ public class StartArea : MonoBehaviour
             // Start the timer when the player exits the start area
             timer.timeRunning = true;
             SoundManager.Instance.PlaySFX("Whip", 1f);
-            animator.SetTrigger("TimerStart");
+            Time_Animator.SetTrigger("TimerStart");
             Debug.Log("Player exited start area. Timer started.");
         }
     }

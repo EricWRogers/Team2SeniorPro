@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class NewThirdPlayerMovement : MonoBehaviour
 {
+    public Vector3 CurrentSlopeNormal => slopeHit.normal;//
     [Header("Movement")]
     private float moveSpeed;
     private float desiredMoveSpeed;
@@ -65,7 +66,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
-    private RaycastHit slopeHit;
+    public RaycastHit slopeHit;
     private bool exitingSlope;
 
     [Header("New Input System")]
@@ -86,11 +87,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private bool jumpPressedThisFrame;
     private bool groundPoundPressedThisFrame;
 
-
     [Header("References")]
     public NewClimbing climbingScript;
     private ClimbingDone climbingScriptDone;
-    private NewSliding slidingScript; // <-- IMPORTANT: we call this on slope impact
+    private NewSliding slidingScript; 
     public Transform orientation;
 
     private float teleportLockTimer = 0f;
@@ -287,7 +287,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     }
 
 
-    bool keepMomentum;
+    public bool keepMomentum;
     private void StateHandler()
     {
         if (freeze)
@@ -478,6 +478,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
         exitingSlope = false;
     }
 
+    //public Vector3 CurrentSlope => norm
+
     public bool OnSlope()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, whatIsGround, QueryTriggerInteraction.Ignore))
@@ -522,7 +524,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         //temp gravity might be off — force it ON for the slam.
         rb.useGravity = true;
 
-        // delay hang: kill upward velocity and damp horizontal
+        // delay hang kill upward velocity and damp horizontal
         Vector3 v = rb.linearVelocity;
         if (v.y > 0f) v.y = 0f;
         v.x *= 0.6f;

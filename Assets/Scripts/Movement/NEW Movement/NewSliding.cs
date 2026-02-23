@@ -17,6 +17,11 @@ public class NewSliding : MonoBehaviour
     public float slideYScale = 0.5f;
     private float startYScale;
 
+    [Header("Uphill vs Downhill")]
+    public float uphillDecel = 20f;
+    public float uphillBrakeForceMult = 0.8f;
+    public float stopSpeed = 0.25f;
+
     [Header("Input (New Input System)")]
     private PlayerControlsB controls;
     private Vector2 moveInput;
@@ -122,27 +127,116 @@ public class NewSliding : MonoBehaviour
     {
         Vector3 inputDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
 
+        // If externally started and no input, give a default direction
         if (externallyForcedSlide && inputDirection.sqrMagnitude < 0.001f)
             inputDirection = orientation.forward;
 
-        if (!tpm.OnSlope() || rb.linearVelocity.y > -0.1f)
-        {
-            rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
+        bool onSlope = tpm != null && tpm.OnSlope();
 
-            if (slideTimer > 0f)
+//NOT ON SLOPE REGULAR
+        if (!onSlope)
+        {
+            if (inputDirection.sqrMagnitude > 0.001f)
+                rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
+
+            slideTimer -= Time.fixedDeltaTime;
+
+            if (slideTimer <= 0f)
+                StopSlideInternal();
+
+            if (!slideHeld && tpm.sliding && !externallyForcedSlide)
+                StopSlideInternal();
+
+            return;
+        }
+
+        /*public Vector3 GetSlopeDownDirection(Vector3 surfaceNormal)
+        {
+            Vector3 rightOnPlane = Vector3.Cross(Vector3.up, surfaceNormal);
+            Vector3 forwardOnPlane = Vector3.Cross(rightOnPlane, surfaceNormal);
+            return forwardOnPlane.normalized;
+        }*/
+        
+        //when ON SLOPE BELOW
+        Vector3 normal = tpm.CurrentSlopeNormal;
+
+        // downhill direction along slope plane
+        Vector3 downhill = Vector3.ProjectOnPlane(Vector3.down, normal).normalized;
+
+        // velocity along slope plane
+        Vector3 planarVel = Vector3.ProjectOnPlane(rb.linearVelocity, normal);
+
+        // input along slope plane
+        Vector3 inputOnSlope = Vector3.ProjectOnPlane(inputDirection, normal);
+        if (inputOnSlope.sqrMagnitude > 0.0001f) inputOnSlope.Normalize();
+
+        // + = moving downhill, - = moving uphill
+        float velDotDownhill = (planarVel.sqrMagnitude > 0.0001f) ? Vector3.Dot(planarVel.normalized, downhill) : 0f;
+
+        // + = input wants downhill, - = input wants uphill
+        float inputDotDownhill = (inputOnSlope.sqrMagnitude > 0.0001f) ? Vector3.Dot(inputOnSlope, downhill) : 0f;
+
+        // If you are actually moving uphill OR player is trying to push uphill cut speed.
+        bool movingUphill = velDotDownhill < -0.05f;
+        bool inputUphill = inputDotDownhill < -0.05f;
+
+        if (movingUphill || inputUphill)
+        {
+            // Brake opposite the current planar motion (only if we have planar motion)
+            if (planarVel.sqrMagnitude > 0.0001f)
             {
-                slideTimer -= Time.fixedDeltaTime;
-                if (slideTimer <= 0f) StopSlideInternal();
+                rb.AddForce(-planarVel.normalized * slideForce * uphillBrakeForceMult, ForceMode.Force);
+
+                float newMag = Mathf.MoveTowards(planarVel.magnitude, 0f, uphillDecel * Time.fixedDeltaTime);
+                Vector3 newPlanar = planarVel.normalized * newMag;
+
+                // keep component into normal (so you don't pop off the slope)
+                Vector3 intoNormal = Vector3.Project(rb.linearVelocity, normal);
+                rb.linearVelocity = newPlanar + intoNormal;
+            }
+
+            // stop if basically zero momentum on the slope
+            if (planarVel.magnitude <= stopSpeed)
+                StopSlideInternal();
+        }
+        else
+        {
+            // DOWNHILL / NEUTRAL: push downhill (prefer input if it's meaningful, else just downhill)
+            Vector3 pushDir = (inputOnSlope.sqrMagnitude > 0.0001f && inputDotDownhill > 0.05f)
+                ? inputOnSlope
+                : downhill;
+
+            rb.AddForce(pushDir * slideForce, ForceMode.Force);
+        }
+
+        // + = moving downhill, - = moving uphill
+        float downhillSpeed = Vector3.Dot(planarVel, downhill);
+        bool movingDownhill = downhillSpeed > 0.1f; // small threshold to avoid jitter
+
+        // NEW Timer behavior: FAHHHHHHHHHHHHHHHHHHHHH
+        // on downhill slope: DO NOT drain timer (keeps sliding)
+        // otherwise: drain timer N O R M A L
+        if (!movingDownhill)
+        {
+            slideTimer -= Time.fixedDeltaTime;
+            if (slideTimer <= 0f)
+            {
+                StopSlideInternal();
+                return;
             }
         }
         else
         {
-            rb.AddForce(tpm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
-            // optional: you can also tick timer here if you want slope slide to time out
+            //keep timer alive so it never ends immediately after leaving the slope
+            slideTimer = Mathf.Max(slideTimer, 0.15f);
         }
 
+         //End on release if this was not externally forced
         if (!slideHeld && tpm.sliding && !externallyForcedSlide)
             StopSlideInternal();
+
+        //if (!slideHeld && tpm.sliding && !externallyForcedSlide && !movingDownhill)
+        //StopSlideInternal();
     }
 
     private void StopSlideInternal()
