@@ -248,4 +248,9 @@ public class NewSliding : MonoBehaviour
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
+
+        public void BumpTimerMin(float seconds)
+    {
+        slideTimer = Mathf.Max(slideTimer, seconds);
+    }
 }
