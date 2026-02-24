@@ -24,6 +24,8 @@ public class ParticleManager : MonoBehaviour
     public void SpawnParticle(string particleName, Vector3 position, Quaternion rotation)
     {
         GameObject particlePrefab = particlePrefabs.Find(p => p.name == particleName);
+        
+
         if (particlePrefab != null)
         {
             Instantiate(particlePrefab, position, rotation);
