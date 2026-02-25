@@ -167,11 +167,18 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         StateHandler();
         TextStuff();
 
-        // Impact detection (first grounded frame)
+        /*// Impact detection (first grounded frame)
         if (groundPounding && grounded && !wasGroundedLastFrame)
         {
             GroundPoundImpact();
+            //ParticleManager.Instance.SpawnParticle("LandingParticleEffect", transform.position - new Vector3(0, playerHeight * 0.3f, 0), Quaternion.Euler(90, 0, 0));
+        }*/
+
+        if (grounded && !wasGroundedLastFrame)
+        {
+            OnLanded();
         }
+        
         wasGroundedLastFrame = grounded;
 
         if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
@@ -552,8 +559,41 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         rb.linearVelocity = slam;
     }
 
-        private void GroundPoundImpact()
+    private void OnLanded()
     {
+        // Optional filters for other states
+        if (climbing || vaulting || wallrunning) return;
+
+        // spawn landing particle
+        if (ParticleManager.Instance != null)
+        {
+            ParticleManager.Instance.SpawnParticle(
+                "LandingParticleEffect",
+                transform.position - new Vector3(0, playerHeight * 0.3f, 0),
+                Quaternion.Euler(90, 0, 0)
+            );
+        }
+
+        // If landed during a ground pound, run the impact logic too
+        if (groundPounding)
+        {
+            GroundPoundImpact();
+        }
+    }
+
+    private void GroundPoundImpact()
+    {
+
+        /*// Spawn landing particle immediately on impact
+        if (ParticleManager.Instance != null)
+        {
+            ParticleManager.Instance.SpawnParticle(
+                "LandingParticleEffect",
+                transform.position - new Vector3(0, playerHeight * 0.3f, 0),
+                Quaternion.Euler(90, 0, 0)
+            );
+        }*/
+
         groundPounding = false;
         groundPoundCooldownTimer = groundPoundImpactCooldown;
         leftGroundSinceLastPound = false;
@@ -625,4 +665,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         rb.position = pos;
         Physics.SyncTransforms();
     }
+
+    
 }
