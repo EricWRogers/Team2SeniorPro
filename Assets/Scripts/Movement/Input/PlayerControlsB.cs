@@ -383,7 +383,7 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f2e9ba44-c423-42a7-ad56-f20975884794"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -449,7 +449,7 @@ public partial class @PlayerControlsB: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0020ecef-7422-4cb6-9a1b-194aaa59449b"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
