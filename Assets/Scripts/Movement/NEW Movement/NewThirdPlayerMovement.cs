@@ -178,7 +178,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         {
             OnLanded();
         }
-        
+
         wasGroundedLastFrame = grounded;
 
         if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
@@ -496,7 +496,9 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, whatIsGround, QueryTriggerInteraction.Ignore))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            Debug.Log("Slope Angle:" + angle);
             return angle < maxSlopeAngle && angle != 0;
+
         }
 
         return false;

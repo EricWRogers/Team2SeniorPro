@@ -10484,6 +10484,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1788065383}
+    - target: {fileID: 6370834667682660888, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: stopSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370834667682660888, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: slideForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370834667682660888, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: uphillDecel
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
       value: 
@@ -10492,6 +10504,18 @@ PrefabInstance:
       propertyPath: text_speed
       value: 
       objectReference: {fileID: 2136892315}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: sprintSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: maxSlopeAngle
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: slopeIncreaseMultiplier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: key
       value: 
@@ -11797,8 +11821,8 @@ Transform:
   m_GameObject: {fileID: 629849666}
   serializedVersion: 2
   m_LocalRotation: {x: 0.14688186, y: -0, z: -0, w: 0.9891541}
-  m_LocalPosition: {x: 6.1299996, y: -52.94, z: -142.96}
-  m_LocalScale: {x: 17.613682, y: 12.374372, z: 29.965282}
+  m_LocalPosition: {x: 6.1299996, y: -54.14, z: -139.14}
+  m_LocalScale: {x: 17.613682, y: 12.637945, z: 37.813187}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 865019208}
