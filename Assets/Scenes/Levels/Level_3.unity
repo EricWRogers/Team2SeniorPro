@@ -1589,6 +1589,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1191242404}
+    - target: {fileID: 6370834667682660888, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: uphillDecel
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6911664843963005600, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.05
@@ -1600,14 +1604,18 @@ PrefabInstance:
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1861136340}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_speed
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1775839508}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: whatIsGround.m_Bits
       value: 393280
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: slopeIncreaseMultiplier
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1746,10 +1754,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1733831255599081805, guid: de1bfd4d10f5c94479de84893b80e890, type: 3}
-      propertyPath: m_Name
-      value: Twisted tree (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1388268651219760119, guid: de1bfd4d10f5c94479de84893b80e890, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.028649999
@@ -1801,6 +1805,10 @@ PrefabInstance:
     - target: {fileID: 1388268651219760119, guid: de1bfd4d10f5c94479de84893b80e890, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733831255599081805, guid: de1bfd4d10f5c94479de84893b80e890, type: 3}
+      propertyPath: m_Name
+      value: Twisted tree (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3783,6 +3791,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 650441126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1775839508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1405179732084616320, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1789753332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5656398370450826341, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
@@ -4027,6 +4046,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3238796641972263029, guid: 232b272dfda962c42a9958a5424809bb, type: 3}
   m_PrefabInstance: {fileID: 1810597631}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1861136340 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8662664385420288580, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1886042722
 GameObject:
   m_ObjectHideFlags: 0
