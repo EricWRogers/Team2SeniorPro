@@ -706,6 +706,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 790a75741c5d7364bbc8f9cd8ec0cbba, type: 3}
+--- !u!114 &62708461 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4905114625706952431, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &64721578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22089,6 +22100,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b796438849fe73643bc02aa94f322b31, type: 3}
+--- !u!114 &1023173213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1403948534304383797, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1024604536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46952,6 +46974,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b796438849fe73643bc02aa94f322b31, type: 3}
+--- !u!1 &2124137281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6686044736672554884, guid: 34e648dc895d97949b3f003641a24972, type: 3}
+  m_PrefabInstance: {fileID: 6620218046182373521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2127451719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47659,10 +47686,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 481442119}
     - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
-      propertyPath: inputText
-      value: 
-      objectReference: {fileID: 400996958710618198}
-    - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1151268860}
@@ -47670,6 +47693,10 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 216765681}
+    - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
+      propertyPath: restartObj
+      value: 
+      objectReference: {fileID: 2124137281}
     - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: playerCanvas
       value: 
@@ -47719,17 +47746,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
---- !u!114 &400996958710618198 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 423414432580152821, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
-  m_PrefabInstance: {fileID: 400996958710618197}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6620218046182373521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47779,9 +47795,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5242350830634345517, guid: 34e648dc895d97949b3f003641a24972, type: 3}
-      propertyPath: holdSeconds
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: restartText
+      value: 
+      objectReference: {fileID: 62708461}
+    - target: {fileID: 5242350830634345517, guid: 34e648dc895d97949b3f003641a24972, type: 3}
+      propertyPath: restartSprite
+      value: 
+      objectReference: {fileID: 1023173213}
     - target: {fileID: 6686044736672554884, guid: 34e648dc895d97949b3f003641a24972, type: 3}
       propertyPath: m_Name
       value: RestartObject
