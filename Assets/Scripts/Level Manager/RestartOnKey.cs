@@ -18,6 +18,7 @@ public class RestartOnKey : MonoBehaviour
     private PlayerControlsB controls;
     private bool restartHeld;
     private bool didFullRestartThisHold;
+    private bool isRestarting; // To prevent multiple restarts from overlapping
 
     private void Awake()
     {
@@ -43,6 +44,9 @@ public class RestartOnKey : MonoBehaviour
 
     private void OnRestartStarted(InputAction.CallbackContext _)
     {
+        // Block restart while starting
+        if (isRestarting) return;
+
         restartHeld = true;
         didFullRestartThisHold = false;
         holdTimer = 0f;
@@ -56,41 +60,46 @@ public class RestartOnKey : MonoBehaviour
 
         restartHeld = false;
         holdTimer = 0f;
+
+        isRestarting = true; // lock restart until drain is 0
     }
 
     private void Update()
-{
-    // HOLDING
-    if (restartHeld && !didFullRestartThisHold)
     {
-        holdTimer += Time.unscaledDeltaTime;
-
-        restartSprite.fillAmount = Mathf.Clamp01(holdTimer / holdSeconds);
-
-        if (holdTimer >= holdSeconds)
+        // HOLDING
+        if (restartHeld && !didFullRestartThisHold)
         {
-            restartSprite.fillAmount = 1f;
-            didFullRestartThisHold = true;
-            FullRestart();
+            holdTimer += Time.unscaledDeltaTime;
+
+            restartSprite.fillAmount = Mathf.Clamp01(holdTimer / holdSeconds);
+
+            if (holdTimer >= holdSeconds)
+            {
+                restartSprite.fillAmount = 1f;
+                didFullRestartThisHold = true;
+                FullRestart();
+            }
         }
-    }
-    // NOT HOLDING → drain back to 0
-    else
-    {
-        restartSprite.fillAmount = Mathf.MoveTowards(
-            restartSprite.fillAmount,
-            0f,
-            Time.unscaledDeltaTime / holdSeconds
-        );
-    }
+        // NOT HOLDING → drain back to 0
+        else
+        {
+            restartSprite.fillAmount = Mathf.MoveTowards(restartSprite.fillAmount, 0f ,Time.unscaledDeltaTime / holdSeconds);
+        }
 
-    // Syncs text alpha to current fill
-    byte alpha = (byte)(restartSprite.fillAmount * 255f);
+        // Once the fill is fully drained, allow new restarts again (unlock)
+        if (!restartHeld && restartSprite.fillAmount <= 0f)
+        {
+            restartSprite.fillAmount = 0f; // ensure it's fully reset
+            isRestarting = false; // allow new restarts once fully drained
+        }
 
-    Color32 c = restartText.color;
-    c.a = alpha;
-    restartText.color = c;
-}
+        // Syncs text alpha to current fill
+        byte alpha = (byte)(restartSprite.fillAmount * 255f);
+
+        Color32 c = restartText.color;
+        c.a = alpha;
+        restartText.color = c;
+    }
 
     private void TryRespawnToCheckpoint()
     {
