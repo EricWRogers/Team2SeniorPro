@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class RestartOnKey : MonoBehaviour
 {
     [Header("Restart Settings")]
     public float holdSeconds = 0.5f;
+
+    [Header("Sprite")]
+    public Image restartSprite;
+    public TextMeshProUGUI restartText;
 
     private float holdTimer = 0f;
 
@@ -16,6 +22,7 @@ public class RestartOnKey : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerControlsB();
+        restartSprite.fillAmount = 0f;
     }
 
     private void OnEnable()
@@ -52,17 +59,38 @@ public class RestartOnKey : MonoBehaviour
     }
 
     private void Update()
+{
+    // HOLDING
+    if (restartHeld && !didFullRestartThisHold)
     {
-        if (!restartHeld || didFullRestartThisHold) return;
-
         holdTimer += Time.unscaledDeltaTime;
+
+        restartSprite.fillAmount = Mathf.Clamp01(holdTimer / holdSeconds);
 
         if (holdTimer >= holdSeconds)
         {
-            didFullRestartThisHold = true; // set BEFORE calling, prevents edge cases
+            restartSprite.fillAmount = 1f;
+            didFullRestartThisHold = true;
             FullRestart();
         }
     }
+    // NOT HOLDING → drain back to 0
+    else
+    {
+        restartSprite.fillAmount = Mathf.MoveTowards(
+            restartSprite.fillAmount,
+            0f,
+            Time.unscaledDeltaTime / holdSeconds
+        );
+    }
+
+    // Syncs text alpha to current fill
+    byte alpha = (byte)(restartSprite.fillAmount * 255f);
+
+    Color32 c = restartText.color;
+    c.a = alpha;
+    restartText.color = c;
+}
 
     private void TryRespawnToCheckpoint()
     {
