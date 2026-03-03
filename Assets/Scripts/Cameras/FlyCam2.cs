@@ -7,6 +7,7 @@ public class FlyCam2 : MonoBehaviour
 {
     [Header("References")]
     public GameObject player; // Player object with scripts
+    public GameObject restartObj ; // Restart object with RestartOnKey script
     public GameObject playerCanvas; // Player UI Canvas
     public GameObject playerCam; // Player camera (Main Camera)
     public GameObject splineCamOBJ; // Spline camera object
@@ -98,6 +99,12 @@ public class FlyCam2 : MonoBehaviour
 
         }
 
+        // Disable Restart script
+        if (restartObj != null)
+        {
+            restartObj.SetActive(false);
+        }
+
         // Disable Player Canvas
         if (playerCanvas != null)
             playerCanvas.SetActive(false);
@@ -150,6 +157,12 @@ public class FlyCam2 : MonoBehaviour
         {
             foreach (var script in player.GetComponents<MonoBehaviour>())
                 script.enabled = true;
+        }
+
+        // Re-enable Restart script
+        if (restartObj != null)
+        {
+            restartObj.SetActive(true);
         }
 
         // Enable Player Canvas
