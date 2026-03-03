@@ -91,6 +91,16 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private bool jumpPressedThisFrame;
     private bool groundPoundPressedThisFrame;
 
+     // Toggle-mode settings (can be wired to Options menu)
+    public bool sprintToggleMode = false;
+    public bool crouchToggleMode = false;
+    private bool sprintToggled = false;
+    private bool crouchToggled = false;
+
+    // runtime helper for sprint check
+    private bool IsSprintingActive => sprintToggleMode ? sprintToggled : sprintHeld;
+
+
     [Header("References")]
     public NewClimbing climbingScript;
     private ClimbingDone climbingScriptDone;
@@ -201,6 +211,13 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private void Awake() 
     {
         controls = new PlayerControlsB();
+
+        sprintToggleMode = PlayerPrefs.GetInt("SprintToggleMode", 0) == 1;
+        crouchToggleMode = PlayerPrefs.GetInt("CrouchToggleMode", 0) == 1;
+
+        // keep toggles consistent with current physical state
+        sprintToggled = false;
+        crouchToggled = crouching;
     }
 
     private void OnEnable()
@@ -238,10 +255,48 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     }
 
     //below stored subscriptions as methods so inputs wont double fire
-    private void OnSprintStarted(InputAction.CallbackContext _) => sprintHeld = true;
-    private void OnSprintCanceled(InputAction.CallbackContext _) => sprintHeld = false;
-    private void OnCrouchStarted(InputAction.CallbackContext _) => crouchHeld = true;
-    private void OnCrouchCanceled(InputAction.CallbackContext _) => crouchHeld = false;
+    //private void OnSprintStarted(InputAction.CallbackContext _) => sprintHeld = true;
+    //private void OnSprintCanceled(InputAction.CallbackContext _) => sprintHeld = false;
+    //private void OnCrouchStarted(InputAction.CallbackContext _) => crouchHeld = true;
+    //private void OnCrouchCanceled(InputAction.CallbackContext _) => crouchHeld = false;
+
+    private void OnSprintStarted(InputAction.CallbackContext _)
+    {
+        if (sprintToggleMode)
+            sprintToggled = !sprintToggled;
+        else
+            sprintHeld = true;
+    }
+
+    private void OnSprintCanceled(InputAction.CallbackContext _)
+    {
+        if (!sprintToggleMode)
+            sprintHeld = false;
+    }
+
+    private void OnCrouchStarted(InputAction.CallbackContext _)
+    {
+        if (crouchToggleMode)
+        {
+            bool targetState = !crouchToggled;
+
+            bool success = ApplyCrouchState(targetState);
+
+            if (success)
+                crouchToggled = targetState;   // only update toggle if it worked
+        }
+        else
+        {
+            crouchHeld = true;
+        }
+    }
+
+    private void OnCrouchCanceled(InputAction.CallbackContext _)
+    {
+        if (!crouchToggleMode)
+            crouchHeld = false;
+    }
+
     private void OnJumpStarted(InputAction.CallbackContext _) => jumpPressedThisFrame = true;
     private void OnGroundPoundStarted(InputAction.CallbackContext _) => groundPoundPressedThisFrame = true;
     private void OnMove(InputAction.CallbackContext ctx)
@@ -278,7 +333,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             StartCoroutine(GroundPoundRoutine());
         }
 
-        // Crouch (hold OR toggle-style; this is HOLD-style)
+        /*// Crouch (hold OR toggle-style; this is HOLD-style)
         if (crouchHeld && !crouching && Mathf.Abs(horizontalInput) < 0.001f && Mathf.Abs(verticalInput) < 0.001f)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
@@ -294,9 +349,22 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         // clear one-frame presses if they weren’t consumed
         jumpPressedThisFrame = false;
-        groundPoundPressedThisFrame = false;
-    }
+        groundPoundPressedThisFrame = false;*/
 
+            // For HOLD-mode: same behavior as before; for TOGGLE-mode crouching is handled in OnCrouchStarted
+        if (!crouchToggleMode)
+        {
+            if (crouchHeld && !crouching && Mathf.Abs(horizontalInput) < 0.001f && Mathf.Abs(verticalInput) < 0.001f)
+            {
+                ApplyCrouchState(true);
+            }
+
+            if (!crouchHeld && crouching)
+            {
+                ApplyCrouchState(false);
+            }
+        }
+    }
 
     public bool keepMomentum;
     private void StateHandler()
@@ -356,7 +424,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             state = MovementState.groundPounding;
             desiredMoveSpeed = 0f;
         }
-        else if (grounded && sprintHeld)
+        else if (grounded && IsSprintingActive)
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
@@ -668,5 +736,87 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         Physics.SyncTransforms();
     }
 
+    private bool ApplyCrouchState(bool shouldCrouch)
+    {
+        if (shouldCrouch)
+        {
+            if (crouching)
+                return true;
+
+            // You currently require no movement to crouch
+            if (Mathf.Abs(horizontalInput) > 0.001f || Mathf.Abs(verticalInput) > 0.001f)
+                return false;   // failed to crouch
+
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            crouching = true;
+
+            return true;        // crouch applied
+        }
+        else
+        {
+            if (!crouching)
+                return true;
+
+            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            crouching = false;
+
+            return true;        // stand applied
+        }
+    }
+
+    public void SetSprintToggleMode(bool on)
+    {
+        sprintToggleMode = on;
+
+        // when switching to HOLD mode, clear toggled
+        if (!on) sprintToggled = false;
+
+        PlayerPrefs.SetInt("SprintToggleMode", on ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void SetCrouchToggleMode(bool on)
+    {
+        crouchToggleMode = on;
+
+        if (!on) crouchToggled = false;
+
+        PlayerPrefs.SetInt("CrouchToggleMode", on ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    /*    public void SetSprintToggleMode(bool on)
+    {
+        sprintToggleMode = on;
+        if (!on) sprintToggled = false;
+        PlayerPrefs.SetInt("SprintToggleMode", on ? 1 : 0);
+    }
+
+    public void SetCrouchToggleMode(bool on)
+    {
+        crouchToggleMode = on;
+        if (!on) crouchToggled = false;
+        PlayerPrefs.SetInt("CrouchToggleMode", on ? 1 : 0);
+    }
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+        sprintToggleMode = PlayerPrefs.GetInt("SprintToggleMode", 0) == 1;
+        crouchToggleMode = PlayerPrefs.GetInt("CrouchToggleMode", 0) == 1;
+    }
     
+    public Toggle sprintToggle;
+    public Toggle crouchToggle;
+    public NewThirdPlayerMovement move;
+
+    private void Start()
+    {
+        sprintToggle.isOn = move.sprintToggleMode;
+        crouchToggle.isOn = move.crouchToggleMode;
+
+        sprintToggle.onValueChanged.AddListener(move.SetSprintToggleMode);
+        crouchToggle.onValueChanged.AddListener(move.SetCrouchToggleMode);
+    }*/
 }
