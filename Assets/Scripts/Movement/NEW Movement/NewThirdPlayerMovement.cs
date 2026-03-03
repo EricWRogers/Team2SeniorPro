@@ -789,20 +789,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         PlayerPrefs.Save();
     }
 
-    /*    public void SetSprintToggleMode(bool on)
-    {
-        sprintToggleMode = on;
-        if (!on) sprintToggled = false;
-        PlayerPrefs.SetInt("SprintToggleMode", on ? 1 : 0);
-    }
-
-    public void SetCrouchToggleMode(bool on)
-    {
-        crouchToggleMode = on;
-        if (!on) crouchToggled = false;
-        PlayerPrefs.SetInt("CrouchToggleMode", on ? 1 : 0);
-    }
-
+    /*
     private void Awake()
     {
         controls = new PlayerControlsB();
