@@ -346,10 +346,11 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             crouching = false;
         }
+        */
 
         // clear one-frame presses if they weren’t consumed
         jumpPressedThisFrame = false;
-        groundPoundPressedThisFrame = false;*/
+        groundPoundPressedThisFrame = false;
 
             // For HOLD-mode: same behavior as before; for TOGGLE-mode crouching is handled in OnCrouchStarted
         if (!crouchToggleMode)
@@ -500,7 +501,9 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         if (climbingScript != null && climbingScript.exitingWall) return;
         if (restricted) return;
 
+        
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+       
 
         if (OnSlope() && !exitingSlope)
         {
