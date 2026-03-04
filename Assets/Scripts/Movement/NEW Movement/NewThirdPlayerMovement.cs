@@ -106,6 +106,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private ClimbingDone climbingScriptDone;
     private NewSliding slidingScript; 
     public Transform orientation;
+    private Animator anim;
 
     private float teleportLockTimer = 0f;
 
@@ -152,6 +153,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         climbingScriptDone = GetComponent<ClimbingDone>();
         slidingScript = GetComponent<NewSliding>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -175,6 +177,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         MyInput();
         SpeedControl();
         StateHandler();
+        UpdateAnimator();
         TextStuff();
 
         /*// Impact detection (first grounded frame)
@@ -218,6 +221,17 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         // keep toggles consistent with current physical state
         sprintToggled = false;
         crouchToggled = crouching;
+    }
+
+    private void UpdateAnimator()
+    {
+        if (anim == null) return;
+        float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
+        bool isMoving = flatSpeed > 0.1f;
+
+        anim.SetBool("isGrounded", grounded);
+        anim.SetBool("isWalking", grounded && isMoving && state == MovementState.walking);
+        anim.SetBool("isRunning", grounded && isMoving && state == MovementState.sprinting);
     }
 
     private void OnEnable()
@@ -438,7 +452,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         else
         {
             state = MovementState.air;
-
+        
             if (!groundPounding && moveSpeed < airMinSpeed)
                 desiredMoveSpeed = airMinSpeed;
         }

@@ -26,24 +26,37 @@ public class CollectibleScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
         Debug.Log("Collectible touched by player");
 
-        // Play particle effect
-        GameObject fx = Instantiate(collectParticles, transform.position, Quaternion.identity);
+        // If particles are a child, detach them first
+        if (collectParticles != null)
+        {
+            collectParticles.transform.parent = null; // Detach from collectible
+            collectParticles.SetActive(true);
 
-        // Play SFX safely
-        AudioSource.PlayClipAtPoint(collectSFX, transform.position);
+            ParticleSystem ps = collectParticles.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Play();
+                Destroy(collectParticles, ps.main.duration + ps.main.startLifetime.constantMax);
+            }
+            else
+            {
+                Destroy(collectParticles, 1f);
+            }
+        }
 
-        // Play animation
+        if (collectSFX != null)
+            AudioSource.PlayClipAtPoint(collectSFX, transform.position);
+
         if (animator != null)
             animator.SetTrigger("BerryCollect");
-        
+
         GameManager.Instance.collectibleCount++;
 
-        // Destroy after animation trigger
-        Destroy(transform.parent.gameObject, 0.1f);
-
-        // Destrot the particle system after it finishes
-        Destroy(fx, 0.5f);
+        // Destroy immediately — no delay needed now
+        Destroy(transform.parent.gameObject);
     }
+
 }
