@@ -418,7 +418,6 @@ GameObject:
   - component: {fileID: 2857964503789427036}
   - component: {fileID: 6370834667682660888}
   - component: {fileID: 3839671093794790857}
-  - component: {fileID: 6724929360425598616}
   - component: {fileID: 2487827173279851799}
   - component: {fileID: 7135522167149671966}
   - component: {fileID: 883837923857014362}
@@ -513,6 +512,8 @@ MonoBehaviour:
   groundPoundBoostOnSlope: 1
   groundPoundSlopeEnterSpeed: 25
   dashing: 0
+  groundPoundSlideBoostSpeed: 25
+  groundPoundSlideBoostMinTime: 0.15
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -520,6 +521,8 @@ MonoBehaviour:
   grounded: 0
   maxSlopeAngle: 40
   playerInput: {fileID: 0}
+  sprintToggleMode: 0
+  crouchToggleMode: 0
   climbingScript: {fileID: 301730769726878209}
   orientation: {fileID: 467439584808613755}
   rb: {fileID: 4703360030634037239}
@@ -617,28 +620,6 @@ MonoBehaviour:
   uphillBrakeForceMult: 1
   stopSpeed: 15
 --- !u!114 &3839671093794790857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2668661954304852184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1b581b47e5b9b44905a07eaf13da72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 467439584808613755}
-  playerCam: {fileID: 2621640965754357359}
-  dashForce: 70
-  dashUpwardForce: 2
-  dashDuration: 0.4
-  useCameraForward: 1
-  allowAllDirections: 1
-  disableGravity: 0
-  resetYVel: 1
-  dashCd: 1.5
---- !u!114 &6724929360425598616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

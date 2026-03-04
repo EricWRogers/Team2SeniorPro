@@ -346,10 +346,11 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             crouching = false;
         }
+        */
 
         // clear one-frame presses if they weren’t consumed
         jumpPressedThisFrame = false;
-        groundPoundPressedThisFrame = false;*/
+        groundPoundPressedThisFrame = false;
 
             // For HOLD-mode: same behavior as before; for TOGGLE-mode crouching is handled in OnCrouchStarted
         if (!crouchToggleMode)
@@ -500,7 +501,9 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         if (climbingScript != null && climbingScript.exitingWall) return;
         if (restricted) return;
 
+        
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+       
 
         if (OnSlope() && !exitingSlope)
         {
@@ -786,20 +789,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         PlayerPrefs.Save();
     }
 
-    /*    public void SetSprintToggleMode(bool on)
-    {
-        sprintToggleMode = on;
-        if (!on) sprintToggled = false;
-        PlayerPrefs.SetInt("SprintToggleMode", on ? 1 : 0);
-    }
-
-    public void SetCrouchToggleMode(bool on)
-    {
-        crouchToggleMode = on;
-        if (!on) crouchToggled = false;
-        PlayerPrefs.SetInt("CrouchToggleMode", on ? 1 : 0);
-    }
-
+    /*
     private void Awake()
     {
         controls = new PlayerControlsB();

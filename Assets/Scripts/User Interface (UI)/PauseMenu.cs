@@ -1,11 +1,17 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI; 
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+
+    [Header("Options Toggles")]
+    public Toggle sprintToggle;
+    public Toggle crouchToggle;
+
+    [Tooltip("Leave empty to auto-find on the player.")]
+    public NewThirdPlayerMovement move;
 
     [Header("Audio(s):")]
     public AudioSource SFXSource;
@@ -19,40 +25,26 @@ public class PauseMenu : MonoBehaviour
     [Tooltip("Scripts to disable when paused and enable when resumed")]
     public MonoBehaviour[] scriptsToToggle;
 
+    private bool uiWired;
+
+    private void Awake()
+    {
+        // Auto-find movement if not assigned
+        if (move == null)
+            move = FindFirstObjectByType<NewThirdPlayerMovement>();
+
+        WireOptionsUI();
+        RefreshOptionsUI();
+    }
+
     void Update()
     {
+        // (Optional) convert this to the Input System later
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            if (GameIsPaused) Resume();
+            else Pause();
         }
-    }
-
-    public void Home()
-    {
-        PlaySound();
-        Debug.Log("Loading Main Menu...");
-        Time.timeScale = 1f;
-        GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
-
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.SetMusicMuted(true);
-        }
-    }
-
-    public void HUB()
-    {
-        PlaySound();
-        Debug.Log("Loading Burrow...");
-        Time.timeScale = 1f;
-        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the burrow, resets collectibles so it doesnt add 0 to total
     }
 
     public void Resume()
@@ -75,19 +67,60 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
         ToggleScripts(false);
 
-        // Play clip once
+        // Always resync UI when opening menu (in case prefs changed elsewhere)
+        RefreshOptionsUI();
+
         if (pauseSFX != null && SFXSource != null)
-        {
             SFXSource.PlayOneShot(pauseSFX);
+    }
+
+    private void WireOptionsUI()
+    {
+        if (uiWired) return;
+
+        if (sprintToggle != null)
+            sprintToggle.onValueChanged.AddListener(OnSprintToggleChanged);
+
+        if (crouchToggle != null)
+            crouchToggle.onValueChanged.AddListener(OnCrouchToggleChanged);
+
+        uiWired = true;
+    }
+
+    private void RefreshOptionsUI()
+    {
+        if (move == null) return;
+
+        // Prevent triggering OnValueChanged while we programmatically set values
+        if (sprintToggle != null)
+        {
+            sprintToggle.SetIsOnWithoutNotify(move.sprintToggleMode);
         }
+
+        if (crouchToggle != null)
+        {
+            crouchToggle.SetIsOnWithoutNotify(move.crouchToggleMode);
+        }
+    }
+
+    private void OnSprintToggleChanged(bool on)
+    {
+        PlaySound();
+        if (move != null) move.SetSprintToggleMode(on);
+    }
+
+    private void OnCrouchToggleChanged(bool on)
+    {
+        PlaySound();
+        if (move != null) move.SetCrouchToggleMode(on);
     }
 
     public void Restart()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); //reloads the current scene, does not reset collectibles so it adds to total
+        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false);
     }
-    
+
     public void Quit()
     {
         PlaySound();
@@ -95,47 +128,25 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("You've quit the game!");
     }
 
-    public void ToggleAudio()
-    {
-        if (SoundManager.Instance == null)
-        {
-            Debug.LogWarning("No SoundManager found!");
-            return;
-        }
-
-        bool mute = !SoundManager.Instance.IsMusicMuted();
-        SoundManager.Instance.SetMusicMuted(mute);
-
-        Debug.Log(mute ? "Music muted." : "Music unmuted.");
-    }
-
     public void PlaySound()
     {
         if (clickSFX != null && SFXSource != null)
-        {
             SFXSource.PlayOneShot(clickSFX);
-            Debug.Log("Played sound: " + clickSFX.name);
-        }
-        else
-        {
-            Debug.LogWarning("ButtonSource or ButtonClip is missing!");
-        }
     }
 
     private IEnumerator WaitForPlay()
     {
-        yield return new WaitForSecondsRealtime(2.0f); // tiny delay so sound registers
+        yield return new WaitForSecondsRealtime(2.0f);
     }
 
     private void ToggleScripts(bool enable)
     {
-        if (scriptsToToggle != null)
+        if (scriptsToToggle == null) return;
+
+        foreach (var script in scriptsToToggle)
         {
-            foreach (var script in scriptsToToggle)
-            {
-                if (script != null)
-                    script.enabled = enable;
-            }
+            if (script != null)
+                script.enabled = enable;
         }
     }
 }
