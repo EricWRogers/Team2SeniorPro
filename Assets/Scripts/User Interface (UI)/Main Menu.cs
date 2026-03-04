@@ -14,8 +14,9 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void Options()
+    public void Options(GameObject optionsMenu)
     {
+        optionsMenu.SetActive(true);
         Debug.Log("Options menu opened");
     }
 
