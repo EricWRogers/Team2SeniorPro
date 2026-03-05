@@ -46,7 +46,7 @@ public class InteractDisplay : MonoBehaviour
     }
     void Update()
     {
-        if (IsPlayerInRange && Input.GetKeyDown(KeyCode.E) && DialogManager.Instance.dialogCanvas.gameObject.activeSelf == false)
+        if (IsPlayerInRange && Input.GetKeyDown(KeyCode.F) && DialogManager.Instance.dialogCanvas.gameObject.activeSelf == false)
         {
             //DialogManager.Instance.ShowDialog("TutorialNPCDialog");
             CutsceneManagement.Instance.PlayCutscene(cutsceneToPlay);
