@@ -106,9 +106,11 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private ClimbingDone climbingScriptDone;
     private NewSliding slidingScript; 
     public Transform orientation;
-    //private Animator anim;
+    private Animator anim;
 
     private float teleportLockTimer = 0f;
+    private float groundedGrace = 0.1f;
+    private float lastGroundedTime;
 
     float horizontalInput;
     float verticalInput;
@@ -153,7 +155,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         climbingScriptDone = GetComponent<ClimbingDone>();
         slidingScript = GetComponent<NewSliding>();
-        //anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -166,7 +168,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround, QueryTriggerInteraction.Ignore);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.6f, whatIsGround, QueryTriggerInteraction.Ignore);
 
         if (groundPoundCooldownTimer > 0f)
             groundPoundCooldownTimer -= Time.deltaTime;
@@ -177,7 +179,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         MyInput();
         SpeedControl();
         StateHandler();
-        //UpdateAnimator();
+        UpdateAnimator();
         TextStuff();
 
         /*// Impact detection (first grounded frame)
@@ -211,6 +213,12 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         }
     }
 
+    private void LateUpdate()
+    {
+        Vector3 rot = transform.eulerAngles;
+        transform.eulerAngles = new Vector3(0f, rot.y, 0f);
+    }
+
     private void Awake() 
     {
         controls = new PlayerControlsB();
@@ -223,17 +231,29 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         crouchToggled = crouching;
     }
 
-    /*private void UpdateAnimator()
+    private void UpdateAnimator()
     {
         if (anim == null) return;
+        
         float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
-        bool isMoving = flatSpeed > 0.1f;
 
-        anim.SetBool("isGrounded", grounded);
+        if (grounded)
+            {
+                lastGroundedTime = Time.time;
+            }
+        
+        bool groundedRecently = Time.time - lastGroundedTime < groundedGrace;
+
+        bool isMoving = flatSpeed > 0.1f;
+        bool isFalling = !grounded && rb.linearVelocity.y < -1f;
+        bool isJumping = !grounded && rb.linearVelocity.y > 0.1f;
+
+        anim.SetBool("isGrounded", groundedRecently);
         anim.SetBool("isWalking", grounded && isMoving && state == MovementState.walking);
         anim.SetBool("isRunning", grounded && isMoving && state == MovementState.sprinting);
-        anim.SetBool("isAir", !grounded);
-    }*/
+        anim.SetBool("isJumping", isJumping);
+        anim.SetBool("isFalling", isFalling);
+    }
 
     private void OnEnable()
     {
@@ -537,7 +557,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         }
 
         if (!wallrunning)
-            rb.useGravity = !OnSlope();
+            rb.useGravity = !OnSlope() || rb.linearVelocity.y > 0.1f;
     }
 
     private void SpeedControl()
@@ -583,7 +603,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             Debug.Log("Slope Angle:" + angle);
-            return angle < maxSlopeAngle && angle != 0;
+            return angle < maxSlopeAngle && angle > 0.1f;
 
         }
 
