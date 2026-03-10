@@ -649,9 +649,9 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         if (OnSlope())
-            text_speed.SetText("Speed: " + Round(rb.linearVelocity.magnitude, 1) + " / " + Round(moveSpeed, 1));
+            text_speed.SetText("" + Round(rb.linearVelocity.magnitude, 1));
         else
-            text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
+            text_speed.SetText("" + Round(flatVel.magnitude, 1));
 
         text_mode.SetText(state.ToString());
     }
