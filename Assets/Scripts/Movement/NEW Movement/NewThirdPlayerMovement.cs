@@ -444,7 +444,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         }
         else if (grounded && !IsSprintingActive && noInput)
         {
-            // explicit idle state added, no input and grounded
+            // explicit idle state added: no input and grounded
             state = MovementState.idle;
             desiredMoveSpeed = 0f;
             moveSpeed = 0f;          // ensure immediate stop
