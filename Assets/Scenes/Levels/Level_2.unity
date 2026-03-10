@@ -757,6 +757,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
     - target: {fileID: 2600957420387605812, guid: 37d015ab53ab8bf4c90f4252b62a363f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600957420387605812, guid: 37d015ab53ab8bf4c90f4252b62a363f, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1847523515}
@@ -32213,6 +32217,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3952908457729018571, guid: 312c863c4be9635459f147401039a4cc, type: 3}
   m_PrefabInstance: {fileID: 1182746642}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1183846473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2050569914120272984, guid: e9565ceb5db5a2347b12351621956570, type: 3}
+  m_PrefabInstance: {fileID: 1016361416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8522d56aab6cd41bdf9bd16ad65ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1184952545
 GameObject:
   m_ObjectHideFlags: 0
@@ -40264,6 +40279,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2132289642}
   m_SourcePrefab: {fileID: 100100000, guid: 1cdce38f857c1f84f8d96759ccebe175, type: 3}
+--- !u!114 &1433450624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5074820941058126303, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 1241684034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1433450625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3304135914869473051, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 1241684034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1433654797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41676,6 +41713,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel
       objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_mode
+      value: 
+      objectReference: {fileID: 1433450624}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_speed
+      value: 
+      objectReference: {fileID: 1433450625}
+    - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: key
+      value: 
+      objectReference: {fileID: 1183846473}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
