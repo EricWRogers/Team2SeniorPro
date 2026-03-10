@@ -123,6 +123,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     {
         freeze,
         unlimited,
+        idle,            // newly added idle state
         walking,
         sprinting,
         wallrunning,
@@ -405,6 +406,11 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     public bool keepMomentum;
     private void StateHandler()
     {
+        // if player has no movement input and is grounded we treat them as "idle"
+        // this prevents the momentum-smoothing logic from trying to interpolate
+        // from a high speed back down to walkSpeed and instead drops speed to 0
+        bool noInput = Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f;
+
         if (freeze)
         {
             state = MovementState.freeze;
@@ -435,6 +441,16 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         {
             state = MovementState.dashing;
             desiredMoveSpeed = 0f;  // we’re using dash impulse, not moveSpeed forces or equal it to lastDesiredMoveSpeed maybe
+        }
+        else if (grounded && !IsSprintingActive && noInput)
+        {
+            // explicit idle state added, no input and grounded
+            state = MovementState.idle;
+            desiredMoveSpeed = 0f;
+            moveSpeed = 0f;          // ensure immediate stop
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            keepMomentum = false;    // don't lerp anything
+            StopAllCoroutines();     // kill any active lerp from previous state
         }
         else if (sliding)
         {
@@ -504,6 +520,10 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         while (time < difference)
         {
+            // abort early if momentum flag is cleared (e.g. idle entered)
+            if (!keepMomentum)
+                break;
+
             moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
 
             if (OnSlope())
@@ -563,7 +583,14 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private void SpeedControl()
     {
         if (dashing) return;   
-        
+
+        // if we’re grounded and there’s no input, kill horizontal momentum right away
+        if (grounded && Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f)
+        {
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            return;
+        }
+
         if (OnSlope() && !exitingSlope)
         {
             if (rb.linearVelocity.magnitude > moveSpeed)
