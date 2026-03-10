@@ -3,6 +3,7 @@ using UnityEngine;
 public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float jumpForce = 15f;
+    public Animator animator;
 
     private void OnTriggerEnter(Collider other)
 {
@@ -17,6 +18,8 @@ public class JumpPad : MonoBehaviour
             rb.linearVelocity = vel;
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+
+                animator.SetTrigger("Bounce");
         }
     }
 }
