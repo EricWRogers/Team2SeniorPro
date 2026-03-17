@@ -499,6 +499,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 34068565}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 34068569}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &34068563 stripped
 Transform:
@@ -522,7 +525,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &34068569
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34068564}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &35658866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1434,6 +1466,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6127872729591928760, guid: 39e30dc0753fc2d43b2b4d50522b724f, type: 3}
   m_PrefabInstance: {fileID: 112252363}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &114376160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7705905443705977479, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &123881423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2123,6 +2160,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 222454885}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 222454889}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &222454883 stripped
 Transform:
@@ -2146,7 +2186,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &222454889
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222454884}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &240333828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2440,6 +2509,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 245324755}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 245324759}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &245324753 stripped
 Transform:
@@ -2463,7 +2535,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &245324759
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245324754}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &246997936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3430,6 +3531,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 321398665}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 321398669}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &321398663 stripped
 Transform:
@@ -3453,7 +3557,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &321398669
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321398664}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &325891890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3649,6 +3782,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 332580783}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 332580787}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &332580781 stripped
 Transform:
@@ -3672,7 +3808,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &332580787
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332580782}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &334113501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3971,6 +4136,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 331337536751531191, guid: b680c3f3d859da547b5640b3761e26e4, type: 3}
   m_PrefabInstance: {fileID: 339989912}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &347189851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6332129069277067709, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb6b020d233ab74e9c7d6ab2ca67fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &349370928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4918,6 +5094,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398657276}
   m_Mesh: {fileID: 8537706236169123842, guid: ffc43efd14dd9a547a0d7405e536a729, type: 3}
+--- !u!114 &399287018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3209240807424561271, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3d50c1184cc6f409e0d8cf8fb044a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &400774500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5163,6 +5350,7 @@ GameObject:
   - component: {fileID: 403936591}
   - component: {fileID: 403936590}
   - component: {fileID: 403936589}
+  - component: {fileID: 403936592}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5244,6 +5432,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &403936592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403936588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &405578621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5729,6 +5961,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 441775164}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 441775168}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &441775162 stripped
 Transform:
@@ -5752,7 +5987,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &441775168
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441775163}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &442783175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7057,6 +7321,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 505943807}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 505943811}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &505943805 stripped
 Transform:
@@ -7080,7 +7347,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &505943811
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505943806}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &507931606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7209,6 +7505,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 511165706}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 511165710}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &511165704 stripped
 Transform:
@@ -7232,7 +7531,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &511165710
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511165705}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &516272844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7895,6 +8223,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 574314447}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 574314451}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &574314445 stripped
 Transform:
@@ -7918,7 +8249,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &574314451
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574314446}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &584709153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8111,6 +8471,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 26.08
       objectReference: {fileID: 0}
+    - target: {fileID: 1882767365746762340, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: defaultMusicTrack
+      value: Spring_Forward
+      objectReference: {fileID: 0}
     - target: {fileID: 2075830250284682903, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
       value: 222.35999
@@ -8275,6 +8639,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 361969482}
+    - target: {fileID: 6119114123833250429, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+    - target: {fileID: 6119114123833250429, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
     - target: {fileID: 6198846570798659794, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
       value: 278.8
@@ -8386,6 +8758,7 @@ PrefabInstance:
     - {fileID: 3517528352252133893, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
     - {fileID: 6689092807427151333, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
     - {fileID: 4322578211897616974, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+    - {fileID: 9038426895728287747, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2346955668241332938, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
@@ -8406,11 +8779,6 @@ MonoBehaviour:
 --- !u!4 &586567717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5246929732595145846, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
-  m_PrefabInstance: {fileID: 586567715}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &586567718 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4148191830779662534, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
   m_PrefabInstance: {fileID: 586567715}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &586567719 stripped
@@ -8527,15 +8895,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7933807
+      value: -2.7933843
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.820007
+      value: 17.82
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.150024
+      value: -32.15
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8625,6 +8993,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel
       objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_mode
+      value: 
+      objectReference: {fileID: 2140577312}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: text_speed
+      value: 
+      objectReference: {fileID: 1372659522}
     - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: key
       value: 
@@ -9105,6 +9481,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 592982886}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 592982890}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &592982884 stripped
 Transform:
@@ -9128,7 +9507,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &592982890
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592982885}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &594607126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9461,6 +9869,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 606644897}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 606644901}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &606644895 stripped
 Transform:
@@ -9484,7 +9895,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &606644901
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606644896}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &606918906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9975,6 +10415,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 647423339}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 647423343}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &647423337 stripped
 Transform:
@@ -9998,7 +10441,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &647423343
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647423338}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1 &650441125
 GameObject:
   m_ObjectHideFlags: 0
@@ -10386,6 +10858,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 652791991}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 652791995}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &652791989 stripped
 Transform:
@@ -10409,7 +10884,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &652791995
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652791990}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &653545881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10469,6 +10973,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 653545884}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 653545888}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &653545882 stripped
 Transform:
@@ -10492,7 +10999,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &653545888
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653545883}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &655389164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11319,6 +11855,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 726774149}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 726774153}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &726774147 stripped
 Transform:
@@ -11342,7 +11881,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &726774153
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726774148}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &731325971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11402,6 +11970,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 731325974}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 731325978}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &731325972 stripped
 Transform:
@@ -11425,7 +11996,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &731325978
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731325973}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &741336860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11944,6 +12544,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 778108137}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 778108141}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &778108135 stripped
 Transform:
@@ -11967,7 +12570,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &778108141
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778108136}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &779117783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12303,6 +12935,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 793690426}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 793690430}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &793690424 stripped
 Transform:
@@ -12326,7 +12961,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &793690430
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793690425}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &796318571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12856,6 +13520,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 830022191}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 830022195}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &830022189 stripped
 Transform:
@@ -12879,7 +13546,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &830022195
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830022190}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &840132476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13025,6 +13721,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 840717700}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 840717704}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &840717698 stripped
 Transform:
@@ -13048,7 +13747,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &840717704
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840717699}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &843953157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13120,6 +13848,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 843953160}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 843953164}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &843953158 stripped
 Transform:
@@ -13143,7 +13874,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &843953164
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843953159}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &847267971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13410,6 +14170,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 857418718}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 857418722}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &857418716 stripped
 Transform:
@@ -13433,7 +14196,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &857418722
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857418717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &867748013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13876,6 +14668,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 883751975}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 883751979}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &883751973 stripped
 Transform:
@@ -13899,7 +14694,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &883751979
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883751974}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &885285483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14681,6 +15505,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 930895382}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 930895386}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &930895380 stripped
 Transform:
@@ -14704,7 +15531,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &930895386
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930895381}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &932077295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14826,6 +15682,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 934122336}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 934122340}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &934122334 stripped
 Transform:
@@ -14849,7 +15708,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &934122340
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934122335}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &936819746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16119,6 +17007,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1034896730}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1034896734}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1034896728 stripped
 Transform:
@@ -16142,7 +17033,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1034896734
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034896729}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1039218945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17050,6 +17970,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1101315916}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1101315920}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1101315914 stripped
 Transform:
@@ -17073,7 +17996,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1101315920
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101315915}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1105660311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17651,6 +18603,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1183096327}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1183096331}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1183096325 stripped
 Transform:
@@ -17674,7 +18629,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1183096331
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183096326}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1183605210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18758,6 +19742,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1290146356}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1290146360}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1290146354 stripped
 Transform:
@@ -18781,7 +19768,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1290146360
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290146355}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1 &1293665184
 GameObject:
   m_ObjectHideFlags: 0
@@ -19244,6 +20260,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1316856941}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1316856945}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1316856939 stripped
 Transform:
@@ -19267,7 +20286,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1316856945
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316856940}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1322392170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19354,6 +20402,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6127872729591928760, guid: 1cdce38f857c1f84f8d96759ccebe175, type: 3}
   m_PrefabInstance: {fileID: 1322392170}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1332585190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7398477127328121725, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab365de29f06101468407fe1db3a6c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1333775823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19713,6 +20772,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 331337536751531191, guid: b680c3f3d859da547b5640b3761e26e4, type: 3}
   m_PrefabInstance: {fileID: 1362941434}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1372659522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1405179732084616320, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1372830579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20001,6 +21071,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1394640753}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1394640757}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1394640751 stripped
 Transform:
@@ -20024,7 +21097,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1394640757
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394640752}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1408242516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23191,6 +24293,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1663626608}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1663626612}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1663626606 stripped
 Transform:
@@ -23214,7 +24319,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1663626612
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663626607}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1673464103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23672,6 +24806,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1691098468}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1691098472}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1691098466 stripped
 Transform:
@@ -23695,7 +24832,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1691098472
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691098467}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1696068455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23971,6 +25137,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1725535297}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1725535301}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1725535295 stripped
 Transform:
@@ -23994,7 +25163,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1725535301
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725535296}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!4 &1738677016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 331337536751531191, guid: b680c3f3d859da547b5640b3761e26e4, type: 3}
@@ -24294,6 +25492,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1748392591}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1748392595}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1748392589 stripped
 Transform:
@@ -24317,7 +25518,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1748392595
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748392590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1753973564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25274,6 +26504,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1812640952}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1812640956}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1812640950 stripped
 Transform:
@@ -25297,7 +26530,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1812640956
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812640951}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1821389571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25612,6 +26874,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1842621568}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1842621572}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1842621566 stripped
 Transform:
@@ -25635,7 +26900,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1842621572
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842621567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
+--- !u!114 &1849982929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5411926425699556264, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1850560766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26085,6 +27390,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1879521763}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1879521767}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1879521761 stripped
 Transform:
@@ -26108,7 +27416,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1879521767
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879521762}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1879618916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26561,6 +27898,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1942420673}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1942420677}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1942420671 stripped
 Transform:
@@ -26584,7 +27924,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1942420677
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942420672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1945984173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26979,6 +28348,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1966976497}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1966976501}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1966976495 stripped
 Transform:
@@ -27002,7 +28374,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1966976501
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966976496}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &1972304609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27276,6 +28677,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1994893391}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1994893395}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &1994893389 stripped
 Transform:
@@ -27299,7 +28703,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &1994893395
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994893390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &2008937924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27894,6 +29327,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2071603874}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2071603878}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &2071603872 stripped
 Transform:
@@ -27917,7 +29353,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &2071603878
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071603873}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &2075153922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28596,6 +30061,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3096189040036246365, guid: 47ba5ab8537c7304c8442e7909b4c453, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421011685604821668, guid: 47ba5ab8537c7304c8442e7909b4c453, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28796,6 +30269,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2138314573}
+    - targetCorrespondingSourceObject: {fileID: 7124054625741649668, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2138314577}
   m_SourcePrefab: {fileID: 100100000, guid: 73be361f61d074644bd555b84753f5d2, type: 3}
 --- !u!4 &2138314571 stripped
 Transform:
@@ -28819,7 +30295,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn: {fileID: 586567718}
+  deathScreen: {fileID: 8361566590436268718}
+  countdownText: {fileID: 1849982929}
+  GM: {fileID: 347189851}
+  scriptsToToggle:
+  - {fileID: 399287018}
+  - {fileID: 1332585190}
+  objectsToToggle:
+  - {fileID: 114376160}
+--- !u!64 &2138314577
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138314572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2041148124782078213, guid: 4b2ed9b6b3e1f36469a409aec54b52f9, type: 3}
 --- !u!1001 &2139701297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28902,6 +30407,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1822654163002212447, guid: 6bc74008ecec87545a0eec20074ae310, type: 3}
   m_PrefabInstance: {fileID: 2139701297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2140577312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8662664385420288580, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2144475728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4144773600205658381, guid: b8835ae6e31ae294f9d7980ad42abc95, type: 3}
@@ -29815,6 +31331,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &8361566590436268718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7261115402662333265, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8362649202560456244
 GameObject:
   m_ObjectHideFlags: 0
