@@ -47,6 +47,20 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void Home()
+    {
+        PlaySound();
+        Time.timeScale = 1f;
+        GameManager.Instance.newMap("Main Menu", true);
+    }
+
+    public void HUB()
+    {
+        PlaySound();
+        Time.timeScale = 1f;
+        GameManager.Instance.newMap("Squirrel_HUB", true);
+    }
+
     public void Resume()
     {
         StartCoroutine(WaitForPlay());
