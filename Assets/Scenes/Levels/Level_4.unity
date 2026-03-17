@@ -17849,6 +17849,87 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4779507527288786033, guid: dadefb91f90ffe24b8a6ff0b00b3cd01, type: 3}
   m_PrefabInstance: {fileID: 824807120}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &826213937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684703896885791902, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: GM
+      value: 
+      objectReference: {fileID: 264810050432634665}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 264810050432634667}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: countdownText
+      value: 
+      objectReference: {fileID: 264810050432634666}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'objectsToToggle.Array.data[0]'
+      value: 
+      objectReference: {fileID: 264810050432634662}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[0]'
+      value: 
+      objectReference: {fileID: 264810050432634664}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[1]'
+      value: 
+      objectReference: {fileID: 264810050432634663}
+    - target: {fileID: 8208234980504317363, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: m_Name
+      value: Killbox
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
 --- !u!1 &826329806
 GameObject:
   m_ObjectHideFlags: 0
@@ -49316,3 +49397,4 @@ SceneRoots:
   - {fileID: 801173104}
   - {fileID: 1721749170}
   - {fileID: 1248891697}
+  - {fileID: 826213937}
