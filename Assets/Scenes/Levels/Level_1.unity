@@ -2613,11 +2613,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
   m_PrefabInstance: {fileID: 213794844}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &216765681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7002487782435042816, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
-  m_PrefabInstance: {fileID: 538968009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &217415797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4444,7 +4439,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6410379431635980518, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 631269284}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 631269288}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab365de29f06101468407fe1db3a6c9c, type: 3}
@@ -7071,6 +7066,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 904671381}
   m_SourcePrefab: {fileID: 100100000, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+--- !u!1 &538968010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6485134007481648012, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+  m_PrefabInstance: {fileID: 538968009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &541964893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8582,6 +8582,11 @@ MonoBehaviour:
 --- !u!1 &631269287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 935795761772418939, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &631269288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5548212830906477391, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 631269284}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &631269289 stripped
@@ -31190,7 +31195,11 @@ PrefabInstance:
     - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 216765681}
+      objectReference: {fileID: 538968010}
+    - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
+      propertyPath: restartObj
+      value: 
+      objectReference: {fileID: 631269288}
     - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: playerCanvas
       value: 
