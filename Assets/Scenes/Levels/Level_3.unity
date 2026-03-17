@@ -8456,6 +8456,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 26.08
       objectReference: {fileID: 0}
+    - target: {fileID: 1642663206048838970, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1075964707}
+    - target: {fileID: 1642663206048838970, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_mute
+      objectReference: {fileID: 0}
     - target: {fileID: 1882767365746762340, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: defaultMusicTrack
       value: Spring_Forward
@@ -17750,6 +17758,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+--- !u!82 &1075964707 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3604075936899672735, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+  m_PrefabInstance: {fileID: 1075964706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1077400071
 PrefabInstance:
   m_ObjectHideFlags: 0
