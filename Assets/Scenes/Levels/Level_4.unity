@@ -2683,6 +2683,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4059260467453321876, guid: 3f72016c2a07ef04eb8e67f84045e14c, type: 3}
   m_PrefabInstance: {fileID: 119470236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &121673269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5074820941058126303, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &121673270 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3304135914869473051, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &128218399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3907,6 +3929,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
       objectReference: {fileID: 0}
@@ -4904,15 +4930,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -4924,15 +4950,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -5871,6 +5897,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -7755,15 +7785,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -7775,15 +7805,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.009999999
@@ -8117,15 +8147,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -8137,15 +8167,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -13302,6 +13332,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3235512, y: 0.5963936, z: 2.4429016}
   m_Center: {x: 0.01829338, y: -0.037628174, z: 0.065719604}
+--- !u!114 &583765261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8449197067762649139, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &585872301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
@@ -14143,15 +14184,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: playerRespawn
       value: 
@@ -14167,15 +14208,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -14248,15 +14289,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -14268,15 +14309,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -17954,6 +17995,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -24208,6 +24253,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+--- !u!114 &1021782970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1725407732565383661, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+  m_PrefabInstance: {fileID: 1021782969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004675bb28aeeda43826e68903d02123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1021782974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4308985530257365924, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+  m_PrefabInstance: {fileID: 1021782969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb6b020d233ab74e9c7d6ab2ca67fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1025269861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27218,15 +27285,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -27238,15 +27305,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -30273,6 +30340,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
       objectReference: {fileID: 0}
@@ -30507,6 +30578,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8590499531049220768, guid: 3c19b5221d7164e4383c267fff5524bf, type: 3}
   m_PrefabInstance: {fileID: 1277264347}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1286647403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6100818056278911260, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1290949251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
@@ -30675,15 +30751,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -30695,15 +30771,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.0046966
@@ -30914,6 +30990,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -31686,15 +31766,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -31706,15 +31786,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 228.4
@@ -34950,6 +35030,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5548212830906477391, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 952994362}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1521777885 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6410379431635980518, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521777883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab365de29f06101468407fe1db3a6c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1532609553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37039,11 +37130,11 @@ PrefabInstance:
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 121673269}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_speed
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 121673270}
     - target: {fileID: 8735135402460256547, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_TagString
       value: Untagged
@@ -37051,7 +37142,7 @@ PrefabInstance:
     - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: key
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2092096335}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38382,15 +38473,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -38402,15 +38493,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -38483,15 +38574,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -38503,15 +38594,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.0046966
@@ -41508,6 +41599,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
       objectReference: {fileID: 0}
@@ -41722,6 +41817,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -43275,6 +43374,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
       objectReference: {fileID: 0}
@@ -43590,15 +43693,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -43610,15 +43713,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -45190,6 +45293,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
       objectReference: {fileID: 0}
@@ -45927,15 +46034,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -45947,15 +46054,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -46582,15 +46689,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -46602,15 +46709,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.0046965997
@@ -48993,15 +49100,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -49013,15 +49120,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.010000001
@@ -49111,6 +49218,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -49353,6 +49464,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
+      propertyPath: SM
+      value: 
+      objectReference: {fileID: 1021782970}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -49836,6 +49951,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2399380919097004846, guid: e9565ceb5db5a2347b12351621956570, type: 3}
   m_PrefabInstance: {fileID: 2092096331}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2092096335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2050569914120272984, guid: e9565ceb5db5a2347b12351621956570, type: 3}
+  m_PrefabInstance: {fileID: 2092096331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8522d56aab6cd41bdf9bd16ad65ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2093798234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50170,15 +50296,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: GM
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1021782974}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2120332675}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: countdownText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 583765261}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: objectsToToggle.Array.size
       value: 1
@@ -50190,15 +50316,15 @@ PrefabInstance:
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1286647403}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1010989709}
     - target: {fileID: 1436236823562343901, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.010000001
@@ -50645,6 +50771,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 333372606158358184, guid: af51f6e4525435d4daef25d87fb51912, type: 3}
   m_PrefabInstance: {fileID: 2120126716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2120332675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6529722903080114378, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2122829548
 GameObject:
