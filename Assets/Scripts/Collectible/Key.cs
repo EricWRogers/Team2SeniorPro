@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Key : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Key : MonoBehaviour
     public int keyNum = 0;
     public bool isCollected = false;
     public Animator textAnimatior;
+    public string keyAudio;
+
+    public SoundManager SM;
 
     float spinSpeed = 20.0f;
     Transform meshTransform;
@@ -23,11 +27,24 @@ public class Key : MonoBehaviour
         meshTransform.Rotate(0, 0, spinSpeed * Time.deltaTime);
     }
 
+    void Awake()
+    {
+        if (SM == null)
+        {
+            SM = FindFirstObjectByType<SoundManager>();
+            if (SM == null)
+            {
+                Debug.LogError("No SoundManager found in scene!");
+            }
+        }
+    }
+
     public void OnTriggerEnter(Collider key)
     {
         if (key.CompareTag("Player"))
         {
             bars.SetActive(false);
+            SM.PlaySFX(keyAudio, 1);
             //keyText.gameObject.SetActive(true);
             //keyText.text = "You got the key!";
             //keyNum++;

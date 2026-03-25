@@ -4980,6 +4980,7 @@ GameObject:
   - component: {fileID: 1361227337645955166}
   - component: {fileID: 1480893565877985689}
   - component: {fileID: 4936504828301006960}
+  - component: {fileID: 8687283713005147397}
   m_Layer: 0
   m_Name: Berry
   m_TagString: Untagged
@@ -5016,8 +5017,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectibleCheckpointNumber: 0
   animator: {fileID: 0}
-  collectSFX: {fileID: 8300000, guid: 4c876a14db4b3bd4087a4f0df9c830ae, type: 3}
   collectParticles: {fileID: 156265017207146915}
+  SM: {fileID: 0}
+  collectSound: chomp
 --- !u!33 &2995574007332414265
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5104,6 +5106,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aea98cdff77f7b4ebdd1d2004ce101a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8687283713005147397
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7538472319907248896}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40f6f56e17f07ce48bf83a68a4279261, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6608857882334163310
 PrefabInstance:
   m_ObjectHideFlags: 0

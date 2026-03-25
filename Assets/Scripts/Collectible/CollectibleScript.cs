@@ -4,8 +4,30 @@ public class CollectibleScript : MonoBehaviour
 {
     public int collectibleCheckpointNumber = 0;
     public Animator animator;
-    public AudioClip collectSFX;
     public GameObject collectParticles;
+    public SoundManager SM;
+    public string collectSound;
+
+    void Awake()
+    {
+        if (SM == null)
+        {
+            SM = FindFirstObjectByType<SoundManager>();
+            if (SM == null)
+            {
+                Debug.LogError("No SoundManager found in scene!");
+            }
+        }
+
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+            if (animator == null)
+            {
+                Debug.LogWarning("No Animator found on collectible or its children!");
+            }
+        }
+    }
 
     private void Start()
     {
@@ -47,8 +69,10 @@ public class CollectibleScript : MonoBehaviour
             }
         }
 
-        if (collectSFX != null)
-            AudioSource.PlayClipAtPoint(collectSFX, transform.position);
+        if (SM != null)
+            {
+                SM.PlaySFX(collectSound, 1);
+            }
 
         if (animator != null)
             animator.SetTrigger("BerryCollect");

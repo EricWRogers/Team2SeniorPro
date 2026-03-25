@@ -8,6 +8,7 @@ public class JustDance : MonoBehaviour
 
     [Header("Dance Cam Spline")]
     public SplineAnimate cameraSpline;
+    public Camera cam;
     public float splineSpeed = 0.1f;
 
     private bool hasStarted = false;
@@ -15,7 +16,13 @@ public class JustDance : MonoBehaviour
     void Awake()
     {
         if (cameraSpline == null)
-        cameraSpline = GameObject.FindWithTag("DanceCam").GetComponent<SplineAnimate>();
+            cameraSpline = GameObject.FindWithTag("DanceCam").GetComponent<SplineAnimate>();
+        
+        if (cam == null)
+            // Find camera in DanceCam tagged "Dance"
+            cam = GameObject.FindWithTag("Dance").GetComponentInChildren<Camera>();
+
+
     }
     void Start()
     {
@@ -46,6 +53,12 @@ public class JustDance : MonoBehaviour
         if (cameraSpline != null)
         {
             cameraSpline.NormalizedTime += splineSpeed * Time.unscaledDeltaTime;
+        }
+
+        if (cam != null)
+        {
+            // change the FOV randomly between 30 and 90
+            cam.fieldOfView = Mathf.Lerp(30f, 90f, Mathf.PingPong(Time.time, 1));
         }
     }
 

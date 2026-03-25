@@ -9,6 +9,24 @@ public class KeyFollow : MonoBehaviour
     public float followDelay = 0.5f; // Delay before the key starts following the player
     private List<Vector3> positionHistory = new List<Vector3>(); // List to store player's past positions
 
+    void Awake()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
+        }
+
+        if (key == null)
+        {
+            key = GameObject.FindFirstObjectByType<Key>();
+        }
+
+        if (spawnedKey == null)
+        {
+            spawnedKey = this.gameObject; // Assuming the script is on the key GameObject
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
