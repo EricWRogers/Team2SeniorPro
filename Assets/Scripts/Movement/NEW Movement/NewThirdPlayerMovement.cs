@@ -100,6 +100,13 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     // runtime helper for sprint check
     private bool IsSprintingActive => sprintToggleMode ? sprintToggled : sprintHeld;
 
+    [Header("Temporary Boosts")]
+    public float speedBoostMultiplier = 1f;
+    public float jumpBoostMultiplier = 1f;
+
+    private Coroutine speedBoostRoutine;
+    private Coroutine jumpBoostRoutine;
+
 
     [Header("References")]
     public NewClimbing climbingScript;
@@ -406,7 +413,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     public bool keepMomentum;
     private void StateHandler()
     {
-        // if player has no movement input and is grounded we treat them as "idle"
+        // if player has no movement input and is grounded they are idle
         // this prevents the momentum-smoothing logic from trying to interpolate
         // from a high speed back down to walkSpeed and instead drops speed to 0
         bool noInput = Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f;
@@ -425,17 +432,17 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         else if (vaulting)
         {
             state = MovementState.vaulting;
-            desiredMoveSpeed = vaultSpeed;
+            desiredMoveSpeed = vaultSpeed * speedBoostMultiplier;
         }
         else if (climbing)
         {
             state = MovementState.climbing;
-            desiredMoveSpeed = climbSpeed;
+            desiredMoveSpeed = climbSpeed * speedBoostMultiplier;
         }
         else if (wallrunning)
         {
             state = MovementState.wallrunning;
-            desiredMoveSpeed = wallrunSpeed;
+            desiredMoveSpeed = wallrunSpeed * speedBoostMultiplier;
         }
         else if (dashing)
         {
@@ -458,18 +465,18 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
             if (OnSlope() && rb.linearVelocity.y < 0.1f)
             {
-                desiredMoveSpeed = slideSpeed;
+                desiredMoveSpeed = slideSpeed * speedBoostMultiplier;
                 keepMomentum = true;
             }
             else
             {
-                desiredMoveSpeed = sprintSpeed;
+                desiredMoveSpeed = sprintSpeed * speedBoostMultiplier;
             }
         }
         else if (crouching)
         {
             state = MovementState.crouching;
-            desiredMoveSpeed = crouchSpeed;
+            desiredMoveSpeed = crouchSpeed * speedBoostMultiplier;
         }
         else if (groundPounding)
         {
@@ -479,12 +486,12 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         else if (grounded && IsSprintingActive)
         {
             state = MovementState.sprinting;
-            desiredMoveSpeed = sprintSpeed;
+            desiredMoveSpeed = sprintSpeed * speedBoostMultiplier;
         }
         else if (grounded)
         {
             state = MovementState.walking;
-            desiredMoveSpeed = walkSpeed;
+            desiredMoveSpeed = walkSpeed * speedBoostMultiplier;
         }
         else
         {
@@ -613,7 +620,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         exitingSlope = true;
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * (jumpForce * jumpBoostMultiplier), ForceMode.Impulse);
     }
 
     private void ResetJump()
@@ -851,24 +858,35 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         PlayerPrefs.Save();
     }
 
-    /*
-    private void Awake()
+    public void ApplyTemporarySpeedBoost(float multiplier, float duration)
     {
-        controls = new PlayerControlsB();
-        sprintToggleMode = PlayerPrefs.GetInt("SprintToggleMode", 0) == 1;
-        crouchToggleMode = PlayerPrefs.GetInt("CrouchToggleMode", 0) == 1;
+        if (speedBoostRoutine != null)
+            StopCoroutine(speedBoostRoutine);
+
+        speedBoostRoutine = StartCoroutine(SpeedBoostRoutine(multiplier, duration));
     }
-    
-    public Toggle sprintToggle;
-    public Toggle crouchToggle;
-    public NewThirdPlayerMovement move;
 
-    private void Start()
+    public void ApplyTemporaryJumpBoost(float multiplier, float duration)
     {
-        sprintToggle.isOn = move.sprintToggleMode;
-        crouchToggle.isOn = move.crouchToggleMode;
+        if (jumpBoostRoutine != null)
+            StopCoroutine(jumpBoostRoutine);
 
-        sprintToggle.onValueChanged.AddListener(move.SetSprintToggleMode);
-        crouchToggle.onValueChanged.AddListener(move.SetCrouchToggleMode);
-    }*/
+        jumpBoostRoutine = StartCoroutine(JumpBoostRoutine(multiplier, duration));
+    }
+
+    private IEnumerator SpeedBoostRoutine(float multiplier, float duration)
+    {
+        speedBoostMultiplier = multiplier;
+        yield return new WaitForSeconds(duration);
+        speedBoostMultiplier = 1f;
+        speedBoostRoutine = null;
+    }
+
+    private IEnumerator JumpBoostRoutine(float multiplier, float duration)
+    {
+        jumpBoostMultiplier = multiplier;
+        yield return new WaitForSeconds(duration);
+        jumpBoostMultiplier = 1f;
+        jumpBoostRoutine = null;
+    }
 }
