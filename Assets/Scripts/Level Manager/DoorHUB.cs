@@ -4,35 +4,78 @@ using TMPro;
 
 public class DoorHUB : MonoBehaviour
 {
-    public GameObject[] NutParts; // Array to hold the nut parts
+    public GameObject NutKeeper; // door blocker
     public GameObject NutText;
     public GameObject NutText2;
     public GameObject NutPanel;
+
+    public TMP_Text berryCountText;
+    
+    public int berriesRequired = 40;
 
     private bool playerInRange;
 
     void Start()
     {
-        if (NutText && NutText2 != null )
+        if (NutText != null  && NutText2 != null )
+        {
             NutText.SetActive(false);
             NutText2.SetActive(false);
-        
+        }
+
         if (NutPanel != null)
         {
             NutPanel.SetActive(false);
+        }
+
+        if (berryCountText != null)
+        {
+            berryCountText.gameObject.SetActive(false);
         }
     }
 
     void Update()
     {
+        int currentTotal = GameManager.Instance.PermaBerryCount;
 
         if (playerInRange){
             NutPanel.SetActive(true);
             NutText.SetActive(true);
+            
+
+            // Update the UI with the current berry count
+            if (berryCountText != null)
+            {
+                berryCountText.gameObject.SetActive(true);
+                berryCountText.text = $"{currentTotal} / {berriesRequired} eaten.";
+            }
         }
         else{
             NutPanel.SetActive(false);
             NutText.SetActive(false);
+
+            if (berryCountText != null)
+            {
+                berryCountText.gameObject.SetActive(false);
+            }
+        }
+
+        // Logic to unlock Level 5
+        if (currentTotal >= berriesRequired)
+        {
+            if (NutKeeper != null)
+                NutKeeper.SetActive(false); // Remove the door blocker
+
+            if (NutText2 != null)
+                NutText2.SetActive(true); // Show the "door unlocked" text
+        }
+        else
+        {
+            if (NutKeeper != null)
+                NutKeeper.SetActive(true); // Ensure the door blocker is active
+
+            if (NutText2 != null)
+                NutText2.SetActive(false); // Hide the "door unlocked" text
         }
     }
 

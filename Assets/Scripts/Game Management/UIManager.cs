@@ -34,7 +34,7 @@ public class UIManagement : MonoBehaviour
         {
             nutJumpText.text = "0" + nutGrabAbility.currentNutJumps;
         }*/
-        collectibleText.text = GameManager.Instance.collectibleCount.ToString();
+        collectibleText.text = GameManager.Instance.PermaBerryCount.ToString();
         
         if(player != null)
         {
