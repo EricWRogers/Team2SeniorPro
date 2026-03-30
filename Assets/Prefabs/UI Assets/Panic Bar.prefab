@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6927135472463625303}
   - component: {fileID: 2981782651960208655}
-  - component: {fileID: 7411153451157974340}
+  - component: {fileID: 3494137611160968069}
   m_Layer: 5
   m_Name: Panic Bar
   m_TagString: Untagged
@@ -162,11 +162,11 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7411153451157974340
+--- !u!114 &3494137611160968069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,12 +175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4541238897420060347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06242e784f5233544be9e4ed5010066b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1400562d2ecf88f41892d24b7e61e7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStamina: 1
+  maxSanity: 1
   regenRate: 0.2
-  staminaSlider: {fileID: 2981782651960208655}
+  sanitySlider: {fileID: 2981782651960208655}
 --- !u!1 &5244169315270486668
 GameObject:
   m_ObjectHideFlags: 0
