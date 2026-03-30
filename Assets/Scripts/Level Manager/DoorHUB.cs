@@ -61,20 +61,23 @@ public class DoorHUB : MonoBehaviour
         }
 
         // Logic to unlock Level 5
-        if (currentTotal >= berriesRequired)
+        if (currentTotal >= berriesRequired && playerInRange)
         {
             if (NutKeeper != null)
                 NutKeeper.SetActive(false); // Remove the door blocker
 
             if (NutText2 != null)
                 NutText2.SetActive(true); // Show the "door unlocked" text
+
+            if (NutText != null)
+                NutText.SetActive(false); // Hide the "door locked" text
         }
         else
         {
             if (NutKeeper != null)
                 NutKeeper.SetActive(true); // Ensure the door blocker is active
 
-            if (NutText2 != null)
+            if (NutText2 != null && !playerInRange)
                 NutText2.SetActive(false); // Hide the "door unlocked" text
         }
     }
