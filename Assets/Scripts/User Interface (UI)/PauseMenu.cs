@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Menu and Script(s):")]
     public GameObject pauseMenu;
+    public GameManager GM;
 
     [Header("Events")]
     [Tooltip("Scripts to disable when paused and enable when resumed")]
@@ -31,8 +33,18 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         // Auto-find movement if not assigned
-        if (move == null)
+        if (move == null){
             move = FindFirstObjectByType<NewThirdPlayerMovement>();
+        }
+
+        if (GM == null)
+        {
+            GM = FindFirstObjectByType<GameManager>();
+            if (GM == null)
+            {
+                Debug.LogError("No GameManager found in scene!");
+            }
+        }
 
         WireOptionsUI();
         RefreshOptionsUI();
@@ -156,6 +168,13 @@ public class PauseMenu : MonoBehaviour
         PlaySound();
         Application.Quit();
         Debug.Log("You've quit the game!");
+    }
+
+    public void ResetData()
+    {
+        PlaySound();
+        GM.ResetBerryData();
+        Debug.Log("All progress reset. Berry data cleared.");
     }
 
     public void PlaySound()

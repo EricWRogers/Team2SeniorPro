@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public int frameRate = 60;
     public SerializationManager serializationManager;
 
-    private HashSet<string> collectedBerryIDs = new HashSet<string>(); // To track collected berries by their unique IDs
+    public HashSet<string> collectedBerryIDs = new HashSet<string>(); // To track collected berries by their unique IDs
 
     public int PermaBerryCount => collectedBerryIDs.Count; // Property to get the total count of unique berries collected
 

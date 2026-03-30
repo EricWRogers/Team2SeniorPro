@@ -12,6 +12,7 @@ public class CollectibleScript : MonoBehaviour
     public Animator animator;
     public GameObject collectParticles;
     public SoundManager SM;
+    public GameManager GM;
     public string collectSound;
 
     void Awake()
@@ -51,9 +52,13 @@ public class CollectibleScript : MonoBehaviour
                 }
             }
         }
-        else
+        if (GM == null)
         {
-            Debug.LogWarning("No GameManager found in scene!");
+            GM = FindFirstObjectByType<GameManager>();
+            if (GM == null)
+            {
+                Debug.LogError("No GameManager found in scene!");
+            }
         }
     }
 
