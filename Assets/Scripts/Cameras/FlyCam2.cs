@@ -37,10 +37,8 @@ public class FlyCam2 : MonoBehaviour
         {
             hasPlayedFlyover_Level1 = true;
             
-            if (splineCamOBJ != null)
-                splineCamOBJ.SetActive(true);
-        
-            StartCoroutine(StartSequence());
+            // Start waiting coroutine to ensure LevelLoader finishes before starting sequence
+            StartCoroutine(WaitAndStartSequence());
         }
     }
 
@@ -84,6 +82,22 @@ public class FlyCam2 : MonoBehaviour
                 splinePlaying = false;
             }
         }
+    }
+
+    private IEnumerator WaitAndStartSequence()
+    {
+        // Wait until the LevelLoader exists and finishes its job
+        if (LevelLoader.Instance != null)
+        {
+            yield return new WaitUntil(() => !LevelLoader.Instance.IsLoading);
+        }
+
+        // Give a small extra tiny buffer frame for the UI to disappear
+        yield return new WaitForEndOfFrame();
+
+        if (splineCamOBJ != null)
+            splineCamOBJ.SetActive(true);
+        StartCoroutine(StartSequence());
     }
 
     private IEnumerator StartSequence()

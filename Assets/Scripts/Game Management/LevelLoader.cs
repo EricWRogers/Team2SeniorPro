@@ -8,6 +8,7 @@ using UnityEngine.Video;
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
+    public bool IsLoading => isLoading;
 
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreen;
