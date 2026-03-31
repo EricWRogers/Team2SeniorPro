@@ -5,30 +5,24 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }    
+    public static GameManager Instance { get; private set; }
     public int currentCheckpoint = 0;
     public int collectibleCount = 0;
     public int totalCollectibles = 0;
     public int frameRate = 60;
     public SerializationManager serializationManager;
 
-    public HashSet<string> collectedBerryIDs = new HashSet<string>(); // To track collected berries by their unique IDs
+    public HashSet<string> collectedBerryIDs = new HashSet<string>();
 
-    public int PermaBerryCount => collectedBerryIDs.Count; // Property to get the total count of unique berries collected
+    public int PermaBerryCount => collectedBerryIDs.Count;
 
-    // Method called whenever a berry is collected, passing its unique ID
     public void CollectBerry(string id)
     {
-        // Check if we already have the specific berry's ID
         if (!collectedBerryIDs.Contains(id))
         {
-            // Add it to the list
-            collectedBerryIDs.Add(id); // Mark berry as collected
+            collectedBerryIDs.Add(id);
+            totalCollectibles = collectedBerryIDs.Count;
 
-            // Track the count of berries 'per level' for the UI
-            totalCollectibles = collectedBerryIDs.Count; // Update total collectibles count
-
-            // SAVE IMMEDIATELY: Save the updated berry data to PlayerPrefs
             Debug.Log($"Collected New ID: {id}. Total: {totalCollectibles}");
             SaveBerryData();
         }
@@ -38,15 +32,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Method to check if a berry should exist
     public bool IsBerryCollected(string id)
     {
-        return collectedBerryIDs.Contains(id); // Check if berry has already been collected
+        return collectedBerryIDs.Contains(id);
     }
 
     public void SaveBerryData()
     {
-        // Convert the HashSet to an array, then to a single string separated by commas
         string berryData = string.Join(",", collectedBerryIDs.ToArray());
         PlayerPrefs.SetString("SavedBerries", berryData);
         PlayerPrefs.Save();
@@ -60,77 +52,96 @@ public class GameManager : MonoBehaviour
             string berryData = PlayerPrefs.GetString("SavedBerries");
             string[] splitIDs = berryData.Split(",");
 
-            collectedBerryIDs.Clear(); // Clear current data before loading
+            collectedBerryIDs.Clear();
             foreach (string id in splitIDs)
             {
                 if (!string.IsNullOrEmpty(id))
                 {
-                    collectedBerryIDs.Add(id); // Add each ID back to the HashSet
+                    collectedBerryIDs.Add(id);
                 }
             }
+
             Debug.Log("Game Loaded: " + collectedBerryIDs.Count + " berries found.");
         }
     }
 
-    // Testing method to clear saved data (not called in normal gameplay)
-    [ContextMenu("Reset All Progress")] // This allows you to right-click the script in the Inspector to reset
+    [ContextMenu("Reset All Progress")]
     public void ResetBerryData()
     {
-        PlayerPrefs.DeleteAll(); // Clear all saved data
-        collectedBerryIDs.Clear(); // Clear the in-memory list as well
+        PlayerPrefs.DeleteAll();
+        collectedBerryIDs.Clear();
         Debug.Log("All progress reset. Berry data cleared.");
     }
 
-    public void newMap(string _newMap, bool _resetCollectibles = false, bool _resetCheckpoint = true) //when loading a new map, it will add the current collectible count to the total. if true, it wont. use for cases of retry or quitting the level
+    public void newMap(string _newMap, bool _resetCollectibles = false, bool _resetCheckpoint = true)
     {
-        currentCheckpoint = _resetCheckpoint ? currentCheckpoint = 0 : currentCheckpoint = 1; //reset checkpoint to 0 unless told not to
+        if (_resetCheckpoint)
+        {
+            currentCheckpoint = 0;
+        }
 
         if (_resetCollectibles)
         {
-            totalCollectibles = totalCollectibles + collectibleCount;
+            totalCollectibles += collectibleCount;
         }
-        collectibleCount = 0;
-        
-        SceneManager.LoadScene(_newMap);
-        //LevelLoader.Instance.LoadLevel(_newMap);
-    }
 
+        collectibleCount = 0;
+
+        if (LevelLoader.Instance != null)
+        {
+            LevelLoader.Instance.LoadLevel(_newMap);
+        }
+        else
+        {
+            Debug.LogWarning($"LevelLoader not found. Falling back to direct load for scene: {_newMap}");
+            SceneManager.LoadScene(_newMap);
+        }
+    }
     public void SetCheckpoint(int _checkpointNumber, bool _force = false)
     {
-        if (!_force && _checkpointNumber > currentCheckpoint) //only set the checkpoint if its a higher number than the current one
+        if (!_force && _checkpointNumber > currentCheckpoint)
         {
             currentCheckpoint = _checkpointNumber;
         }
-        else if (_force) //if force is true, set it no matter what
+        else if (_force)
         {
             currentCheckpoint = _checkpointNumber;
         }
     }
+
     public string GetCurrentScene()
     {
         return SceneManager.GetActiveScene().name;
     }
-    public void respawnAtCheckpoint(int _checkpointNumber = -1) //if nothing is input, it will use the variable currentCheckpoint by default, so dont worry about calling without a number
+
+    public void respawnAtCheckpoint(int _checkpointNumber = -1)
     {
         if (_checkpointNumber >= 0)
         {
-            SceneManager.LoadScene(GetCurrentScene());
+            SetCheckpoint(_checkpointNumber, true);
+        }
+
+        string currentScene = GetCurrentScene();
+
+        if (LevelLoader.Instance != null)
+        {
+            LevelLoader.Instance.LoadLevel(currentScene);
         }
         else
         {
-            SetCheckpoint(_checkpointNumber);
-            SceneManager.LoadScene(GetCurrentScene());
+            Debug.LogWarning($"LevelLoader not found. Falling back to direct reload for scene: {currentScene}");
+            SceneManager.LoadScene(currentScene);
         }
-        
     }
+
     public float GetTime()
     {
-        return 123.45f; //placeholder
+        return 123.45f;
     }
 
     public void Start()
     {
-        //ResetBerryData(); // Clear saved data for testing purposes (remove this line in production)
+        // ResetBerryData();
     }
 
     public void Awake()
@@ -143,24 +154,14 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
         if (QualitySettings.vSyncCount == 0)
         {
-            Application.targetFrameRate = frameRate; //cap the fps
+            Application.targetFrameRate = frameRate;
         }
-        else
-        {
-            //Application.targetFrameRate = -1;
-        }
-        if (Instance == this)
-        {
-            LoadBerryData(); // Load berry data when the GameManager is initialized
-        }
-/*        #if UNITY_EDITOR
-            if (SceneManager.GetActiveScene().name != "LoadingScene")
-                {SceneManager.LoadSceneAsync("LoadingScene", LoadSceneMode.Additive);}
-        #endif
-  */      
+
+        LoadBerryData();
     }
-    
 }

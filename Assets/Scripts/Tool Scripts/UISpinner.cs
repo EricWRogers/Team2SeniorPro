@@ -2,20 +2,19 @@ using UnityEngine;
 
 public class UISpinner : MonoBehaviour
 {
-    float spinRate = 50.0f;
-    Transform spinningSprite;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float spinRate = 180f;
+    private RectTransform spinningSprite;
+
+    private void Awake()
     {
-        spinningSprite = this.transform;
+        spinningSprite = GetComponent<RectTransform>();
     }
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         if (spinningSprite != null)
         {
-            spinningSprite.transform.Rotate(0.0f, 0.0f, (spinRate * -1.0f) * Time.deltaTime);
+            spinningSprite.Rotate(0f, 0f, -spinRate * Time.deltaTime);
         }
     }
 }
-
