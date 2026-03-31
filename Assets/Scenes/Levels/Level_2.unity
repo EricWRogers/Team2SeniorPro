@@ -4616,7 +4616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -4810,7 +4810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -5297,7 +5297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -5545,7 +5545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -6852,17 +6852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab365de29f06101468407fe1db3a6c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &205890942 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8449197067762649139, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-  m_PrefabInstance: {fileID: 1241684034}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &205890943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6529722903080114378, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
@@ -7816,7 +7805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -8068,7 +8057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -11149,7 +11138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -11809,7 +11798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -16083,7 +16072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -17718,7 +17707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -18365,6 +18354,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6411748094295092446, guid: 078f5803d7b615f4f9f3cf7de6b7afa1, type: 3}
   m_PrefabInstance: {fileID: 972041108}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &602677140
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1324230534}
+    m_Modifications:
+    - target: {fileID: 8203224897003963828, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_Name
+      value: Wall_Jump_Platform (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203224897003963828, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.542907
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 159.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 72.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 412.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+--- !u!4 &602677141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+  m_PrefabInstance: {fileID: 602677140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &606690694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18827,7 +18886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -21324,7 +21383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -21574,7 +21633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -22076,7 +22135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -22815,7 +22874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -23404,7 +23463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -23934,7 +23993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -24238,7 +24297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -25784,7 +25843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -26063,7 +26122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -26985,6 +27044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scaffold_Normal (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1297193791657220837, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
       propertyPath: m_LocalScale.x
       value: 7.1785
@@ -27036,6 +27099,10 @@ PrefabInstance:
     - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459608446874440013, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27315,7 +27382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -27372,7 +27439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -28209,7 +28276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -29627,7 +29694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -29877,7 +29944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -30150,7 +30217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -30232,7 +30299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -30716,7 +30783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -30978,7 +31045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -31206,7 +31273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -31497,7 +31564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -31883,7 +31950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -32539,7 +32606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -33169,7 +33236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -34149,7 +34216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -34577,7 +34644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -35201,7 +35268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -36818,7 +36885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -37345,7 +37412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -37666,7 +37733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -38849,6 +38916,76 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 935795761772418939, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 1241684034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1243186729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1324230534}
+    m_Modifications:
+    - target: {fileID: 1689297256592600435, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_Name
+      value: Collectable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 324
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 53.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 363.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 332930408}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+--- !u!4 &1243186730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+  m_PrefabInstance: {fileID: 1243186729}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1246187242
 PrefabInstance:
@@ -40556,7 +40693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -41070,7 +41207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -41117,7 +41254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -41385,7 +41522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -41495,7 +41632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -42414,6 +42551,8 @@ Transform:
   - {fileID: 685112620}
   - {fileID: 521934296}
   - {fileID: 1077090132}
+  - {fileID: 1608005154}
+  - {fileID: 1243186730}
   - {fileID: 1922138810}
   - {fileID: 1193738028}
   - {fileID: 1145302212}
@@ -42545,6 +42684,8 @@ Transform:
   - {fileID: 1363320974}
   - {fileID: 338468873}
   - {fileID: 1205035122}
+  - {fileID: 2054414975}
+  - {fileID: 602677141}
   - {fileID: 1699892119}
   - {fileID: 502315111}
   - {fileID: 1754203897}
@@ -42649,6 +42790,7 @@ Transform:
   - {fileID: 731921602}
   - {fileID: 1009681185}
   - {fileID: 822935312}
+  - {fileID: 1406876048}
   - {fileID: 66792174}
   - {fileID: 427802281}
   - {fileID: 490022083}
@@ -43217,7 +43359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -43903,7 +44045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -45339,7 +45481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -45504,6 +45646,88 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3238796641972263029, guid: 232b272dfda962c42a9958a5424809bb, type: 3}
   m_PrefabInstance: {fileID: 1707359004}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1406876047
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1324230534}
+    m_Modifications:
+    - target: {fileID: 1297193791657220837, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_Name
+      value: Scaffold_Normal (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1297193791657220837, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.1785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.1785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7.1785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 155.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 61.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 427.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459608446874440013, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+--- !u!4 &1406876048 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1822654163002212447, guid: 0d9a1d6d3c3a2a944aae79145e2b280d, type: 3}
+  m_PrefabInstance: {fileID: 1406876047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1407953419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45659,7 +45883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -45910,7 +46134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -46176,7 +46400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -46754,7 +46978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -47215,7 +47439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -47580,7 +47804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -47947,7 +48171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -49884,7 +50108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -51139,7 +51363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -51336,7 +51560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -51683,6 +51907,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 322f05f4b83e2ec4d9b60f971b5ff856, type: 3}
+--- !u!1001 &1608005153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1324230534}
+    m_Modifications:
+    - target: {fileID: 1689297256592600435, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_Name
+      value: Collectable (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 283.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 482.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 332930408}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+--- !u!4 &1608005154 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2682002908186785031, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+  m_PrefabInstance: {fileID: 1608005153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1611974942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51921,7 +52215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -53132,7 +53426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -53242,7 +53536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -53654,7 +53948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -54414,7 +54708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -54884,7 +55178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -54994,7 +55288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -55220,7 +55514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -55687,7 +55981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -56138,7 +56432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -56475,7 +56769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -57272,7 +57566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -57456,7 +57750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -58265,7 +58559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -58380,7 +58674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -58757,7 +59051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -58820,7 +59114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -59060,7 +59354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -59685,7 +59979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -59871,7 +60165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -60288,7 +60582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -60882,7 +61176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -60956,7 +61250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -61214,7 +61508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -61324,7 +61618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -61464,7 +61758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -61538,7 +61832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -61659,7 +61953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -62036,7 +62330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -62376,7 +62670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -62770,7 +63064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -62902,7 +63196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -63149,7 +63443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -63437,7 +63731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -63873,7 +64167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -64204,7 +64498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -64335,7 +64629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -64444,7 +64738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -64559,7 +64853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -65227,7 +65521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -65342,7 +65636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -65463,7 +65757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -65760,7 +66054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -66019,7 +66313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -66129,7 +66423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -66879,7 +67173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -67232,7 +67526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -67931,6 +68225,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3550557ed964f64478139e496834a96f, type: 3}
+--- !u!1001 &2054414974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1324230534}
+    m_Modifications:
+    - target: {fileID: 8203224897003963828, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_Name
+      value: Wall_Jump_Platform (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203224897003963828, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.542907
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 175.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 72.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 424.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+--- !u!4 &2054414975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8835047861600100110, guid: ca4f7dac6f52cfb46a2b36b9d6183ef3, type: 3}
+  m_PrefabInstance: {fileID: 2054414974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2057500459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68012,7 +68376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69117,7 +69481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69164,7 +69528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69285,7 +69649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69487,7 +69851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69539,7 +69903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69676,7 +70040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69701,7 +70065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -69948,7 +70312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -70357,7 +70721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
@@ -70536,7 +70900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScreen: {fileID: 205890943}
-  countdownText: {fileID: 205890942}
+  deathCountdown: {fileID: 0}
   GM: {fileID: 2074815866}
   scriptsToToggle:
   - {fileID: 1241684038}
