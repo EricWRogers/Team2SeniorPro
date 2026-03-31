@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.EventSystems; // Required for EventSystem cleanup
 
 public class LevelLoader : MonoBehaviour
 {
@@ -44,8 +45,16 @@ public class LevelLoader : MonoBehaviour
 
     private void Start()
     {
-        if (loadingScreen != null)
-            loadingScreen.SetActive(false);
+        // If we are currently in the process of a routine, isLoading should be true
+        // Otherwise, default to fase.
+        if (loadingScreen != null && loadingScreen.activeSelf)
+        {
+            isLoading = true;
+        }
+        else
+        {
+            isLoading = false;
+        }
     }
 
     private void Update()
@@ -144,6 +153,11 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
 
+        // --- NEW CLEANUP LOGIC STARTS HERE ---
+        // As soon as the new scene is loaded, we look for duplicate EventSystems
+        CleanDuplicateEventSystems();
+        // --- NEW CLEANUP LOGIC ENDS HERE ---
+
         Scene newScene = SceneManager.GetSceneByName(sceneName);
         if (newScene.IsValid())
         {
@@ -166,6 +180,22 @@ public class LevelLoader : MonoBehaviour
             loadingScreen.SetActive(false);
 
         isLoading = false;
+    }
+
+    // New helper method to ensure cutscenes and UI aren't blocked by duplicate systems
+    private void CleanDuplicateEventSystems()
+    {
+        EventSystem[] systems = Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None);
+        if (systems.Length > 1)
+        {
+            // We keep the first one found (usually the one from the persistent root)
+            // and destroy the others found in the newly loaded level.
+            for (int i = 1; i < systems.Length; i++)
+            {
+                Debug.Log($"LevelLoader: Destroyed duplicate EventSystem in new scene: {systems[i].gameObject.scene.name}");
+                Destroy(systems[i].gameObject);
+            }
+        }
     }
 
     private void StartBackgroundVideo()

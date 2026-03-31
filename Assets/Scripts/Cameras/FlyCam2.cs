@@ -86,17 +86,34 @@ public class FlyCam2 : MonoBehaviour
 
     private IEnumerator WaitAndStartSequence()
     {
-        // Wait until the LevelLoader exists and finishes its job
-        if (LevelLoader.Instance != null)
+        float timeoutTimer = 0f;
+        float maxWaitTime = 1.0f; // Safety: only wait 1 second for a loader to appear
+
+        // 1. Wait to see if a LevelLoader appears (useful for scene transitions)
+        while (LevelLoader.Instance == null && timeoutTimer < maxWaitTime)
         {
-            yield return new WaitUntil(() => !LevelLoader.Instance.IsLoading);
+            timeoutTimer += Time.deltaTime;
+            yield return null;
         }
 
-        // Give a small extra tiny buffer frame for the UI to disappear
-        yield return new WaitForEndOfFrame();
+        // 2. If we found a loader, wait for it to actually finish loading
+        if (LevelLoader.Instance != null)
+        {
+            // Wait until the IsLoading flag is false
+            yield return new WaitUntil(() => !LevelLoader.Instance.IsLoading);
+            
+            // Give the UI a moment to deactivate and the camera to settle
+            yield return new WaitForSeconds(0.2f);
+        }
+        else
+        {
+            Debug.Log("No LevelLoader found. Proceeding with cutscene for standalone testing.");
+        }
 
+        // 3. Kick off the cutscene
         if (splineCamOBJ != null)
             splineCamOBJ.SetActive(true);
+
         StartCoroutine(StartSequence());
     }
 
@@ -108,7 +125,8 @@ public class FlyCam2 : MonoBehaviour
         // Disable player scripts
         if (player != null)
         {
-            foreach (var script in player.GetComponents<MonoBehaviour>())
+            var components = player.GetComponents<MonoBehaviour>();
+            foreach (var script in components)
                 script.enabled = false;
 
         }
