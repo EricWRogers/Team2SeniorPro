@@ -136,6 +136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5098918856810007981}
   - {fileID: 2307686050310337179}
   - {fileID: 2380687813924856152}
   - {fileID: 3140323990890422485}
@@ -213,10 +214,10 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Radius: 1.25
+  m_Center: {x: 0.31, y: 0.98, z: -0.27}
 --- !u!95 &3927476156578986632
 Animator:
   serializedVersion: 7
@@ -251,12 +252,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9e270930877cc4f9d58e9a4f31bb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NutKeeper: {fileID: 1961352922204572450}
+  NutKeeperA: {fileID: 1961352922204572450}
+  NutKeeperD: {fileID: 9078222776887751700}
   NutText: {fileID: 6353270254548120677}
   NutText2: {fileID: 4097789693025430030}
   NutPanel: {fileID: 2520631166111989250}
   berryCountText: {fileID: 8131623596815514746}
-  berriesRequired: 7
+  interactKey: 102
+  berriesRequired: 8
 --- !u!1 &2520631166111989250
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.74}
+  m_AnchoredPosition: {x: 0, y: 2.03}
   m_SizeDelta: {x: 100, y: 34.4828}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8146578046722004895
@@ -359,7 +362,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2646206721415386751}
   m_LocalRotation: {x: -0, y: 0.9999917, z: -0, w: -0.0040796935}
-  m_LocalPosition: {x: 0, y: 0, z: -0.32}
+  m_LocalPosition: {x: 0, y: 0, z: -0.28}
   m_LocalScale: {x: 0.118951604, y: 0.118951604, z: 0.118951604}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -367,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180.468, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.039, y: 2.82}
+  m_AnchoredPosition: {x: 0.039, y: 3.09}
   m_SizeDelta: {x: 24.9855, y: 2.5758}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8957674310925580360
@@ -543,7 +546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 182.686, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.03, y: 1.7671}
+  m_AnchoredPosition: {x: 0.03, y: 2.22}
   m_SizeDelta: {x: 33.0072, y: 6.2813}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5743888441002421816
@@ -611,7 +614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "All Berries Eaten! \n(Level 5 Unlocked)"
+  m_text: "All Berries Eaten! \n(Level 5: Unlocked)\nPress F to Enter."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
@@ -638,7 +641,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.15
+  m_fontSize: 18
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -794,7 +797,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 182.686, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.053354, y: 1.81}
+  m_AnchoredPosition: {x: -0.05, y: 2.08}
   m_SizeDelta: {x: 19.9888, y: 7.6134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1643125204933412171
@@ -862,10 +865,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '(Level 5: Secret)
+  m_text: '(Level 5: Locked)
 
+    <Steps>
 
-    Eat all the Berries From Each Level!'
+    1. Go to each level
+
+    2. Eat all
+    the Berries
+
+    3. Final Area Unlocked!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
@@ -892,7 +901,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.15
+  m_fontSize: 8.9
   m_fontSizeBase: 12.4
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -949,7 +958,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1738930692294570342, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
       propertyPath: m_Name
-      value: Nut Keeper
+      value: Nut Keeper (Alive)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738930692294570342, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -957,7 +970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.31
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -990,6 +1003,26 @@ PrefabInstance:
     - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Radius
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Center.x
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Center.y
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Center.z
+      value: -0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3891770880587998144, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
       propertyPath: rb
@@ -5834,3 +5867,123 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
   m_PrefabInstance: {fileID: 223434330902395460}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7340233817216304498
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8192389249823340092}
+    m_Modifications:
+    - target: {fileID: 1402007387247933102, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0365b0bffc24da44089bfefc39dad1b1, type: 2}
+    - target: {fileID: 1738930692294570342, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Name
+      value: Nut Keeper (Dead)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295866721460462602, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0365b0bffc24da44089bfefc39dad1b1, type: 2}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Radius
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Center.x
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Center.y
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_Center.z
+      value: -0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252243735066486026, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891770880587998144, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946917034006108191, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7edd1d1ff31271d4986925a32d031775, type: 2}
+    m_RemovedComponents:
+    - {fileID: 6661799246855725678, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+    - {fileID: 3891770880587998144, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1738930692294570342, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3568511868227805064}
+  m_SourcePrefab: {fileID: 100100000, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+--- !u!4 &5098918856810007981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2530812345619269855, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+  m_PrefabInstance: {fileID: 7340233817216304498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9078222776887751700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1738930692294570342, guid: 2645ca7be836a6648b4d8d5da10a6a58, type: 3}
+  m_PrefabInstance: {fileID: 7340233817216304498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3568511868227805064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078222776887751700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aea98cdff77f7b4ebdd1d2004ce101a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
