@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CutsceneManagement : MonoBehaviour
 {
-    bool advanceCutscene = false;
-    bool cutscenePlaying = true;
+    bool cutscenePlaying = false;
     public int currentIndex = -1;
     CutsceneAsset cutscene;
     public static CutsceneManagement Instance { get; private set; }
@@ -22,53 +21,72 @@ public class CutsceneManagement : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     void Update()
     {
-        if (cutscene != null)
+        if (cutscene == null || !cutscenePlaying) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            if (cutscenePlaying)
+            // NEW LOGIC: Check if the text is still typing
+            if (DialogManager.Instance.IsTyping)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (currentIndex < cutscene.dialogLines.Count)
-                    {
-                        if (currentIndex + 1 < cutscene.dialogLines.Count) //only advance if there is another line
-                        {
-                            currentIndex++;
-                        }
-                        else
-                        {
-                            currentIndex = -1; //set to end
-                        }
-                        if (currentIndex != -1)
-                        {
-                            DialogManager.Instance.ShowDialog(cutscene.dialogLines[currentIndex], cutscene.characterSprites[currentIndex], cutscene.characterNames[currentIndex]);
-                        }
-                    }
-                    if (currentIndex == -1) //forgot, haha, that the index starts at zero.
-                    {
-                        cutscenePlaying = false;
-                        DialogManager.Instance.HideDialog();
-                        //Re-enable player controls here
-                        cutscene = null;
-                        currentIndex = -1;
-                    }
-                }
-                advanceCutscene = false;
+                // If it's typing, tell the manager to show the full sentence immediately
+                DialogManager.Instance.FinishSentenceEarly();
+            }
+            else
+            {
+                // If the text is already finished, move to the next index
+                AdvanceDialogue();
             }
         }
     }
+
+    private void AdvanceDialogue()
+    {
+        currentIndex++;
+
+        if (currentIndex >= cutscene.dialogLines.Count)
+        {
+            EndCutscene();
+        }
+        else
+        {
+            // Safety: Check if the other lists actually have an item at this index
+            Sprite currentSprite = (currentIndex < cutscene.characterSprites.Count) 
+                ? cutscene.characterSprites[currentIndex] 
+                : null;
+
+            string currentName = (currentIndex < cutscene.characterNames.Count) 
+                ? cutscene.characterNames[currentIndex] 
+                : "???";
+
+            DialogManager.Instance.ShowDialog(
+                cutscene.dialogLines[currentIndex], 
+                currentSprite, 
+                currentName
+            );
+        }
+    }
+
+    private void EndCutscene()
+    {
+        cutscenePlaying = false;
+        DialogManager.Instance.HideDialog();
+        cutscene = null;
+        currentIndex = -1;
+    }
+
     public void PlayCutscene(CutsceneAsset cutscene)
     {
         this.cutscene = cutscene;
         currentIndex = 0;
         cutscenePlaying = true;
-        advanceCutscene = false;
-        DialogManager.Instance.ShowDialog(cutscene.dialogLines[currentIndex], cutscene.characterSprites[currentIndex], cutscene.characterNames[currentIndex]);
-
-        //DialogManager.Instance.HideDialog();
-        //Re-enable player controls here
-
+        
+        DialogManager.Instance.ShowDialog(
+            cutscene.dialogLines[currentIndex], 
+            cutscene.characterSprites[currentIndex], 
+            cutscene.characterNames[currentIndex]
+        );
     }
-
 }

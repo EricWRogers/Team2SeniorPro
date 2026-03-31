@@ -2200,8 +2200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 1892205522313000847}
-  animator: {fileID: 8457590124988334156}
-  animator2: {fileID: 6250704167864371236}
+  Time_Animator: {fileID: 0}
+  Level_Animator: {fileID: 0}
 --- !u!1 &4470410821208603929
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,6 +7364,10 @@ PrefabInstance:
       value: Berry
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 76810518
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1719359564293276687}
@@ -12336,6 +12340,10 @@ PrefabInstance:
       value: Berry
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 39dedd21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1719359564293276687}
@@ -14018,6 +14026,7 @@ MonoBehaviour:
   VictorySquirrel: {fileID: 8267223982152447422}
   timer: {fileID: 1892205522313000847}
   SFXSource: {fileID: 5076615170609308614}
+  timerText: {fileID: 0}
   statsText: {fileID: 0}
   scriptsToToggle:
   - {fileID: 4774549075021174285}
@@ -17893,6 +17902,10 @@ PrefabInstance:
       value: Berry
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: cd5fcd8c
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1719359564293276687}
@@ -21300,6 +21313,10 @@ PrefabInstance:
     - target: {fileID: 7538472319907248896, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_Name
       value: Berry
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 10079c05
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator
@@ -30193,11 +30210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3d50c1184cc6f409e0d8cf8fb044a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6250704167864371236 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 445710508452273605, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
-  m_PrefabInstance: {fileID: 5805576469306988001}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6750235555323314777 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 953683894642333624, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
@@ -40501,6 +40513,10 @@ PrefabInstance:
       value: Berry
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 4e948a09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1719359564293276687}
@@ -43467,6 +43483,10 @@ PrefabInstance:
       value: Berry
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: 56ca264f
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1719359564293276687}
@@ -45165,6 +45185,10 @@ PrefabInstance:
     - target: {fileID: 7538472319907248896, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: m_Name
       value: Berry
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
+      propertyPath: berryID
+      value: a0be5cab
       objectReference: {fileID: 0}
     - target: {fileID: 7613388820098317646, guid: e476332e5596498468e0fc6931b02cb5, type: 3}
       propertyPath: animator

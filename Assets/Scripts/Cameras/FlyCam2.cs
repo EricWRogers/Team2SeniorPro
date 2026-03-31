@@ -33,14 +33,12 @@ public class FlyCam2 : MonoBehaviour
     {
         string currentScene = GameManager.Instance.GetCurrentScene();
 
-        if ((currentScene == "Level_1" || currentScene == "Level_2") && !hasPlayedFlyover_Level1)
+        if ((currentScene == "Level_1" || currentScene == "Level_2" || currentScene == "Level_3" || currentScene == "Level_4") && !hasPlayedFlyover_Level1)
         {
             hasPlayedFlyover_Level1 = true;
             
-            if (splineCamOBJ != null)
-                splineCamOBJ.SetActive(true);
-        
-            StartCoroutine(StartSequence());
+            // Start waiting coroutine to ensure LevelLoader finishes before starting sequence
+            StartCoroutine(WaitAndStartSequence());
         }
     }
 
@@ -86,6 +84,39 @@ public class FlyCam2 : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitAndStartSequence()
+    {
+        float timeoutTimer = 0f;
+        float maxWaitTime = 1.0f; // Safety: only wait 1 second for a loader to appear
+
+        // 1. Wait to see if a LevelLoader appears (useful for scene transitions)
+        while (LevelLoader.Instance == null && timeoutTimer < maxWaitTime)
+        {
+            timeoutTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        // 2. If we found a loader, wait for it to actually finish loading
+        if (LevelLoader.Instance != null)
+        {
+            // Wait until the IsLoading flag is false
+            yield return new WaitUntil(() => !LevelLoader.Instance.IsLoading);
+            
+            // Give the UI a moment to deactivate and the camera to settle
+            yield return new WaitForSeconds(0.2f);
+        }
+        else
+        {
+            Debug.Log("No LevelLoader found. Proceeding with cutscene for standalone testing.");
+        }
+
+        // 3. Kick off the cutscene
+        if (splineCamOBJ != null)
+            splineCamOBJ.SetActive(true);
+
+        StartCoroutine(StartSequence());
+    }
+
     private IEnumerator StartSequence()
     {
         if (inSequence) yield break;
@@ -94,7 +125,8 @@ public class FlyCam2 : MonoBehaviour
         // Disable player scripts
         if (player != null)
         {
-            foreach (var script in player.GetComponents<MonoBehaviour>())
+            var components = player.GetComponents<MonoBehaviour>();
+            foreach (var script in components)
                 script.enabled = false;
 
         }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     [Header("Options Toggles")]
     public Toggle sprintToggle;
     public Toggle crouchToggle;
+    public Toggle audioToggle;
 
     [Tooltip("Leave empty to auto-find on the player.")]
     public NewThirdPlayerMovement move;
@@ -20,6 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Menu and Script(s):")]
     public GameObject pauseMenu;
+    public GameManager GM;
 
     [Header("Events")]
     [Tooltip("Scripts to disable when paused and enable when resumed")]
@@ -30,8 +33,18 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         // Auto-find movement if not assigned
-        if (move == null)
+        if (move == null){
             move = FindFirstObjectByType<NewThirdPlayerMovement>();
+        }
+
+        if (GM == null)
+        {
+            GM = FindFirstObjectByType<GameManager>();
+            if (GM == null)
+            {
+                Debug.LogError("No GameManager found in scene!");
+            }
+        }
 
         WireOptionsUI();
         RefreshOptionsUI();
@@ -45,6 +58,20 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused) Resume();
             else Pause();
         }
+    }
+
+    public void Home()
+    {
+        PlaySound();
+        Time.timeScale = 1f;
+        GameManager.Instance.newMap("Main Menu", true);
+    }
+
+    public void HUB()
+    {
+        PlaySound();
+        Time.timeScale = 1f;
+        GameManager.Instance.newMap("Squirrel_HUB", true);
     }
 
     public void Resume()
@@ -74,6 +101,18 @@ public class PauseMenu : MonoBehaviour
             SFXSource.PlayOneShot(pauseSFX);
     }
 
+    public void ToggleAudio()
+    {
+        if (audioToggle == null || SoundManager.Instance == null) return;
+
+        // 1. Play the click SFX (This will still be heard!)
+        PlaySound(); 
+
+        // 2. Mute ONLY the music. 
+        // If Toggle is ON, Mute is FALSE. If Toggle is OFF, Mute is TRUE.
+        SoundManager.Instance.SetMusicMuted(!audioToggle.isOn);
+    }
+    
     private void WireOptionsUI()
     {
         if (uiWired) return;
@@ -89,17 +128,20 @@ public class PauseMenu : MonoBehaviour
 
     private void RefreshOptionsUI()
     {
-        if (move == null) return;
-
-        // Prevent triggering OnValueChanged while we programmatically set values
-        if (sprintToggle != null)
+        if (move != null)
         {
-            sprintToggle.SetIsOnWithoutNotify(move.sprintToggleMode);
+            if (sprintToggle != null)
+                sprintToggle.SetIsOnWithoutNotify(move.sprintToggleMode);
+
+            if (crouchToggle != null)
+                crouchToggle.SetIsOnWithoutNotify(move.crouchToggleMode);
         }
 
-        if (crouchToggle != null)
+        // 3. Sync the toggle visual with the SoundManager's music state
+        if (audioToggle != null && SoundManager.Instance != null)
         {
-            crouchToggle.SetIsOnWithoutNotify(move.crouchToggleMode);
+            // Toggle is "On" if Music is NOT muted
+            audioToggle.SetIsOnWithoutNotify(!SoundManager.Instance.IsMusicMuted());
         }
     }
 
@@ -126,6 +168,13 @@ public class PauseMenu : MonoBehaviour
         PlaySound();
         Application.Quit();
         Debug.Log("You've quit the game!");
+    }
+
+    public void ResetData()
+    {
+        PlaySound();
+        GM.ResetBerryData();
+        Debug.Log("All progress reset. Berry data cleared.");
     }
 
     public void PlaySound()
