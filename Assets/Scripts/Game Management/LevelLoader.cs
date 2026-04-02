@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.EventSystems; // Required for EventSystem cleanup
 
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
+    public bool IsLoading => isLoading;
 
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreen;
@@ -182,6 +184,11 @@ public class LevelLoader : MonoBehaviour
         {
             yield return null;
         }
+
+        // --- NEW CLEANUP LOGIC STARTS HERE ---
+        // As soon as the new scene is loaded, we look for duplicate EventSystems
+        CleanDuplicateEventSystems();
+        // --- NEW CLEANUP LOGIC ENDS HERE ---
 
         Scene newScene = SceneManager.GetSceneByName(sceneName);
         if (newScene.IsValid())
