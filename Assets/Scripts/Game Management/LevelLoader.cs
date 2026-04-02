@@ -15,6 +15,10 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] private TMP_Text loadingText;
     [SerializeField] private TMP_Text percentText;
 
+    [Header("Continue Control")]
+    [SerializeField] private GameObject readyPanel;
+    [SerializeField] private Button nextButton;
+
     [Header("Optional Video Background")]
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private VideoClip[] backgroundVideos;
@@ -27,6 +31,9 @@ public class LevelLoader : MonoBehaviour
     private float targetProgress = 0f;
     private float displayedProgress = 0f;
     private bool isLoading = false;
+    private bool continueRequested = false;
+
+    public bool IsLoading => isLoading;
 
     private void Awake()
     {
@@ -39,17 +46,26 @@ public class LevelLoader : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        if (nextButton != null)
+        {
+            nextButton.onClick.RemoveAllListeners();
+            nextButton.onClick.AddListener(OnNextPressed);
+        }
     }
 
     private void Start()
     {
         if (loadingScreen != null)
             loadingScreen.SetActive(false);
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
     }
 
     private void Update()
     {
-        displayedProgress = Mathf.Lerp(displayedProgress, targetProgress, Time.deltaTime * progressSmoothSpeed);
+        displayedProgress = Mathf.Lerp(displayedProgress, targetProgress, Time.unscaledDeltaTime * progressSmoothSpeed);
 
         if (Mathf.Abs(displayedProgress - targetProgress) < 0.001f)
             displayedProgress = targetProgress;
@@ -69,12 +85,18 @@ public class LevelLoader : MonoBehaviour
             loadingScreen.SetActive(true);
         }
 
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
+
         StartBackgroundVideo();
     }
 
     public void HideLoadingScreenImmediate()
     {
         StopBackgroundVideo();
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
 
         if (loadingScreen != null)
             loadingScreen.SetActive(false);
@@ -94,12 +116,19 @@ public class LevelLoader : MonoBehaviour
     public IEnumerator LoadLevelRoutine(string sceneName, IEnumerator initializationSteps)
     {
         isLoading = true;
+        continueRequested = false;
+
+        // Freeze scene/game time during loading screen
+        Time.timeScale = 0f;
 
         if (loadingScreen != null)
         {
             loadingScreen.transform.SetAsLastSibling();
             loadingScreen.SetActive(true);
         }
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
 
         StartBackgroundVideo();
 
@@ -124,7 +153,7 @@ public class LevelLoader : MonoBehaviour
 
         while (sceneLoad.progress < 0.9f || !initDone || timer < minimumLoadingScreenTime)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
 
             float sceneProgress = Mathf.Clamp01(sceneLoad.progress / 0.9f);
             float combinedProgress = Mathf.Clamp01((sceneProgress * 0.7f) + (extraProgress * 0.3f));
@@ -133,8 +162,19 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
 
-        SetLoadingStep("Activating " + sceneName + "...");
-        UpdateUI(0.98f);
+        UpdateUI(1f);
+        SetLoadingStep(sceneName + " ready");
+
+        if (readyPanel != null)
+            readyPanel.SetActive(true);
+
+        // Wait until the player chooses to continue
+        while (!continueRequested)
+        {
+            yield return null;
+        }
+
+        SetLoadingStep("Starting " + sceneName + "...");
 
         sceneLoad.allowSceneActivation = true;
 
@@ -154,17 +194,28 @@ public class LevelLoader : MonoBehaviour
             yield return SceneManager.UnloadSceneAsync(currentScene);
         }
 
+        // Resume normal scene time only after scene is activated
+        Time.timeScale = 1f;
+
         UpdateUI(1f);
         SetLoadingStep("Done");
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSecondsRealtime(0.15f);
 
         StopBackgroundVideo();
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
 
         if (loadingScreen != null)
             loadingScreen.SetActive(false);
 
         isLoading = false;
+    }
+
+    public void OnNextPressed()
+    {
+        continueRequested = true;
     }
 
     private void StartBackgroundVideo()
