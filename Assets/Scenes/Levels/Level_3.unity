@@ -16,8 +16,8 @@ RenderSettings:
   serializedVersion: 10
   m_Fog: 1
   m_FogColor: {r: 0.78916967, g: 0.87956786, b: 0.8930817, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.002
+  m_FogMode: 2
+  m_FogDensity: 0.009
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -8325,7 +8325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 650441126}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415642214
 GameObject:
@@ -16126,7 +16126,6 @@ Transform:
   - {fileID: 1835503120}
   - {fileID: 1578495226}
   - {fileID: 1176379948}
-  - {fileID: 405578623}
   - {fileID: 45323350}
   - {fileID: 400774501}
   - {fileID: 1198260782}
@@ -46612,6 +46611,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 403936591}
   - {fileID: 598679811}
+  - {fileID: 405578623}
   - {fileID: 2122617915}
   - {fileID: 589218824}
   - {fileID: 650441126}
