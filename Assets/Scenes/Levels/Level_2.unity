@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.7735849, g: 0.64778656, b: 0.40625367, a: 1}
+  m_FogColor: {r: 0.8805031, g: 0.78579694, b: 0.59530866, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.003
   m_LinearFogStart: 37.47
@@ -39355,6 +39355,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: set_mute
       objectReference: {fileID: 0}
+    - target: {fileID: 4028794075481487130, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4221826294026196274, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: player
       value: 
@@ -48932,6 +48936,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel
       objectReference: {fileID: 0}
+    - target: {fileID: 6370834667682660888, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: stopSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: jumpForce
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
       value: 
@@ -48940,6 +48952,10 @@ PrefabInstance:
       propertyPath: text_speed
       value: 
       objectReference: {fileID: 1847628883}
+    - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: groundPoundBounceVelocity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: key
       value: 

@@ -14,7 +14,7 @@ public class UISpinner : MonoBehaviour
     {
         if (spinningSprite != null)
         {
-            spinningSprite.Rotate(0f, 0f, -spinRate * Time.deltaTime);
+            spinningSprite.Rotate(0f, 0f, -spinRate * Time.unscaledDeltaTime);
         }
     }
 }

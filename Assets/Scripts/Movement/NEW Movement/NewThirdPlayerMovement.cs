@@ -22,6 +22,9 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
 
+    private bool justJumped;
+    public float jumpUngroundTime = 0.1f;
+
     public float groundDrag;
 
     [Header("Jumping")]
@@ -204,7 +207,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         wasGroundedLastFrame = grounded;
 
-        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
+        if (!justJumped && (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching))
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 0;
@@ -483,12 +486,12 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             state = MovementState.groundPounding;
             desiredMoveSpeed = 0f;
         }
-        else if (grounded && IsSprintingActive)
+        else if (grounded && !justJumped && IsSprintingActive)
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed * speedBoostMultiplier;
         }
-        else if (grounded)
+        else if (grounded && !justJumped)
         {
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed * speedBoostMultiplier;
@@ -496,7 +499,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         else
         {
             state = MovementState.air;
-        
+
             if (!groundPounding && moveSpeed < airMinSpeed)
                 desiredMoveSpeed = airMinSpeed;
         }
@@ -589,24 +592,28 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void SpeedControl()
     {
-        if (dashing) return;   
+        if (dashing) return;
 
-        // if we’re grounded and there’s no input, kill horizontal momentum right away
+        // if grounded and no input → stop horizontal movement
         if (grounded && Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f)
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
             return;
         }
 
+        // ALWAYS use flat velocity (X/Z only)
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
         if (OnSlope() && !exitingSlope)
         {
-            if (rb.linearVelocity.magnitude > moveSpeed)
-                rb.linearVelocity = rb.linearVelocity.normalized * moveSpeed;
+            if (flatVel.magnitude > moveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+            }
         }
         else
         {
-            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
             if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
@@ -615,12 +622,27 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         }
     }
 
+    private void ClearJustJumped()
+    {
+        justJumped = false;
+    }
+
     private void Jump()
     {
+
+        //if (sprintToggleMode)
+            //sprintToggled = false;
+
         exitingSlope = true;
+        justJumped = true;
+
+        // force us out of grounded logic right away
+        grounded = false;
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * (jumpForce * jumpBoostMultiplier), ForceMode.Impulse);
+
+        Invoke(nameof(ClearJustJumped), jumpUngroundTime);
     }
 
     private void ResetJump()

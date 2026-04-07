@@ -4,18 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using UnityEngine.EventSystems; // Required for EventSystem cleanup
 
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
-    public bool IsLoading => isLoading;
 
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private Slider progressBar;
     [SerializeField] private TMP_Text loadingText;
     [SerializeField] private TMP_Text percentText;
+
+    [Header("Continue Control")]
+    [SerializeField] private GameObject readyPanel;
+    [SerializeField] private Button nextButton;
 
     [Header("Optional Video Background")]
     [SerializeField] private VideoPlayer videoPlayer;
@@ -29,6 +31,9 @@ public class LevelLoader : MonoBehaviour
     private float targetProgress = 0f;
     private float displayedProgress = 0f;
     private bool isLoading = false;
+    private bool continueRequested = false;
+
+    public bool IsLoading => isLoading;
 
     private void Awake()
     {
@@ -41,25 +46,26 @@ public class LevelLoader : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        if (nextButton != null)
+        {
+            nextButton.onClick.RemoveAllListeners();
+            nextButton.onClick.AddListener(OnNextPressed);
+        }
     }
 
     private void Start()
     {
-        // If we are currently in the process of a routine, isLoading should be true
-        // Otherwise, default to fase.
-        if (loadingScreen != null && loadingScreen.activeSelf)
-        {
-            isLoading = true;
-        }
-        else
-        {
-            isLoading = false;
-        }
+        if (loadingScreen != null)
+            loadingScreen.SetActive(false);
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
     }
 
     private void Update()
     {
-        displayedProgress = Mathf.Lerp(displayedProgress, targetProgress, Time.deltaTime * progressSmoothSpeed);
+        displayedProgress = Mathf.Lerp(displayedProgress, targetProgress, Time.unscaledDeltaTime * progressSmoothSpeed);
 
         if (Mathf.Abs(displayedProgress - targetProgress) < 0.001f)
             displayedProgress = targetProgress;
@@ -79,12 +85,18 @@ public class LevelLoader : MonoBehaviour
             loadingScreen.SetActive(true);
         }
 
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
+
         StartBackgroundVideo();
     }
 
     public void HideLoadingScreenImmediate()
     {
         StopBackgroundVideo();
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
 
         if (loadingScreen != null)
             loadingScreen.SetActive(false);
@@ -104,12 +116,19 @@ public class LevelLoader : MonoBehaviour
     public IEnumerator LoadLevelRoutine(string sceneName, IEnumerator initializationSteps)
     {
         isLoading = true;
+        continueRequested = false;
+
+        // Freeze scene/game time during loading screen
+        Time.timeScale = 0f;
 
         if (loadingScreen != null)
         {
             loadingScreen.transform.SetAsLastSibling();
             loadingScreen.SetActive(true);
         }
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
 
         StartBackgroundVideo();
 
@@ -134,7 +153,7 @@ public class LevelLoader : MonoBehaviour
 
         while (sceneLoad.progress < 0.9f || !initDone || timer < minimumLoadingScreenTime)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
 
             float sceneProgress = Mathf.Clamp01(sceneLoad.progress / 0.9f);
             float combinedProgress = Mathf.Clamp01((sceneProgress * 0.7f) + (extraProgress * 0.3f));
@@ -143,8 +162,19 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
 
-        SetLoadingStep("Activating " + sceneName + "...");
-        UpdateUI(0.98f);
+        UpdateUI(1f);
+        SetLoadingStep(sceneName + " ready");
+
+        if (readyPanel != null)
+            readyPanel.SetActive(true);
+
+        // Wait until the player chooses to continue
+        while (!continueRequested)
+        {
+            yield return null;
+        }
+
+        SetLoadingStep("Starting " + sceneName + "...");
 
         sceneLoad.allowSceneActivation = true;
 
@@ -152,11 +182,6 @@ public class LevelLoader : MonoBehaviour
         {
             yield return null;
         }
-
-        // --- NEW CLEANUP LOGIC STARTS HERE ---
-        // As soon as the new scene is loaded, we look for duplicate EventSystems
-        CleanDuplicateEventSystems();
-        // --- NEW CLEANUP LOGIC ENDS HERE ---
 
         Scene newScene = SceneManager.GetSceneByName(sceneName);
         if (newScene.IsValid())
@@ -169,12 +194,18 @@ public class LevelLoader : MonoBehaviour
             yield return SceneManager.UnloadSceneAsync(currentScene);
         }
 
+        // Resume normal scene time only after scene is activated
+        Time.timeScale = 1f;
+
         UpdateUI(1f);
         SetLoadingStep("Done");
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSecondsRealtime(0.15f);
 
         StopBackgroundVideo();
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
 
         if (loadingScreen != null)
             loadingScreen.SetActive(false);
@@ -182,20 +213,9 @@ public class LevelLoader : MonoBehaviour
         isLoading = false;
     }
 
-    // New helper method to ensure cutscenes and UI aren't blocked by duplicate systems
-    private void CleanDuplicateEventSystems()
+    public void OnNextPressed()
     {
-        EventSystem[] systems = Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None);
-        if (systems.Length > 1)
-        {
-            // We keep the first one found (usually the one from the persistent root)
-            // and destroy the others found in the newly loaded level.
-            for (int i = 1; i < systems.Length; i++)
-            {
-                Debug.Log($"LevelLoader: Destroyed duplicate EventSystem in new scene: {systems[i].gameObject.scene.name}");
-                Destroy(systems[i].gameObject);
-            }
-        }
+        continueRequested = true;
     }
 
     private void StartBackgroundVideo()
