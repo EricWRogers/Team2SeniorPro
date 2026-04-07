@@ -35,7 +35,7 @@ public class PersistentManager : MonoBehaviour
             GetInitializationSteps()
         ));*/
 
-                LevelLoader.Instance.ShowLoadingScreenImmediate();
+                //LevelLoader.Instance.ShowLoadingScreenImmediate();
         yield return null;
 
         yield return StartCoroutine(LevelLoader.Instance.LoadLevelRoutine(

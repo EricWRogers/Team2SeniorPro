@@ -29,15 +29,23 @@ public class FlyCam2 : MonoBehaviour
     private bool skipText = false;    // True when player wants to skip current text
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
+        StartCoroutine(BeginAfterLoading());
+    }
+
+    private IEnumerator BeginAfterLoading()
+    {
+        while (LevelLoader.Instance != null && LevelLoader.Instance.IsLoading)
+            yield return null;
+
+        yield return null;
+        yield return null;
+
         string currentScene = GameManager.Instance.GetCurrentScene();
 
-        if ((currentScene == "Level_1" || currentScene == "Level_2" || currentScene == "Level_3" || currentScene == "Level_4") && !hasPlayedFlyover_Level1)
+        if (currentScene == "Level_1" || currentScene == "Level_2" || currentScene == "Level_3" || currentScene == "Level_4")
         {
-            hasPlayedFlyover_Level1 = true;
-            
-            // Start waiting coroutine to ensure LevelLoader finishes before starting sequence
             StartCoroutine(StartSequence());
         }
     }

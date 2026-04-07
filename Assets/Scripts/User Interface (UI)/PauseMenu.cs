@@ -32,51 +32,46 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        // Auto-find movement if not assigned
-        if (move == null){
+        if (move == null)
             move = FindFirstObjectByType<NewThirdPlayerMovement>();
-        }
 
         if (GM == null)
         {
             GM = FindFirstObjectByType<GameManager>();
             if (GM == null)
-            {
                 Debug.LogError("No GameManager found in scene!");
-            }
         }
 
         WireOptionsUI();
         RefreshOptionsUI();
+        ForceClosePauseMenu();
+    }
+
+    private void OnEnable()
+    {
+        ForceClosePauseMenu();
     }
 
     void Update()
     {
-        // (Optional) convert this to the Input System later
+        if (LevelLoader.Instance != null && LevelLoader.Instance.IsLoading)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused) Resume();
             else Pause();
         }
     }
-
     public void Home()
     {
         PlaySound();
-        Time.timeScale = 1f;
+        CloseForSceneChange();
         GameManager.Instance.newMap("Main Menu", true);
-    }
-
-    public void HUB()
-    {
-        PlaySound();
-        Time.timeScale = 1f;
-        GameManager.Instance.newMap("Squirrel_HUB", true);
     }
 
     public void Resume()
     {
-        StartCoroutine(WaitForPlay());
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -87,6 +82,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        // Extra safety: never open while loading
+        if (LevelLoader.Instance != null && LevelLoader.Instance.IsLoading)
+            return;
+
         pauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -94,7 +93,6 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
         ToggleScripts(false);
 
-        // Always resync UI when opening menu (in case prefs changed elsewhere)
         RefreshOptionsUI();
 
         if (pauseSFX != null && SFXSource != null)
@@ -105,14 +103,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (audioToggle == null || SoundManager.Instance == null) return;
 
-        // 1. Play the click SFX (This will still be heard!)
-        PlaySound(); 
-
-        // 2. Mute ONLY the music. 
-        // If Toggle is ON, Mute is FALSE. If Toggle is OFF, Mute is TRUE.
+        PlaySound();
         SoundManager.Instance.SetMusicMuted(!audioToggle.isOn);
     }
-    
+
     private void WireOptionsUI()
     {
         if (uiWired) return;
@@ -137,10 +131,8 @@ public class PauseMenu : MonoBehaviour
                 crouchToggle.SetIsOnWithoutNotify(move.crouchToggleMode);
         }
 
-        // 3. Sync the toggle visual with the SoundManager's music state
         if (audioToggle != null && SoundManager.Instance != null)
         {
-            // Toggle is "On" if Music is NOT muted
             audioToggle.SetIsOnWithoutNotify(!SoundManager.Instance.IsMusicMuted());
         }
     }
@@ -159,7 +151,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        Time.timeScale = 1f;
+        CloseForSceneChange();
         GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false);
     }
 
@@ -183,9 +175,28 @@ public class PauseMenu : MonoBehaviour
             SFXSource.PlayOneShot(clickSFX);
     }
 
-    private IEnumerator WaitForPlay()
+    public void ForceClosePauseMenu()
     {
-        yield return new WaitForSecondsRealtime(2.0f);
+        GameIsPaused = false;
+
+        if (pauseMenu != null)
+            pauseMenu.SetActive(false);
+
+        ToggleScripts(true);
+    }
+
+    public void CloseForSceneChange()
+    {
+        GameIsPaused = false;
+        Time.timeScale = 1f;
+
+        if (pauseMenu != null)
+            pauseMenu.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        ToggleScripts(true);
     }
 
     private void ToggleScripts(bool enable)

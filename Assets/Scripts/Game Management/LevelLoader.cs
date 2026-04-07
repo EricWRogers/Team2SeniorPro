@@ -65,7 +65,11 @@ public class LevelLoader : MonoBehaviour
 
     private void Update()
     {
-        displayedProgress = Mathf.Lerp(displayedProgress, targetProgress, Time.unscaledDeltaTime * progressSmoothSpeed);
+        displayedProgress = Mathf.Lerp(
+            displayedProgress,
+            targetProgress,
+            Time.unscaledDeltaTime * progressSmoothSpeed
+        );
 
         if (Mathf.Abs(displayedProgress - targetProgress) < 0.001f)
             displayedProgress = targetProgress;
@@ -77,73 +81,75 @@ public class LevelLoader : MonoBehaviour
             percentText.text = Mathf.RoundToInt(displayedProgress * 100f) + "%";
     }
 
-    public void ShowLoadingScreenImmediate()
-    {
-        if (loadingScreen != null)
-        {
-            loadingScreen.transform.SetAsLastSibling();
-            loadingScreen.SetActive(true);
-        }
-
-        if (readyPanel != null)
-            readyPanel.SetActive(false);
-
-        StartBackgroundVideo();
-    }
-
-    public void HideLoadingScreenImmediate()
-    {
-        StopBackgroundVideo();
-
-        if (readyPanel != null)
-            readyPanel.SetActive(false);
-
-        if (loadingScreen != null)
-            loadingScreen.SetActive(false);
-    }
-
     public void LoadLevel(string sceneName)
     {
-        Debug.Log("LoadLevel called for: " + sceneName);
-        Debug.Log("Loading screen reference is null? " + (loadingScreen == null));
+        LoadLevel(sceneName, true);
+    }
 
+    public void LoadLevel(string sceneName, bool useLoadingScreen)
+    {
         if (isLoading)
             return;
 
-        StartCoroutine(LoadLevelRoutine(sceneName, null));
+        StartCoroutine(LoadLevelRoutine(sceneName, null, useLoadingScreen));
     }
 
-    public IEnumerator LoadLevelRoutine(string sceneName, IEnumerator initializationSteps)
+    public IEnumerator LoadLevelRoutine(string sceneName, IEnumerator initializationSteps, bool useLoadingScreen = true)
     {
         isLoading = true;
         continueRequested = false;
 
-        // Freeze scene/game time during loading screen
-        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-        if (loadingScreen != null)
+        ForceCloseAllPauseMenus();
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool reloadingSameScene = currentSceneName == sceneName;
+
+        // Same-scene restart must use SINGLE or it will stack duplicates
+        LoadSceneMode mode = reloadingSameScene ? LoadSceneMode.Single : LoadSceneMode.Additive;
+
+        if (useLoadingScreen)
         {
-            loadingScreen.transform.SetAsLastSibling();
-            loadingScreen.SetActive(true);
+            Time.timeScale = 0f;
+
+            if (loadingScreen != null)
+            {
+                loadingScreen.transform.SetAsLastSibling();
+                loadingScreen.SetActive(true);
+            }
+
+            if (readyPanel != null)
+                readyPanel.SetActive(false);
+
+            StartBackgroundVideo();
+
+            extraProgress = 0f;
+            targetProgress = 0f;
+            displayedProgress = 0f;
+
+            SetLoadingStep("Loading " + sceneName + "...");
         }
+        else
+        {
+            Time.timeScale = 1f;
 
-        if (readyPanel != null)
-            readyPanel.SetActive(false);
+            if (readyPanel != null)
+                readyPanel.SetActive(false);
 
-        StartBackgroundVideo();
+            if (loadingScreen != null)
+                loadingScreen.SetActive(false);
 
-        extraProgress = 0f;
-        targetProgress = 0f;
-        displayedProgress = 0f;
-
-        SetLoadingStep("Loading " + sceneName + "...");
+            StopBackgroundVideo();
+        }
 
         Scene currentScene = SceneManager.GetActiveScene();
 
         float timer = 0f;
         bool initDone = initializationSteps == null;
 
-        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(sceneName, mode);
         sceneLoad.allowSceneActivation = false;
 
         if (initializationSteps != null)
@@ -151,30 +157,35 @@ public class LevelLoader : MonoBehaviour
             StartCoroutine(RunInitialization(initializationSteps, () => initDone = true));
         }
 
-        while (sceneLoad.progress < 0.9f || !initDone || timer < minimumLoadingScreenTime)
+        while (sceneLoad.progress < 0.9f || !initDone || (useLoadingScreen && timer < minimumLoadingScreenTime))
         {
-            timer += Time.unscaledDeltaTime;
+            if (useLoadingScreen)
+            {
+                timer += Time.unscaledDeltaTime;
 
-            float sceneProgress = Mathf.Clamp01(sceneLoad.progress / 0.9f);
-            float combinedProgress = Mathf.Clamp01((sceneProgress * 0.7f) + (extraProgress * 0.3f));
+                float sceneProgress = Mathf.Clamp01(sceneLoad.progress / 0.9f);
+                float combinedProgress = Mathf.Clamp01((sceneProgress * 0.7f) + (extraProgress * 0.3f));
+                UpdateUI(combinedProgress);
+            }
 
-            UpdateUI(combinedProgress);
             yield return null;
         }
 
-        UpdateUI(1f);
-        SetLoadingStep(sceneName + " ready");
-
-        if (readyPanel != null)
-            readyPanel.SetActive(true);
-
-        // Wait until the player chooses to continue
-        while (!continueRequested)
+        if (useLoadingScreen)
         {
-            yield return null;
-        }
+            UpdateUI(1f);
+            SetLoadingStep(sceneName + " ready");
 
-        SetLoadingStep("Starting " + sceneName + "...");
+            if (readyPanel != null)
+                readyPanel.SetActive(true);
+
+            while (!continueRequested)
+            {
+                yield return null;
+            }
+
+            SetLoadingStep("Starting " + sceneName + "...");
+        }
 
         sceneLoad.allowSceneActivation = true;
 
@@ -189,26 +200,38 @@ public class LevelLoader : MonoBehaviour
             SceneManager.SetActiveScene(newScene);
         }
 
-        if (currentScene.IsValid() && currentScene != newScene)
+        // Only unload manually if this was an additive transition to a different scene
+        if (mode == LoadSceneMode.Additive && currentScene.IsValid() && currentScene.name != sceneName)
         {
             yield return SceneManager.UnloadSceneAsync(currentScene);
         }
 
-        // Resume normal scene time only after scene is activated
         Time.timeScale = 1f;
 
-        UpdateUI(1f);
-        SetLoadingStep("Done");
+        yield return null;
+        yield return null;
 
-        yield return new WaitForSecondsRealtime(0.15f);
+        if (useLoadingScreen)
+        {
+            StopBackgroundVideo();
 
-        StopBackgroundVideo();
+            if (readyPanel != null)
+                readyPanel.SetActive(false);
 
-        if (readyPanel != null)
-            readyPanel.SetActive(false);
+            if (loadingScreen != null)
+                loadingScreen.SetActive(false);
+        }
 
-        if (loadingScreen != null)
-            loadingScreen.SetActive(false);
+        if (IsGameplayScene(sceneName))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         isLoading = false;
     }
@@ -237,9 +260,7 @@ public class LevelLoader : MonoBehaviour
     private void StopBackgroundVideo()
     {
         if (videoPlayer != null)
-        {
             videoPlayer.Stop();
-        }
     }
 
     private IEnumerator RunInitialization(IEnumerator routine, System.Action onComplete)
@@ -262,5 +283,25 @@ public class LevelLoader : MonoBehaviour
     private void UpdateUI(float progress)
     {
         targetProgress = progress;
+    }
+
+    private bool IsGameplayScene(string sceneName)
+    {
+        return sceneName == "Level_1"
+            || sceneName == "Level_2"
+            || sceneName == "Level_3"
+            || sceneName == "Level_4"
+            || sceneName == "Squirrel_HUB";
+    }
+
+    private void ForceCloseAllPauseMenus()
+    {
+        PauseMenu[] pauseMenus = FindObjectsByType<PauseMenu>(FindObjectsSortMode.None);
+
+        foreach (var pm in pauseMenus)
+        {
+            if (pm != null)
+                pm.ForceClosePauseMenu();
+        }
     }
 }
