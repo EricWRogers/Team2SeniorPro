@@ -38,7 +38,7 @@ public class FlyCam2 : MonoBehaviour
             hasPlayedFlyover_Level1 = true;
             
             // Start waiting coroutine to ensure LevelLoader finishes before starting sequence
-            StartCoroutine(WaitAndStartSequence());
+            StartCoroutine(StartSequence());
         }
     }
 
@@ -84,7 +84,7 @@ public class FlyCam2 : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitAndStartSequence()
+    /*private IEnumerator WaitAndStartSequence()
     {
         float timeoutTimer = 0f;
         float maxWaitTime = 1.0f; // Safety: only wait 1 second for a loader to appear
@@ -115,7 +115,7 @@ public class FlyCam2 : MonoBehaviour
             splineCamOBJ.SetActive(true);
 
         StartCoroutine(StartSequence());
-    }
+    }*/
 
     private IEnumerator StartSequence()
     {
