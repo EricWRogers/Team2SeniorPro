@@ -87,9 +87,14 @@ public class GameManager : MonoBehaviour
 
         collectibleCount = 0;
 
+        bool isRestartingCurrentScene = GetCurrentScene() == _newMap;
+        bool skipLoadingScreenForRestart =
+            isRestartingCurrentScene &&
+            (_newMap == "Level_1" || _newMap == "Level_2" || _newMap == "Level_3" || _newMap == "Level_4");
+
         if (LevelLoader.Instance != null)
         {
-            LevelLoader.Instance.LoadLevel(_newMap);
+            LevelLoader.Instance.LoadLevel(_newMap, !skipLoadingScreenForRestart);
         }
         else
         {
@@ -97,6 +102,8 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(_newMap);
         }
     }
+
+    
     public void SetCheckpoint(int _checkpointNumber, bool _force = false)
     {
         if (!_force && _checkpointNumber > currentCheckpoint)

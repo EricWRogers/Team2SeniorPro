@@ -63,8 +63,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private bool leftGroundSinceLastPound;
 
     [Header("Ground Pound -> Slide Boost")]
-public float groundPoundSlideBoostSpeed = 25f; // the short boost speed
-public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-end right after impact
+    public float groundPoundSlideBoostSpeed = 25f; // the short boost speed
+    public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-end right after impact
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -94,14 +94,15 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private bool jumpPressedThisFrame;
     private bool groundPoundPressedThisFrame;
 
-     // Toggle-mode settings (can be wired to Options menu)
+    // Toggle-mode settings (can be wired to Options menu)
     public bool sprintToggleMode = false;
     public bool crouchToggleMode = false;
     private bool sprintToggled = false;
     private bool crouchToggled = false;
 
-    // runtime helper for sprint check
-    private bool IsSprintingActive => sprintToggleMode ? sprintToggled : sprintHeld;
+    // Sprint is the default now.
+    // This helper returns true when the player should WALK.
+    private bool IsWalkActive => sprintToggleMode ? sprintToggled : sprintHeld;
 
     [Header("Temporary Boosts")]
     public float speedBoostMultiplier = 1f;
@@ -110,11 +111,10 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private Coroutine speedBoostRoutine;
     private Coroutine jumpBoostRoutine;
 
-
     [Header("References")]
     public NewClimbing climbingScript;
     private ClimbingDone climbingScriptDone;
-    private NewSliding slidingScript; 
+    private NewSliding slidingScript;
     public Transform orientation;
     private Animator anim;
 
@@ -133,7 +133,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     {
         freeze,
         unlimited,
-        idle,            // newly added idle state
+        idle,
         walking,
         sprinting,
         wallrunning,
@@ -162,8 +162,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void Start()
     {
-        //controls = new PlayerControlsB();
-
         climbingScriptDone = GetComponent<ClimbingDone>();
         slidingScript = GetComponent<NewSliding>();
         anim = GetComponentInChildren<Animator>();
@@ -192,13 +190,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         StateHandler();
         UpdateAnimator();
         TextStuff();
-
-        /*// Impact detection (first grounded frame)
-        if (groundPounding && grounded && !wasGroundedLastFrame)
-        {
-            GroundPoundImpact();
-            //ParticleManager.Instance.SpawnParticle("LandingParticleEffect", transform.position - new Vector3(0, playerHeight * 0.3f, 0), Quaternion.Euler(90, 0, 0));
-        }*/
 
         if (grounded && !wasGroundedLastFrame)
         {
@@ -230,14 +221,14 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         transform.eulerAngles = new Vector3(0f, rot.y, 0f);
     }
 
-    private void Awake() 
+    private void Awake()
     {
         controls = new PlayerControlsB();
 
         sprintToggleMode = PlayerPrefs.GetInt("SprintToggleMode", 0) == 1;
         crouchToggleMode = PlayerPrefs.GetInt("CrouchToggleMode", 0) == 1;
 
-        // keep toggles consistent with current physical state
+        // false = default sprinting
         sprintToggled = false;
         crouchToggled = crouching;
     }
@@ -245,14 +236,14 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     private void UpdateAnimator()
     {
         if (anim == null) return;
-        
+
         float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
 
         if (grounded)
-            {
-                lastGroundedTime = Time.time;
-            }
-        
+        {
+            lastGroundedTime = Time.time;
+        }
+
         bool groundedRecently = Time.time - lastGroundedTime < groundedGrace;
 
         bool isMoving = flatSpeed > 0.1f;
@@ -300,24 +291,18 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         controls.Player.Disable();
     }
 
-    //below stored subscriptions as methods so inputs wont double fire
-    //private void OnSprintStarted(InputAction.CallbackContext _) => sprintHeld = true;
-    //private void OnSprintCanceled(InputAction.CallbackContext _) => sprintHeld = false;
-    //private void OnCrouchStarted(InputAction.CallbackContext _) => crouchHeld = true;
-    //private void OnCrouchCanceled(InputAction.CallbackContext _) => crouchHeld = false;
-
     private void OnSprintStarted(InputAction.CallbackContext _)
     {
         if (sprintToggleMode)
-            sprintToggled = !sprintToggled;
+            sprintToggled = !sprintToggled; // toggle walk on/off
         else
-            sprintHeld = true;
+            sprintHeld = true; // hold to walk
     }
 
     private void OnSprintCanceled(InputAction.CallbackContext _)
     {
         if (!sprintToggleMode)
-            sprintHeld = false;
+            sprintHeld = false; // release to return to sprinting
     }
 
     private void OnCrouchStarted(InputAction.CallbackContext _)
@@ -329,7 +314,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             bool success = ApplyCrouchState(targetState);
 
             if (success)
-                crouchToggled = targetState;   // only update toggle if it worked
+                crouchToggled = targetState;
         }
         else
         {
@@ -345,6 +330,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void OnJumpStarted(InputAction.CallbackContext _) => jumpPressedThisFrame = true;
     private void OnGroundPoundStarted(InputAction.CallbackContext _) => groundPoundPressedThisFrame = true;
+
     private void OnMove(InputAction.CallbackContext ctx)
     {
         moveInputNIS = ctx.ReadValue<Vector2>();
@@ -355,7 +341,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         horizontalInput = moveInputNIS.x;
         verticalInput = moveInputNIS.y;
 
-        // Jump (press)
         if (jumpPressedThisFrame && readyToJump && grounded)
         {
             jumpPressedThisFrame = false;
@@ -365,7 +350,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        // Ground pound (press)
         if (groundPoundPressedThisFrame
             && !grounded
             && !groundPounding
@@ -379,26 +363,9 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             StartCoroutine(GroundPoundRoutine());
         }
 
-        /*// Crouch (hold OR toggle-style; this is HOLD-style)
-        if (crouchHeld && !crouching && Mathf.Abs(horizontalInput) < 0.001f && Mathf.Abs(verticalInput) < 0.001f)
-        {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-            crouching = true;
-        }
-
-        if (!crouchHeld && crouching)
-        {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-            crouching = false;
-        }
-        */
-
-        // clear one-frame presses if they weren’t consumed
         jumpPressedThisFrame = false;
         groundPoundPressedThisFrame = false;
 
-            // For HOLD-mode: same behavior as before; for TOGGLE-mode crouching is handled in OnCrouchStarted
         if (!crouchToggleMode)
         {
             if (crouchHeld && !crouching && Mathf.Abs(horizontalInput) < 0.001f && Mathf.Abs(verticalInput) < 0.001f)
@@ -416,9 +383,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     public bool keepMomentum;
     private void StateHandler()
     {
-        // if player has no movement input and is grounded they are idle
-        // this prevents the momentum-smoothing logic from trying to interpolate
-        // from a high speed back down to walkSpeed and instead drops speed to 0
         bool noInput = Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f;
 
         if (freeze)
@@ -450,17 +414,16 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         else if (dashing)
         {
             state = MovementState.dashing;
-            desiredMoveSpeed = 0f;  // we’re using dash impulse, not moveSpeed forces or equal it to lastDesiredMoveSpeed maybe
+            desiredMoveSpeed = 0f;
         }
-        else if (grounded && !IsSprintingActive && noInput)
+        else if (grounded && noInput)
         {
-            // explicit idle state added, no input and grounded
             state = MovementState.idle;
             desiredMoveSpeed = 0f;
-            moveSpeed = 0f;          // ensure immediate stop
+            moveSpeed = 0f;
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
-            keepMomentum = false;    // don't lerp anything
-            StopAllCoroutines();     // kill any active lerp from previous state
+            keepMomentum = false;
+            StopAllCoroutines();
         }
         else if (sliding)
         {
@@ -486,15 +449,15 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             state = MovementState.groundPounding;
             desiredMoveSpeed = 0f;
         }
-        else if (grounded && !justJumped && IsSprintingActive)
-        {
-            state = MovementState.sprinting;
-            desiredMoveSpeed = sprintSpeed * speedBoostMultiplier;
-        }
-        else if (grounded && !justJumped)
+        else if (grounded && !justJumped && IsWalkActive)
         {
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed * speedBoostMultiplier;
+        }
+        else if (grounded && !justJumped)
+        {
+            state = MovementState.sprinting;
+            desiredMoveSpeed = sprintSpeed * speedBoostMultiplier;
         }
         else
         {
@@ -530,7 +493,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         while (time < difference)
         {
-            // abort early if momentum flag is cleared (e.g. idle entered)
             if (!keepMomentum)
                 break;
 
@@ -555,20 +517,18 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void MovePlayer()
     {
-        if (teleportLockTimer > 0f)  //new test for timer and restart on checkpoint
+        if (teleportLockTimer > 0f)
         {
             teleportLockTimer -= Time.fixedDeltaTime;
             return;
         }
 
         if (dashing) return;
-        if (groundPounding) return;  
+        if (groundPounding) return;
         if (climbingScript != null && climbingScript.exitingWall) return;
         if (restricted) return;
 
-        
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-       
 
         if (OnSlope() && !exitingSlope)
         {
@@ -594,14 +554,12 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     {
         if (dashing) return;
 
-        // if grounded and no input → stop horizontal movement
         if (grounded && Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f)
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
             return;
         }
 
-        // ALWAYS use flat velocity (X/Z only)
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         if (OnSlope() && !exitingSlope)
@@ -629,14 +587,8 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void Jump()
     {
-
-        //if (sprintToggleMode)
-            //sprintToggled = false;
-
         exitingSlope = true;
         justJumped = true;
-
-        // force us out of grounded logic right away
         grounded = false;
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
@@ -651,8 +603,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         exitingSlope = false;
     }
 
-    //public Vector3 CurrentSlope => norm
-
     public bool OnSlope()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, whatIsGround, QueryTriggerInteraction.Ignore))
@@ -660,7 +610,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             Debug.Log("Slope Angle:" + angle);
             return angle < maxSlopeAngle && angle > 0.1f;
-
         }
 
         return false;
@@ -691,15 +640,12 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
         return Mathf.Round(value * mult) / mult;
     }
 
-//Ground pound
     private IEnumerator GroundPoundRoutine()
     {
         groundPounding = true;
 
-        //temp gravity might be off — force it ON for the slam.
         rb.useGravity = true;
 
-        // delay hang kill upward velocity and damp horizontal
         Vector3 v = rb.linearVelocity;
         if (v.y > 0f) v.y = 0f;
         v.x *= 0.6f;
@@ -725,10 +671,8 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void OnLanded()
     {
-        // Optional filters for other states
         if (climbing || vaulting || wallrunning) return;
 
-        // spawn landing particle
         if (ParticleManager.Instance != null)
         {
             ParticleManager.Instance.SpawnParticle(
@@ -738,7 +682,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             );
         }
 
-        // If landed during a ground pound, run the impact logic too
         if (groundPounding)
         {
             GroundPoundImpact();
@@ -747,17 +690,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
     private void GroundPoundImpact()
     {
-
-        /*// Spawn landing particle immediately on impact
-        if (ParticleManager.Instance != null)
-        {
-            ParticleManager.Instance.SpawnParticle(
-                "LandingParticleEffect",
-                transform.position - new Vector3(0, playerHeight * 0.3f, 0),
-                Quaternion.Euler(90, 0, 0)
-            );
-        }*/
-
         groundPounding = false;
         groundPoundCooldownTimer = groundPoundImpactCooldown;
         leftGroundSinceLastPound = false;
@@ -766,20 +698,16 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
 
         if (groundPoundBoostOnSlope && onSlopeNow && slidingScript != null)
         {
-            // pick enter speed: at least boost speed (25), and at least walkSpeed
             float minEnterSpeed = Mathf.Max(walkSpeed, groundPoundSlideBoostSpeed);
 
-            // downhill direction on the slope
             Vector3 normal = slopeHit.normal;
             Vector3 downhill = Vector3.ProjectOnPlane(Vector3.down, normal).normalized;
             if (downhill.sqrMagnitude < 0.001f)
                 downhill = Vector3.ProjectOnPlane(orientation.forward, normal).normalized;
 
-            // current velocity projected onto slope plane
             Vector3 v = rb.linearVelocity;
             Vector3 planar = Vector3.ProjectOnPlane(v, normal);
 
-            // ensure we are moving downhill with at least min speed
             float alongDownhill = Vector3.Dot(planar, downhill);
             if (planar.sqrMagnitude < 0.01f || alongDownhill < 0.1f)
                 planar = downhill * minEnterSpeed;
@@ -787,26 +715,20 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             if (planar.magnitude < minEnterSpeed)
                 planar = planar.normalized * minEnterSpeed;
 
-            // prevent downward Y spike jitter
             float newY = v.y;
             if (newY < 0f) newY = 0f;
 
             rb.linearVelocity = new Vector3(planar.x, newY, planar.z);
 
-            // keep your movement system "caught up"
             moveSpeed = Mathf.Max(moveSpeed, walkSpeed);
             lastDesiredMoveSpeed = -9999f;
 
-            // start slide; DON'T reset timer if you want slope to control duration anyway
             slidingScript.StartSlideExternal(resetTimer: false);
-
-            // optional: keep slide from instantly ending if timer was already 0
             slidingScript.BumpTimerMin(groundPoundSlideBoostMinTime);
 
             return;
         }
 
-        // fallback bounce logic if not on slope
         if (groundPoundBounceVelocity > 0f)
         {
             Vector3 vv = rb.linearVelocity;
@@ -820,10 +742,10 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             rb.linearVelocity = vv;
         }
     }
-    
+
     public void TeleportTo(Vector3 pos)
     {
-        teleportLockTimer = 0.1f; // 0.1s stops forces for a couple physics frames
+        teleportLockTimer = 0.1f;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.position = pos;
@@ -837,15 +759,14 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             if (crouching)
                 return true;
 
-            // You currently require no movement to crouch
             if (Mathf.Abs(horizontalInput) > 0.001f || Mathf.Abs(verticalInput) > 0.001f)
-                return false;   // failed to crouch
+                return false;
 
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
             crouching = true;
 
-            return true;        // crouch applied
+            return true;
         }
         else
         {
@@ -855,7 +776,7 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             crouching = false;
 
-            return true;        // stand applied
+            return true;
         }
     }
 
@@ -863,7 +784,6 @@ public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-e
     {
         sprintToggleMode = on;
 
-        // when switching to HOLD mode, clear toggled
         if (!on) sprintToggled = false;
 
         PlayerPrefs.SetInt("SprintToggleMode", on ? 1 : 0);

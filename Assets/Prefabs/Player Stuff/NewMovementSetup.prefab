@@ -441,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 2668661954304852184}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.032450654, z: -0, w: 0.9994734}
-  m_LocalPosition: {x: -2.793384, y: 15.57, z: -28.15}
+  m_LocalPosition: {x: -2.793384, y: 15.5, z: -28.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -498,6 +498,7 @@ MonoBehaviour:
   airMinSpeed: 7
   speedIncreaseMultiplier: 2.5
   slopeIncreaseMultiplier: 2.5
+  jumpUngroundTime: 0.1
   groundDrag: 4
   jumpForce: 20
   jumpCooldown: 0.25
@@ -635,13 +636,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 467439584808613755}
   playerCam: {fileID: 2621640965754357359}
-  dashForce: 20
+  dashForce: 30
   dashUpwardForce: 2
   dashDuration: 0.4
   useCameraForward: 1
   allowAllDirections: 1
   disableGravity: 0
   resetYVel: 1
+  resetFlatVelocity: 1
+  makeDashConsistent: 1
   dashCd: 1.5
 --- !u!114 &2487827173279851799
 MonoBehaviour:
@@ -1085,7 +1088,7 @@ Transform:
   m_GameObject: {fileID: 4632052800590402103}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.032450654, z: -0, w: 0.9994734}
-  m_LocalPosition: {x: -1.1525229, y: 6.2990007, z: -2.6904278}
+  m_LocalPosition: {x: 0.17, y: 0.86, z: 0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1121,8 +1124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4807681935547030722}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2534013, y: -0.000000008769289, z: 0.0000000052756666, w: 0.9673613}
-  m_LocalPosition: {x: -2.7933807, y: 17.820007, z: -32.150024}
+  m_LocalRotation: {x: 0.26043773, y: 0.03675982, z: -0.009923552, w: 0.9647396}
+  m_LocalPosition: {x: -3.1425354, y: 18.876297, z: -32.08095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1148,11 +1151,11 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 1972529787884859178}
+    TrackingTarget: {fileID: 467439584808613755}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 70
+    FieldOfView: 94
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1195,13 +1198,13 @@ MonoBehaviour:
   Orbits:
     Top:
       Radius: 2
-      Height: 5
+      Height: 4
     Center:
       Radius: 4
-      Height: 2.25
+      Height: 2
     Bottom:
       Radius: 2.5
-      Height: 0.1
+      Height: -1.5
     SplineCurvature: 0.3
   RecenteringTarget: 2
   HorizontalAxis:
@@ -1215,7 +1218,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 17.5
+    Value: 20
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -1862,7 +1865,7 @@ Transform:
   m_GameObject: {fileID: 6034258005363245367}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.049, y: 1.078, z: 0.001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2056,8 +2059,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6485134007481648012}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2534013, y: -0.0000000079315745, z: 0.0000000020776845, w: 0.9673613}
-  m_LocalPosition: {x: -2.793384, y: 17.82, z: -32.15}
+  m_LocalRotation: {x: 0.26043776, y: 0.036759816, z: -0.009923553, w: 0.96473956}
+  m_LocalPosition: {x: -3.1425354, y: 18.100296, z: -32.08095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2096,7 +2099,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70
+  field of view: 94
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2284,7 +2287,7 @@ Transform:
   m_GameObject: {fileID: 7002487782435042816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.776, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
