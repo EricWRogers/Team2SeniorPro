@@ -1,24 +1,25 @@
 using UnityEngine;
 using TMPro;
-using SuperPupSystems.Helper;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class KillVolume : MonoBehaviour
 {
-    // public Transform playerRespawn;  // usually same as BottomRespawn
     public GameObject deathScreen;
-    public TMP_Text deathCountdown; 
+    public TMP_Text deathCountdown;
     public GameManager GM;
 
-    private float countdownTime = 3f; // time in seconds before respawn after death
+    [SerializeField] private float countdownTime = 3f;
+
     private bool isDead = false;
+    private bool isReloading = false;
 
     [Header("Events")]
     [Tooltip("Scripts to disable when paused and enable when resumed")]
     public MonoBehaviour[] scriptsToToggle;
     public GameObject[] objectsToToggle;
 
-    void Start()
+    private void Start()
     {
         if (GM == null)
         {
@@ -31,12 +32,9 @@ public class KillVolume : MonoBehaviour
 
         if (deathScreen == null)
         {
-            // This finds ALL objects of type Canvas and searches inside them,
-            // even if they are disabled.
             Canvas[] allCanvases = Resources.FindObjectsOfTypeAll<Canvas>();
             foreach (Canvas c in allCanvases)
             {
-                // Search for a child named exactly "Death Screen"
                 Transform t = c.transform.Find("Death Screen");
                 if (t != null)
                 {
@@ -46,74 +44,89 @@ public class KillVolume : MonoBehaviour
             }
         }
 
-        if (deathCountdown == null)
+        if (deathCountdown == null && deathScreen != null)
         {
-            // Since the death screen is found, we can look inside for the text
             deathCountdown = deathScreen.GetComponentInChildren<TMP_Text>(true);
         }
+
+        if (deathScreen != null)
+        {
+            deathScreen.SetActive(false);
+        }
+
+        isDead = false;
+        isReloading = false;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isDead)
-        {
-            isDead = true;
+        if (!other.CompareTag("Player")) return;
+        if (isDead || isReloading) return;
+        if (LevelLoader.Instance != null && LevelLoader.Instance.IsLoading) return;
 
-            Toggle(false);
+        isDead = true;
+        isReloading = true;
+
+        Toggle(false);
+
+        if (deathScreen != null)
             deathScreen.SetActive(true);
 
-            Time.timeScale = 0f; // pause the game
-            StartCoroutine(DeathCountdown());
-        }
-        /*if (other.CompareTag("Acorn"))
-        {
-            other.GetComponent<CarryableAcorn>()?.RespawnToPoint();
-        }
-        else if (other.CompareTag("Player"))
-        {
-            var rb = other.attachedRigidbody;
-            if (rb) { rb.linearVelocity = Vector3.zero; }
-            other.transform.position = playerRespawn.position + Vector3.up * 0.5f;
-        }*/
+        Time.timeScale = 0f;
+        StartCoroutine(DeathCountdown());
     }
 
-    System.Collections.IEnumerator DeathCountdown()
+    private IEnumerator DeathCountdown()
     {
         float timeLeft = countdownTime;
 
-        while (timeLeft > 0)
+        while (timeLeft > 0f)
         {
-            deathCountdown.text = Mathf.Ceil(timeLeft).ToString();
+            if (deathCountdown != null)
+                deathCountdown.text = Mathf.Ceil(timeLeft).ToString();
+
             yield return new WaitForSecondsRealtime(1f);
-            timeLeft--;
+            timeLeft -= 1f;
         }
 
         ReloadScene();
     }
 
-    void ReloadScene()
+    private void ReloadScene()
     {
-        Time.timeScale = 1f; // resume the game
-        SceneManager.LoadScene(GM.GetCurrentScene());
+        Time.timeScale = 1f;
 
+        if (deathScreen != null)
+            deathScreen.SetActive(false);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     private void Toggle(bool enable)
     {
-        if (scriptsToToggle == null) return;
-
-        if (objectsToToggle == null) return;
-
-         foreach (var obj in objectsToToggle)
+        if (objectsToToggle != null)
         {
-            if (obj != null)
-                obj.SetActive(enable);
+            foreach (var obj in objectsToToggle)
+            {
+                if (obj != null)
+                    obj.SetActive(enable);
+            }
         }
 
-        foreach (var script in scriptsToToggle)
+        if (scriptsToToggle != null)
         {
-            if (script != null)
-                script.enabled = enable;
+            foreach (var script in scriptsToToggle)
+            {
+                if (script != null)
+                    script.enabled = enable;
+            }
         }
     }
 }

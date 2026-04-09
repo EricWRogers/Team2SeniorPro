@@ -4,18 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using UnityEngine.EventSystems; // Required for EventSystem cleanup
 
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
-    public bool IsLoading => isLoading;
 
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private Slider progressBar;
     [SerializeField] private TMP_Text loadingText;
     [SerializeField] private TMP_Text percentText;
+
+    [Header("Continue Control")]
+    [SerializeField] private GameObject readyPanel;
+    [SerializeField] private Button nextButton;
 
     [Header("Optional Video Background")]
     [SerializeField] private VideoPlayer videoPlayer;
@@ -29,6 +31,9 @@ public class LevelLoader : MonoBehaviour
     private float targetProgress = 0f;
     private float displayedProgress = 0f;
     private bool isLoading = false;
+    private bool continueRequested = false;
+
+    public bool IsLoading => isLoading;
 
     private void Awake()
     {
@@ -41,25 +46,30 @@ public class LevelLoader : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        if (nextButton != null)
+        {
+            nextButton.onClick.RemoveAllListeners();
+            nextButton.onClick.AddListener(OnNextPressed);
+        }
     }
 
     private void Start()
     {
-        // If we are currently in the process of a routine, isLoading should be true
-        // Otherwise, default to fase.
-        if (loadingScreen != null && loadingScreen.activeSelf)
-        {
-            isLoading = true;
-        }
-        else
-        {
-            isLoading = false;
-        }
+        if (loadingScreen != null)
+            loadingScreen.SetActive(false);
+
+        if (readyPanel != null)
+            readyPanel.SetActive(false);
     }
 
     private void Update()
     {
-        displayedProgress = Mathf.Lerp(displayedProgress, targetProgress, Time.deltaTime * progressSmoothSpeed);
+        displayedProgress = Mathf.Lerp(
+            displayedProgress,
+            targetProgress,
+            Time.unscaledDeltaTime * progressSmoothSpeed
+        );
 
         if (Mathf.Abs(displayedProgress - targetProgress) < 0.001f)
             displayedProgress = targetProgress;
@@ -71,60 +81,75 @@ public class LevelLoader : MonoBehaviour
             percentText.text = Mathf.RoundToInt(displayedProgress * 100f) + "%";
     }
 
-    public void ShowLoadingScreenImmediate()
-    {
-        if (loadingScreen != null)
-        {
-            loadingScreen.transform.SetAsLastSibling();
-            loadingScreen.SetActive(true);
-        }
-
-        StartBackgroundVideo();
-    }
-
-    public void HideLoadingScreenImmediate()
-    {
-        StopBackgroundVideo();
-
-        if (loadingScreen != null)
-            loadingScreen.SetActive(false);
-    }
-
     public void LoadLevel(string sceneName)
     {
-        Debug.Log("LoadLevel called for: " + sceneName);
-        Debug.Log("Loading screen reference is null? " + (loadingScreen == null));
+        LoadLevel(sceneName, true);
+    }
 
+    public void LoadLevel(string sceneName, bool useLoadingScreen)
+    {
         if (isLoading)
             return;
 
-        StartCoroutine(LoadLevelRoutine(sceneName, null));
+        StartCoroutine(LoadLevelRoutine(sceneName, null, useLoadingScreen));
     }
 
-    public IEnumerator LoadLevelRoutine(string sceneName, IEnumerator initializationSteps)
+    public IEnumerator LoadLevelRoutine(string sceneName, IEnumerator initializationSteps, bool useLoadingScreen = true)
     {
         isLoading = true;
+        continueRequested = false;
 
-        if (loadingScreen != null)
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        ForceCloseAllPauseMenus();
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool reloadingSameScene = currentSceneName == sceneName;
+
+        // Same-scene restart must use SINGLE or it will stack duplicates
+        LoadSceneMode mode = reloadingSameScene ? LoadSceneMode.Single : LoadSceneMode.Additive;
+
+        if (useLoadingScreen)
         {
-            loadingScreen.transform.SetAsLastSibling();
-            loadingScreen.SetActive(true);
+            Time.timeScale = 0f;
+
+            if (loadingScreen != null)
+            {
+                loadingScreen.transform.SetAsLastSibling();
+                loadingScreen.SetActive(true);
+            }
+
+            if (readyPanel != null)
+                readyPanel.SetActive(false);
+
+            StartBackgroundVideo();
+
+            extraProgress = 0f;
+            targetProgress = 0f;
+            displayedProgress = 0f;
+
+            SetLoadingStep("Loading " + sceneName + "...");
         }
+        else
+        {
+            Time.timeScale = 1f;
 
-        StartBackgroundVideo();
+            if (readyPanel != null)
+                readyPanel.SetActive(false);
 
-        extraProgress = 0f;
-        targetProgress = 0f;
-        displayedProgress = 0f;
+            if (loadingScreen != null)
+                loadingScreen.SetActive(false);
 
-        SetLoadingStep("Loading " + sceneName + "...");
+            StopBackgroundVideo();
+        }
 
         Scene currentScene = SceneManager.GetActiveScene();
 
         float timer = 0f;
         bool initDone = initializationSteps == null;
 
-        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(sceneName, mode);
         sceneLoad.allowSceneActivation = false;
 
         if (initializationSteps != null)
@@ -132,19 +157,35 @@ public class LevelLoader : MonoBehaviour
             StartCoroutine(RunInitialization(initializationSteps, () => initDone = true));
         }
 
-        while (sceneLoad.progress < 0.9f || !initDone || timer < minimumLoadingScreenTime)
+        while (sceneLoad.progress < 0.9f || !initDone || (useLoadingScreen && timer < minimumLoadingScreenTime))
         {
-            timer += Time.deltaTime;
+            if (useLoadingScreen)
+            {
+                timer += Time.unscaledDeltaTime;
 
-            float sceneProgress = Mathf.Clamp01(sceneLoad.progress / 0.9f);
-            float combinedProgress = Mathf.Clamp01((sceneProgress * 0.7f) + (extraProgress * 0.3f));
+                float sceneProgress = Mathf.Clamp01(sceneLoad.progress / 0.9f);
+                float combinedProgress = Mathf.Clamp01((sceneProgress * 0.7f) + (extraProgress * 0.3f));
+                UpdateUI(combinedProgress);
+            }
 
-            UpdateUI(combinedProgress);
             yield return null;
         }
 
-        SetLoadingStep("Activating " + sceneName + "...");
-        UpdateUI(0.98f);
+        if (useLoadingScreen)
+        {
+            UpdateUI(1f);
+            SetLoadingStep(sceneName + " ready");
+
+            if (readyPanel != null)
+                readyPanel.SetActive(true);
+
+            while (!continueRequested)
+            {
+                yield return null;
+            }
+
+            SetLoadingStep("Starting " + sceneName + "...");
+        }
 
         sceneLoad.allowSceneActivation = true;
 
@@ -153,49 +194,51 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
 
-        // --- NEW CLEANUP LOGIC STARTS HERE ---
-        // As soon as the new scene is loaded, we look for duplicate EventSystems
-        CleanDuplicateEventSystems();
-        // --- NEW CLEANUP LOGIC ENDS HERE ---
-
         Scene newScene = SceneManager.GetSceneByName(sceneName);
         if (newScene.IsValid())
         {
             SceneManager.SetActiveScene(newScene);
         }
 
-        if (currentScene.IsValid() && currentScene != newScene)
+        // Only unload manually if this was an additive transition to a different scene
+        if (mode == LoadSceneMode.Additive && currentScene.IsValid() && currentScene.name != sceneName)
         {
             yield return SceneManager.UnloadSceneAsync(currentScene);
         }
 
-        UpdateUI(1f);
-        SetLoadingStep("Done");
+        Time.timeScale = 1f;
 
-        yield return new WaitForSeconds(0.15f);
+        yield return null;
+        yield return null;
 
-        StopBackgroundVideo();
+        if (useLoadingScreen)
+        {
+            StopBackgroundVideo();
 
-        if (loadingScreen != null)
-            loadingScreen.SetActive(false);
+            if (readyPanel != null)
+                readyPanel.SetActive(false);
+
+            if (loadingScreen != null)
+                loadingScreen.SetActive(false);
+        }
+
+        if (IsGameplayScene(sceneName))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         isLoading = false;
     }
 
-    // New helper method to ensure cutscenes and UI aren't blocked by duplicate systems
-    private void CleanDuplicateEventSystems()
+    public void OnNextPressed()
     {
-        EventSystem[] systems = Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None);
-        if (systems.Length > 1)
-        {
-            // We keep the first one found (usually the one from the persistent root)
-            // and destroy the others found in the newly loaded level.
-            for (int i = 1; i < systems.Length; i++)
-            {
-                Debug.Log($"LevelLoader: Destroyed duplicate EventSystem in new scene: {systems[i].gameObject.scene.name}");
-                Destroy(systems[i].gameObject);
-            }
-        }
+        continueRequested = true;
     }
 
     private void StartBackgroundVideo()
@@ -217,9 +260,7 @@ public class LevelLoader : MonoBehaviour
     private void StopBackgroundVideo()
     {
         if (videoPlayer != null)
-        {
             videoPlayer.Stop();
-        }
     }
 
     private IEnumerator RunInitialization(IEnumerator routine, System.Action onComplete)
@@ -242,5 +283,25 @@ public class LevelLoader : MonoBehaviour
     private void UpdateUI(float progress)
     {
         targetProgress = progress;
+    }
+
+    private bool IsGameplayScene(string sceneName)
+    {
+        return sceneName == "Level_1"
+            || sceneName == "Level_2"
+            || sceneName == "Level_3"
+            || sceneName == "Level_4"
+            || sceneName == "Squirrel_HUB";
+    }
+
+    private void ForceCloseAllPauseMenus()
+    {
+        PauseMenu[] pauseMenus = FindObjectsByType<PauseMenu>(FindObjectsSortMode.None);
+
+        foreach (var pm in pauseMenus)
+        {
+            if (pm != null)
+                pm.ForceClosePauseMenu();
+        }
     }
 }
