@@ -97,7 +97,8 @@ public class NestGoal : MonoBehaviour
 
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.SetMusicMuted(true);
+            // Play victory music (make sure "Squirrel Groove" is added to your MusicAsset file)
+            SoundManager.Instance.PlayMusic("Squirrel Groove", 1f);
         }
 
         // Stop the timer
