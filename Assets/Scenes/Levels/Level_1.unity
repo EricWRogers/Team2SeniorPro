@@ -7860,6 +7860,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4807681935547030722, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
   m_PrefabInstance: {fileID: 538968009}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &538968011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6485134007481648012, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+  m_PrefabInstance: {fileID: 538968009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &539031430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 333372606158358184, guid: af51f6e4525435d4daef25d87fb51912, type: 3}
@@ -8804,7 +8809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1999bf2ed61202478647228ed0cfbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCam: {fileID: 0}
+  MainCam: {fileID: 538968011}
   PlayerSquirrel: {fileID: 0}
   VictorySquirrel: {fileID: 2115313943}
   timer: {fileID: 631269286}
@@ -8816,6 +8821,7 @@ MonoBehaviour:
   WinScreen: {fileID: 631269289}
   BerryUI: {fileID: 259451793}
   TimerUI: {fileID: 489742422}
+  SpeedOmeterUI: {fileID: 1802642893}
   Srank: {fileID: 1702420746}
   Arank: {fileID: 71355691}
   Brank: {fileID: 256441508}
@@ -9411,6 +9417,10 @@ PrefabInstance:
       propertyPath: move
       value: 
       objectReference: {fileID: 481442121}
+    - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: audioToggle
+      value: 
+      objectReference: {fileID: 1719656298}
     - target: {fileID: 1356452224064439276, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: crouchToggle
       value: 
@@ -28002,6 +28012,17 @@ Transform:
   - {fileID: 1462082042}
   m_Father: {fileID: 865019208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1719656298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2923254956888286881, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1720458331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4632763056735633632, guid: 566b4f3d005d7fc4a9608bd4894fde4e, type: 3}
@@ -29394,6 +29415,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
   m_PrefabInstance: {fileID: 1801910249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1802642893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7235698377400828777, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1811091121
 PrefabInstance:
@@ -35346,3 +35372,5 @@ SceneRoots:
   - {fileID: 1245380077}
   - {fileID: 937584699}
   - {fileID: 755024599}
+  - {fileID: 1951214482}
+  - {fileID: 637940642}

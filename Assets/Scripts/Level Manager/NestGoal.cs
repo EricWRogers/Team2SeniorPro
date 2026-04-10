@@ -25,6 +25,7 @@ public class NestGoal : MonoBehaviour
     public GameObject WinScreen;
     public GameObject BerryUI;
     public GameObject TimerUI;
+    public GameObject SpeedOmeterUI;
 
     [Header("Rank Displays")]
     public GameObject Srank;
@@ -36,15 +37,10 @@ public class NestGoal : MonoBehaviour
 
     public void ReturnToMain()
     {
-        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the burrow, resets collectibles so it doesnt add 0 to total
+        GameManager.Instance.newMap("Squirrel_HUB"); //loads the burrow
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f; // Resume the game
-
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.SetMusicMuted(true);
-        }
     }
 
     public void Restart()
@@ -83,6 +79,7 @@ public class NestGoal : MonoBehaviour
         WinScreen.SetActive(true);
         BerryUI.SetActive(false);
         TimerUI.SetActive(false);
+        SpeedOmeterUI.SetActive(false);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -142,7 +139,7 @@ public class NestGoal : MonoBehaviour
 
         // Save best stats
         string levelName = GameManager.Instance.GetCurrentScene();
-        int berries = GameManager.Instance.collectibleCount;
+        int berries = GameManager.Instance.PermaBerryCount;
 
         DataManager.Instance.SaveBestTime(levelName, finalTime);
         DataManager.Instance.SaveBestScore(levelName, berries);
@@ -161,7 +158,7 @@ public class NestGoal : MonoBehaviour
         // Display total collectibles in statsText
         if (statsText != null)
         {
-            statsText.text = $"Berries - {GameManager.Instance.collectibleCount}";
+            statsText.text = $"Berries - {GameManager.Instance.PermaBerryCount}";
         }
     }
 }
