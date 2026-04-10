@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; // Add this for UI components
+using UnityEngine.UI;
+using System.Reflection; // Add this for UI components
 
 public class NestGoal : MonoBehaviour
 {
@@ -33,24 +34,6 @@ public class NestGoal : MonoBehaviour
 
     string achievedRank = "D";
 
-    void Awake()
-    {
-        if (MainCam == null)
-        MainCam = GameObject.FindWithTag("MainCamera");
-
-        if (PlayerSquirrel == null)
-            PlayerSquirrel = GameObject.FindWithTag("Player");
-
-        if (VictorySquirrel == null)
-            VictorySquirrel = GameObject.FindWithTag("DancingPlayer");
-        
-        if (timer == null)
-            timer = GameObject.FindWithTag("Canvas").GetComponent<Timer>();
-
-        if (SFXSource == null)
-            SFXSource = GameObject.FindWithTag("Canvas").GetComponent<AudioSource>();
-    }
-
     public void ReturnToMain()
     {
         GameManager.Instance.newMap("Squirrel_HUB", true); //loads the burrow, resets collectibles so it doesnt add 0 to total
@@ -73,6 +56,20 @@ public class NestGoal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
+        // Dynamically find missing references if they are null
+        if (PlayerSquirrel == null) PlayerSquirrel = other.gameObject;
+        if (MainCam == null) MainCam = Camera.main.gameObject;
+        if (VictorySquirrel == null) VictorySquirrel = GameObject.FindWithTag("DancingPlayer");
+        if (timer == null) timer = FindFirstObjectByType<Timer>();
+        if (SFXSource == null) SFXSource = GetComponent<AudioSource>();
+
+        // Safety Check - IF we still can't find what we need, stop before crashing
+        if (timer == null || PlayerSquirrel == null)
+        {
+            Debug.LogError("Win Goal failed: Missing Timer or Player reference!");
+            return;
+        }
 
         Debug.Log("WIN! Acorn delivered to the nest.");
 
