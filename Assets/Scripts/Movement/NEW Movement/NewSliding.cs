@@ -71,7 +71,9 @@ public class NewSliding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (tpm != null && tpm.sliding)
+        if (tpm == null) return;
+        if (tpm.dashing) return;
+        if (tpm.sliding)
             SlidingMovement();
     }
 

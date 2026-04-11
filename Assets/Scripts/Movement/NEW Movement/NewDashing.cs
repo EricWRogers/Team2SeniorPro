@@ -37,6 +37,8 @@ public class NewDashing : MonoBehaviour
 
     private Vector3 delayedForceToApply;
 
+    private NewSliding slidingScript;
+
     private void Awake()
     {
         controls = new PlayerControlsB();
@@ -49,6 +51,8 @@ public class NewDashing : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         tpm = GetComponent<NewThirdPlayerMovement>();
+
+        slidingScript = GetComponent<NewSliding>();
     }
 
     private void OnEnable()
@@ -105,6 +109,10 @@ public class NewDashing : MonoBehaviour
 
         CancelInvoke(nameof(DelayedDashForce));
         CancelInvoke(nameof(ResetDash));
+
+        // STOP SLIDE FIRST so slide force does not stack with dash
+        if (slidingScript != null)
+            slidingScript.StopSlideExternal();
 
         if (tpm != null)
         {
