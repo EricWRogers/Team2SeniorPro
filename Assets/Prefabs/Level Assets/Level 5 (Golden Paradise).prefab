@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.64}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8949643323345569128
@@ -370,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180.468, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.06, y: 2.61}
+  m_AnchoredPosition: {x: -0.06, y: 3.26}
   m_SizeDelta: {x: 24.9855, y: 2.5758}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8957674310925580360
@@ -396,7 +396,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: 1402141224702348541, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,8 +440,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 / 40 Collected.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
+  m_sharedMaterial: {fileID: 1402141224702348541, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 23.2
   m_fontSizeBase: 13.17
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -538,15 +538,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4097789693025430030}
   m_LocalRotation: {x: -0, y: 0.99972534, z: -0, w: -0.023436284}
-  m_LocalPosition: {x: 0, y: 0, z: -0.24086}
-  m_LocalScale: {x: 0.11333099, y: 0.11333099, z: 0.11333099}
+  m_LocalPosition: {x: 0, y: 0, z: -0.24036}
+  m_LocalScale: {x: 0.15980802, y: 0.15980802, z: 0.15980802}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8192389249823340092}
   m_LocalEulerAnglesHint: {x: 0, y: 182.686, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.03, y: 1.66}
+  m_AnchoredPosition: {x: 0.019235, y: 2.2900004}
   m_SizeDelta: {x: 33.0072, y: 6.2813}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5743888441002421816
@@ -572,7 +572,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: 1402141224702348541, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -616,8 +616,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "All Berries Eaten! \n(Level 5: Unlocked)\nPress F to Enter."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
+  m_sharedMaterial: {fileID: 1402141224702348541, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 19
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -789,15 +789,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6353270254548120677}
   m_LocalRotation: {x: -0, y: 0.99972534, z: -0, w: -0.023436284}
-  m_LocalPosition: {x: 0, y: 0, z: -0.24019}
-  m_LocalScale: {x: 0.16982527, y: 0.16982527, z: 0.16982527}
+  m_LocalPosition: {x: 0, y: 0, z: -0.24012}
+  m_LocalScale: {x: 0.17943738, y: 0.17943738, z: 0.17943738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8192389249823340092}
   m_LocalEulerAnglesHint: {x: 0, y: 182.686, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.05, y: 1.54}
+  m_AnchoredPosition: {x: -0.051447, y: 2.2905004}
   m_SizeDelta: {x: 19.9888, y: 7.6134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1643125204933412171
@@ -823,7 +823,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: 1402141224702348541, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -876,8 +876,8 @@ MonoBehaviour:
 
     3. Final Area Unlocked!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
+  m_sharedMaterial: {fileID: 1402141224702348541, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -901,7 +901,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.9
+  m_fontSize: 13.45
   m_fontSizeBase: 12.4
   m_fontWeight: 400
   m_enableAutoSizing: 1

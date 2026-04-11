@@ -29320,17 +29320,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 952994372}
     - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 952994367}
+    - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
       propertyPath: BerryUI
       value: 
       objectReference: {fileID: 952994375}
     - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
       propertyPath: MainCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1585394375}
     - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
       propertyPath: TimerUI
       value: 
       objectReference: {fileID: 952994373}
+    - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
+      propertyPath: SFXSource
+      value: 
+      objectReference: {fileID: 1787123285}
     - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
       propertyPath: WinScreen
       value: 
@@ -29343,6 +29351,10 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 952994378}
+    - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
+      propertyPath: SpeedOmeterUI
+      value: 
+      objectReference: {fileID: 1872501830}
     - target: {fileID: 530214597508130643, guid: 63950d6729e3df3438e91cc4efa09c80, type: 3}
       propertyPath: VictorySquirrel
       value: 
@@ -44860,6 +44872,11 @@ MonoBehaviour:
   m_ForceModule: {fileID: 0}
   m_ForceScale: 1
   m_SimulateSpace: {fileID: 0}
+--- !u!1 &1585394375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6485134007481648012, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+  m_PrefabInstance: {fileID: 1585394371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1592288753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50431,6 +50448,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 333372606158358184, guid: af51f6e4525435d4daef25d87fb51912, type: 3}
   m_PrefabInstance: {fileID: 1785985815}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1787123285 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3478165600103428584, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1796195107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53175,6 +53197,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 333372606158358184, guid: af51f6e4525435d4daef25d87fb51912, type: 3}
   m_PrefabInstance: {fileID: 1870525978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1872501830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7235698377400828777, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1872528723
 PrefabInstance:

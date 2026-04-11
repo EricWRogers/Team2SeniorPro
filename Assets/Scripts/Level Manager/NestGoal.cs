@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; // Add this for UI components
+using UnityEngine.UI;
+using System.Reflection; // Add this for UI components
 
 public class NestGoal : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class NestGoal : MonoBehaviour
     public GameObject WinScreen;
     public GameObject BerryUI;
     public GameObject TimerUI;
+    public GameObject SpeedOmeterUI;
 
     [Header("Rank Displays")]
     public GameObject Srank;
@@ -33,35 +35,12 @@ public class NestGoal : MonoBehaviour
 
     string achievedRank = "D";
 
-    void Awake()
-    {
-        if (MainCam == null)
-        MainCam = GameObject.FindWithTag("MainCamera");
-
-        if (PlayerSquirrel == null)
-            PlayerSquirrel = GameObject.FindWithTag("Player");
-
-        if (VictorySquirrel == null)
-            VictorySquirrel = GameObject.FindWithTag("DancingPlayer");
-        
-        if (timer == null)
-            timer = GameObject.FindWithTag("Canvas").GetComponent<Timer>();
-
-        if (SFXSource == null)
-            SFXSource = GameObject.FindWithTag("Canvas").GetComponent<AudioSource>();
-    }
-
     public void ReturnToMain()
     {
-        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the burrow, resets collectibles so it doesnt add 0 to total
+        GameManager.Instance.newMap("Squirrel_HUB"); //loads the burrow
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f; // Resume the game
-
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.SetMusicMuted(true);
-        }
     }
 
     public void Restart()
@@ -73,6 +52,20 @@ public class NestGoal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
+        // Dynamically find missing references if they are null
+        if (PlayerSquirrel == null) PlayerSquirrel = other.gameObject;
+        if (MainCam == null) MainCam = Camera.main.gameObject;
+        if (VictorySquirrel == null) VictorySquirrel = GameObject.FindWithTag("DancingPlayer");
+        if (timer == null) timer = FindFirstObjectByType<Timer>();
+        if (SFXSource == null) SFXSource = GetComponent<AudioSource>();
+
+        // Safety Check - IF we still can't find what we need, stop before crashing
+        if (timer == null || PlayerSquirrel == null)
+        {
+            Debug.LogError("Win Goal failed: Missing Timer or Player reference!");
+            return;
+        }
 
         Debug.Log("WIN! Acorn delivered to the nest.");
 
@@ -86,6 +79,7 @@ public class NestGoal : MonoBehaviour
         WinScreen.SetActive(true);
         BerryUI.SetActive(false);
         TimerUI.SetActive(false);
+        SpeedOmeterUI.SetActive(false);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -103,7 +97,8 @@ public class NestGoal : MonoBehaviour
 
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.SetMusicMuted(true);
+            // Play victory music (make sure "Squirrel Groove" is added to your MusicAsset file)
+            SoundManager.Instance.PlayMusic("Squirrel Groove", 1f);
         }
 
         // Stop the timer
@@ -145,7 +140,7 @@ public class NestGoal : MonoBehaviour
 
         // Save best stats
         string levelName = GameManager.Instance.GetCurrentScene();
-        int berries = GameManager.Instance.collectibleCount;
+        int berries = GameManager.Instance.PermaBerryCount;
 
         DataManager.Instance.SaveBestTime(levelName, finalTime);
         DataManager.Instance.SaveBestScore(levelName, berries);
@@ -164,7 +159,7 @@ public class NestGoal : MonoBehaviour
         // Display total collectibles in statsText
         if (statsText != null)
         {
-            statsText.text = $"Berries - {GameManager.Instance.collectibleCount}";
+            statsText.text = $"Berries - {GameManager.Instance.PermaBerryCount}";
         }
     }
 }
