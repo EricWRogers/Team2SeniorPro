@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEditor.ShaderGraph.Internal;
 
 public class NewThirdPlayerMovement : MonoBehaviour
 {
@@ -42,6 +43,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;*/
+
+    [Header("Dive Settings")]
+    public float timeBeforeDive = 5.0f; // How many seconds of air time before diving
+    private float fallTimer = 0f;
 
     [Header("Ground Pound")]
     //public KeyCode groundPoundKey = KeyCode.LeftAlt;
@@ -237,8 +242,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         if (anim == null) return;
 
-        float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
-
         if (grounded)
         {
             lastGroundedTime = Time.time;
@@ -246,15 +249,38 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         bool groundedRecently = Time.time - lastGroundedTime < groundedGrace;
 
+        // Basic Movement Data: from the Rigidbody & GroundCheck
+        float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
         bool isMoving = flatSpeed > 0.1f;
+
+        // We define falling as being airbone amd moving downwards
         bool isFalling = !grounded && rb.linearVelocity.y < -1f;
         bool isJumping = !grounded && rb.linearVelocity.y > 0.1f;
 
+        // Dive Logic (Timer based)
+        // Must be NOT grounded, falling, and NOT currently ground pounding
+        if (!grounded && isFalling && !groundPounding)
+        {
+            fallTimer += Time.deltaTime;
+        }
+        else
+        {
+            fallTimer = 0f; // Reset instantly if we touch ground or stop falling
+        }
+
+        // Sync to Animator Parameters
         anim.SetBool("isGrounded", groundedRecently);
         anim.SetBool("isWalking", grounded && isMoving && state == MovementState.walking);
         anim.SetBool("isRunning", grounded && isMoving && state == MovementState.sprinting);
         anim.SetBool("isJumping", isJumping);
-        anim.SetBool("isFalling", isFalling);
+
+        // True ONLY if we haven't reached the "Dive" threshold yet, but we're in the air and falling
+        anim.SetBool("isFalling", isFalling && fallTimer < timeBeforeDive);
+
+        // New Movement Actions
+        anim.SetBool("isCrouch", crouching);
+        anim.SetBool("isSit", sliding || groundPounding);
+        anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
     }
 
     private void OnEnable()
