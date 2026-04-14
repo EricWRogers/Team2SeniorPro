@@ -45,7 +45,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftControl;*/
 
     [Header("Dive Settings")]
-    public float timeBeforeDive = 5.0f; // How many seconds of air time before diving
+    public float timeBeforeDive = 2f; // How many seconds of air time before diving
     private float fallTimer = 0f;
 
     [Header("Ground Pound")]
