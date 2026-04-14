@@ -70,6 +70,13 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.newMap("Main Menu", true);
     }
 
+    public void HUB()
+    {
+        PlaySound();
+        CloseForSceneChange();
+        GameManager.Instance.newMap("Squirrel_HUB", true);
+    }
+
     public void Resume()
     {
         pauseMenu.SetActive(false);
