@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -22,6 +24,9 @@ public class LevelLoader : MonoBehaviour
     [Header("Optional Video Background")]
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private VideoClip[] backgroundVideos;
+
+    [Header("Controller/UI")]
+    [SerializeField] private PlayerInput playerInput;
 
     [Header("Settings")]
     [SerializeField] private float minimumLoadingScreenTime = 1f;
@@ -46,6 +51,9 @@ public class LevelLoader : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
 
         if (nextButton != null)
         {
@@ -104,10 +112,15 @@ public class LevelLoader : MonoBehaviour
 
         ForceCloseAllPauseMenus();
 
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
+
+        if (playerInput != null)
+            playerInput.SwitchCurrentActionMap("UI");
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         bool reloadingSameScene = currentSceneName == sceneName;
 
-        // Same-scene restart must use SINGLE or it will stack duplicates
         LoadSceneMode mode = reloadingSameScene ? LoadSceneMode.Single : LoadSceneMode.Additive;
 
         if (useLoadingScreen)
@@ -153,9 +166,7 @@ public class LevelLoader : MonoBehaviour
         sceneLoad.allowSceneActivation = false;
 
         if (initializationSteps != null)
-        {
             StartCoroutine(RunInitialization(initializationSteps, () => initDone = true));
-        }
 
         while (sceneLoad.progress < 0.9f || !initDone || (useLoadingScreen && timer < minimumLoadingScreenTime))
         {
@@ -179,10 +190,14 @@ public class LevelLoader : MonoBehaviour
             if (readyPanel != null)
                 readyPanel.SetActive(true);
 
-            while (!continueRequested)
+            if (EventSystem.current != null && nextButton != null)
             {
-                yield return null;
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(nextButton.gameObject);
             }
+
+            while (!continueRequested)
+                yield return null;
 
             SetLoadingStep("Starting " + sceneName + "...");
         }
@@ -190,21 +205,14 @@ public class LevelLoader : MonoBehaviour
         sceneLoad.allowSceneActivation = true;
 
         while (!sceneLoad.isDone)
-        {
             yield return null;
-        }
 
         Scene newScene = SceneManager.GetSceneByName(sceneName);
         if (newScene.IsValid())
-        {
             SceneManager.SetActiveScene(newScene);
-        }
 
-        // Only unload manually if this was an additive transition to a different scene
         if (mode == LoadSceneMode.Additive && currentScene.IsValid() && currentScene.name != sceneName)
-        {
             yield return SceneManager.UnloadSceneAsync(currentScene);
-        }
 
         Time.timeScale = 1f;
 
@@ -224,11 +232,17 @@ public class LevelLoader : MonoBehaviour
 
         if (IsGameplayScene(sceneName))
         {
+            if (playerInput != null)
+                playerInput.SwitchCurrentActionMap("Player");
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
         else
         {
+            if (playerInput != null)
+                playerInput.SwitchCurrentActionMap("UI");
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
