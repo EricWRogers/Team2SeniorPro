@@ -11,6 +11,7 @@ public class CorkBoard : MonoBehaviour
     public GameObject playerCam; // Player camera
     public GameObject splineCamOBJ; // Spline camera object
     public GameObject corkBoardCanvas; // Corkboard UI Canvas
+    public GameObject challengeCanvas; // Challenge Canvas
     public GameObject playerCanvas;
     public GameObject KeyCodeCanvas; // Prompt canvas
     public SplineAnimate SplineCam; // Spline camera animation
@@ -126,6 +127,10 @@ public class CorkBoard : MonoBehaviour
         if (corkBoardCanvas != null)
             corkBoardCanvas.SetActive(true);
 
+        if (challengeCanvas != null)
+            challengeCanvas.SetActive(true);
+
+        // Corkboard open
         BoardActive = true;
 
         if (KeyCodeCanvas != null)
@@ -172,6 +177,14 @@ public class CorkBoard : MonoBehaviour
         if (corkBoardCanvas != null)
             corkBoardCanvas.SetActive(false);
 
+        // Hide Challenge Canvas
+        if (challengeCanvas != null)
+        {
+            challengeCanvas.SetActive(false);
+        }
+
+
+        // Corkboard closed
         BoardActive = false;
 
         if (playerCanvas != null)
@@ -249,6 +262,10 @@ public class CorkBoard : MonoBehaviour
     public void Level_2() => LoadLevel("Level_2");
     public void Level_3() => LoadLevel("Level_3");
     public void Level_4() => LoadLevel("Level_4");
+    public void Level_1_Challenge() => LoadLevel("Level_1_Challenge");
+    public void Level_2_Challenge() => LoadLevel("Level_2_Challenge");
+    public void Level_3_Challenge() => LoadLevel("Level_3_Challenge");
+    public void Level_4_Challenge() => LoadLevel("Level_4_Challenge");
 
     private void LoadLevel(string levelName)
     {
