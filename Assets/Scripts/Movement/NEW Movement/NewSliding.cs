@@ -129,13 +129,12 @@ public class NewSliding : MonoBehaviour
     {
         Vector3 inputDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
 
-        // If externally started and no input, give a default direction
+        //if externally started and no input, give a default direction
         if (externallyForcedSlide && inputDirection.sqrMagnitude < 0.001f)
             inputDirection = orientation.forward;
 
         bool onSlope = tpm != null && tpm.OnSlope();
 
-//NOT ON SLOPE REGULAR
         if (!onSlope)
         {
             if (inputDirection.sqrMagnitude > 0.001f)
