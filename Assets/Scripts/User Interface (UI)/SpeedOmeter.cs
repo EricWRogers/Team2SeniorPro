@@ -4,37 +4,52 @@ public class SpeedOmeter : MonoBehaviour
 {
     private Transform pivot;
     private NewThirdPlayerMovement pm;
+    private Rigidbody playerRb;
 
     private const float Max_Speed_Angle = -120;
     private const float Zero_Speed_Angle = 118;
 
-    public float maxSpeed = 30f; // speed that maxes out the guage
+    [Header("Settings")]
+    public float maxSpeed = 30f; 
+    [Tooltip("Higher = faster needle. Lower = heavier/slower needle.")]
+    public float needleSmoothness = 5f; 
 
-    private void Awake()
+    private float smoothedSpeedPercent = 0f;
+
+    void Awake()
     {
         pivot = transform.Find("Pivot");
-
-        // Find the player movement script 
-        pm = FindFirstObjectByType<NewThirdPlayerMovement>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (pm == null) return;
+        if (pm == null)
+        {
+            pm = FindFirstObjectByType<NewThirdPlayerMovement>();
+            return;
+        }
 
-        // Get player's horizontal speed
-        Vector3 flatVel = new Vector3(pm.rb.linearVelocity.x, 0f, pm.rb.linearVelocity.z);
-        float speed = flatVel.magnitude;
+        if (playerRb == null)
+        {
+            playerRb = pm.rb ?? pm.GetComponent<Rigidbody>();
+            return;
+        }
 
-        // Normalize speed (0 to 1)
-        float speedPercent = Mathf.Clamp01(speed / maxSpeed);
+        // Get the raw speed
+        Vector3 vel = playerRb.linearVelocity;
+        float actualSpeed = new Vector3(vel.x, 0, vel.z).magnitude;
 
-        // Convert to needle angle
-        float angle = Mathf.Lerp(Zero_Speed_Angle, Max_Speed_Angle, speedPercent);
+        // Calculate the "Target" percentage (where the needle WANTS to be)
+        float targetPercent = Mathf.Clamp01(actualSpeed / maxSpeed);
 
-        // Rotate needle
-        Quaternion target = Quaternion.Euler(0, 0, angle);
-        pivot.localRotation = Quaternion.Lerp(pivot.localRotation, target, Time.deltaTime * 8f);
+        // Smoothly move our current percentage toward the target
+        // This is what creates the "descending/rising" effect
+        smoothedSpeedPercent = Mathf.Lerp(smoothedSpeedPercent, targetPercent, Time.deltaTime * needleSmoothness);
+
+        // Convert that smoothed value into an angle
+        float angle = Mathf.Lerp(Zero_Speed_Angle, Max_Speed_Angle, smoothedSpeedPercent);
+
+        // Apply the rotation
+        pivot.localRotation = Quaternion.Euler(0, 0, angle);
     }
 }

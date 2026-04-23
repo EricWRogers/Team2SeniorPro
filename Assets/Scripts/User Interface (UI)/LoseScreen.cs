@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class LoseScreen : MonoBehaviour
 {
@@ -12,17 +14,33 @@ public class LoseScreen : MonoBehaviour
     public AudioClip loserSFX;
     public Timer timer;
 
+    [Header("Controller/UI")]
+    public PlayerInput playerInput;
+    public GameObject firstSelectedObject;
+    public MonoBehaviour[] gameplayScriptsToDisable;
+
     public static bool GameIsPaused = false;
 
     public void GameOver()
     {
         gameOverUI.SetActive(true);
         D_Rank.SetActive(true);
-        D_animator.SetTrigger("D_Display");
+
+        if (D_animator != null)
+            D_animator.SetTrigger("D_Display");
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         GameIsPaused = true;
+
+        ToggleGameplayScripts(false);
+
+        if (playerInput == null)
+            playerInput = FindFirstObjectByType<PlayerInput>();
+
+        if (playerInput != null)
+            playerInput.SwitchCurrentActionMap("UI");
 
         if (pauseMenu != null)
         {
@@ -31,10 +49,7 @@ public class LoseScreen : MonoBehaviour
         }
 
         if (SoundManager.Instance != null)
-        {
             SoundManager.Instance.SetMusicMuted(true);
-        }
-
 
         if (SFXSource != null && loserSFX != null)
         {
@@ -42,26 +57,28 @@ public class LoseScreen : MonoBehaviour
             Debug.Log("Played sound: " + loserSFX.name);
         }
 
+        if (EventSystem.current != null && firstSelectedObject != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelectedObject);
+        }
     }
-    
+
     public void Home()
     {
         PlaySound();
-        Debug.Log("Loading Main Menu...");
         Time.timeScale = 1f;
-        GameManager.Instance.newMap("Main Menu", true); //loads the main menu, resets collectibles so it doesnt add 0 to total
+        GameManager.Instance.newMap("Main Menu", true);
     }
 
     public void Restart()
     {
         PlaySound();
         Time.timeScale = 1f;
-        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false); //reloads the current scene, does not reset collectibles so it adds to total
+        GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false);
 
         if (SoundManager.Instance != null)
-        {
             SoundManager.Instance.SetMusicMuted(false);
-        }
     }
 
     public void Quit()
@@ -76,7 +93,7 @@ public class LoseScreen : MonoBehaviour
         Debug.Log("Loading Stats...");
         SceneManager.LoadScene("Stats Scene");
     }
-    
+
     private void PlaySound()
     {
         if (clickSFX != null && SFXSource != null)
@@ -87,6 +104,17 @@ public class LoseScreen : MonoBehaviour
         else
         {
             Debug.LogWarning("ButtonSource or ButtonClip is missing!");
+        }
+    }
+
+    private void ToggleGameplayScripts(bool enable)
+    {
+        if (gameplayScriptsToDisable == null) return;
+
+        foreach (var script in gameplayScriptsToDisable)
+        {
+            if (script != null)
+                script.enabled = enable;
         }
     }
 }

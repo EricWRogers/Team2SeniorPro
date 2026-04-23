@@ -1,22 +1,37 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Controller/UI")]
+    public GameObject firstSelectedObject;
+
+    private void OnEnable()
+    {
+        if (EventSystem.current != null && firstSelectedObject != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelectedObject);
+        }
+    }
+
     public void Play()
     {
-        GameManager.Instance.newMap("Squirrel_HUB", true); //loads the main hub scene, resets collectibles so it doesnt add 0 to total
+        GameManager.Instance.newMap("Squirrel_HUB", true);
         Debug.Log("Play button pressed, loading game...");
 
         if (SoundManager.Instance != null)
-        {
             SoundManager.Instance.UnmuteMusicDelayed();
-        }
     }
 
     public void Options(GameObject optionsMenu)
     {
         optionsMenu.SetActive(true);
+
+        UISelectOnEnable selector = optionsMenu.GetComponent<UISelectOnEnable>();
+        if (selector != null)
+            selector.Reselect();
+
         Debug.Log("Options menu opened");
     }
 

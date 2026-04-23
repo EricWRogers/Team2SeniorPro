@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5215261937064968498}
   - component: {fileID: 2050569914120272984}
   - component: {fileID: 3940914673692432542}
-  - component: {fileID: 4322833050833206746}
+  - component: {fileID: 5620807550776936500}
   m_Layer: 0
   m_Name: key (placehold)
   m_TagString: Untagged
@@ -4937,8 +4937,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4322833050833206746
-BoxCollider:
+--- !u!136 &5620807550776936500
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4955,9 +4955,11 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.0000002, z: 1.0000002}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.5000003
+  m_Height: 2.7
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.000015258789, z: 0.89}
 --- !u!1001 &1386971053120112509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5010,6 +5012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 6920349656890000790, guid: a01b2ead46de64b45b60061544ef9d57, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c214dac70be0cdc4cb417a94b4d978bc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

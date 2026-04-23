@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class NewThirdPlayerMovement : MonoBehaviour
 {
-    public Vector3 CurrentSlopeNormal => slopeHit.normal;//
+    public Vector3 CurrentSlopeNormal => slopeHit.normal;
+
     [Header("Movement")]
     private float moveSpeed;
     private float desiredMoveSpeed;
@@ -38,13 +39,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float crouchYScale;
     private float startYScale;
 
-    /*[Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.LeftControl;*/
+    [Header("Dive Settings")]
+    public float timeBeforeDive = 2f;
+    private float fallTimer = 0f;
 
     [Header("Ground Pound")]
-    //public KeyCode groundPoundKey = KeyCode.LeftAlt;
     public float groundPoundWindup = 0.08f;
     public float groundPoundDownVelocity = 35f;
     public float groundPoundExtraGravity = 2.5f;
@@ -63,8 +62,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private bool leftGroundSinceLastPound;
 
     [Header("Ground Pound -> Slide Boost")]
-    public float groundPoundSlideBoostSpeed = 25f; // the short boost speed
-    public float groundPoundSlideBoostMinTime = 0.15f; // optional: prevents insta-end right after impact
+    public float groundPoundSlideBoostSpeed = 25f;
+    public float groundPoundSlideBoostMinTime = 0.15f;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -84,7 +83,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private InputAction sprintAction;
     private InputAction crouchAction;
     private InputAction groundPoundAction;
-    //private InputAction wallRunAction;
     private InputAction slideAction;
 
     private PlayerControlsB controls;
@@ -94,14 +92,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private bool jumpPressedThisFrame;
     private bool groundPoundPressedThisFrame;
 
-    // Toggle-mode settings (can be wired to Options menu)
     public bool sprintToggleMode = false;
     public bool crouchToggleMode = false;
     private bool sprintToggled = false;
     private bool crouchToggled = false;
 
-    // Sprint is the default now.
-    // This helper returns true when the player should WALK.
     private bool IsWalkActive => sprintToggleMode ? sprintToggled : sprintHeld;
 
     [Header("Temporary Boosts")]
@@ -110,6 +105,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private Coroutine speedBoostRoutine;
     private Coroutine jumpBoostRoutine;
+    private Coroutine moveSpeedLerpRoutine;
 
     [Header("References")]
     public NewClimbing climbingScript;
@@ -160,6 +156,19 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public TextMeshProUGUI text_speed;
     public TextMeshProUGUI text_mode;
 
+    public bool keepMomentum;
+
+    private void Awake()
+    {
+        controls = new PlayerControlsB();
+
+        sprintToggleMode = PlayerPrefs.GetInt("SprintToggleMode", 0) == 1;
+        crouchToggleMode = PlayerPrefs.GetInt("CrouchToggleMode", 0) == 1;
+
+        sprintToggled = false;
+        crouchToggled = crouching;
+    }
+
     private void Start()
     {
         climbingScriptDone = GetComponent<ClimbingDone>();
@@ -173,6 +182,40 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         wasGroundedLastFrame = false;
         leftGroundSinceLastPound = true;
+    }
+
+    private void OnEnable()
+    {
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
+
+        controls.Player.Sprint.started += OnSprintStarted;
+        controls.Player.Sprint.canceled += OnSprintCanceled;
+
+        controls.Player.Crouch.started += OnCrouchStarted;
+        controls.Player.Crouch.canceled += OnCrouchCanceled;
+
+        controls.Player.Jump.started += OnJumpStarted;
+        controls.Player.GroundPound.started += OnGroundPoundStarted;
+
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Move.performed -= OnMove;
+        controls.Player.Move.canceled -= OnMove;
+
+        controls.Player.Sprint.started -= OnSprintStarted;
+        controls.Player.Sprint.canceled -= OnSprintCanceled;
+
+        controls.Player.Crouch.started -= OnCrouchStarted;
+        controls.Player.Crouch.canceled -= OnCrouchCanceled;
+
+        controls.Player.Jump.started -= OnJumpStarted;
+        controls.Player.GroundPound.started -= OnGroundPoundStarted;
+
+        controls.Player.Disable();
     }
 
     private void Update()
@@ -221,23 +264,9 @@ public class NewThirdPlayerMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0f, rot.y, 0f);
     }
 
-    private void Awake()
-    {
-        controls = new PlayerControlsB();
-
-        sprintToggleMode = PlayerPrefs.GetInt("SprintToggleMode", 0) == 1;
-        crouchToggleMode = PlayerPrefs.GetInt("CrouchToggleMode", 0) == 1;
-
-        // false = default sprinting
-        sprintToggled = false;
-        crouchToggled = crouching;
-    }
-
     private void UpdateAnimator()
     {
         if (anim == null) return;
-
-        float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
 
         if (grounded)
         {
@@ -246,63 +275,43 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         bool groundedRecently = Time.time - lastGroundedTime < groundedGrace;
 
+        float flatSpeed = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z).magnitude;
         bool isMoving = flatSpeed > 0.1f;
+
         bool isFalling = !grounded && rb.linearVelocity.y < -1f;
         bool isJumping = !grounded && rb.linearVelocity.y > 0.1f;
+
+        if (!grounded && isFalling && !groundPounding)
+        {
+            fallTimer += Time.deltaTime;
+        }
+        else
+        {
+            fallTimer = 0f;
+        }
 
         anim.SetBool("isGrounded", groundedRecently);
         anim.SetBool("isWalking", grounded && isMoving && state == MovementState.walking);
         anim.SetBool("isRunning", grounded && isMoving && state == MovementState.sprinting);
         anim.SetBool("isJumping", isJumping);
-        anim.SetBool("isFalling", isFalling);
-    }
-
-    private void OnEnable()
-    {
-        controls.Player.Move.performed += OnMove;
-        controls.Player.Move.canceled += OnMove;
-
-        controls.Player.Sprint.started += OnSprintStarted;
-        controls.Player.Sprint.canceled += OnSprintCanceled;
-
-        controls.Player.Crouch.started += OnCrouchStarted;
-        controls.Player.Crouch.canceled += OnCrouchCanceled;
-
-        controls.Player.Jump.started += OnJumpStarted;
-        controls.Player.GroundPound.started += OnGroundPoundStarted;
-
-        controls.Player.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Player.Move.performed -= OnMove;
-        controls.Player.Move.canceled -= OnMove;
-
-        controls.Player.Sprint.started -= OnSprintStarted;
-        controls.Player.Sprint.canceled -= OnSprintCanceled;
-
-        controls.Player.Crouch.started -= OnCrouchStarted;
-        controls.Player.Crouch.canceled -= OnCrouchCanceled;
-
-        controls.Player.Jump.started -= OnJumpStarted;
-        controls.Player.GroundPound.started -= OnGroundPoundStarted;
-
-        controls.Player.Disable();
+        anim.SetBool("isFalling", isFalling && fallTimer < timeBeforeDive);
+        anim.SetBool("isCrouch", crouching);
+        anim.SetBool("isSit", sliding || groundPounding);
+        anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
     }
 
     private void OnSprintStarted(InputAction.CallbackContext _)
     {
         if (sprintToggleMode)
-            sprintToggled = !sprintToggled; // toggle walk on/off
+            sprintToggled = !sprintToggled;
         else
-            sprintHeld = true; // hold to walk
+            sprintHeld = true;
     }
 
     private void OnSprintCanceled(InputAction.CallbackContext _)
     {
         if (!sprintToggleMode)
-            sprintHeld = false; // release to return to sprinting
+            sprintHeld = false;
     }
 
     private void OnCrouchStarted(InputAction.CallbackContext _)
@@ -380,7 +389,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
     }
 
-    public bool keepMomentum;
     private void StateHandler()
     {
         bool noInput = Mathf.Abs(horizontalInput) < 0.01f && Mathf.Abs(verticalInput) < 0.01f;
@@ -423,7 +431,12 @@ public class NewThirdPlayerMovement : MonoBehaviour
             moveSpeed = 0f;
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
             keepMomentum = false;
-            StopAllCoroutines();
+
+            if (moveSpeedLerpRoutine != null)
+            {
+                StopCoroutine(moveSpeedLerpRoutine);
+                moveSpeedLerpRoutine = null;
+            }
         }
         else if (sliding)
         {
@@ -472,8 +485,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
         {
             if (keepMomentum)
             {
-                StopAllCoroutines();
-                StartCoroutine(SmoothlyLerpMoveSpeed());
+                if (moveSpeedLerpRoutine != null)
+                    StopCoroutine(moveSpeedLerpRoutine);
+
+                moveSpeedLerpRoutine = StartCoroutine(SmoothlyLerpMoveSpeed());
             }
             else
             {
@@ -513,6 +528,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+        moveSpeedLerpRoutine = null;
     }
 
     private void MovePlayer()
@@ -805,6 +821,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (speedBoostRoutine != null)
             StopCoroutine(speedBoostRoutine);
 
+        speedBoostMultiplier = 1f;
         speedBoostRoutine = StartCoroutine(SpeedBoostRoutine(multiplier, duration));
     }
 
@@ -813,6 +830,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (jumpBoostRoutine != null)
             StopCoroutine(jumpBoostRoutine);
 
+        jumpBoostMultiplier = 1f;
         jumpBoostRoutine = StartCoroutine(JumpBoostRoutine(multiplier, duration));
     }
 
@@ -830,5 +848,23 @@ public class NewThirdPlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(duration);
         jumpBoostMultiplier = 1f;
         jumpBoostRoutine = null;
+    }
+
+    public void ResetTemporaryStatModifiers()
+    {
+        if (speedBoostRoutine != null)
+        {
+            StopCoroutine(speedBoostRoutine);
+            speedBoostRoutine = null;
+        }
+
+        if (jumpBoostRoutine != null)
+        {
+            StopCoroutine(jumpBoostRoutine);
+            jumpBoostRoutine = null;
+        }
+
+        speedBoostMultiplier = 1f;
+        jumpBoostMultiplier = 1f;
     }
 }

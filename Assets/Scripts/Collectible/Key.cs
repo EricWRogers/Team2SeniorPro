@@ -1,18 +1,14 @@
+using NUnit.Framework;
 using UnityEngine;
-using TMPro;
-using System;
 
 public class Key : MonoBehaviour
 {
     public GameObject bars;
-    //public TMP_Text keyText;
-    //public TMP_Text keyScore;
+
     public int keyNum = 0;
     public bool isCollected = false;
     public Animator textAnimatior;
     public string keyAudio;
-
-    public SoundManager SM;
 
     float spinSpeed = 20.0f;
     Transform meshTransform;
@@ -27,30 +23,27 @@ public class Key : MonoBehaviour
         meshTransform.Rotate(0, 0, spinSpeed * Time.deltaTime);
     }
 
-    void Awake()
-    {
-        if (SM == null)
-        {
-            SM = FindFirstObjectByType<SoundManager>();
-            if (SM == null)
-            {
-                Debug.LogError("No SoundManager found in scene!");
-            }
-        }
-    }
-
     public void OnTriggerEnter(Collider key)
     {
-        if (key.CompareTag("Player"))
+        if (key.CompareTag("Player") && !isCollected)
         {
-            bars.SetActive(false);
-            SM.PlaySFX(keyAudio, 1);
-            //keyText.gameObject.SetActive(true);
-            //keyText.text = "You got the key!";
-            //keyNum++;
-            //keyScore.text = keyNum.ToString();
-            textAnimatior.SetTrigger("KeyCollect");
-            isCollected = true;
+            isCollected = true; // Set immediately to prevent multiple triggers
+            
+            if (bars != null) bars.SetActive(false);
+
+            // Using static instance directly to play sound effect
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlaySFX(keyAudio, 1);
+            }
+            else
+            {
+                // Tell the developer that the SoundManager instance is missing
+                Debug.LogError("Key on {gameObject.name} can't find SoundManager.Instance!");
+            }
+
+            if (textAnimatior != null) textAnimatior.SetTrigger("KeyCollect");
+
             Destroy(gameObject);
         }
     }
