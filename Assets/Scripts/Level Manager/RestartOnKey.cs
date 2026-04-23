@@ -126,6 +126,9 @@ public class RestartOnKey : MonoBehaviour
         var mover = FindFirstObjectByType<NewThirdPlayerMovement>();
         if (mover == null) return;
 
+        // Clear temporary stat modifiers before respawn
+        mover.ResetTemporaryStatModifiers();
+
         var rb = mover.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -147,6 +150,10 @@ public class RestartOnKey : MonoBehaviour
         Time.timeScale = 1f;
 
         RunCheckpointState.Clear();
+
+        var mover = FindFirstObjectByType<NewThirdPlayerMovement>();
+        if (mover != null)
+            mover.ResetTemporaryStatModifiers();
 
         var timer = FindFirstObjectByType<Timer>();
         if (timer != null)
