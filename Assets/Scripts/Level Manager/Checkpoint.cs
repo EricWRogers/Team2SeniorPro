@@ -12,15 +12,15 @@ public class Checkpoint : MonoBehaviour
     public CarryableAcorn acorn;
 
     [Header("Respawn Point")]
-    public Transform respawnPoint; // very optional but if not set, will use checkpoint's own transform (can set two automations)
+    public Transform respawnPoint;
 
     [Header("Timer Saved")]
-    public Timer timerScript; // Reference to the Timer script to save the time when checkpoint is activated
+    public Timer timerScript;
 
-    [Header("Checkpoint Animaton")]
+    [Header("Checkpoint Animation")]
     public Animator checkpointAnimator;
 
-    [Header("Jump-pad Objecct")]
+    [Header("Jump-pad Object")]
     public GameObject jumpPadObject;
 
     [Header("Visuals (optional)")]
@@ -31,33 +31,24 @@ public class Checkpoint : MonoBehaviour
     [Header("Checkpoint SFX")]
     public AudioSource SFXSource;
     public AudioClip checkpointSFX;
-    public AudioClip conffetiSFX;
+    public AudioClip confettiSFX;
 
-    static Checkpoint s_active; // for visuals
+    private static Checkpoint s_active;
     public bool Activated = false;
 
-    void Start()
+    private void Start()
     {
-        //if (!timerScript) timerScript = FindFirstObjectByType<Timer>(); //can auto find timer if needed
+        if (!acorn)
+            acorn = FindFirstObjectByType<CarryableAcorn>();
 
-        if (!acorn) acorn = FindFirstObjectByType<CarryableAcorn>();
-        
         var col = GetComponent<Collider>();
-        col.isTrigger = true;
+        if (col != null)
+            col.isTrigger = true;
+
         SetVisualActive(this == s_active);
     }
 
-    /*void Update()
-    {
-        if (Input.GetKeyDown(teleportKey) && Activated == true)
-        {
-            PlayerTeleport(respawnPoint);
-            //if (timerScript) timerScript.SaveTimer();
-        }
-    }*/
-
-
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag(playerTag)) return;
 
@@ -69,65 +60,71 @@ public class Checkpoint : MonoBehaviour
         Activate();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!requireButtonPress && other.CompareTag(playerTag))
             Activate();
     }
 
-    void Activate()
+    private void Activate()
     {
-        // If active already, do nothing
         if (Activated) return;
 
-        if (!acorn) acorn = FindFirstObjectByType<CarryableAcorn>();
-        if (acorn) acorn.SetRespawnPoint(transform);
+        if (!acorn)
+            acorn = FindFirstObjectByType<CarryableAcorn>();
 
-        if (s_active && s_active != this) s_active.SetVisualActive(false);
+        if (acorn)
+            acorn.SetRespawnPoint(respawnPoint ? respawnPoint : transform);
+
+        if (s_active && s_active != this)
+            s_active.SetVisualActive(false);
+
         s_active = this;
         SetVisualActive(true);
 
-        if (checkpointAnimator) checkpointAnimator.SetTrigger("Checkpoint");
+        if (checkpointAnimator)
+            checkpointAnimator.SetTrigger("Checkpoint");
 
-        ParticleManager.Instance.SpawnParticle("Confetti", transform.position + new Vector3(0f, -1.5f, 0f), Quaternion.Euler(-90, 0, 0));
-        SoundManager.Instance.PlaySFX("checkpointSFX", 0.3f);
-        SoundManager.Instance.PlaySFX("party-horn", 0.5f);
-        //SFXSource.PlayOneShot(checkpointSFX);
-        //SFXSource.PlayOneShot(conffetiSFX);
+        if (ParticleManager.Instance != null)
+        {
+            ParticleManager.Instance.SpawnParticle(
+                "Confetti",
+                transform.position + new Vector3(0f, -1.5f, 0f),
+                Quaternion.Euler(-90, 0, 0)
+            );
+        }
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySFX("checkpointSFX", 0.3f);
+            SoundManager.Instance.PlaySFX("party-horn", 0.5f);
+        }
 
         if (jumpPadObject != null)
-        {
             jumpPadObject.SetActive(true);
-        }
+
         Activated = true;
-       
-        //Transform target = respawnPoint ? respawnPoint : transform;
-        if (!timerScript) timerScript = FindFirstObjectByType<Timer>();
+
+        if (!timerScript)
+            timerScript = FindFirstObjectByType<Timer>();
 
         Transform target = respawnPoint ? respawnPoint : transform;
 
-        // save checkpoint for THIS RUN ONLY
-        float t = timerScript ? timerScript.GetElapsedTime() : 0f;
-        RunCheckpointState.Set(target.position, t);
+        float savedTime = timerScript ? timerScript.GetElapsedTime() : 0f;
 
-        // player prefs only needed for consistent saving but in this case it needs to occur once
-
+        RunCheckpointState.Set(target.position, savedTime);
     }
 
-    void SetVisualActive(bool on)
+    private void SetVisualActive(bool on)
     {
         if (renderersToTint == null) return;
+
         foreach (var r in renderersToTint)
         {
             if (!r) continue;
+
             foreach (var m in r.materials)
                 m.color = on ? activeColor : inactiveColor;
         }
-    }
-
-    void PlayerTeleport(Transform target)
-    {
-        var player = GameObject.FindWithTag(playerTag);
-        if (player) player.transform.position = target.position;
     }
 }
