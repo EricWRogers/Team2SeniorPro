@@ -179,7 +179,7 @@ MonoBehaviour:
   m_text: 18Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -270,10 +271,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -291,9 +294,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &17231767
 GameObject:
@@ -381,6 +386,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -402,9 +409,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &17231772
 MonoBehaviour:
@@ -654,7 +663,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -812,6 +821,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &57758221
 Mesh:
   m_ObjectHideFlags: 0
@@ -819,7 +841,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -977,6 +999,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &92535630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1072,7 @@ MonoBehaviour:
   m_text: 4 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1072,6 +1107,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1128,10 +1164,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1149,10 +1187,25 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &95574653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6572310589110225400, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+  m_PrefabInstance: {fileID: 1167922314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &95574660
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95574653}
+  m_Enabled: 1
 --- !u!1 &96968466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1292,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1260,9 +1315,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &96968471
 MonoBehaviour:
@@ -1565,7 +1622,7 @@ MonoBehaviour:
   m_text: 7 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1600,6 +1657,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1656,10 +1714,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1677,9 +1737,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &141313642
 PrefabInstance:
@@ -1727,27 +1789,27 @@ PrefabInstance:
       objectReference: {fileID: 382598485}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.793384
+      value: -2.842216
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.15
+      value: -32.0924
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9673613
+      value: 0.9654397
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.25340122
+      value: 0.2606266
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000007931576
+      value: 0.000000008504357
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000002077684
+      value: -0.0000000022958055
       objectReference: {fileID: 0}
     - target: {fileID: 3714680282047917832, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_Mesh
@@ -1759,27 +1821,27 @@ PrefabInstance:
       objectReference: {fileID: 382598485}
     - target: {fileID: 4066398067646279291, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.793384
+      value: -2.842216
       objectReference: {fileID: 0}
     - target: {fileID: 4066398067646279291, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.15
+      value: -32.0924
       objectReference: {fileID: 0}
     - target: {fileID: 4066398067646279291, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.96736133
+      value: 0.9654397
       objectReference: {fileID: 0}
     - target: {fileID: 4066398067646279291, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.25340122
+      value: 0.2606266
       objectReference: {fileID: 0}
     - target: {fileID: 4066398067646279291, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000000876929
+      value: 0.000000008504357
       objectReference: {fileID: 0}
     - target: {fileID: 4066398067646279291, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000052756657
+      value: -0.0000000022958058
       objectReference: {fileID: 0}
     - target: {fileID: 4117471416118826539, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1853,7 +1915,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -2011,6 +2073,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &276189325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,6 +2172,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2118,9 +2195,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &276189330
 MonoBehaviour:
@@ -2434,6 +2513,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2455,9 +2536,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &283417871
 MonoBehaviour:
@@ -2801,6 +2884,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2822,9 +2907,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &290470829
 MonoBehaviour:
@@ -3138,6 +3225,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3159,9 +3248,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &314694653
 MonoBehaviour:
@@ -3505,6 +3596,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3526,9 +3619,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &319177580
 MonoBehaviour:
@@ -3831,7 +3926,7 @@ MonoBehaviour:
   m_text: 11Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3866,6 +3961,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3922,10 +4018,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3943,9 +4041,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &366635898
 Mesh:
@@ -3954,7 +4054,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -4112,6 +4212,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &382598485
 Mesh:
   m_ObjectHideFlags: 0
@@ -4119,7 +4232,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-56810
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -4277,6 +4390,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &462719331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4318,7 +4444,7 @@ MonoBehaviour:
   m_text: 0 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4353,6 +4479,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4409,10 +4536,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4430,9 +4559,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &462719334
 RectTransform:
@@ -4460,7 +4591,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -4618,6 +4749,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &504041990
 GameObject:
   m_ObjectHideFlags: 0
@@ -4730,7 +4874,7 @@ MonoBehaviour:
   m_text: 6 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4765,6 +4909,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4821,10 +4966,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4842,9 +4989,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &544776490
 GameObject:
@@ -5053,6 +5202,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5074,9 +5225,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &615664292
 MonoBehaviour:
@@ -5394,7 +5547,7 @@ MonoBehaviour:
   m_text: 15Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5429,6 +5582,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -5485,10 +5639,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5506,9 +5662,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &640856092
 Mesh:
@@ -5517,7 +5675,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -5675,6 +5833,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &649800695
 Mesh:
   m_ObjectHideFlags: 0
@@ -5682,7 +5853,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -5840,6 +6011,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &685375201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5900,7 +6084,7 @@ MonoBehaviour:
   m_text: 20Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5935,6 +6119,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -5991,10 +6176,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6012,9 +6199,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &689779230
 Mesh:
@@ -6023,7 +6212,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -6181,6 +6370,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &723491120
 GameObject:
   m_ObjectHideFlags: 0
@@ -6241,7 +6443,7 @@ MonoBehaviour:
   m_text: 12Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6276,6 +6478,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -6332,10 +6535,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6353,9 +6558,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &821632630
 GameObject:
@@ -6417,7 +6624,7 @@ MonoBehaviour:
   m_text: 8 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6452,6 +6659,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -6508,10 +6716,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6529,9 +6739,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &836425052
 Mesh:
@@ -6540,7 +6752,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -6698,6 +6910,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &868518427
 Mesh:
   m_ObjectHideFlags: 0
@@ -6705,7 +6930,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-56802
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -6863,6 +7088,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &891350921
 GameObject:
   m_ObjectHideFlags: 0
@@ -6934,6 +7172,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6955,9 +7195,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &891350925
 MonoBehaviour:
@@ -7222,7 +7464,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -7380,6 +7622,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &917623538
 Mesh:
   m_ObjectHideFlags: 0
@@ -7387,7 +7642,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -7545,6 +7800,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &989113060
 GameObject:
   m_ObjectHideFlags: 0
@@ -7605,7 +7873,7 @@ MonoBehaviour:
   m_text: 1 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7640,6 +7908,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7696,10 +7965,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7717,9 +7988,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1005697339
 GameObject:
@@ -7781,7 +8054,7 @@ MonoBehaviour:
   m_text: 17Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7816,6 +8089,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7872,10 +8146,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7893,9 +8169,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &1052874684
 Mesh:
@@ -7904,7 +8182,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -8062,6 +8340,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &1064372780
 Mesh:
   m_ObjectHideFlags: 0
@@ -8069,7 +8360,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -8227,6 +8518,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &1075075341
 Mesh:
   m_ObjectHideFlags: 0
@@ -8234,7 +8538,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -8392,6 +8696,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &1117470067
 Mesh:
   m_ObjectHideFlags: 0
@@ -8399,7 +8716,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -8557,6 +8874,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &1132157211
 GameObject:
   m_ObjectHideFlags: 0
@@ -8617,7 +8947,7 @@ MonoBehaviour:
   m_text: 10Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8652,6 +8982,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -8708,10 +9039,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8729,10 +9062,72 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1167922314
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.59597
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.4793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572310589110225400, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6572310589110225400, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 95574660}
+  m_SourcePrefab: {fileID: 100100000, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
 --- !u!43 &1253809737
 Mesh:
   m_ObjectHideFlags: 0
@@ -8740,7 +9135,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -8898,6 +9293,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &1278160474
 GameObject:
   m_ObjectHideFlags: 0
@@ -8969,6 +9377,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8990,9 +9400,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1278160478
 MonoBehaviour:
@@ -9321,6 +9733,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9342,9 +9756,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1286043801
 MonoBehaviour:
@@ -9662,7 +10078,7 @@ MonoBehaviour:
   m_text: 2 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9697,6 +10113,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -9753,10 +10170,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9774,9 +10193,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1312035982
 GameObject:
@@ -9864,6 +10285,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9885,9 +10308,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1312035987
 MonoBehaviour:
@@ -10190,7 +10615,7 @@ MonoBehaviour:
   m_text: 3 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10225,6 +10650,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -10281,10 +10707,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10302,9 +10730,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1378662690
 GameObject:
@@ -10377,6 +10807,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10398,9 +10830,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1378662694
 MonoBehaviour:
@@ -10665,7 +11099,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -10823,6 +11257,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &1446680111
 Mesh:
   m_ObjectHideFlags: 0
@@ -10830,7 +11277,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -10988,6 +11435,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!43 &1455096511
 Mesh:
   m_ObjectHideFlags: 0
@@ -10995,7 +11455,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -11153,6 +11613,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &1502799860
 GameObject:
   m_ObjectHideFlags: 0
@@ -11224,6 +11697,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -11245,9 +11720,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1502799864
 MonoBehaviour:
@@ -11565,7 +12042,7 @@ MonoBehaviour:
   m_text: 13Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11600,6 +12077,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11656,10 +12134,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11677,9 +12157,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1650666491
 GameObject:
@@ -11752,6 +12234,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -11773,9 +12257,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1650666495
 MonoBehaviour:
@@ -12104,6 +12590,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12125,9 +12613,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1684090564
 MonoBehaviour:
@@ -12471,6 +12961,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12492,9 +12984,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1698359849
 MonoBehaviour:
@@ -12808,6 +13302,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12829,9 +13325,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1739780180
 MonoBehaviour:
@@ -13149,7 +13647,7 @@ MonoBehaviour:
   m_text: 9 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13184,6 +13682,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -13240,10 +13739,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13261,9 +13762,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1750652307
 GameObject:
@@ -13336,6 +13839,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13357,9 +13862,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1750652311
 MonoBehaviour:
@@ -13677,7 +14184,7 @@ MonoBehaviour:
   m_text: 19Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13712,6 +14219,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -13768,10 +14276,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13789,9 +14299,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1807574273
 GameObject:
@@ -13853,7 +14365,7 @@ MonoBehaviour:
   m_text: 14Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13888,6 +14400,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -13944,10 +14457,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13965,9 +14480,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &1832022539
 PrefabInstance:
@@ -13983,11 +14500,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2399380919097004846, guid: e9565ceb5db5a2347b12351621956570, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 7.6
       objectReference: {fileID: 0}
     - target: {fileID: 2399380919097004846, guid: e9565ceb5db5a2347b12351621956570, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2399380919097004846, guid: e9565ceb5db5a2347b12351621956570, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14044,7 +14561,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -14202,6 +14719,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &1895353256
 GameObject:
   m_ObjectHideFlags: 0
@@ -14261,7 +14791,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -14419,6 +14949,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1 &1926099169
 GameObject:
   m_ObjectHideFlags: 0
@@ -14505,6 +15048,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14526,9 +15071,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1926099174
 MonoBehaviour:
@@ -14857,6 +15404,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14878,9 +15427,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1936640254
 MonoBehaviour:
@@ -15183,7 +15734,7 @@ MonoBehaviour:
   m_text: 16Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15218,6 +15769,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15274,10 +15826,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15295,9 +15849,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1996978755
 GameObject:
@@ -15385,6 +15941,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -15406,9 +15964,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1996978760
 MonoBehaviour:
@@ -15711,7 +16271,7 @@ MonoBehaviour:
   m_text: 5 Units
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
-  m_sharedMaterial: {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  m_sharedMaterial: {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15746,6 +16306,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15802,10 +16363,12 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1972953888687362529, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
+  - {fileID: -157533739651664686, guid: 4265f1842f3bbac4cb056adda55bb059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15823,9 +16386,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &2120301149
 Mesh:
@@ -15834,7 +16399,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: pb_Mesh-62220(Clone)(Clone)
-  serializedVersion: 11
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -15992,6 +16557,19 @@ Mesh:
     offset: 0
     size: 0
     path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -16003,3 +16581,4 @@ SceneRoots:
   - {fileID: 283417873}
   - {fileID: 1895353257}
   - {fileID: 504041991}
+  - {fileID: 1167922314}

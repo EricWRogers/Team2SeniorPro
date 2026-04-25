@@ -11,6 +11,10 @@ public class StartArea : MonoBehaviour
     void Start()
     {
         timer.timeRunning = false; // Ensure the timer is not running at the start
+        
+        // lock player mouse and hide cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void OnTriggerEnter(Collider other)

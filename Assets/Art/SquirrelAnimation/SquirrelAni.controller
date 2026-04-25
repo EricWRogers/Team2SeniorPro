@@ -283,6 +283,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -6456094130612209772}
     m_Position: {x: 790, y: 320, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 6960462165103472170}
+    m_Position: {x: 1000, y: 480, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 5992839279657409282}
+    m_Position: {x: 1000, y: 550, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 2416926386017999212}
@@ -975,6 +981,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &5992839279657409282
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SquirrelWallHug
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -998496362607748373, guid: a284cdfd37546274c9270c1059ba9849, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &6117670534680439735
 AnimatorState:
   serializedVersion: 6
@@ -1032,6 +1064,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &6960462165103472170
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SquirrelWallRun
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 1827226128182048838, guid: a284cdfd37546274c9270c1059ba9849, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &7306562688536478425
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

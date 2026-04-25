@@ -45,7 +45,6 @@ public class RestartOnKey : MonoBehaviour
 
     private void Update()
     {
-        // Block restart UI while loading
         if (LevelLoader.Instance != null && LevelLoader.Instance.IsLoading)
         {
             ResetHoldVisualsImmediate();
@@ -109,7 +108,6 @@ public class RestartOnKey : MonoBehaviour
             return;
         }
 
-        // Tap = checkpoint respawn only if a full restart did not happen
         if (!didFullRestartThisHold && !isRestarting)
         {
             TryRespawnToCheckpoint();
@@ -121,12 +119,16 @@ public class RestartOnKey : MonoBehaviour
 
     private void TryRespawnToCheckpoint()
     {
-        if (!RunCheckpointState.HasCheckpoint) return;
+        if (!RunCheckpointState.IsForCurrentScene())
+        {
+            RunCheckpointState.Clear();
+            ResetHoldVisualsImmediate();
+            return;
+        }
 
         var mover = FindFirstObjectByType<NewThirdPlayerMovement>();
         if (mover == null) return;
 
-        // Clear temporary stat modifiers before respawn
         mover.ResetTemporaryStatModifiers();
 
         var rb = mover.GetComponent<Rigidbody>();

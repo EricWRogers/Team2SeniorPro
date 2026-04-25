@@ -34,6 +34,16 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float airMultiplier;
     bool readyToJump;
 
+    [Header("Jump Assist")]
+    [Tooltip("How long after leaving ground the player can still jump.")]
+    public float coyoteTime = 0.15f;
+
+    [Tooltip("How long before touching ground a jump press is remembered.")]
+    public float jumpBufferTime = 0.15f;
+
+    private float coyoteTimeCounter;
+    private float jumpBufferCounter;
+
     [Header("Crouching")]
     public float crouchSpeed;
     public float crouchYScale;
@@ -349,13 +359,35 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         horizontalInput = moveInputNIS.x;
         verticalInput = moveInputNIS.y;
-
-        if (jumpPressedThisFrame && readyToJump && grounded)
+        //cayote time gotta test
+        if (jumpPressedThisFrame)
         {
+            jumpBufferCounter = jumpBufferTime;
             jumpPressedThisFrame = false;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        if (grounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && readyToJump)
+        {
             readyToJump = false;
 
             Jump();
+
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
+
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
@@ -372,7 +404,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
             StartCoroutine(GroundPoundRoutine());
         }
 
-        jumpPressedThisFrame = false;
+        //jumpPressedThisFrame = false;
         groundPoundPressedThisFrame = false;
 
         if (!crouchToggleMode)
