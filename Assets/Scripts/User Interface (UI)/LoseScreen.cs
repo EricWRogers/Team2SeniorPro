@@ -68,7 +68,7 @@ public class LoseScreen : MonoBehaviour
     {
         PlaySound();
         Time.timeScale = 1f;
-        GameManager.Instance.newMap("Main Menu", true);
+        GameManager.Instance.newMap("Squirrel_HUB", true);
     }
 
     public void Restart()

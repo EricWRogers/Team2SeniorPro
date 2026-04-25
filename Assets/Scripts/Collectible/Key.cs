@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 
 public class Key : MonoBehaviour
@@ -7,7 +8,6 @@ public class Key : MonoBehaviour
 
     public int keyNum = 0;
     public bool isCollected = false;
-    public Animator textAnimatior;
     public string keyAudio;
 
     float spinSpeed = 20.0f;
@@ -42,9 +42,13 @@ public class Key : MonoBehaviour
                 Debug.LogError("Key on {gameObject.name} can't find SoundManager.Instance!");
             }
 
-            if (textAnimatior != null) textAnimatior.SetTrigger("KeyCollect");
+            if (GetComponent<Renderer>() != null) GetComponent<Renderer>().enabled = false; // Make the key invisible in the world
+            if (GetComponent<Collider>() != null) GetComponent<Collider>().enabled = false; // Disable the collider to prevent further triggers
 
-            Destroy(gameObject);
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false); // Disable all child objects to hide the entire key
+            }
         }
     }
 }
