@@ -18,13 +18,13 @@ RenderSettings:
   m_FogColor: {r: 0.78916967, g: 0.87956786, b: 0.8930817, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.009
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_LinearFogStart: -1552
+  m_LinearFogEnd: 3000
+  m_AmbientSkyColor: {r: 0, g: 0.05448028, b: 0.5520116, a: 1}
+  m_AmbientEquatorColor: {r: 0.53144646, g: 0.7825086, b: 1, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 5660e0d4d6cb0db4995abdf0ef566c8c, type: 2}
   m_HaloStrength: 0.5
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 598679810}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12894,6 +12894,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1607397115676912027, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Antialiasing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607397115676912027, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_RenderShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607397115676912027, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
@@ -12902,24 +12910,28 @@ PrefabInstance:
       value: -2.7933843
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.z
       value: -33.15
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7204469
+      value: 0.51385903
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000081312095
+      value: -0.5049679
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6935102
+      value: -0.49464643
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000005975679
+      value: -0.48608774
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13051,7 +13063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6567960323035176534, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: far clip plane
-      value: 1000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
@@ -13061,6 +13073,10 @@ PrefabInstance:
       propertyPath: text_speed
       value: 
       objectReference: {fileID: 1034044985}
+    - target: {fileID: 8166636639562746853, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: Lens.FarClipPlane
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: key
       value: 
@@ -14153,7 +14169,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2915096840818334460, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: m_MaxSpeed
-      value: 16.36679
+      value: 58.616173
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164266768145691038, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
+      propertyPath: far clip plane
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3960852233605979905, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.size
