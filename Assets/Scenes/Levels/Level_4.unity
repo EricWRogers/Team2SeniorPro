@@ -12236,6 +12236,14 @@ PrefabInstance:
       propertyPath: defaultMusicTrack
       value: Spring_Forward
       objectReference: {fileID: 0}
+    - target: {fileID: 1920061243504398072, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1212698555}
+    - target: {fileID: 1920061243504398072, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMain
+      objectReference: {fileID: 0}
     - target: {fileID: 2075830250284682903, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
       value: 222.35999
@@ -12699,6 +12707,14 @@ PrefabInstance:
     - target: {fileID: 8298626417778349083, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.z
       value: 34.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585331251289844011, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1212698555}
+    - target: {fileID: 8585331251289844011, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 9026775156764267604, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30098,6 +30114,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1212698555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6005117121889469246, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1999bf2ed61202478647228ed0cfbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1217962229
 GameObject:
   m_ObjectHideFlags: 0
