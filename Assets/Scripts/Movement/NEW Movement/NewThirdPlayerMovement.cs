@@ -308,6 +308,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
         anim.SetBool("isCrouch", crouching);
         anim.SetBool("isSit", sliding || groundPounding);
         anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
+
+        // New Wall Logic
+        anim.SetBool("isWallRunning", wallrunning);
+        anim.SetBool("isWallHugging", climbing);
     }
 
     private void OnSprintStarted(InputAction.CallbackContext _)
