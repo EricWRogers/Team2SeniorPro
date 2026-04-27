@@ -108,8 +108,8 @@ public class NestGoal : MonoBehaviour
 
         if (SoundManager.Instance != null)
         {
-            // Play victory music (make sure "Squirrel Groove" is added to your MusicAsset file)
-            SoundManager.Instance.PlayMusic("Squirrel Groove", 1f);
+            // Play victory music (make sure "The_Golden_Horizon" is added to your MusicAsset file)
+            SoundManager.Instance.PlayMusic("The_Golden_Horizon", 1f);
         }
 
         // Stop the timer
