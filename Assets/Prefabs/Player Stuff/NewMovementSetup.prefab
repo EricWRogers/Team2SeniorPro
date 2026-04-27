@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 818943730189132274}
   m_Layer: 12
   m_Name: NewPlayerObject
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 2819997404148144322}
   - component: {fileID: 4564823411632646334}
   - component: {fileID: 3095406847548462516}
+  - component: {fileID: 632574390814929565}
   m_Layer: 12
   m_Name: NewTestPlayer
   m_TagString: Player
@@ -916,6 +917,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &632574390814929565
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668661954304852184}
+  m_Material: {fileID: 13400000, guid: 2be13e73fc92abf4c9c054b8633672bf, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.41
+  m_Height: 2.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!1 &3839653853592578239
 GameObject:
   m_ObjectHideFlags: 0
@@ -7739,7 +7763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 957556477700834583, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       propertyPath: m_Layer
@@ -7912,9 +7936,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8543373590469540070}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6365240969420877230}
     - targetCorrespondingSourceObject: {fileID: -1329833918625417751, guid: 5166eb27f3add6e4f8cba7a613a56819, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3413838865888614230}
@@ -8018,29 +8039,6 @@ MonoBehaviour:
   playerMovement: {fileID: 7573647716419646299}
   playerAnimator: {fileID: 372940318209878044}
   emoteKey: 112
---- !u!136 &6365240969420877230
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6379084191767701724}
-  m_Material: {fileID: 13400000, guid: 2be13e73fc92abf4c9c054b8633672bf, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.1
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.02, z: 0}
 --- !u!1001 &8733404261064438170
 PrefabInstance:
   m_ObjectHideFlags: 0

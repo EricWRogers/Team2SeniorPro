@@ -71,6 +71,17 @@ public class NestGoal : MonoBehaviour
 
         // Scene Transition and UI updates
         PlayerSquirrel.SetActive(false);
+
+        // disable audio source from child objects of the player squirrel
+        foreach (Transform child in PlayerSquirrel.transform)
+        {
+            var audioSource = child.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.enabled = false;
+            }
+        }
+
         MainCam.SetActive(false);
         VictorySquirrel.SetActive(true);
 
