@@ -308,10 +308,22 @@ public class NewThirdPlayerMovement : MonoBehaviour
         anim.SetBool("isCrouch", crouching);
         anim.SetBool("isSit", sliding || groundPounding);
         anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
+        anim.SetBool("isDashing", dashing);
 
         // New Wall Logic
         anim.SetBool("isWallRunning", wallrunning);
         anim.SetBool("isWallHugging", climbing);
+
+        if (wallrunning)
+        {
+            // Logic for detecting which side the wall is on for the Blend Tree
+            Vector3 wallNormal = slopeHit.normal;
+            Vector3 playerRight = orientation.right;
+
+            // Dot product: -1 = Left wall, 1 = Right wall
+            float side = Vector3.Dot(wallNormal, playerRight) > 0 ? -1 : 1f;
+            anim.SetFloat("wallSide", side);
+        }
     }
 
     private void OnSprintStarted(InputAction.CallbackContext _)
