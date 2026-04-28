@@ -14,6 +14,12 @@ public class LoseScreen : MonoBehaviour
     public AudioClip loserSFX;
     public Timer timer;
 
+    [Header("Times Up Animation")]
+    public Animator timesUpAnimator;
+
+    [Header("Delay Settings")]
+    public float loseDelay = 1.5f;
+
     [Header("Controller/UI")]
     public PlayerInput playerInput;
     public GameObject firstSelectedObject;
@@ -23,11 +29,11 @@ public class LoseScreen : MonoBehaviour
 
     public void GameOver()
     {
-        gameOverUI.SetActive(true);
-        D_Rank.SetActive(true);
-
-        if (D_animator != null)
-            D_animator.SetTrigger("D_Display");
+        if (timesUpAnimator != null)
+            timesUpAnimator.SetTrigger("TimesUp");
+        
+        // Wait to show the lose screen until after the "Times Up" animation plays
+        Invoke(nameof(ShowLoseScreen), loseDelay);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -62,6 +68,16 @@ public class LoseScreen : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(firstSelectedObject);
         }
+        
+    }
+
+    public void ShowLoseScreen()
+    {
+        gameOverUI.SetActive(true);
+        D_Rank.SetActive(true);
+
+        if (D_animator != null)
+            D_animator.SetTrigger("D_Display");
     }
 
     public void Home()
