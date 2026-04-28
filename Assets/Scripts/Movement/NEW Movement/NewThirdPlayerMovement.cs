@@ -121,6 +121,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public NewClimbing climbingScript;
     private ClimbingDone climbingScriptDone;
     private NewSliding slidingScript;
+    private NewWallRunning wallRunningScript;
     public Transform orientation;
     private Animator anim;
 
@@ -183,6 +184,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         climbingScriptDone = GetComponent<ClimbingDone>();
         slidingScript = GetComponent<NewSliding>();
+        wallRunningScript = GetComponent<NewWallRunning>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -308,6 +310,25 @@ public class NewThirdPlayerMovement : MonoBehaviour
         anim.SetBool("isCrouch", crouching);
         anim.SetBool("isSit", sliding || groundPounding);
         anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
+        anim.SetBool("isDashing", dashing);
+
+        // New Wall Logic
+        anim.SetBool("isWallRunning", wallrunning);
+        anim.SetBool("isWallHugging", climbing);
+
+        if (wallrunning)
+        {
+            // Logic for detecting which side the wall is on for the Blend Tree
+            bool isWallOnLeft = wallRunningScript.wallLeft;
+            bool isWallOnRight = wallRunningScript.wallRight;
+
+            // Set the float: -1 for Left, 1 for Right
+            float side = 0f;
+            if (isWallOnLeft) side = -1f;
+            else if (isWallOnRight) side = 1f;
+
+            anim.SetFloat("wallSide", side);
+        }
     }
 
     private void OnSprintStarted(InputAction.CallbackContext _)
