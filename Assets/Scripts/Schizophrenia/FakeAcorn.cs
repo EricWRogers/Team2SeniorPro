@@ -52,7 +52,8 @@ public class FakeAcorn : MonoBehaviour
         Vector3 spawnPos = new Vector3(Random.Range(spawnLimitXLeft, spawnLimitXRight), spawnPosY, Random.Range(spawnLimitZFront, spawnLimitZBack));
 
         // Instantiate the chosen object at the random position
-        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPos, objectToSpawn.transform.rotation);
+        Quaternion randomRot = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPos, randomRot);
 
         // Start the lifecycle coroutine for the spawned object
         StartCoroutine(AcornLifeCycle(spawnedObject));
