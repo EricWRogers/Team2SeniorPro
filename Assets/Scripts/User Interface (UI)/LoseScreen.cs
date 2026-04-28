@@ -18,7 +18,7 @@ public class LoseScreen : MonoBehaviour
     public Animator timesUpAnimator;
 
     [Header("Delay Settings")]
-    public float loseDelay = 1.5f;
+    public float loseDelay = 0.5f;
 
     [Header("Controller/UI")]
     public PlayerInput playerInput;
