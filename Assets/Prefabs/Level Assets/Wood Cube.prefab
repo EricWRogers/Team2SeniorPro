@@ -1274,6 +1274,18 @@ PrefabInstance:
       propertyPath: playerRespawn
       value: 
       objectReference: {fileID: 4148191830779662534}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'objectsToToggle.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7705905443705977479}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3209240807424561271}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7398477127328121725}
     - target: {fileID: 8208234980504317363, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: m_Name
       value: Killbox
@@ -1638,6 +1650,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7398477127328121725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6410379431635980518, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 4493068087299199899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab365de29f06101468407fe1db3a6c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7705905443705977479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6100818056278911260, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 4493068087299199899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8397364412642210293 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5391930185192268398, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
