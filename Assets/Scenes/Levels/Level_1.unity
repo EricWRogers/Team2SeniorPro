@@ -7549,6 +7549,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1716200283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &465355560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6275700342578155059, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 631269284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &466661186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10821,8 +10826,16 @@ PrefabInstance:
       objectReference: {fileID: 1896993613}
     - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: loseDelay
-      value: 0.5
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: timesUpUI
+      value: 
+      objectReference: {fileID: 465355560}
+    - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+      propertyPath: timesUpSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 6a504269cbc10ef4db524a23d958d301, type: 3}
     - target: {fileID: 1420574837309271952, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: timesUpAnimator
       value: 
