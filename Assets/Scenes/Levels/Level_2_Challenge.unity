@@ -10664,13 +10664,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1477008287}
     - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: deathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: SFXSource
+      value: 
+      objectReference: {fileID: 1477008290}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: deathFaceUI
+      value: 
+      objectReference: {fileID: 1477008291}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: deathScreen
       value: 
       objectReference: {fileID: 1477008289}
     - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: deathFaceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: deathCountdown
       value: 
       objectReference: {fileID: 1477008288}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: deathFaceAnimator
+      value: 
+      objectReference: {fileID: 1477008292}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: deathFaceDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: delayBeforeDeathFace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7141960898635560287, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.99
@@ -10753,6 +10781,21 @@ MonoBehaviour:
 --- !u!1 &1477008289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7261115402662333265, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 1477008286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1477008290 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1017383271047701107, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 1477008286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1477008291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4986483881966032251, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 1477008286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1477008292 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4451999684378524127, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
   m_PrefabInstance: {fileID: 1477008286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1483314487
