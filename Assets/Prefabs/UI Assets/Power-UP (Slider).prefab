@@ -504,6 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2802356541926122621}
   - component: {fileID: 8552256878064161062}
+  - component: {fileID: -9090524168369297765}
   m_Layer: 5
   m_Name: Power-UP (Slider)
   m_TagString: Untagged
@@ -585,3 +586,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-9090524168369297765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173200848921947639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5455c76e27fc1ad4788697886b6b6914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupSliderUI
+  playerMovement: {fileID: 0}
+  sliderRoot: {fileID: 0}
+  slider: {fileID: 0}
+  powerupType: 0
+  hideWhenInactive: 1
