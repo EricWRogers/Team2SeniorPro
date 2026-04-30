@@ -6,12 +6,12 @@ public class StartArea : MonoBehaviour
     public Timer timer;
     public Animator Time_Animator;
     public Animator Level_Animator;
+    public GameObject PlayerSquirrel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         timer.timeRunning = false; // Ensure the timer is not running at the start
-        
         // lock player mouse and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -19,7 +19,9 @@ public class StartArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (PlayerSquirrel == null) PlayerSquirrel = other.gameObject;
+
+        if (PlayerSquirrel != null && other.GetComponentInParent<Collider>() != null)
         {
             Level_Animator.SetTrigger("LevelDisplay");
             Debug.Log("Player entered start area.");
@@ -27,7 +29,7 @@ public class StartArea : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (!timer.timeRunning && other.CompareTag("Player"))
+        if (!timer.timeRunning && PlayerSquirrel != null && other.GetComponentInParent<Collider>() != null)
         {
             // Start the timer when the player exits the start area
             timer.timeRunning = true;

@@ -9,6 +9,7 @@ public class NewDashing : MonoBehaviour
 
     private Rigidbody rb;
     private NewThirdPlayerMovement tpm;
+    private NewSliding slidingScript;
 
     [Header("Dashing")]
     public float dashForce = 70f;
@@ -19,13 +20,18 @@ public class NewDashing : MonoBehaviour
     public bool useCameraForward = true;
     public bool allowAllDirections = true;
     public bool disableGravity = false;
-    public bool resetYVel = true;
 
-    [Tooltip("If true, clears current X/Z velocity before dashing so slide momentum does not stack with dash.")]
-    public bool resetFlatVelocity = true;
+    [Tooltip("If true, grounded dashes reset Y velocity before dashing.")]
+    public bool resetYVelOnGround = true;
 
-    [Tooltip("If true, also ends slide momentum by fully clearing X/Z speed before dash.")]
-    public bool makeDashConsistent = true;
+    [Tooltip("If true, air dashes keep current Y velocity instead of pausing upward/falling momentum.")]
+    public bool preserveAirYMomentum = true;
+
+    [Tooltip("If true, grounded/sliding dashes clear X/Z velocity so slide momentum does not stack.")]
+    public bool resetFlatVelocityOnGround = true;
+
+    [Tooltip("If true, air dashes keep current X/Z velocity and add dash force on top.")]
+    public bool preserveAirFlatMomentum = true;
 
     [Header("Cooldown")]
     public float dashCd = 1.5f;
@@ -36,8 +42,6 @@ public class NewDashing : MonoBehaviour
     private bool dashPressedThisFrame;
 
     private Vector3 delayedForceToApply;
-
-    private NewSliding slidingScript;
 
     private void Awake()
     {
@@ -51,7 +55,6 @@ public class NewDashing : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         tpm = GetComponent<NewThirdPlayerMovement>();
-
         slidingScript = GetComponent<NewSliding>();
     }
 
@@ -59,9 +62,7 @@ public class NewDashing : MonoBehaviour
     {
         controls.Player.Move.performed += OnMove;
         controls.Player.Move.canceled += OnMove;
-
         controls.Player.Dash.started += OnDashStarted;
-
         controls.Player.Enable();
     }
 
@@ -69,9 +70,7 @@ public class NewDashing : MonoBehaviour
     {
         controls.Player.Move.performed -= OnMove;
         controls.Player.Move.canceled -= OnMove;
-
         controls.Player.Dash.started -= OnDashStarted;
-
         controls.Player.Disable();
 
         CancelInvoke();
@@ -99,8 +98,15 @@ public class NewDashing : MonoBehaviour
         }
     }
 
-    private void OnMove(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
-    private void OnDashStarted(InputAction.CallbackContext _) => dashPressedThisFrame = true;
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        moveInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnDashStarted(InputAction.CallbackContext _)
+    {
+        dashPressedThisFrame = true;
+    }
 
     private void TryDash()
     {
@@ -110,14 +116,18 @@ public class NewDashing : MonoBehaviour
         CancelInvoke(nameof(DelayedDashForce));
         CancelInvoke(nameof(ResetDash));
 
-        // STOP SLIDE FIRST so slide force does not stack with dash
-        if (slidingScript != null)
+        bool isGrounded = tpm != null && tpm.grounded;
+        bool isAirDash = !isGrounded;
+
+        // Only stop sliding when grounded/sliding.
+        // Air dash should not kill momentum.
+        if (!isAirDash && slidingScript != null)
             slidingScript.StopSlideExternal();
 
         if (tpm != null)
         {
             tpm.dashing = true;
-            // tpm.restricted = true;
+            tpm.restricted = false;
         }
 
         Transform forwardT = (useCameraForward && playerCam != null) ? playerCam : orientation;
@@ -128,20 +138,36 @@ public class NewDashing : MonoBehaviour
 
         Vector3 currentVel = rb.linearVelocity;
 
-        float newY = resetYVel ? 0f : currentVel.y;
         float newX = currentVel.x;
+        float newY = currentVel.y;
         float newZ = currentVel.z;
 
-        if (resetFlatVelocity || makeDashConsistent)
+        if (isAirDash)
         {
-            newX = 0f;
-            newZ = 0f;
+            if (!preserveAirFlatMomentum)
+            {
+                newX = 0f;
+                newZ = 0f;
+            }
+
+            if (!preserveAirYMomentum)
+                newY = 0f;
+        }
+        else
+        {
+            if (resetFlatVelocityOnGround)
+            {
+                newX = 0f;
+                newZ = 0f;
+            }
+
+            if (resetYVelOnGround)
+                newY = 0f;
         }
 
         rb.linearVelocity = new Vector3(newX, newY, newZ);
 
-        Vector3 forceToApply = direction * dashForce + orientation.up * dashUpwardForce;
-        delayedForceToApply = forceToApply;
+        delayedForceToApply = direction * dashForce + orientation.up * dashUpwardForce;
 
         Invoke(nameof(DelayedDashForce), 0.025f);
         Invoke(nameof(ResetDash), dashDuration);

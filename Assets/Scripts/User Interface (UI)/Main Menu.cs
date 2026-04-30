@@ -17,11 +17,11 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        GameManager.Instance.newMap("Squirrel_HUB", true);
+        GameManager.Instance.newMap("IntroScene", true);
         Debug.Log("Play button pressed, loading game...");
 
         if (SoundManager.Instance != null)
-            SoundManager.Instance.UnmuteMusicDelayed();
+            SoundManager.Instance.SetMusicMuted(true);
     }
 
     public void Options(GameObject optionsMenu)

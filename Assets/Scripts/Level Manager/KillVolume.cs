@@ -9,10 +9,21 @@ public class KillVolume : MonoBehaviour
     public TMP_Text deathCountdown;
     public GameManager GM;
 
+    [Header("Audio")]
+    public AudioSource SFXSource;
+    public AudioClip deathSFX;
+    public AudioClip deathFaceSFX;
+
     [SerializeField] private float countdownTime = 3f;
 
     private bool isDead = false;
     private bool isReloading = false;
+
+    [Header("Death Face Animation")]
+    public GameObject deathFaceUI;
+    public Animator deathFaceAnimator;
+    public float delayBeforeDeathFace = 0.5f;
+    public float deathFaceDuration = 1.5f;
 
     [Header("Events")]
     [Tooltip("Scripts to disable when paused and enable when resumed")]
@@ -49,10 +60,9 @@ public class KillVolume : MonoBehaviour
             deathCountdown = deathScreen.GetComponentInChildren<TMP_Text>(true);
         }
 
-        if (deathScreen != null)
-        {
-            deathScreen.SetActive(false);
-        }
+        if (SFXSource == null) SFXSource = GetComponent<AudioSource>();
+        if (deathFaceUI != null) deathFaceUI.SetActive(false);
+        if (deathScreen != null) deathScreen.SetActive(false);
 
         isDead = false;
         isReloading = false;
@@ -67,22 +77,44 @@ public class KillVolume : MonoBehaviour
         isDead = true;
         isReloading = true;
 
+        Time.timeScale = 0f;
         Toggle(false);
 
-        if (deathScreen != null)
-            deathScreen.SetActive(true);
-
-        Time.timeScale = 0f;
-        StartCoroutine(DeathCountdown());
+        StartCoroutine(DeathSequence());
     }
 
-    private IEnumerator DeathCountdown()
+    private IEnumerator DeathSequence()
     {
-        float timeLeft = countdownTime;
+        if (SFXSource != null && deathSFX != null)
+        {
+            SFXSource.PlayOneShot(deathSFX);
+        }
+        yield return new WaitForSecondsRealtime(delayBeforeDeathFace);
 
+        if (deathFaceUI != null)
+        {
+            deathFaceUI.SetActive(true);
+
+            if (SFXSource != null && deathFaceSFX != null)
+            {
+                SFXSource.PlayOneShot(deathFaceSFX);
+            }
+            
+            if (deathFaceAnimator != null)
+            {
+                deathFaceAnimator.SetTrigger("DeathFace");
+            }
+        }
+
+        yield return new WaitForSecondsRealtime(deathFaceDuration);
+
+        if (deathFaceUI != null) deathFaceUI.SetActive(false);
+        if (deathScreen != null) deathScreen.SetActive(true);
+
+        float timeLeft = countdownTime;
         while (timeLeft > 0f)
         {
-            if (deathCountdown != null)
+            if(deathCountdown != null)
                 deathCountdown.text = Mathf.Ceil(timeLeft).ToString();
 
             yield return new WaitForSecondsRealtime(1f);

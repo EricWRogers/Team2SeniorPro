@@ -18,13 +18,13 @@ RenderSettings:
   m_FogColor: {r: 0.78916967, g: 0.87956786, b: 0.8930817, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.009
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_LinearFogStart: -1552
+  m_LinearFogEnd: 3000
+  m_AmbientSkyColor: {r: 0, g: 0.05448028, b: 0.5520116, a: 1}
+  m_AmbientEquatorColor: {r: 0.53144646, g: 0.7825086, b: 1, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 5660e0d4d6cb0db4995abdf0ef566c8c, type: 2}
   m_HaloStrength: 0.5
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 598679810}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -226,10 +226,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -342,10 +349,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -571,10 +585,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -766,10 +787,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -1120,10 +1148,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -1222,10 +1257,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -1591,10 +1633,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -2466,10 +2515,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -2582,10 +2638,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -2706,10 +2769,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -3361,10 +3431,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -3539,10 +3616,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -3655,10 +3739,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -3849,10 +3940,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -3955,10 +4053,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -4093,10 +4198,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -4209,10 +4321,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -4325,10 +4444,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -4658,10 +4784,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -4883,10 +5016,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -4999,10 +5139,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -5347,7 +5494,7 @@ PrefabInstance:
     - target: {fileID: 7131653786814355205, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5163066fad200de4499c9d1e0eb929b4, type: 2}
+      objectReference: {fileID: 2100000, guid: 99bce00b7ac42a74f88e5797642cc788, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5737,10 +5884,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -5923,10 +6077,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -6153,10 +6314,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -6405,10 +6573,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -6849,10 +7024,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -7047,10 +7229,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -7225,10 +7414,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -8613,10 +8809,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -8991,10 +9194,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -10551,10 +10761,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -10736,10 +10953,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -11322,10 +11546,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -11751,10 +11982,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -11991,10 +12229,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -12236,6 +12481,14 @@ PrefabInstance:
       propertyPath: defaultMusicTrack
       value: Spring_Forward
       objectReference: {fileID: 0}
+    - target: {fileID: 1920061243504398072, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1212698555}
+    - target: {fileID: 1920061243504398072, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMain
+      objectReference: {fileID: 0}
     - target: {fileID: 2075830250284682903, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
       value: 222.35999
@@ -12292,6 +12545,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.16770235
       objectReference: {fileID: 0}
+    - target: {fileID: 3209240807424561271, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: GM
+      value: 
+      objectReference: {fileID: 1080500591}
     - target: {fileID: 3209240807424561271, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: move
       value: 
@@ -12700,6 +12957,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 34.68
       objectReference: {fileID: 0}
+    - target: {fileID: 8585331251289844011, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1212698555}
+    - target: {fileID: 8585331251289844011, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
     - target: {fileID: 9026775156764267604, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_LocalPosition.x
       value: -33.84
@@ -12894,6 +13159,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1607397115676912027, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_Antialiasing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607397115676912027, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_RenderShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607397115676912027, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
@@ -12902,24 +13175,28 @@ PrefabInstance:
       value: -2.7933843
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.z
       value: -33.15
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7204469
+      value: 0.51385903
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000081312095
+      value: -0.5049679
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6935102
+      value: -0.49464643
       objectReference: {fileID: 0}
     - target: {fileID: 1671332079918133618, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000005975679
+      value: -0.48608774
       objectReference: {fileID: 0}
     - target: {fileID: 2621640965754357359, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13051,7 +13328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6567960323035176534, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: far clip plane
-      value: 1000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7573647716419646299, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: text_mode
@@ -13061,6 +13338,10 @@ PrefabInstance:
       propertyPath: text_speed
       value: 
       objectReference: {fileID: 1034044985}
+    - target: {fileID: 8166636639562746853, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+      propertyPath: Lens.FarClipPlane
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 9021141394091064076, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
       propertyPath: key
       value: 
@@ -13613,10 +13894,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -13895,10 +14183,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -14047,6 +14342,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Winterland
       objectReference: {fileID: 0}
+    - target: {fileID: 423414432580152821, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1fa8bb04a21776b4c8b4e9a2f30caf2b, type: 2}
+    - target: {fileID: 423414432580152821, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1246734141821001903, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: player
       value: 
@@ -14153,7 +14456,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2915096840818334460, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: m_MaxSpeed
-      value: 16.36679
+      value: 58.616173
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164266768145691038, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
+      propertyPath: far clip plane
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3960852233605979905, guid: 4179ed4fb520b5b489a10c2890841522, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.size
@@ -17308,10 +17615,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -17855,10 +18169,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -18226,6 +18547,7 @@ Transform:
   - {fileID: 652791989}
   - {fileID: 1316856939}
   - {fileID: 1262208566}
+  - {fileID: 1606791153}
   - {fileID: 2034078708}
   - {fileID: 595939126}
   - {fileID: 1101315914}
@@ -18406,10 +18728,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -18522,10 +18851,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -19227,10 +19563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -19818,10 +20161,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -19934,10 +20284,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -20040,10 +20397,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -20178,10 +20542,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -20272,10 +20643,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -21124,10 +21502,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -21516,10 +21901,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -22175,10 +22567,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -22331,10 +22730,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -22469,10 +22875,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -22649,10 +23062,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -22777,10 +23197,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -23040,10 +23467,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -23224,10 +23658,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -23739,10 +24180,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -23993,7 +24441,7 @@ PrefabInstance:
     - target: {fileID: 7131653786814355205, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5163066fad200de4499c9d1e0eb929b4, type: 2}
+      objectReference: {fileID: 2100000, guid: 99bce00b7ac42a74f88e5797642cc788, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24569,10 +25017,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -24807,10 +25262,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -24985,10 +25447,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -25123,10 +25592,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -25685,10 +26161,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -26117,10 +26600,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -26682,10 +27172,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -27210,10 +27707,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -27326,10 +27830,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -27442,10 +27953,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -27568,7 +28086,7 @@ PrefabInstance:
     - target: {fileID: 7131653786814355205, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5163066fad200de4499c9d1e0eb929b4, type: 2}
+      objectReference: {fileID: 2100000, guid: 99bce00b7ac42a74f88e5797642cc788, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27974,10 +28492,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -28285,10 +28810,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -28851,10 +29383,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -28967,15 +29506,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
   objectsToToggle:
   - {fileID: 114376160}
+--- !u!95 &1168098260 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4451999684378524127, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1168098261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4986483881966032251, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1168663160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29091,10 +29647,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -29215,10 +29778,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -29495,10 +30065,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -29589,10 +30166,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -30078,6 +30662,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1212698555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6005117121889469246, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 586567715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1999bf2ed61202478647228ed0cfbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1217962229
 GameObject:
   m_ObjectHideFlags: 0
@@ -30389,7 +30984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435277555387920863, guid: ea881f23328078a4c8a4918adabbefa2, type: 3}
       propertyPath: defaultMusicTrack
-      value: Spring_Forward
+      value: Winter_Blessing
       objectReference: {fileID: 0}
     - target: {fileID: 9109170245464262721, guid: ea881f23328078a4c8a4918adabbefa2, type: 3}
       propertyPath: m_Name
@@ -30700,10 +31295,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -30816,10 +31418,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -30940,10 +31549,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -31064,10 +31680,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -31242,10 +31865,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -31470,7 +32100,7 @@ PrefabInstance:
     - target: {fileID: 7131653786814355205, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5163066fad200de4499c9d1e0eb929b4, type: 2}
+      objectReference: {fileID: 2100000, guid: 99bce00b7ac42a74f88e5797642cc788, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31736,10 +32366,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -31961,10 +32598,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -32134,7 +32778,7 @@ PrefabInstance:
     - target: {fileID: 7131653786814355205, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5163066fad200de4499c9d1e0eb929b4, type: 2}
+      objectReference: {fileID: 2100000, guid: 99bce00b7ac42a74f88e5797642cc788, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32260,10 +32904,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -32478,10 +33129,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -32713,10 +33371,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -33301,10 +33966,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -33624,10 +34296,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -33762,10 +34441,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -34435,10 +35121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -35081,10 +35774,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -36020,10 +36720,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -36478,10 +37185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -36754,10 +37468,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -37467,10 +38188,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -37702,10 +38430,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -37784,6 +38519,84 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6127872729591928760, guid: 39e30dc0753fc2d43b2b4d50522b724f, type: 3}
   m_PrefabInstance: {fileID: 1606633356}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1606791152
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 650441126}
+    m_Modifications:
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7159
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7159
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7159
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 441.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.57633376
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8172145
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 109.614
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428482592256947418, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: m_Name
+      value: arrow_sign (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131653786814355205, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 99bce00b7ac42a74f88e5797642cc788, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+--- !u!4 &1606791153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5944010949314850400, guid: bfea6d4f6d83b7a4cb96b27c86662800, type: 3}
+  m_PrefabInstance: {fileID: 1606791152}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1622885795
 PrefabInstance:
@@ -38222,10 +39035,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -38407,10 +39227,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -38523,10 +39350,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -38936,10 +39770,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -39074,10 +39915,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -39296,10 +40144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -39490,10 +40345,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -39855,10 +40717,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -40035,10 +40904,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -40548,10 +41424,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -40797,10 +41680,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -40891,10 +41781,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -41037,10 +41934,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -41384,10 +42288,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -41530,10 +42441,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -41983,10 +42901,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -42335,10 +43260,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -42628,10 +43560,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -42826,10 +43765,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -43114,10 +44060,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -43260,10 +44213,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -43458,10 +44418,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -43574,10 +44541,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -43785,10 +44759,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -43965,10 +44946,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -44715,10 +45703,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -44944,10 +45939,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -45060,10 +46062,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -45228,10 +46237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -45725,10 +46741,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -45986,10 +47009,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -46171,10 +47201,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -46287,10 +47324,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -46381,10 +47425,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -46601,10 +47652,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -46799,10 +47857,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -47121,10 +48186,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -47311,10 +48383,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -47417,10 +48496,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -47555,10 +48641,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -47679,10 +48772,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -48100,10 +49200,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -48690,10 +49797,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -48888,10 +50002,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -49061,10 +50182,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -49164,10 +50292,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -49859,10 +50994,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -50344,10 +51486,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -50564,10 +51713,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -50680,10 +51836,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b245d0f130d5451479e9646da3ae49fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 8361566590436268718}
+  deathScreen: {fileID: 0}
   deathCountdown: {fileID: 0}
-  GM: {fileID: 1080500591}
+  GM: {fileID: 0}
+  SFXSource: {fileID: 368859818}
+  deathSFX: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+  deathFaceSFX: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
   countdownTime: 3
+  deathFaceUI: {fileID: 1168098261}
+  deathFaceAnimator: {fileID: 1168098260}
+  delayBeforeDeathFace: 1
+  deathFaceDuration: 10
   scriptsToToggle:
   - {fileID: 399287018}
   - {fileID: 1332585190}
@@ -51622,11 +52785,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &8361566590436268718 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7261115402662333265, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
-  m_PrefabInstance: {fileID: 586567715}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8362649202560456244
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 
 public class Key : MonoBehaviour
