@@ -117,6 +117,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private Coroutine jumpBoostRoutine;
     private Coroutine moveSpeedLerpRoutine;
 
+    [Header("Powerup UI Timers")]
+    public float speedBoostTimeLeft;
+    public float speedBoostMaxTime;
+
+    public float jumpBoostTimeLeft;
+    public float jumpBoostMaxTime;
+
     [Header("References")]
     public NewClimbing climbingScript;
     private ClimbingDone climbingScriptDone;
@@ -194,6 +201,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         wasGroundedLastFrame = false;
         leftGroundSinceLastPound = true;
+
+        speedBoostMultiplier = 1f;
+        jumpBoostMultiplier = 1f;
+
+        speedBoostTimeLeft = 0f;
+        speedBoostMaxTime = 0f;
+
+        jumpBoostTimeLeft = 0f;
+        jumpBoostMaxTime = 0f;
     }
 
     private void OnEnable()
@@ -312,17 +328,14 @@ public class NewThirdPlayerMovement : MonoBehaviour
         anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
         anim.SetBool("isDashing", dashing);
 
-        // New Wall Logic
         anim.SetBool("isWallRunning", wallrunning);
         anim.SetBool("isWallHugging", climbing);
 
-        if (wallrunning)
+        if (wallrunning && wallRunningScript != null)
         {
-            // Logic for detecting which side the wall is on for the Blend Tree
             bool isWallOnLeft = wallRunningScript.wallLeft;
             bool isWallOnRight = wallRunningScript.wallRight;
 
-            // Set the float: -1 for Left, 1 for Right
             float side = 0f;
             if (isWallOnLeft) side = -1f;
             else if (isWallOnRight) side = 1f;
@@ -380,7 +393,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         horizontalInput = moveInputNIS.x;
         verticalInput = moveInputNIS.y;
-        //cayote time gotta test
+
         if (jumpPressedThisFrame)
         {
             jumpBufferCounter = jumpBufferTime;
@@ -425,7 +438,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
             StartCoroutine(GroundPoundRoutine());
         }
 
-        //jumpPressedThisFrame = false;
         groundPoundPressedThisFrame = false;
 
         if (!crouchToggleMode)
@@ -874,8 +886,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (speedBoostRoutine != null)
             StopCoroutine(speedBoostRoutine);
 
-        speedBoostMultiplier = 1f;
-        speedBoostRoutine = StartCoroutine(SpeedBoostRoutine(multiplier, duration));
+        speedBoostMultiplier = multiplier;
+        speedBoostMaxTime = duration;
+        speedBoostTimeLeft = duration;
+
+        speedBoostRoutine = StartCoroutine(SpeedBoostRoutine());
     }
 
     public void ApplyTemporaryJumpBoost(float multiplier, float duration)
@@ -883,22 +898,37 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (jumpBoostRoutine != null)
             StopCoroutine(jumpBoostRoutine);
 
-        jumpBoostMultiplier = 1f;
-        jumpBoostRoutine = StartCoroutine(JumpBoostRoutine(multiplier, duration));
+        jumpBoostMultiplier = multiplier;
+        jumpBoostMaxTime = duration;
+        jumpBoostTimeLeft = duration;
+
+        jumpBoostRoutine = StartCoroutine(JumpBoostRoutine());
     }
 
-    private IEnumerator SpeedBoostRoutine(float multiplier, float duration)
+    private IEnumerator SpeedBoostRoutine()
     {
-        speedBoostMultiplier = multiplier;
-        yield return new WaitForSeconds(duration);
+        while (speedBoostTimeLeft > 0f)
+        {
+            speedBoostTimeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        speedBoostTimeLeft = 0f;
+        speedBoostMaxTime = 0f;
         speedBoostMultiplier = 1f;
         speedBoostRoutine = null;
     }
 
-    private IEnumerator JumpBoostRoutine(float multiplier, float duration)
+    private IEnumerator JumpBoostRoutine()
     {
-        jumpBoostMultiplier = multiplier;
-        yield return new WaitForSeconds(duration);
+        while (jumpBoostTimeLeft > 0f)
+        {
+            jumpBoostTimeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        jumpBoostTimeLeft = 0f;
+        jumpBoostMaxTime = 0f;
         jumpBoostMultiplier = 1f;
         jumpBoostRoutine = null;
     }
@@ -919,5 +949,11 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         speedBoostMultiplier = 1f;
         jumpBoostMultiplier = 1f;
+
+        speedBoostTimeLeft = 0f;
+        speedBoostMaxTime = 0f;
+
+        jumpBoostTimeLeft = 0f;
+        jumpBoostMaxTime = 0f;
     }
 }
