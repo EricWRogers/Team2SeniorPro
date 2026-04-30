@@ -30,7 +30,6 @@ public class StatPickupZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // lets the pickup work if player stands on it after cooldown
         TryApplyPickup(other);
     }
 
