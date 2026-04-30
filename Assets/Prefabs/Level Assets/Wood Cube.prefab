@@ -1271,9 +1271,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: deathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ece4ac0fe91d49a42969a04392bb6a23, type: 3}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: SFXSource
+      value: 
+      objectReference: {fileID: 1017383271047701107}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: deathFaceUI
+      value: 
+      objectReference: {fileID: 4986483881966032251}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: deathFaceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ac3e1e8cbc8bcf942b9837322ec0dd4c, type: 3}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: playerRespawn
       value: 
       objectReference: {fileID: 4148191830779662534}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: deathFaceAnimator
+      value: 
+      objectReference: {fileID: 4451999684378524127}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: deathFaceDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: delayBeforeDeathFace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
       value: 
@@ -1603,9 +1631,19 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 445710508452273605, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 4493068087299199899}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &4451999684378524127 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 257333818905897540, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 4493068087299199899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4643588173466115178 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9091574995200233457, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 4493068087299199899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4986483881966032251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8892666656553633504, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
   m_PrefabInstance: {fileID: 4493068087299199899}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5882338288735438260 stripped

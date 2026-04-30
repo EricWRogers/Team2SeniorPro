@@ -176,17 +176,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
---- !u!114 &108445326 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1725407732565383661, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
-  m_PrefabInstance: {fileID: 108445325}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004675bb28aeeda43826e68903d02123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &202687081
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +552,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002831285}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: f87c893a29397b24988eda842aa4cf60, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 02a296aac7dfee641be72d96b6e77740, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -648,8 +637,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 108445326}
-          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        - m_Target: {fileID: 1190860961}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
           m_Arguments:
@@ -716,8 +705,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 108445326}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 1190860961}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
         m_Arguments:
@@ -915,6 +904,8 @@ GameObject:
   - component: {fileID: 1190860958}
   - component: {fileID: 1190860957}
   - component: {fileID: 1190860956}
+  - component: {fileID: 1190860961}
+  - component: {fileID: 1190860960}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1009,6 +1000,119 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!82 &1190860960
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190860955}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 3357826975369731628, guid: 753027327693e904ebb832c372bef5e5, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1190860961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190860955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ca02db9d40a6545bc1087aa54b4c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundManager
+  sfxSource: {fileID: 1190860960}
+  sfxAssets: {fileID: 11400000, guid: 97e7becc329027243b0d1db7653259a4, type: 2}
+  UnmuteDelay: 2
+  hoverCooldown: 0.15
 --- !u!1 &1222384067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,8 +1209,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 108445326}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 1190860961}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
         m_Arguments:
@@ -1172,8 +1276,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 108445326}
-          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        - m_Target: {fileID: 1190860961}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
           m_Arguments:
