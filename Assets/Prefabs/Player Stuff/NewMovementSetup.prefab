@@ -534,6 +534,20 @@ MonoBehaviour:
   crouchToggleMode: 0
   speedBoostMultiplier: 1
   jumpBoostMultiplier: 1
+  speedBoostTimeLeft: 0
+  speedBoostMaxTime: 0
+  jumpBoostTimeLeft: 0
+  jumpBoostMaxTime: 0
+  speedTrailPrefab: {fileID: 5319164490225928974, guid: b1e1793d67913b944bf49afbdf0fae94, type: 3}
+  speedTrailSpawnPoint: {fileID: 1972529787884859178}
+  speedTrailSpawnRate: 0.08
+  speedTrailLifetime: 0.5
+  onlySpawnSpeedTrailWhileMoving: 1
+  normalLandingParticlePrefab: {fileID: 9200854525567801142, guid: 8646f0b4460750a40ab02cc65b7d4ef2, type: 3}
+  jumpBoostLandingParticlePrefab: {fileID: 0}
+  normalLandingParticleLifetime: 3
+  jumpBoostLandingParticleLifetime: 3
+  jumpBoostLandingScale: 2
   climbingScript: {fileID: 301730769726878209}
   orientation: {fileID: 467439584808613755}
   rb: {fileID: 4703360030634037239}
@@ -605,6 +619,8 @@ MonoBehaviour:
   maxWallRunTime: 4
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  wallLeft: 0
+  wallRight: 0
   exitWallTime: 0.2
   useGravity: 0
   gravityCounterForce: 27
@@ -650,9 +666,10 @@ MonoBehaviour:
   useCameraForward: 1
   allowAllDirections: 1
   disableGravity: 0
-  resetYVel: 1
-  resetFlatVelocity: 1
-  makeDashConsistent: 1
+  resetYVelOnGround: 1
+  preserveAirYMomentum: 1
+  resetFlatVelocityOnGround: 1
+  preserveAirFlatMomentum: 1
   dashCd: 1.5
 --- !u!114 &2487827173279851799
 MonoBehaviour:
