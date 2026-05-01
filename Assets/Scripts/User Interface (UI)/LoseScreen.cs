@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class LoseScreen : MonoBehaviour
 {
@@ -12,7 +13,15 @@ public class LoseScreen : MonoBehaviour
     public AudioSource SFXSource;
     public AudioClip clickSFX;
     public AudioClip loserSFX;
+    public AudioClip timesUpSFX;
     public Timer timer;
+
+    [Header("Times Up Animation")]
+    public GameObject timesUpUI;
+    public Animator timesUpAnimator;
+
+    [Header("Delay Settings")]
+    public float loseDelay = 1.5f;
 
     [Header("Controller/UI")]
     public PlayerInput playerInput;
@@ -23,39 +32,42 @@ public class LoseScreen : MonoBehaviour
 
     public void GameOver()
     {
-        gameOverUI.SetActive(true);
-        D_Rank.SetActive(true);
+        StartCoroutine(LoseSequence());
+        
+    }
 
-        if (D_animator != null)
-            D_animator.SetTrigger("D_Display");
+    private IEnumerator LoseSequence()
+    {
+        if (timesUpAnimator != null)
+        {
+            timesUpAnimator.SetTrigger("TimesUp");
+        }
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        if (SFXSource != null && timesUpSFX != null)
+        {
+            SFXSource.PlayOneShot(timesUpSFX);
+        }
+
         Time.timeScale = 0f;
         GameIsPaused = true;
-
         ToggleGameplayScripts(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
-        if (playerInput == null)
-            playerInput = FindFirstObjectByType<PlayerInput>();
+        if (pauseMenu != null) pauseMenu.enabled = false;
+        if (SoundManager.Instance != null) SoundManager.Instance.SetMusicMuted(true);
 
-        if (playerInput != null)
-            playerInput.SwitchCurrentActionMap("UI");
+        yield return new WaitForSecondsRealtime(loseDelay);
 
-        if (pauseMenu != null)
+        if (timesUpUI != null)
         {
-            pauseMenu.enabled = false;
-            Debug.Log("Pause menu disabled");
+            timesUpUI.SetActive(false);
         }
 
-        if (SoundManager.Instance != null)
-            SoundManager.Instance.SetMusicMuted(true);
+        ShowLoseScreen();
 
-        if (SFXSource != null && loserSFX != null)
-        {
-            SFXSource.PlayOneShot(loserSFX);
-            Debug.Log("Played sound: " + loserSFX.name);
-        }
+        if (playerInput == null) playerInput = FindFirstObjectByType<PlayerInput>();
+        if (playerInput != null) playerInput.SwitchCurrentActionMap("UI");
 
         if (EventSystem.current != null && firstSelectedObject != null)
         {
@@ -63,12 +75,25 @@ public class LoseScreen : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(firstSelectedObject);
         }
     }
+    public void ShowLoseScreen()
+    {
+        gameOverUI.SetActive(true);
+        D_Rank.SetActive(true);
+
+        if (D_animator != null)
+            D_animator.SetTrigger("D_Display");
+        
+        if (SFXSource != null && loserSFX != null)
+        {
+            SFXSource.PlayOneShot(loserSFX);
+        }
+    }
 
     public void Home()
     {
         PlaySound();
         Time.timeScale = 1f;
-        GameManager.Instance.newMap("Main Menu", true);
+        GameManager.Instance.newMap("Squirrel_HUB", true);
     }
 
     public void Restart()

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
@@ -32,7 +31,14 @@ public class NewThirdPlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    private bool readyToJump;
+
+    [Header("Jump Assist")]
+    public float coyoteTime = 0.15f;
+    public float jumpBufferTime = 0.15f;
+
+    private float coyoteTimeCounter;
+    private float jumpBufferCounter;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -52,7 +58,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     [Header("Ground Pound -> Slope Slide")]
     public bool groundPoundBoostOnSlope = true;
-    [Tooltip("Minimum planar speed after landing on a slope. If 0, uses walkSpeed.")]
     public float groundPoundSlopeEnterSpeed = 0f;
 
     private bool groundPounding;
@@ -78,13 +83,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
     [Header("New Input System")]
     public PlayerInput playerInput;
 
-    private InputAction moveAction;
-    private InputAction jumpAction;
-    private InputAction sprintAction;
-    private InputAction crouchAction;
-    private InputAction groundPoundAction;
-    private InputAction slideAction;
-
     private PlayerControlsB controls;
     private Vector2 moveInputNIS;
     private bool sprintHeld;
@@ -107,10 +105,33 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private Coroutine jumpBoostRoutine;
     private Coroutine moveSpeedLerpRoutine;
 
+    [Header("Powerup UI Timers")]
+    public float speedBoostTimeLeft;
+    public float speedBoostMaxTime;
+
+    public float jumpBoostTimeLeft;
+    public float jumpBoostMaxTime;
+
+    [Header("Powerup Visual Effects")]
+    public GameObject speedTrailPrefab;
+    public Transform speedTrailSpawnPoint;
+    public float speedTrailSpawnRate = 0.08f;
+    public float speedTrailLifetime = 0.5f;
+    public bool onlySpawnSpeedTrailWhileMoving = true;
+
+    public GameObject normalLandingParticlePrefab;
+    public GameObject jumpBoostLandingParticlePrefab;
+    public float normalLandingParticleLifetime = 3f;
+    public float jumpBoostLandingParticleLifetime = 3f;
+    public float jumpBoostLandingScale = 2f;
+
+    private float speedTrailTimer;
+
     [Header("References")]
     public NewClimbing climbingScript;
     private ClimbingDone climbingScriptDone;
     private NewSliding slidingScript;
+    private NewWallRunning wallRunningScript;
     public Transform orientation;
     private Animator anim;
 
@@ -118,13 +139,14 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private float groundedGrace = 0.1f;
     private float lastGroundedTime;
 
-    float horizontalInput;
-    float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
 
-    Vector3 moveDirection;
+    private Vector3 moveDirection;
     public Rigidbody rb;
 
     public MovementState state;
+
     public enum MovementState
     {
         freeze,
@@ -150,7 +172,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     public bool freeze;
     public bool unlimited;
-
     public bool restricted;
 
     public TextMeshProUGUI text_speed;
@@ -173,6 +194,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         climbingScriptDone = GetComponent<ClimbingDone>();
         slidingScript = GetComponent<NewSliding>();
+        wallRunningScript = GetComponent<NewWallRunning>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -182,6 +204,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         wasGroundedLastFrame = false;
         leftGroundSinceLastPound = true;
+
+        speedBoostMultiplier = 1f;
+        jumpBoostMultiplier = 1f;
+
+        speedBoostTimeLeft = 0f;
+        speedBoostMaxTime = 0f;
+
+        jumpBoostTimeLeft = 0f;
+        jumpBoostMaxTime = 0f;
     }
 
     private void OnEnable()
@@ -220,7 +251,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.6f, whatIsGround, QueryTriggerInteraction.Ignore);
+        grounded = Physics.Raycast(
+            transform.position,
+            Vector3.down,
+            playerHeight * 0.5f + 0.6f,
+            whatIsGround,
+            QueryTriggerInteraction.Ignore
+        );
 
         if (groundPoundCooldownTimer > 0f)
             groundPoundCooldownTimer -= Time.deltaTime;
@@ -233,6 +270,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         StateHandler();
         UpdateAnimator();
         TextStuff();
+        HandlePowerupVisuals();
 
         if (grounded && !wasGroundedLastFrame)
         {
@@ -264,14 +302,46 @@ public class NewThirdPlayerMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0f, rot.y, 0f);
     }
 
+    private void HandlePowerupVisuals()
+    {
+        bool speedBoostActive = speedBoostTimeLeft > 0f;
+
+        if (!speedBoostActive) return;
+        if (speedTrailPrefab == null) return;
+
+        if (onlySpawnSpeedTrailWhileMoving)
+        {
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            if (flatVel.magnitude < 0.1f) return;
+        }
+
+        speedTrailTimer -= Time.deltaTime;
+
+        if (speedTrailTimer <= 0f)
+        {
+            speedTrailTimer = speedTrailSpawnRate;
+
+            Vector3 spawnPos = speedTrailSpawnPoint != null
+                ? speedTrailSpawnPoint.position
+                : transform.position - transform.forward * 0.5f;
+
+            Quaternion spawnRot = speedTrailSpawnPoint != null
+                ? speedTrailSpawnPoint.rotation
+                : transform.rotation;
+
+            GameObject trail = Instantiate(speedTrailPrefab, spawnPos, spawnRot);
+
+            if (speedTrailLifetime > 0f)
+                Destroy(trail, speedTrailLifetime);
+        }
+    }
+
     private void UpdateAnimator()
     {
         if (anim == null) return;
 
         if (grounded)
-        {
             lastGroundedTime = Time.time;
-        }
 
         bool groundedRecently = Time.time - lastGroundedTime < groundedGrace;
 
@@ -282,13 +352,9 @@ public class NewThirdPlayerMovement : MonoBehaviour
         bool isJumping = !grounded && rb.linearVelocity.y > 0.1f;
 
         if (!grounded && isFalling && !groundPounding)
-        {
             fallTimer += Time.deltaTime;
-        }
         else
-        {
             fallTimer = 0f;
-        }
 
         anim.SetBool("isGrounded", groundedRecently);
         anim.SetBool("isWalking", grounded && isMoving && state == MovementState.walking);
@@ -298,6 +364,22 @@ public class NewThirdPlayerMovement : MonoBehaviour
         anim.SetBool("isCrouch", crouching);
         anim.SetBool("isSit", sliding || groundPounding);
         anim.SetBool("isDive", !grounded && fallTimer >= timeBeforeDive);
+        anim.SetBool("isDashing", dashing);
+
+        anim.SetBool("isWallRunning", wallrunning);
+        anim.SetBool("isWallHugging", climbing);
+
+        if (wallrunning && wallRunningScript != null)
+        {
+            bool isWallOnLeft = wallRunningScript.wallLeft;
+            bool isWallOnRight = wallRunningScript.wallRight;
+
+            float side = 0f;
+            if (isWallOnLeft) side = -1f;
+            else if (isWallOnRight) side = 1f;
+
+            anim.SetFloat("wallSide", side);
+        }
     }
 
     private void OnSprintStarted(InputAction.CallbackContext _)
@@ -319,7 +401,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (crouchToggleMode)
         {
             bool targetState = !crouchToggled;
-
             bool success = ApplyCrouchState(targetState);
 
             if (success)
@@ -337,8 +418,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
             crouchHeld = false;
     }
 
-    private void OnJumpStarted(InputAction.CallbackContext _) => jumpPressedThisFrame = true;
-    private void OnGroundPoundStarted(InputAction.CallbackContext _) => groundPoundPressedThisFrame = true;
+    private void OnJumpStarted(InputAction.CallbackContext _)
+    {
+        jumpPressedThisFrame = true;
+    }
+
+    private void OnGroundPoundStarted(InputAction.CallbackContext _)
+    {
+        groundPoundPressedThisFrame = true;
+    }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
@@ -350,12 +438,30 @@ public class NewThirdPlayerMovement : MonoBehaviour
         horizontalInput = moveInputNIS.x;
         verticalInput = moveInputNIS.y;
 
-        if (jumpPressedThisFrame && readyToJump && grounded)
+        if (jumpPressedThisFrame)
         {
+            jumpBufferCounter = jumpBufferTime;
             jumpPressedThisFrame = false;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        if (grounded)
+            coyoteTimeCounter = coyoteTime;
+        else
+            coyoteTimeCounter -= Time.deltaTime;
+
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && readyToJump)
+        {
             readyToJump = false;
 
             Jump();
+
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
+
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
@@ -372,20 +478,15 @@ public class NewThirdPlayerMovement : MonoBehaviour
             StartCoroutine(GroundPoundRoutine());
         }
 
-        jumpPressedThisFrame = false;
         groundPoundPressedThisFrame = false;
 
         if (!crouchToggleMode)
         {
             if (crouchHeld && !crouching && Mathf.Abs(horizontalInput) < 0.001f && Mathf.Abs(verticalInput) < 0.001f)
-            {
                 ApplyCrouchState(true);
-            }
 
             if (!crouchHeld && crouching)
-            {
                 ApplyCrouchState(false);
-            }
         }
     }
 
@@ -481,6 +582,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
+
         if (desiredMoveSpeedHasChanged)
         {
             if (keepMomentum)
@@ -497,12 +599,14 @@ public class NewThirdPlayerMovement : MonoBehaviour
         }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
-        if (Mathf.Abs(desiredMoveSpeed - moveSpeed) < 0.1f) keepMomentum = false;
+
+        if (Mathf.Abs(desiredMoveSpeed - moveSpeed) < 0.1f)
+            keepMomentum = false;
     }
 
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
-        float time = 0;
+        float time = 0f;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
 
@@ -516,7 +620,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
             if (OnSlope())
             {
                 float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
-                float slopeAngleIncrease = 1 + (slopeAngle / 90f);
+                float slopeAngleIncrease = 1f + (slopeAngle / 90f);
                 time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
             }
             else
@@ -550,7 +654,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
         {
             rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
 
-            if (rb.linearVelocity.y > 0)
+            if (rb.linearVelocity.y > 0f)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
         else if (grounded)
@@ -578,21 +682,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        if (OnSlope() && !exitingSlope)
+        if (flatVel.magnitude > moveSpeed)
         {
-            if (flatVel.magnitude > moveSpeed)
-            {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-            }
-        }
-        else
-        {
-            if (flatVel.magnitude > moveSpeed)
-            {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-            }
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
 
@@ -624,7 +717,6 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, whatIsGround, QueryTriggerInteraction.Ignore))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            Debug.Log("Slope Angle:" + angle);
             return angle < maxSlopeAngle && angle > 0.1f;
         }
 
@@ -659,22 +751,29 @@ public class NewThirdPlayerMovement : MonoBehaviour
     private IEnumerator GroundPoundRoutine()
     {
         groundPounding = true;
-
         rb.useGravity = true;
 
         Vector3 v = rb.linearVelocity;
-        if (v.y > 0f) v.y = 0f;
+
+        if (v.y > 0f)
+            v.y = 0f;
+
         v.x *= 0.6f;
         v.z *= 0.6f;
+
         rb.linearVelocity = v;
 
         float t = 0f;
+
         while (t < groundPoundWindup && !grounded)
         {
             t += Time.deltaTime;
 
             Vector3 vv = rb.linearVelocity;
-            if (vv.y > 0f) vv.y = 0f;
+
+            if (vv.y > 0f)
+                vv.y = 0f;
+
             rb.linearVelocity = vv;
 
             yield return null;
@@ -689,18 +788,47 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         if (climbing || vaulting || wallrunning) return;
 
+        SpawnLandingPowerupParticle();
+
+        if (groundPounding)
+            GroundPoundImpact();
+    }
+
+    private void SpawnLandingPowerupParticle()
+    {
+        bool jumpBoostActive = jumpBoostTimeLeft > 0f;
+
+        GameObject particlePrefab = jumpBoostActive
+            ? jumpBoostLandingParticlePrefab
+            : normalLandingParticlePrefab;
+
+        Vector3 spawnPos = transform.position - new Vector3(0f, playerHeight * 0.3f, 0f);
+        Quaternion spawnRot = Quaternion.Euler(90f, 0f, 0f);
+
+        if (particlePrefab != null)
+        {
+            GameObject particle = Instantiate(particlePrefab, spawnPos, spawnRot);
+
+            if (jumpBoostActive)
+                particle.transform.localScale *= jumpBoostLandingScale;
+
+            float lifetime = jumpBoostActive
+                ? jumpBoostLandingParticleLifetime
+                : normalLandingParticleLifetime;
+
+            if (lifetime > 0f)
+                Destroy(particle, lifetime);
+
+            return;
+        }
+
         if (ParticleManager.Instance != null)
         {
             ParticleManager.Instance.SpawnParticle(
                 "LandingParticleEffect",
-                transform.position - new Vector3(0, playerHeight * 0.3f, 0),
-                Quaternion.Euler(90, 0, 0)
+                spawnPos,
+                spawnRot
             );
-        }
-
-        if (groundPounding)
-        {
-            GroundPoundImpact();
         }
     }
 
@@ -718,6 +846,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
             Vector3 normal = slopeHit.normal;
             Vector3 downhill = Vector3.ProjectOnPlane(Vector3.down, normal).normalized;
+
             if (downhill.sqrMagnitude < 0.001f)
                 downhill = Vector3.ProjectOnPlane(orientation.forward, normal).normalized;
 
@@ -725,6 +854,7 @@ public class NewThirdPlayerMovement : MonoBehaviour
             Vector3 planar = Vector3.ProjectOnPlane(v, normal);
 
             float alongDownhill = Vector3.Dot(planar, downhill);
+
             if (planar.sqrMagnitude < 0.01f || alongDownhill < 0.1f)
                 planar = downhill * minEnterSpeed;
 
@@ -732,7 +862,9 @@ public class NewThirdPlayerMovement : MonoBehaviour
                 planar = planar.normalized * minEnterSpeed;
 
             float newY = v.y;
-            if (newY < 0f) newY = 0f;
+
+            if (newY < 0f)
+                newY = 0f;
 
             rb.linearVelocity = new Vector3(planar.x, newY, planar.z);
 
@@ -754,7 +886,10 @@ public class NewThirdPlayerMovement : MonoBehaviour
         else
         {
             Vector3 vv = rb.linearVelocity;
-            if (vv.y < 0f) vv.y = 0f;
+
+            if (vv.y < 0f)
+                vv.y = 0f;
+
             rb.linearVelocity = vv;
         }
     }
@@ -800,7 +935,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         sprintToggleMode = on;
 
-        if (!on) sprintToggled = false;
+        if (!on)
+            sprintToggled = false;
 
         PlayerPrefs.SetInt("SprintToggleMode", on ? 1 : 0);
         PlayerPrefs.Save();
@@ -810,7 +946,8 @@ public class NewThirdPlayerMovement : MonoBehaviour
     {
         crouchToggleMode = on;
 
-        if (!on) crouchToggled = false;
+        if (!on)
+            crouchToggled = false;
 
         PlayerPrefs.SetInt("CrouchToggleMode", on ? 1 : 0);
         PlayerPrefs.Save();
@@ -821,8 +958,12 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (speedBoostRoutine != null)
             StopCoroutine(speedBoostRoutine);
 
-        speedBoostMultiplier = 1f;
-        speedBoostRoutine = StartCoroutine(SpeedBoostRoutine(multiplier, duration));
+        speedBoostMultiplier = multiplier;
+        speedBoostMaxTime = duration;
+        speedBoostTimeLeft = duration;
+        speedTrailTimer = 0f;
+
+        speedBoostRoutine = StartCoroutine(SpeedBoostRoutine());
     }
 
     public void ApplyTemporaryJumpBoost(float multiplier, float duration)
@@ -830,22 +971,37 @@ public class NewThirdPlayerMovement : MonoBehaviour
         if (jumpBoostRoutine != null)
             StopCoroutine(jumpBoostRoutine);
 
-        jumpBoostMultiplier = 1f;
-        jumpBoostRoutine = StartCoroutine(JumpBoostRoutine(multiplier, duration));
+        jumpBoostMultiplier = multiplier;
+        jumpBoostMaxTime = duration;
+        jumpBoostTimeLeft = duration;
+
+        jumpBoostRoutine = StartCoroutine(JumpBoostRoutine());
     }
 
-    private IEnumerator SpeedBoostRoutine(float multiplier, float duration)
+    private IEnumerator SpeedBoostRoutine()
     {
-        speedBoostMultiplier = multiplier;
-        yield return new WaitForSeconds(duration);
+        while (speedBoostTimeLeft > 0f)
+        {
+            speedBoostTimeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        speedBoostTimeLeft = 0f;
+        speedBoostMaxTime = 0f;
         speedBoostMultiplier = 1f;
         speedBoostRoutine = null;
     }
 
-    private IEnumerator JumpBoostRoutine(float multiplier, float duration)
+    private IEnumerator JumpBoostRoutine()
     {
-        jumpBoostMultiplier = multiplier;
-        yield return new WaitForSeconds(duration);
+        while (jumpBoostTimeLeft > 0f)
+        {
+            jumpBoostTimeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        jumpBoostTimeLeft = 0f;
+        jumpBoostMaxTime = 0f;
         jumpBoostMultiplier = 1f;
         jumpBoostRoutine = null;
     }
@@ -866,5 +1022,13 @@ public class NewThirdPlayerMovement : MonoBehaviour
 
         speedBoostMultiplier = 1f;
         jumpBoostMultiplier = 1f;
+
+        speedBoostTimeLeft = 0f;
+        speedBoostMaxTime = 0f;
+
+        jumpBoostTimeLeft = 0f;
+        jumpBoostMaxTime = 0f;
+
+        speedTrailTimer = 0f;
     }
 }

@@ -17,11 +17,28 @@ public class SoundManager : MonoBehaviour
     public GameObject spawnableAudioSourcePrefab;
 
     public float UnmuteDelay = 2f; // adjust in Inspector
+    private float lastPlayTime;
+    public float hoverCooldown = 0.15f;
 
     public void PlayMusic(AudioClip clip)
     {
         musicSource.clip = clip;
         musicSource.Play();
+    }
+
+    public void PlayButtonSFX(AudioClip clip)
+    {
+        if (clip == null) return;
+        sfxSource.clip = clip;
+        sfxSource.PlayOneShot(clip);
+        lastPlayTime = Time.unscaledTime; // Mark the time of when played
+    }
+
+    public void PlayHoverSFX(AudioClip clip)
+    {
+        // If the button was just clicked, ignore hover sounds for a split second
+        if (Time.unscaledTime - lastPlayTime < hoverCooldown) return;
+        sfxSource.PlayOneShot(clip);
     }
 
     public void PlaySFX(string audioClipName, float volume = 1f, Vector3 position = default)
@@ -131,6 +148,12 @@ public class SoundManager : MonoBehaviour
             musicSource.mute = muted;
     }
 
+    public void SetSFXMuted(bool muted)
+    {
+        if (sfxSource != null)
+            sfxSource.mute = muted;
+    }
+
     public bool IsMusicMuted()
     {
         return musicSource != null && musicSource.mute;
@@ -140,6 +163,18 @@ public class SoundManager : MonoBehaviour
     {
         StopAllCoroutines(); // prevents stacking delays
         StartCoroutine(UnmuteMusicAfterDelay());
+    }
+
+    public void UnmuteSFXDelayed()
+    {
+        StopAllCoroutines(); // prevents stacking delays
+        StartCoroutine(UnmuteSFXAfterDelay());
+    }
+
+    public IEnumerator UnmuteSFXAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(UnmuteDelay);
+        SetSFXMuted(false);
     }
 
     private IEnumerator UnmuteMusicAfterDelay()
