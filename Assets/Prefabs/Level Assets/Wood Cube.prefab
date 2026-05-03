@@ -791,6 +791,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23c936dd032f07647a07091930438504, type: 3}
+--- !u!114 &1222066312218204930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 122986405392975446, guid: 23c936dd032f07647a07091930438504, type: 3}
+  m_PrefabInstance: {fileID: 1243355983302516052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e6292216df55e47b00d9537efb6b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7141960898635560287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8240494631582476299, guid: 23c936dd032f07647a07091930438504, type: 3}
@@ -1296,11 +1307,15 @@ PrefabInstance:
       objectReference: {fileID: 4451999684378524127}
     - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: deathFaceDuration
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: delayBeforeDeathFace
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: scriptsToToggle.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: 'objectsToToggle.Array.data[0]'
@@ -1314,6 +1329,10 @@ PrefabInstance:
       propertyPath: 'scriptsToToggle.Array.data[1]'
       value: 
       objectReference: {fileID: 7398477127328121725}
+    - target: {fileID: 7057041615155542442, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1222066312218204930}
     - target: {fileID: 8208234980504317363, guid: a4213e49e49e6bd4fbfc0c1796166e66, type: 3}
       propertyPath: m_Name
       value: Killbox
