@@ -2188,6 +2188,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1248891697}
     m_Modifications:
+    - target: {fileID: 777873440861047553, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: m_Size.x
+      value: 59.627052
+      objectReference: {fileID: 0}
+    - target: {fileID: 777873440861047553, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: m_Size.y
+      value: 24.393803
+      objectReference: {fileID: 0}
+    - target: {fileID: 777873440861047553, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: m_Size.z
+      value: 33.72159
+      objectReference: {fileID: 0}
+    - target: {fileID: 777873440861047553, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: m_Center.x
+      value: 15.550484
+      objectReference: {fileID: 0}
+    - target: {fileID: 777873440861047553, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: m_Center.y
+      value: 11.091906
+      objectReference: {fileID: 0}
+    - target: {fileID: 777873440861047553, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: m_Center.z
+      value: -2.8601227
+      objectReference: {fileID: 0}
     - target: {fileID: 2957754381547557751, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
       propertyPath: m_VideoClip
       value: 
@@ -2340,6 +2364,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level2Video
       objectReference: {fileID: 0}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1585394376}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: exitPromptObj
+      value: 
+      objectReference: {fileID: 791672754}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: 'objectsToDisable.Array.data[0]'
+      value: 
+      objectReference: {fileID: 952994375}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: 'objectsToDisable.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1872501830}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: 'objectsToDisable.Array.data[2]'
+      value: 
+      objectReference: {fileID: 952994373}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: 'scriptsToDisable.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1010989709}
+    - target: {fileID: 7785879023622873908, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
+      propertyPath: 'scriptsToDisable.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1521777885}
     - target: {fileID: 8805918743674548095, guid: 12386714c49442940bb8d6fc6728fca9, type: 3}
       propertyPath: m_Texture
       value: 
@@ -27246,6 +27298,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4034732487474241418, guid: 67fd2a47cbd75534ab5d0fb30fc9f1e2, type: 3}
   m_PrefabInstance: {fileID: 212638074}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &791672754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2455216502987450003, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
+  m_PrefabInstance: {fileID: 952994362}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &791851035
 GameObject:
@@ -53158,6 +53215,11 @@ MonoBehaviour:
 --- !u!1 &1585394375 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6485134007481648012, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
+  m_PrefabInstance: {fileID: 1585394371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1585394376 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6567960323035176534, guid: cfb9b2abff35b1f4f80af194eb4db652, type: 3}
   m_PrefabInstance: {fileID: 1585394371}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1592288753
