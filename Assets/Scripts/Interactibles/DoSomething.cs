@@ -17,7 +17,7 @@ public class DoSomething : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Acorn"))
+        if (other.CompareTag("Acorn") || other.CompareTag("Ball"))
         {
             if (objectsToEnable != null && enable == true)
             {
