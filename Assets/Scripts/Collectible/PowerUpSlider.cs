@@ -61,6 +61,15 @@ public class PowerupSliderUI : MonoBehaviour
         }
 
         slider.maxValue = maxTime;
-        slider.value = timeLeft;
+
+        // If timeLeft is exactly maxTime, ensure the sldie stays at full
+        if (timeLeft >= maxTime)
+        {
+            slider.value = maxTime;
+        }
+        else
+        {
+            slider.value = timeLeft;
+        }
     }
 }
