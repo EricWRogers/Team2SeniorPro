@@ -49,27 +49,14 @@ public class PowerupSliderUI : MonoBehaviour
                 break;
         }
 
-        bool active = timeLeft > 0f && maxTime > 0f;
+        bool active = timeLeft > 0f;
 
         if (sliderRoot != null && hideWhenInactive)
             sliderRoot.SetActive(active);
 
-        if (!active)
-        {
-            slider.value = 0f;
-            return;
-        }
+        if (!active) return;
 
         slider.maxValue = maxTime;
-
-        // If timeLeft is exactly maxTime, ensure the sldie stays at full
-        if (timeLeft >= maxTime)
-        {
-            slider.value = maxTime;
-        }
-        else
-        {
-            slider.value = timeLeft;
-        }
+        slider.value = timeLeft;
     }
 }
