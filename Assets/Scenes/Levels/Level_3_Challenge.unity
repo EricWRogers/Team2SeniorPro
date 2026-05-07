@@ -3223,6 +3223,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.000000002295804
       objectReference: {fileID: 0}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 800314948}
+    - target: {fileID: 6589962277659346255, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+      propertyPath: 'scriptsToToggle.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7411364545958861198, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3272,6 +3280,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+--- !u!1 &800314948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7261115402662333265, guid: b49963e86bca1b54791de3eeff0fe780, type: 3}
+  m_PrefabInstance: {fileID: 800314947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &822613670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5065,7 +5078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1218792051
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5073,7 +5086,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218792050}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1218792052
 Camera:
   m_ObjectHideFlags: 0
