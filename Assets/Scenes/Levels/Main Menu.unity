@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a6ba51494151c4197dfbefbb4b55ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIControllerNavigation
-  firstSelectedButton: {fileID: 1384146221}
+  firstSelectedButton: {fileID: 1148999789}
 --- !u!1 &91837583
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 697451277}
+      - m_Target: {fileID: 1469061387}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
@@ -673,7 +673,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 697451277}
+        - m_Target: {fileID: 1469061387}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
@@ -702,7 +702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &123062340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,7 +1058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &506272343
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1591,17 +1591,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684640786}
   m_CullTransparentMesh: 1
---- !u!114 &697451277 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1725407732565383661, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
-  m_PrefabInstance: {fileID: 704677929}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004675bb28aeeda43826e68903d02123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &704677929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1610,6 +1599,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4308985530257365924, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725407732565383661, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5032191729609155891, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1653,6 +1650,10 @@ PrefabInstance:
     - target: {fileID: 6572310589110225400, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572310589110225400, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1831,7 +1832,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 697451277}
+      - m_Target: {fileID: 1469061387}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
@@ -1920,7 +1921,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 697451277}
+        - m_Target: {fileID: 1469061387}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
@@ -2202,7 +2203,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 697451277}
+      - m_Target: {fileID: 1469061387}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
@@ -2291,7 +2292,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 697451277}
+        - m_Target: {fileID: 1469061387}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
@@ -2690,7 +2691,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 697451277}
+      - m_Target: {fileID: 1469061387}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
@@ -2779,7 +2780,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 697451277}
+        - m_Target: {fileID: 1469061387}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
@@ -2827,7 +2828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -426, y: 36.99997}
+  m_AnchoredPosition: {x: -425.99994, y: 36.99997}
   m_SizeDelta: {x: 0, y: 13.312}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1291401287
@@ -2987,7 +2988,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 697451277}
+      - m_Target: {fileID: 1469061387}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
@@ -3054,7 +3055,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 697451277}
+        - m_Target: {fileID: 1469061387}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
@@ -3162,7 +3163,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 697451277}
+      - m_Target: {fileID: 1469061387}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 2
@@ -3229,7 +3230,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 697451277}
+        - m_Target: {fileID: 1469061387}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
           m_MethodName: PlayHoverSFX
           m_Mode: 2
@@ -3275,7 +3276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6, y: -2}
+  m_AnchoredPosition: {x: -6, y: -1.999999}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1429626001
@@ -3378,6 +3379,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429625999}
   m_CullTransparentMesh: 1
+--- !u!114 &1469061387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1022547782321540429, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+  m_PrefabInstance: {fileID: 2122488445736524385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004675bb28aeeda43826e68903d02123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1555007650
 GameObject:
   m_ObjectHideFlags: 0
@@ -4323,6 +4335,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISelectOnEnable
   firstSelectedObject: {fileID: 1384621195}
+--- !u!1001 &2122488445736524385
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5514018542410830786, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -104.62502
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 371.1242
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4332,4 +4401,5 @@ SceneRoots:
   - {fileID: 54202042}
   - {fileID: 123062342}
   - {fileID: 704677929}
+  - {fileID: 2122488445736524385}
   - {fileID: 1086327649}

@@ -11,21 +11,10 @@ public class CollectibleScript : MonoBehaviour
     [Header("References")]
     public Animator animator;
     public GameObject collectParticles;
-    public SoundManager SM;
-    public GameManager GM;
     public string collectSound;
 
     void Awake()
     {
-        if (SM == null)
-        {
-            SM = FindFirstObjectByType<SoundManager>();
-            if (SM == null)
-            {
-                Debug.LogError("No SoundManager found in scene!");
-            }
-        }
-
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
@@ -50,14 +39,6 @@ public class CollectibleScript : MonoBehaviour
                 {
                     Destroy(transform.parent.gameObject);
                 }
-            }
-        }
-        if (GM == null)
-        {
-            GM = FindFirstObjectByType<GameManager>();
-            if (GM == null)
-            {
-                Debug.LogError("No GameManager found in scene!");
             }
         }
     }
@@ -104,14 +85,32 @@ public class CollectibleScript : MonoBehaviour
             }
         }
 
-        if (SM != null)
-            {
-                SM.PlaySFX(collectSound, 1);
-            }
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySFX(collectSound, 1);
+        }
+        else
+        {
+            Debug.LogWarning("SoundManager instance not found. Cannot play collect sound.");
+        }
 
         if (animator != null) 
         {
             animator.SetTrigger("BerryCollect");
+        }
+
+        // Record the berry as collected in the GameManager
+        if (GameManager.Instance != null)
+        {
+            if (countsTowardTotal)
+            {
+                GameManager.Instance.CollectBerry(berryID);
+            }
+            else
+            {
+                // For berries that don't count toward the total, you might still want to track them
+                GameManager.Instance.collectibleCount++;
+            }
         }
 
         if (countsTowardTotal)

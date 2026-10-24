@@ -20,8 +20,16 @@ public class DialogManager : MonoBehaviour
 
     void Start()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null) 
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         if (dialogCanvas == null) dialogCanvas = GetComponentInParent<Canvas>();
         

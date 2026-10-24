@@ -5819,7 +5819,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -8139,7 +8139,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -26514,7 +26514,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -32710,7 +32710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 656431455488170902, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 935795761772418939, guid: 75d96e9e5e8805045b302d7c25e0afb6, type: 3}
       propertyPath: m_Name
@@ -35100,17 +35100,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
---- !u!114 &1021782970 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1725407732565383661, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
-  m_PrefabInstance: {fileID: 1021782969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004675bb28aeeda43826e68903d02123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1021782974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -4308985530257365924, guid: c788bcc3703313c4aa18abc1bc26b902, type: 3}
@@ -43262,7 +43251,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -44585,7 +44574,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -52148,6 +52137,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6127872729591928760, guid: 1cdce38f857c1f84f8d96759ccebe175, type: 3}
   m_PrefabInstance: {fileID: 1563729151}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1565015883
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5514018542410830786, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38.98936
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24.99542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 138.21936
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963185635674883606, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2db374772e404143ab3d750f82fbf80, type: 3}
 --- !u!1 &1566168867
 GameObject:
   m_ObjectHideFlags: 0
@@ -60579,7 +60625,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -60802,7 +60848,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -64945,7 +64991,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -65055,7 +65101,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -66764,7 +66810,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -70296,7 +70342,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -70729,7 +70775,7 @@ PrefabInstance:
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: SM
       value: 
-      objectReference: {fileID: 1021782970}
+      objectReference: {fileID: 0}
     - target: {fileID: 1113499633065182351, guid: 794bc6a7cb6bf1148a54485827efbe58, type: 3}
       propertyPath: JPAudio
       value: sproing
@@ -73528,6 +73574,7 @@ SceneRoots:
   - {fileID: 1500518947}
   - {fileID: 1075612772}
   - {fileID: 1021782969}
+  - {fileID: 1565015883}
   - {fileID: 2145638368}
   - {fileID: 557956283}
   - {fileID: 1814708791}
