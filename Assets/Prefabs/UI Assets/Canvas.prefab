@@ -6030,10 +6030,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerupSliderUI
   playerMovement: {fileID: 0}
-  sliderRoot: {fileID: 6458016477387328859}
+  sliderVisualsContainer: {fileID: 0}
   slider: {fileID: 5251355100936205238}
   powerupType: 0
   hideWhenInactive: 1
+  barDrainSpeed: 10
+  animationPopSpeed: 8
+  sliderFillImage: {fileID: 4982477007807197327}
+  normalColor: {r: 0.7058824, g: 0.69411767, b: 0.10588236, a: 1}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  criticalTimeThreshold: 1.2
+  flashSpeed: 15
 --- !u!114 &456448913928478232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6047,10 +6054,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerupSliderUI
   playerMovement: {fileID: 0}
-  sliderRoot: {fileID: 4974531401099122569}
+  sliderVisualsContainer: {fileID: 0}
   slider: {fileID: 6586885499232789453}
   powerupType: 1
   hideWhenInactive: 1
+  barDrainSpeed: 10
+  animationPopSpeed: 8
+  sliderFillImage: {fileID: 1259927139314855668}
+  normalColor: {r: 0.73333335, g: 0.21960786, b: 0.10980393, a: 1}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  criticalTimeThreshold: 1.2
+  flashSpeed: 15
 --- !u!1 &5478646542682930409
 GameObject:
   m_ObjectHideFlags: 0

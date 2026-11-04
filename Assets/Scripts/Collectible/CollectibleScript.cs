@@ -1,6 +1,10 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class CollectibleScript : MonoBehaviour
 {
@@ -28,9 +32,15 @@ public class CollectibleScript : MonoBehaviour
     private void Start()
     {
         if (countsTowardTotal) {
-            // Fallback: if you forget to set the berryID, use its position as an ID
+            // Fallback: If you forget to manually type an ID, generate a standarized, stable one.
+            // Using integer rounding (Mathf.RoundToInt) ensures float precision issues within builds that won't mismatch ID strings.
             if (string.IsNullOrEmpty(berryID))
-                berryID = SceneManager.GetActiveScene().name + "_" + gameObject.name + transform.position.ToString();
+            {
+                int x = Mathf.RoundToInt(transform.position.x);
+                int y = Mathf.RoundToInt(transform.position.y);
+                int z = Mathf.RoundToInt(transform.position.z);
+                berryID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}_{x}_{y}_{z}";
+            }
 
             if (GameManager.Instance != null)
             {
@@ -38,6 +48,7 @@ public class CollectibleScript : MonoBehaviour
                 if (GameManager.Instance.IsBerryCollected(berryID))
                 {
                     Destroy(transform.parent.gameObject);
+                    return; // Stop further processing if the berry has already been collected - prevents duplicate collection logic from Start()
                 }
             }
         }
@@ -53,7 +64,10 @@ public class CollectibleScript : MonoBehaviour
         {
             // Generate an ID that includes the object name and its position
             // This ensures two berries or more berries in the same scene have different IDs
-            berryID = $"{gameObject.name}_{transform.position.x}_{transform.position.y}_{transform.position.z}";
+            int x = Mathf.RoundToInt(transform.position.x);
+            int y = Mathf.RoundToInt(transform.position.y);
+            int z = Mathf.RoundToInt(transform.position.z);
+            berryID = $"{gameObject.name}_{x}_{y}_{z}";
            
             #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
