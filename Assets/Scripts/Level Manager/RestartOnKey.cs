@@ -163,7 +163,7 @@ public class RestartOnKey : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), true);
+            GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false);
         }
 
         ResetHoldVisualsImmediate();

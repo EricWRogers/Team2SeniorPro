@@ -133,7 +133,7 @@ public class KillVolume : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), false);
+            GameManager.Instance.newMap(GameManager.Instance.GetCurrentScene(), true);
         }
         else
         {
