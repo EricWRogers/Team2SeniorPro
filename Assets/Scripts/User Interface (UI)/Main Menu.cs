@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement; // Added to allow direct loading if GM is missing
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,11 +18,21 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        GameManager.Instance.newMap("IntroScene", true);
         Debug.Log("Play button pressed, loading game...");
 
         if (SoundManager.Instance != null)
             SoundManager.Instance.SetMusicMuted(true);
+
+        // BULLETPROOF CHECK: If the GameManager exists, use it. If not, bypass it entirely!
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.newMap("IntroScene", true);
+        }
+        else
+        {
+            Debug.LogWarning("GameManager not found in Main Menu. Falling back to direct scene load.");
+            SceneManager.LoadScene("IntroScene");
+        }
     }
 
     public void Options(GameObject optionsMenu)

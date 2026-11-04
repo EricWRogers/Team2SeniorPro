@@ -16,6 +16,46 @@ public class GameManager : MonoBehaviour
 
     public int PermaBerryCount => collectedBerryIDs.Count;
 
+    public void Awake()
+    {
+        if (Instance == null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (QualitySettings.vSyncCount == 0)
+        {
+            Application.targetFrameRate = frameRate;
+        }
+
+        // Keep the baseline initilization
+        LoadBerryData();
+    }
+
+    private void OnEnable()
+    {
+        // NEW BUILD PROTECTION: Tell Unity to re-load our berry list automatically
+        // every single time any map finishes loading.
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Clean up the event delegate when the GameManager gets disabled/destroyed 
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // This method executes automatically right as a scene finishes spinning up 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"Scene Loaded: {scene.name}. Refreshing persistent collected items list.");
+        LoadBerryData(); // Forces standalone memory threads to pull data down fresh from the disk
+    }
+
     public void CollectBerry(string id)
     {
         if (!collectedBerryIDs.Contains(id))
@@ -50,6 +90,12 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("SavedBerries"))
         {
             string berryData = PlayerPrefs.GetString("SavedBerries");
+
+            if (string.IsNullOrEmpty(berryData))
+            {
+                Debug.LogWarning("LoadBerryData: PlayerPrefs key exists but returned blank. Skipping clear.");
+            }
+
             string[] splitIDs = berryData.Split(",");
 
             collectedBerryIDs.Clear();
@@ -68,8 +114,9 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Reset All Progress")]
     public void ResetBerryData()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("SavedBerries");
         collectedBerryIDs.Clear();
+        totalCollectibles = 0;
         Debug.Log("All progress reset. Berry data cleared.");
     }
 
@@ -144,52 +191,5 @@ public class GameManager : MonoBehaviour
     public float GetTime()
     {
         return 123.45f;
-    }
-
-    public void Start()
-    {
-        // ResetBerryData();
-    }
-
-    public void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        if (QualitySettings.vSyncCount == 0)
-        {
-            Application.targetFrameRate = frameRate;
-        }
-
-        // Keep the baseline initilization
-        LoadBerryData();
-    }
-
-    private void OnEnable()
-    {
-        // NEW BUILD PROTECTION: Tell Unity to re-load our berry list automatically
-        // every single time any map finishes loading.
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        // Clean up the event delegate when the GameManager gets disabled/destroyed 
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    // This method executes automatically right as a scene finishes spinning up 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log($"Scene Loaded: {scene.name}. Refreshing persistent collected items list.");
-        LoadBerryData(); // Forces standalone memory threads to pull data down fresh from the disk
     }
 }

@@ -110,14 +110,14 @@ public class PauseMenu : MonoBehaviour
     {
         PlaySound();
         CloseForSceneChange();
-        GameManager.Instance.newMap("Main Menu", true);
+        GameManager.Instance.newMap("Main Menu", false);
     }
 
     public void HUB()
     {
         PlaySound();
         CloseForSceneChange();
-        GameManager.Instance.newMap("Squirrel_HUB", true);
+        GameManager.Instance.newMap("Squirrel_HUB", false);
     }
 
     public void Resume()
@@ -255,9 +255,16 @@ public class PauseMenu : MonoBehaviour
     {
         PlaySound();
 
-        if (GM != null)
-            GM.ResetBerryData();
-
+        // FIXED: Call the master global singleton instance directly to eliminate scene reference cross-talk!
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResetBerryData();
+        }
+        else
+        {
+            Debug.LogError("PauseMenu: Cannot reset date because GameManager.Instance is null!");
+        }
+        
         Debug.Log("All progress reset. Berry data cleared.");
     }
 
