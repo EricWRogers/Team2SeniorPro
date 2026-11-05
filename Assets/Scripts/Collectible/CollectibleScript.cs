@@ -8,7 +8,7 @@ using UnityEditor;
 public class CollectibleScript : MonoBehaviour
 {
     [Header("Collectible Settings")]
-    [Tooltip("Type a manual ID here to guarantee it locks, or leave empty for auto-generation.")]
+    [Tooltip("Type a manual ID here to guarantee it locks (e.g., 'Level1_Berry_01'). Recommended for stubborn berries!")]
     public string berryID; 
     public bool countsTowardTotal = true;
 
@@ -22,10 +22,6 @@ public class CollectibleScript : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
-            if (animator == null)
-            {
-                Debug.LogWarning("No Animator found on collectible or its children!");
-            }
         }
     }
 
@@ -33,19 +29,20 @@ public class CollectibleScript : MonoBehaviour
     {
         if (countsTowardTotal)
         {
-            // // NOTE: Fallback generation if no manual ID is set. 
-            // Always ensures it includes the scene name to avoid cross-scene or restart ID mismatches.
+            // If no manual ID was typed, fall back to auto-generating one
             if (string.IsNullOrEmpty(berryID))
             {
                 GenerateId();
             }
 
-            // // NOTE: Check if GameManager already has this berry recorded as collected.
-            // If it does, vanish immediately upon loading/restarting the scene.
+            Debug.Log($"Checking Berry on Start. ID: {berryID}");
+
+            // Check if GameManager already has this exact ID recorded as collected
             if (GameManager.Instance != null)
             {
                 if (GameManager.Instance.IsBerryCollected(berryID))
                 {
+                    Debug.Log($"Berry {berryID} is already collected. Vanishing!");
                     DestroyCollectible();
                     return; 
                 }
@@ -55,10 +52,9 @@ public class CollectibleScript : MonoBehaviour
 
     private void OnValidate()
     {
-        // // NOTE: Automatically generates a stable ID in the inspector if left blank,
-        // preventing manual setup errors in large levels.
         if (!Application.isPlaying) return;
 
+        // Only auto-generate if left completely blank
         if (string.IsNullOrEmpty(berryID))
         {
             GenerateId();
@@ -71,23 +67,30 @@ public class CollectibleScript : MonoBehaviour
 
     private void GenerateId()
     {
-        int posX = Mathf.RoundToInt(transform.position.x);
-        int posY = Mathf.RoundToInt(transform.position.y);
-        int posZ = Mathf.RoundToInt(transform.position.z);
-        
-        // // NOTE: Standardized ID format combining Scene Name, Object Name, and Rounded Coordinates
-        // This guarantees uniqueness and stops duplicate re-appearances on rapid restarts/deaths.
-        berryID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}_{posX}_{posY}_{posZ}";
+        // Fallback auto-generation using hierarchy path
+        string hierarchyPath = GetHierarchyPath(transform);
+        berryID = $"{SceneManager.GetActiveScene().name}_{hierarchyPath}";
+    }
+
+    private string GetHierarchyPath(Transform t)
+    {
+        string path = t.name;
+        Transform parentTransform = t.parent;
+        while (parentTransform != null)
+        {
+            path = parentTransform.name + "/" + path;
+            parentTransform = parentTransform.parent;
+        }
+        return path;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
 
-        Debug.Log("Collectible touched by player");
+        Debug.Log($"Collectible touched by player. Registering ID: {berryID}");
 
-        // // NOTE: Record the berry as collected in the GameManager IMMEDIATELY 
-        // before triggering particle/sound effects or destroying the object.
+        // Record the berry as collected in the GameManager IMMEDIATELY
         if (GameManager.Instance != null)
         {
             if (countsTowardTotal)
@@ -106,7 +109,6 @@ public class CollectibleScript : MonoBehaviour
 
     private void TriggerEffects()
     {
-        // // NOTE: Detach particles so they can finish playing even after the berry GameObject is destroyed
         if (collectParticles != null)
         {
             collectParticles.transform.parent = null;
@@ -128,10 +130,6 @@ public class CollectibleScript : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX(collectSound, 1);
         }
-        else
-        {
-            Debug.LogWarning("SoundManager instance not found. Cannot play collect sound.");
-        }
 
         if (animator != null) 
         {
@@ -141,7 +139,6 @@ public class CollectibleScript : MonoBehaviour
 
     private void DestroyCollectible()
     {
-        // // NOTE: Safely destroys either the parent container layout or the berry itself
         if (transform.parent != null)
             Destroy(transform.parent.gameObject);
         else
