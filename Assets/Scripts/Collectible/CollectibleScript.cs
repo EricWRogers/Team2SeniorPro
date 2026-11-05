@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -9,9 +8,9 @@ using UnityEditor;
 public class CollectibleScript : MonoBehaviour
 {
     [Header("Collectible Settings")]
-    [Tooltip("Type a manual ID here to gurantee it locks, or leave empty for auto-generation.")]
-    public string berryID; // IMPORTANT: Unique ID for every berry, set in the inspector
-    public bool countsTowardTotal = true; // Set to false for berries that shouldn't count toward the total (e.g., tutorial berries)
+    [Tooltip("Type a manual ID here to guarantee it locks, or leave empty for auto-generation.")]
+    public string berryID; 
+    public bool countsTowardTotal = true;
 
     [Header("References")]
     public Animator animator;
@@ -32,29 +31,23 @@ public class CollectibleScript : MonoBehaviour
 
     private void Start()
     {
-        if (countsTowardTotal) {
-            // Fallback: If you forget to manually type an ID, generate a standarized, stable one.
-            // Using integer rounding (Mathf.RoundToInt) ensures float precision issues within builds that won't mismatch ID strings.
-            // FIXED Fallback: Round to integer to kill decimal mismatch errors
+        if (countsTowardTotal)
+        {
+            // // NOTE: Fallback generation if no manual ID is set. 
+            // Always ensures it includes the scene name to avoid cross-scene or restart ID mismatches.
             if (string.IsNullOrEmpty(berryID))
             {
-                int posX = Mathf.RoundToInt(transform.position.x);
-                int posY = Mathf.RoundToInt(transform.position.y);
-                int posZ = Mathf.RoundToInt(transform.position.z);
-                berryID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}_{posX}_{posY}_{posZ}";
+                GenerateId();
             }
 
+            // // NOTE: Check if GameManager already has this berry recorded as collected.
+            // If it does, vanish immediately upon loading/restarting the scene.
             if (GameManager.Instance != null)
             {
-                // NEW LOGIC: If the ID is in the collected list, vanish immediately
                 if (GameManager.Instance.IsBerryCollected(berryID))
                 {
-                    // Destroy the parent object holding the berry layout
-                    if (transform.parent != null)
-                        Destroy(transform.parent.gameObject);
-                    else
-                        Destroy(gameObject);
-                    return; // Stop further processing if the berry has already been collected - prevents duplicate collection logic from Start()
+                    DestroyCollectible();
+                    return; 
                 }
             }
         }
@@ -62,23 +55,29 @@ public class CollectibleScript : MonoBehaviour
 
     private void OnValidate()
     {
-        // This function runs automatically whenever you change something in the inspector.
-        // It ensures that every berry has a unique ID, even if you forget to set it.
+        // // NOTE: Automatically generates a stable ID in the inspector if left blank,
+        // preventing manual setup errors in large levels.
         if (!Application.isPlaying) return;
 
         if (string.IsNullOrEmpty(berryID))
         {
-            // Generate an ID that includes the object name and its position
-            // This ensures two berries or more berries in the same scene have different IDs
-            int posX = Mathf.RoundToInt(transform.position.x);
-            int posY = Mathf.RoundToInt(transform.position.y);
-            int posZ = Mathf.RoundToInt(transform.position.z);
-            berryID = $"{gameObject.name}_{posX}_{posY}_{posZ}";
-           
+            GenerateId();
+            
             #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
             #endif
         }
+    }
+
+    private void GenerateId()
+    {
+        int posX = Mathf.RoundToInt(transform.position.x);
+        int posY = Mathf.RoundToInt(transform.position.y);
+        int posZ = Mathf.RoundToInt(transform.position.z);
+        
+        // // NOTE: Standardized ID format combining Scene Name, Object Name, and Rounded Coordinates
+        // This guarantees uniqueness and stops duplicate re-appearances on rapid restarts/deaths.
+        berryID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}_{posX}_{posY}_{posZ}";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -87,10 +86,30 @@ public class CollectibleScript : MonoBehaviour
 
         Debug.Log("Collectible touched by player");
 
-        // If particles are a child, detach them first
+        // // NOTE: Record the berry as collected in the GameManager IMMEDIATELY 
+        // before triggering particle/sound effects or destroying the object.
+        if (GameManager.Instance != null)
+        {
+            if (countsTowardTotal)
+            {
+                GameManager.Instance.CollectBerry(berryID);
+            }
+            else
+            {
+                GameManager.Instance.collectibleCount++;
+            }
+        }
+
+        TriggerEffects();
+        DestroyCollectible();
+    }
+
+    private void TriggerEffects()
+    {
+        // // NOTE: Detach particles so they can finish playing even after the berry GameObject is destroyed
         if (collectParticles != null)
         {
-            collectParticles.transform.parent = null; // Detach from collectible
+            collectParticles.transform.parent = null;
             collectParticles.SetActive(true);
 
             ParticleSystem ps = collectParticles.GetComponent<ParticleSystem>();
@@ -118,25 +137,12 @@ public class CollectibleScript : MonoBehaviour
         {
             animator.SetTrigger("BerryCollect");
         }
+    }
 
-        // Record the berry as collected in the GameManager
-        if (GameManager.Instance != null)
-        {
-            if (countsTowardTotal)
-            {
-                GameManager.Instance.CollectBerry(berryID);
-                // CRUCIAL FOR STANDALONE BUILDS:
-                // Ensure the GameManager script runs PlayerPrefs.Save() to persist the collected berry data
-            }
-            else
-            {
-                // For berries that don't count toward the total, you might still want to track them
-                GameManager.Instance.collectibleCount++;
-            }
-        }
-
-        // FIXED: Only destroy the parent object ONCE right here at the very end of the method execution
-         if (transform.parent != null)
+    private void DestroyCollectible()
+    {
+        // // NOTE: Safely destroys either the parent container layout or the berry itself
+        if (transform.parent != null)
             Destroy(transform.parent.gameObject);
         else
             Destroy(gameObject);

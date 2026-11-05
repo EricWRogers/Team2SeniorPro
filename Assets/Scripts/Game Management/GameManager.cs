@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        // If an instance already exists and it's not this one, destroy this duplicate
+        // // NOTE: Standard singleton duplicate destruction check
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -33,24 +33,24 @@ public class GameManager : MonoBehaviour
             Application.targetFrameRate = frameRate;
         }
 
-        // Keep the baseline initilization
+        // // NOTE: Baseline initialization on startup
         LoadBerryData();
     }
 
     private void OnEnable()
     {
-        // NEW BUILD PROTECTION: Tell Unity to re-load our berry list automatically
+        // // NOTE: Tell Unity to re-load our berry list automatically
         // every single time any map finishes loading.
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        // Clean up the event delegate when the GameManager gets disabled/destroyed 
+        // // NOTE: Clean up the event delegate when the GameManager gets disabled/destroyed 
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // This method executes automatically right as a scene finishes spinning up 
+    // // NOTE: This method executes automatically right as a scene finishes spinning up 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene Loaded: {scene.name}. Refreshing persistent collected items list.");
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     {
         string berryData = string.Join(",", collectedBerryIDs.ToArray());
         PlayerPrefs.SetString("SavedBerries", berryData);
-        PlayerPrefs.Save();
+        PlayerPrefs.Save(); // Forces immediate write to disk
         Debug.Log("Game Saved: " + berryData);
     }
 
@@ -95,20 +95,23 @@ public class GameManager : MonoBehaviour
             if (string.IsNullOrEmpty(berryData))
             {
                 Debug.LogWarning("LoadBerryData: PlayerPrefs key exists but returned blank. Skipping clear.");
+                return; // // NOTE: Added early return to prevent clearing valid runtime data if string is blank
             }
 
             string[] splitIDs = berryData.Split(",");
 
-            collectedBerryIDs.Clear();
+            // // NOTE: BUILD FIX - Instead of blindly clearing collectedBerryIDs (which can 
+            // wipe recent collections if disk I/O lagged during a fast death/restart), 
+            // we safely add/merge disk records into our runtime memory HashSet.
             foreach (string id in splitIDs)
             {
                 if (!string.IsNullOrEmpty(id))
                 {
-                    collectedBerryIDs.Add(id);
+                    collectedBerryIDs.Add(id); // HashSet automatically handles duplicate prevention
                 }
             }
 
-            Debug.Log("Game Loaded: " + collectedBerryIDs.Count + " berries found.");
+            Debug.Log("Game Loaded: " + collectedBerryIDs.Count + " total unique berries tracked in memory.");
         }
     }
 
@@ -151,7 +154,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
     public void SetCheckpoint(int _checkpointNumber, bool _force = false)
     {
         if (!_force && _checkpointNumber > currentCheckpoint)
